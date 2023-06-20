@@ -5,7 +5,11 @@ module.exports = {
     'airbnb',
     'airbnb/hooks',
     'eslint:recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
     'plugin:react/recommended',
+    'plugin:vitest/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
@@ -14,7 +18,11 @@ module.exports = {
     sourceType: 'module',
     project: 'tsconfig.vite.json',
   },
-  plugins: ['react-refresh'],
+  plugins: [
+    'react-refresh', 
+    'react', 
+    'vitest'
+  ],
   rules: {
     'react-refresh/only-export-components': 'warn',
     'linebreak-style': 0,
