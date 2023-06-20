@@ -33,7 +33,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "jsdom": "^22.1.0",
     "lint-staged": "^13.2.2",
     "postcss": "^8.4.24",
@@ -45,6 +45,6 @@
     "startCommand": "npm run test:ui"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": "eslint --fix"
+    "src/**/*.{js,jsx}": "eslint --cache --fix"
   }
 }
