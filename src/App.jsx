@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   const { count, increment } = useCounter();
 
+  console.log('testing pre-commit');
   return (
     <div className="App">
       <header className="App-header">
