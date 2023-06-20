@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": [],
     "allowJs": false,
     "skipLibCheck": false,
     "esModuleInterop": false,
@@ -14,10 +14,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react-jsx",
+    "types": ["vitest/globals"]
   },
-  "include": ["src"],
+  "include": [
+    "vite.config.ts",
+    "./src", 
+    ".eslintrc.cjs"
+  ],
   "paths": {
+    "@assets/*": ["src/assets/*"], 
+    "@hooks/*": ["src/hooks/*"], 
     "@components/*": ["src/components/*"], 
     "@features/*": ["src/features/*"],
   }

@@ -14,9 +14,22 @@ module.exports = {
     sourceType: 'module',
     project: 'tsconfig.vite.json',
   },
-  settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    'linebreak-style': 0,
+    'import/extensions': 0,
+    'import/no-extraneous-dependencies': 0,
+  },
+  ignorePatterns: ['test-utils.tsx'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
   },
 };
