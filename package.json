@@ -46,6 +46,6 @@
     "startCommand": "npm run test:ui"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": "eslint --cache --fix"
+    "src/**/*.{js,jsx}": "eslint --fix"
   }
 }
