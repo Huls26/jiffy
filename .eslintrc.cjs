@@ -25,6 +25,7 @@ module.exports = {
   ],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    'import/no-unresolved': 0,
     'linebreak-style': 0,
     'import/extensions': 0,
     'import/no-extraneous-dependencies': 0,

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { render, screen, userEvent } from '@utils/test-utils';
 import App from './App';
-import { render, screen, userEvent } from './utils/test-utils';
 
 describe('Simple working test', () => {
   it('the title is visible', () => {
@@ -17,7 +17,7 @@ describe('Simple working test', () => {
   it('uses flexbox in app header', async () => {
     render(<App />);
     const element = screen.getByRole('banner');
-    expect(element.className).toEqual('App-header');
-    expect(getComputedStyle(element).display).toEqual('flex');
+    expect(element.className).toBe('App-header');
+    expect(getComputedStyle(element).display).toBe('flex');
   });
 });
