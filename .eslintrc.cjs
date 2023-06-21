@@ -19,9 +19,9 @@ module.exports = {
     project: 'tsconfig.vite.json',
   },
   plugins: [
-    'react-refresh', 
-    'react', 
-    'vitest'
+    'react-refresh',
+    'react',
+    'vitest',
   ],
   rules: {
     'react-refresh/only-export-components': 'warn',
