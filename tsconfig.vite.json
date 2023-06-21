@@ -23,10 +23,13 @@
     ".eslintrc.cjs"
   ],
   "paths": {
+    "@api/*": ["src/api/*"], 
     "@assets/*": ["src/assets/*"], 
-    "@hooks/*": ["src/hooks/*"], 
     "@components/*": ["src/components/*"], 
     "@features/*": ["src/features/*"],
+    "@hooks/*": ["src/hooks/*"], 
+    "@pages/*": ["src/pages/*"], 
+    "@routes/*": ["src/routes/*"],
     "@utils/*": ["src/utils/*"],
   }
 }
