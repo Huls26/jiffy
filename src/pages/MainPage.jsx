@@ -1,5 +1,7 @@
 export default function MainPage() {
   return (
-    <div>MainPage here</div>
+    <main>
+      <div>Tag section </div>
+    </main>
   );
 }

@@ -11,7 +11,7 @@ export default function Header() {
 
       <div>
         <h1 className="font-A">Create post logo</h1>
-        <div className="bg-black w-10 h-10 text-white text-[.7em] text-center rounded-full">
+        <div className="bg-dark-1 w-10 h-10 text-white text-[.7em] text-center rounded-full">
           user photo
         </div>
       </div>
