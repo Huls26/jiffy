@@ -13,8 +13,10 @@ export default {
     },
     colors: {
       1: '#F8D6B3',
+      'focus-1': '#3300FF',
       'aqua-1': '#69D2E7',
-      'aqua-2': '$DAF5F0',
+      'aqua-2': '#A7DBD8',
+      'aqua-3': '#DAF5F0',
       'dark-1': '#000103',
       'dark-2': '#26261f',
       'yellow-1': '#E3A018',
