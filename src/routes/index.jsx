@@ -6,7 +6,9 @@ import {
 } from 'react-router-dom';
 
 import AppLayout from '@layout/AppLayout';
+
 import MainPage from '@pages/MainPage';
+import LoginPage from '@pages/LoginPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +19,10 @@ const router = createBrowserRouter(
       <Route
         index
         element={<MainPage />}
+      />
+      <Route
+        path="login"
+        element={<LoginPage />}
       />
     </Route>,
   ),

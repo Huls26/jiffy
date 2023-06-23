@@ -42,6 +42,11 @@ export default {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
+    borderWidth: {
+      DEFAULT: '2.3px',
+      0: '0',
+      2: '4px',
+    },
     extend: {},
   },
   plugins: [],
