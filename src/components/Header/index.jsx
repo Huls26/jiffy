@@ -8,10 +8,10 @@ export default function Header() {
     flex justify-between items-center
     text-dark-2
     p-3
-    border
+    shadow
     "
     >
-      <h1 className="font-A text-lg font-extrabold">J I F F Y</h1>
+      <h1 className="font-A text-2xl font-extrabold">J I F F Y</h1>
       <form className="border-dark-2">
         <input
           type="text"
@@ -53,7 +53,9 @@ export default function Header() {
               font-extrabold
               rounded-full
               border-dark-2
-              border-2
+              border
+              border-b-2
+              border-r-2
               hover:opacity-80
               active:bg-aqua-2
             "
@@ -65,7 +67,9 @@ export default function Header() {
           w-10 h-10
           text-dark2 text-[.7em] text-center
           border-dark-2
-          border-2
+          border
+          border-b-2
+          border-r-2
           rounded-full
         "
         >

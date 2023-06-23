@@ -5,12 +5,23 @@ export default function ContentComponents({ content, details }) {
   const isImg = typeof content === 'string';
 
   const displayContent = isImg
-    ? <img src={content} alt="content" />
+    ? (
+      <img
+        src={content}
+        alt="content"
+        className="
+                  w-full h-full
+                  object-cover
+                "
+      />
+    )
     : <div>content.text</div>;
 
   return (
-    <article>
-      {displayContent}
+    <article className="mb-4 border-dark-2 border border-b-2 border-r-2 pb-3">
+      <div className="h-72 mb-2">
+        {displayContent}
+      </div>
       <DetailsContent details={details} />
     </article>
   );
