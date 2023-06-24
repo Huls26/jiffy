@@ -9,6 +9,7 @@ import AppLayout from '@layout/AppLayout';
 
 import MainPage from '@pages/MainPage';
 import LoginPage from '@pages/LoginPage';
+import SignupPage from '@pages/SignupPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,10 @@ const router = createBrowserRouter(
       <Route
         path="login"
         element={<LoginPage />}
+      />
+      <Route
+        path="signup"
+        element={<SignupPage />}
       />
     </Route>,
   ),
