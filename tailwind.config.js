@@ -26,6 +26,7 @@ export default {
       'peach-2': '#FF7A5C',
       white: '#FFFFFF',
       blue: '#1fb6ff',
+      'dark-blue': '#3300FF',
       purple: '#7e5bef',
       pink: '#ff49db',
       orange: '#ff7849',
