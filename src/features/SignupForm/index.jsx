@@ -43,6 +43,7 @@ export default function SignupForm() {
                   outline-none
                   focus:border-blue
                 "
+          required
         />
       </label>
       <label htmlFor="lastname">
@@ -60,6 +61,7 @@ export default function SignupForm() {
                   outline-none
                   focus:border-blue
                 "
+          required
         />
       </label>
       <label htmlFor="username">
@@ -77,6 +79,7 @@ export default function SignupForm() {
                   outline-none
                   focus:border-blue
                 "
+          required
         />
       </label>
       <div>
@@ -84,8 +87,8 @@ export default function SignupForm() {
         <label htmlFor="month" className="flex flex-col">
           Month
           <select
-            name="cars"
-            id="cars"
+            name="month"
+            id="month"
             placeholder="Month"
             className="
                 border-dark-2 border border-r-2 border-b-2
@@ -169,6 +172,7 @@ export default function SignupForm() {
                   outline-none
                   focus:border-blue
                 "
+            required
           />
         </label>
         <label htmlFor="confirmPassword">
@@ -186,6 +190,7 @@ export default function SignupForm() {
                   outline-none
                   focus:border-blue
                 "
+            required
           />
         </label>
       </div>

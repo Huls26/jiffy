@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
+
 import ContentBtn from '@components/ContentBtn';
+import UserImage from '@components/UserImage';
 
 export default function ViewDetailsContent({ details }) {
   const { userImg, username, textDetails } = details;
@@ -15,22 +17,7 @@ export default function ViewDetailsContent({ details }) {
       <h1 className="font-PS text-xl font-bold capitalize leading-none mb-3 block">{textDetails}</h1>
       <div className="flex items-start justify-between">
         <div className="flex space-x-2">
-          <div className="
-                w-11 h-11
-                rounded-full
-              "
-          >
-            <img
-              src={userImg}
-              alt="userPhoto"
-              className="
-                      w-full h-full object-cover
-                      border-dark-1
-                      border-[.2em]
-                      rounded-full
-                    "
-            />
-          </div>
+          <UserImage userImg={userImg} />
           <div className="flex items-start space-x-3">
             <div className="inline">
               <h6 className="font-A text-lg font-medium capitalize leading-none">{username}</h6>

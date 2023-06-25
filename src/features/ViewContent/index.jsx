@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
+
 import ViewDetailsContent from './components/ViewDetailsContent';
 import DescriptionBox from './components/DescriptionBox';
+import CommentSection from './components/CommentSection';
 
 export default function ViewContent({ content, details }) {
   const isImg = typeof content === 'string';
@@ -25,8 +27,8 @@ export default function ViewContent({ content, details }) {
       </div>
 
       <ViewDetailsContent details={details} />
-
       <DescriptionBox />
+      <CommentSection details={details} />
     </article>
   );
 }
