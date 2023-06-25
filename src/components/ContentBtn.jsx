@@ -8,6 +8,7 @@ export default function ContentBtn({ text, bg }) {
       className={`
         ${bgColor} px-3 py-1
         font-A font-bold text-sm 
+        grow-0 basis-0
         border-dark-2
         border border-b-2 border-r-2 rounded
         capitalize

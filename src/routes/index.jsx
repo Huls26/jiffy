@@ -10,6 +10,7 @@ import AppLayout from '@layout/AppLayout';
 import MainPage from '@pages/MainPage';
 import LoginPage from '@pages/LoginPage';
 import SignupPage from '@pages/SignupPage';
+import ViewPage from '@pages/ViewPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,10 @@ const router = createBrowserRouter(
       <Route
         path="signup"
         element={<SignupPage />}
+      />
+      <Route
+        path="view"
+        element={<ViewPage />}
       />
     </Route>,
   ),

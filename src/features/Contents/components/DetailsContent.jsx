@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ContentBtn from './ContentBtn';
+import ContentBtn from '@components/ContentBtn';
 
 export default function DetailsContent({ details }) {
   const { userImg, username, textDetails } = details;

@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import DetailsContent from './DetailsContent';
+import ViewDetailsContent from './components/ViewDetailsContent';
+import DescriptionBox from './components/DescriptionBox';
 
-export default function ContentComponents({ content, details }) {
+export default function ViewContent({ content, details }) {
   const isImg = typeof content === 'string';
 
   const displayContent = isImg
@@ -18,16 +19,19 @@ export default function ContentComponents({ content, details }) {
     : <div>content.text</div>;
 
   return (
-    <article className="mb-4 border-dark-2 border border-b-2 border-r-2 pb-3">
+    <article className="mb-4 border-dark-2 border border-b-2 border-r-2 pb-3 rounded">
       <div className="h-72 mb-2">
         {displayContent}
       </div>
-      <DetailsContent details={details} />
+
+      <ViewDetailsContent details={details} />
+
+      <DescriptionBox />
     </article>
   );
 }
 
-ContentComponents.propTypes = {
+ViewContent.propTypes = {
   content: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.string.isRequired,
