@@ -11,6 +11,7 @@ import MainPage from '@pages/MainPage';
 import LoginPage from '@pages/LoginPage';
 import SignupPage from '@pages/SignupPage';
 import ViewPage from '@pages/ViewPage';
+import ProfilePage from '@pages/ProfilePage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,10 @@ const router = createBrowserRouter(
       <Route
         path="view"
         element={<ViewPage />}
+      />
+      <Route
+        path="profile/:id"
+        element={<ProfilePage />}
       />
     </Route>,
   ),
