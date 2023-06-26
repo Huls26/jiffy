@@ -1,3 +1,4 @@
+import Contents from '@features/Contents';
 import Header from './components/Header';
 
 export default function UserProfile() {
@@ -11,8 +12,9 @@ export default function UserProfile() {
   return (
     <>
       <Header banner={bannerPhoto} userDetails={userDetails} />
+      {/* the data should fetch from the user */}
       <section>
-        content
+        <Contents />
       </section>
     </>
   );
