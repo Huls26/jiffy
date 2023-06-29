@@ -29,6 +29,7 @@ module.exports = {
     'linebreak-style': 0,
     'import/extensions': 0,
     'import/no-extraneous-dependencies': 0,
+    'max-len': ['error', { ignoreUrls: true }, { ignoreStrings: true }],
     'jsx-a11y/label-has-associated-control': ['error', {
       required: {
         some: ['nesting', 'id'],

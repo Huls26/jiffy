@@ -98,8 +98,9 @@ export default function SignupForm() {
                   focus:border-blue
                   capitalize
                 "
+            defaultValue="DEFAULT"
           >
-            <option value="" disabled selected>Month</option>
+            <option value="DEFAULT" disabled className="text-gray-dark opacity-80">Month</option>
             <option value="january">january</option>
             <option value="february">february</option>
             <option value="march">march</option>
@@ -173,6 +174,7 @@ export default function SignupForm() {
                   focus:border-blue
                 "
             required
+            autoComplete="off"
           />
         </label>
         <label htmlFor="confirmPassword">
@@ -191,6 +193,7 @@ export default function SignupForm() {
                   focus:border-blue
                 "
             required
+            autoComplete="off"
           />
         </label>
       </div>

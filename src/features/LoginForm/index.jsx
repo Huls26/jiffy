@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, Form } from 'react-router-dom';
 import LoginBtn from './components/LoginBtn';
 
 export default function LoginForm() {
   return (
-    <form className="
+    <Form
+      method="post"
+      className="
         bg-purple
         border-dark-2 border border-r-2 border-b-2
           px-8 py-6
@@ -22,6 +24,7 @@ export default function LoginForm() {
                 "
         type="text"
         placeholder="Username"
+        name="username"
       />
       <input
         className="
@@ -34,6 +37,8 @@ export default function LoginForm() {
                 "
         type="password"
         placeholder="Password"
+        name="password"
+        autoComplete="on"
       />
       {/* link react router dom */}
       <div>
@@ -64,6 +69,6 @@ export default function LoginForm() {
       >
         Forgot password?
       </Link>
-    </form>
+    </Form>
   );
 }

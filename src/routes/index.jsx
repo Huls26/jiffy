@@ -8,7 +8,7 @@ import {
 import AppLayout from '@layout/AppLayout';
 
 import MainPage from '@pages/MainPage';
-import LoginPage from '@pages/LoginPage';
+import LoginPage, { action as actionLoader } from '@pages/LoginPage';
 import SignupPage from '@pages/SignupPage';
 import ViewPage from '@pages/ViewPage';
 import ProfilePage from '@pages/ProfilePage';
@@ -25,6 +25,7 @@ const router = createBrowserRouter(
       />
       <Route
         path="login"
+        action={actionLoader}
         element={<LoginPage />}
       />
       <Route
