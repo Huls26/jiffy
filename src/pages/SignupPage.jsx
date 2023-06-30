@@ -1,4 +1,4 @@
-import signupPage from '@api/signupPage';
+import signupPage from '@api/signupPageAPI';
 import SignupForm from '@features/SignupForm';
 
 export async function action({ request }) {
