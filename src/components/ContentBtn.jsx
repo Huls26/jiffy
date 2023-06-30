@@ -23,5 +23,6 @@ export default function ContentBtn({ text, bg }) {
 
 ContentBtn.propTypes = {
   text: PropTypes.string.isRequired,
-  bg: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  bg: PropTypes.string,
 };

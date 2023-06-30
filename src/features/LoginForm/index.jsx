@@ -22,9 +22,10 @@ export default function LoginForm() {
                   outline-none
                   focus:border-blue
                 "
-        type="text"
-        placeholder="Username"
-        name="username"
+        type="email"
+        placeholder="Email"
+        name="email"
+        required
       />
       <input
         className="

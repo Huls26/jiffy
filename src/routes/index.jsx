@@ -8,8 +8,8 @@ import {
 import AppLayout from '@layout/AppLayout';
 
 import MainPage from '@pages/MainPage';
-import LoginPage, { action as actionLoader } from '@pages/LoginPage';
-import SignupPage from '@pages/SignupPage';
+import LoginPage, { action as actionLoginPage } from '@pages/LoginPage';
+import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
 import ViewPage from '@pages/ViewPage';
 import ProfilePage from '@pages/ProfilePage';
 
@@ -25,11 +25,12 @@ const router = createBrowserRouter(
       />
       <Route
         path="login"
-        action={actionLoader}
+        action={actionLoginPage}
         element={<LoginPage />}
       />
       <Route
         path="signup"
+        action={actionSignupPage}
         element={<SignupPage />}
       />
       <Route

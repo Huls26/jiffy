@@ -1,3 +1,4 @@
+// import { Form } from 'react-router-dom';
 import LoginBtn from '@components/LoginBtn';
 import SignupBtn from './components/SignupBtn';
 
@@ -61,16 +62,15 @@ export default function SignupForm() {
                   outline-none
                   focus:border-blue
                 "
-          required
         />
       </label>
-      <label htmlFor="username">
-        Username
+      <label htmlFor="email">
+        email
         <input
           type="text"
-          id="username"
-          name="username"
-          placeholder="Username"
+          id="email"
+          name="email"
+          placeholder="email"
           className="
                 border-dark-2 border border-r-2 border-b-2
                   mb-3 p-1
