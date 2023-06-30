@@ -1,10 +1,11 @@
-// import { Form } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 import LoginBtn from '@components/LoginBtn';
 import SignupBtn from './components/SignupBtn';
 
 export default function SignupForm() {
   return (
-    <form
+    <Form
+      method="post"
       className="
         bg-orange
         text-base font-bold text-dark-2
@@ -67,7 +68,7 @@ export default function SignupForm() {
       <label htmlFor="email">
         email
         <input
-          type="text"
+          type="email"
           id="email"
           name="email"
           placeholder="email"
@@ -199,6 +200,6 @@ export default function SignupForm() {
       </div>
       <SignupBtn />
       <LoginBtn />
-    </form>
+    </Form>
   );
 }

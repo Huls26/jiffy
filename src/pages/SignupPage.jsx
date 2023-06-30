@@ -7,9 +7,10 @@ export async function action({ request }) {
   const password = formData.get('password');
 
   if (email && password) {
-    const res = signupPage(email, password);
+    const res = await signupPage(email, password);
     console.log(res);
   }
+  return null;
 }
 
 export default function SignupPage() {
