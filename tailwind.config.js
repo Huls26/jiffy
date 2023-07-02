@@ -24,7 +24,7 @@ export default {
       'yellow-2': '#E3A018',
       'peach-1': '#FF6B6B',
       'peach-2': '#FF7A5C',
-      red: '#FF0000',
+      red: '#913c3c',
       bRed: '#880808',
       'bright-red': '#EE4B2B',
       white: '#FFFFFF',

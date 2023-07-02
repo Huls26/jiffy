@@ -17,7 +17,7 @@ export default async function login(email, password) {
   } catch (error) {
     // const errorCode = error.code;
     // const errorMessage = error.message;
-
+    console.clear();
     return { resMessage, isInvalid: true };
   }
 }

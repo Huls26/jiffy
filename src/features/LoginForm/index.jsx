@@ -1,43 +1,50 @@
+import PropTypes from 'prop-types';
 import { Link, Form } from 'react-router-dom';
 import LoginBtn from './components/LoginBtn';
 
-export default function LoginForm() {
+export default function LoginForm({ actionData }) {
+  const { error } = actionData || {};
+  const isErrorEmail = error?.email;
+  const isErrorPassword = error?.password;
+  const errorBorderC = 'border-red';
+  const emailBorder = isErrorEmail ? errorBorderC : 'border-dark-2';
+  const passwordBorder = isErrorPassword ? errorBorderC : 'border-dark-2';
+
   return (
     <Form
       method="post"
-      className="
+      className={`
         bg-purple
         border-dark-2 border border-r-2 border-b-2
           px-8 py-6
           max-w-[22em]
           rounded-xl
-        "
+        `}
     >
       <input
-        className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  w-full
-                  rounded
-                  outline-none
-                  focus:border-blue
-                "
+        className={`         
+                    ${emailBorder} border border-r-2 border-b-2
+                    mb-3 p-1
+                    w-full
+                    rounded
+                    outline-none
+                    focus:border-blue
+                `}
         type="email"
-        placeholder="Email"
+        placeholder={isErrorEmail ? 'Enter Email' : 'Email'}
         name="email"
-        required
       />
       <input
-        className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  w-full
-                  rounded
-                  outline-none
-                  focus:border-blue
-                "
+        className={`
+                    ${passwordBorder} border border-r-2 border-b-2
+                    mb-3 p-1
+                    w-full
+                    rounded
+                    outline-none
+                    focus:border-blue
+                  `}
         type="password"
-        placeholder="Password"
+        placeholder={isErrorPassword ? 'Enter Password' : 'Password'}
         name="password"
         autoComplete="on"
       />
@@ -73,3 +80,13 @@ export default function LoginForm() {
     </Form>
   );
 }
+
+LoginForm.propTypes = {
+  // eslint-disable-next-line react/require-default-props
+  actionData: PropTypes.shape({
+    resMessage: PropTypes.string.isRequired,
+    isInvalid: PropTypes.bool.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
+    error: PropTypes.object,
+  }),
+};
