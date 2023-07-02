@@ -20,6 +20,7 @@ export default function LoginForm({ actionData }) {
           max-w-[22em]
           rounded-xl
         `}
+      replace
     >
       <input
         className={`         
