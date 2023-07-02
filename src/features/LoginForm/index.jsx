@@ -2,19 +2,22 @@ import PropTypes from 'prop-types';
 import {
   Link,
   Form,
-  //  useSearchParams,
 } from 'react-router-dom';
+
 import LoginBtn from './components/LoginBtn';
+import emailPasswordBorderColor from './utils/emailPasswordBorder';
 
 export default function LoginForm({ actionData }) {
-  // const [searchParams] = useSearchParams();
-  // const prevEmail = searchParams.get('e');
   const { error, email } = actionData || {};
-  const isErrorEmail = error?.email;
-  const isErrorPassword = error?.password;
-  const errorBorderC = 'border-red';
-  const emailBorder = isErrorEmail ? errorBorderC : 'border-dark-2';
-  const passwordBorder = isErrorPassword ? errorBorderC : 'border-dark-2';
+  // const isErrorEmail = error?.email;
+  // const isErrorPassword = error?.password;
+  // const errorBorderC = 'border-red';
+  // const emailBorder = isErrorEmail ? errorBorderC : 'border-dark-2';
+  // const passwordBorder = isErrorPassword ? errorBorderC : 'border-dark-2';
+
+  const {
+    emailBorder, passwordBorder, isErrorEmail, isErrorPassword,
+  } = emailPasswordBorderColor(error);
 
   return (
     <Form

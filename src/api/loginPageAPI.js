@@ -17,6 +17,7 @@ export default async function login(email, password) {
     // const errorCode = error.code;
     // const errorMessage = error.message;
     console.clear();
+
     return {
       email,
       resMessage,

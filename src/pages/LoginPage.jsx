@@ -43,8 +43,6 @@ export default function LoginPage() {
       className="flex flex-col items-center pt-10"
     >
       <ErrorMessage actionData={actionData} />
-      {/* <LoginForm actionData={actionData} /> */}
-      {/* { isLoading } */}
       <LoginLoadingComponent actionData={actionData} />
     </main>
   );
