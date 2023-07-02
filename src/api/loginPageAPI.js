@@ -3,7 +3,6 @@ import { auth } from '@api/FB';
 
 export default async function login(email, password) {
   const resMessage = 'Incorrect Email or Password Try again';
-  // const responseLogin = { user: '', isInvalid: true, resMessage };
 
   try {
     const userCredential = await signInWithEmailAndPassword(
@@ -17,8 +16,9 @@ export default async function login(email, password) {
   } catch (error) {
     // const errorCode = error.code;
     // const errorMessage = error.message;
-    // console.clear();
+    console.clear();
     return {
+      email,
       resMessage,
       isInvalid: true,
       error: { email: true, password: true },

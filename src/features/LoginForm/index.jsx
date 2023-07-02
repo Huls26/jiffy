@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
-import { Link, Form } from 'react-router-dom';
+import {
+  Link,
+  Form,
+  //  useSearchParams,
+} from 'react-router-dom';
 import LoginBtn from './components/LoginBtn';
 
 export default function LoginForm({ actionData }) {
-  const { error } = actionData || {};
+  // const [searchParams] = useSearchParams();
+  // const prevEmail = searchParams.get('e');
+  const { error, email } = actionData || {};
   const isErrorEmail = error?.email;
   const isErrorPassword = error?.password;
   const errorBorderC = 'border-red';
@@ -34,6 +40,7 @@ export default function LoginForm({ actionData }) {
         type="email"
         placeholder={isErrorEmail ? 'Enter Email' : 'Email'}
         name="email"
+        defaultValue={email}
       />
       <input
         className={`
