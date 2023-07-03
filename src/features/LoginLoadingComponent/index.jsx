@@ -15,7 +15,7 @@ export default function LoginLoadingComponent({ actionData }) {
 LoginForm.propTypes = {
   // eslint-disable-next-line react/require-default-props
   actionData: PropTypes.shape({
-    resMessage: PropTypes.string.isRequired,
+    resMessage: PropTypes.string,
     isInvalid: PropTypes.bool.isRequired,
     // eslint-disable-next-line react/forbid-prop-types
     error: PropTypes.object,

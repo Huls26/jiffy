@@ -9,12 +9,6 @@ import emailPasswordBorderColor from './utils/emailPasswordBorder';
 
 export default function LoginForm({ actionData }) {
   const { error, email } = actionData || {};
-  // const isErrorEmail = error?.email;
-  // const isErrorPassword = error?.password;
-  // const errorBorderC = 'border-red';
-  // const emailBorder = isErrorEmail ? errorBorderC : 'border-dark-2';
-  // const passwordBorder = isErrorPassword ? errorBorderC : 'border-dark-2';
-
   const {
     emailBorder, passwordBorder, isErrorEmail, isErrorPassword,
   } = emailPasswordBorderColor(error);
@@ -95,7 +89,7 @@ export default function LoginForm({ actionData }) {
 LoginForm.propTypes = {
   // eslint-disable-next-line react/require-default-props
   actionData: PropTypes.shape({
-    resMessage: PropTypes.string.isRequired,
+    resMessage: PropTypes.string,
     isInvalid: PropTypes.bool.isRequired,
     // eslint-disable-next-line react/forbid-prop-types
     error: PropTypes.object,

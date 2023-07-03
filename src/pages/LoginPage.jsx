@@ -1,15 +1,13 @@
 import {
+  redirect,
   useActionData,
 } from 'react-router-dom';
 
 import loginPage from '@api/loginPageAPI';
-// import LoginForm from '@features/LoginForm';
 import LoginLoadingComponent from '@features/LoginLoadingComponent';
 import ErrorMessage from '@components/LoginPage/ErrorMessage';
 
 // to do
-// if user is success logging in
-// direct/navigate to mainPage if there is no previous path
 // clean up code
 
 export async function action({ request }) {
@@ -20,6 +18,10 @@ export async function action({ request }) {
 
   if (email && password) {
     const loginDetails = await loginPage(email, password);
+
+    if (loginDetails.user) {
+      return redirect('..');
+    }
 
     return { ...loginDetails };
   }
