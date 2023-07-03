@@ -7,7 +7,7 @@ import {
 
 import AppLayout from '@layout/AppLayout';
 
-import MainPage from '@pages/MainPage';
+import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
 import LoginPage, { action as actionLoginPage } from '@pages/LoginPage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
 import ViewPage from '@pages/ViewPage';
@@ -21,6 +21,7 @@ const router = createBrowserRouter(
     >
       <Route
         index
+        loader={loaderMainpage}
         element={<MainPage />}
       />
       <Route

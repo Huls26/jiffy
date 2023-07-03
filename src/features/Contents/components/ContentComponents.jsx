@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import DetailsContent from './DetailsContent';
 
-export default function ContentComponents({ content, details }) {
+export default function ContentComponents({ doc }) {
+  const { content } = doc;
   const isImg = typeof content === 'string';
 
   const displayContent = isImg
@@ -22,19 +23,24 @@ export default function ContentComponents({ content, details }) {
       <div className="h-72 mb-2">
         {displayContent}
       </div>
-      <DetailsContent details={details} />
+      <DetailsContent details={doc} />
     </article>
   );
 }
 
 ContentComponents.propTypes = {
-  content: PropTypes.oneOfType([
-    PropTypes.object.isRequired,
-    PropTypes.string.isRequired,
-  ]).isRequired,
-  details: PropTypes.shape({
-    userImg: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    textDetails: PropTypes.string.isRequired,
-  }).isRequired,
+  // content: PropTypes.oneOfType([
+  //   PropTypes.object.isRequired,
+  //   PropTypes.string.isRequired,
+  // ]).isRequired,
+  // eslint-disable-next-line react/require-default-props
+  doc: PropTypes.shape({
+    content: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
+    userImg: PropTypes.string,
+    username: PropTypes.string,
+    textDetails: PropTypes.string,
+  }),
 };

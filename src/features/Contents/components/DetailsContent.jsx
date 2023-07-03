@@ -4,7 +4,7 @@ import ContentBtn from '@components/ContentBtn';
 import UserImage from '@components/UserImage';
 
 export default function DetailsContent({ details }) {
-  const { userImg, username, textDetails } = details;
+  const { userImg, username, textContent } = details;
 
   return (
     <section className="
@@ -17,7 +17,7 @@ export default function DetailsContent({ details }) {
       <div className="flex items-start space-x-3">
         <UserImage userImg={userImg} />
         <div>
-          <h1 className="font-PS text-lg font-bold capitalize leading-none mb-1">{textDetails}</h1>
+          <h1 className="font-PS text-lg font-bold capitalize leading-none mb-1">{textContent}</h1>
           <h6 className="font-A text-base capitalize leading-none mb-2">{username}</h6>
           <div className="space-x-1">
             <ContentBtn text="like" bg="bg-aqua-1" />
@@ -33,8 +33,8 @@ export default function DetailsContent({ details }) {
 
 DetailsContent.propTypes = {
   details: PropTypes.shape({
-    userImg: PropTypes.string.isRequired,
+    userImg: PropTypes.string,
     username: PropTypes.string.isRequired,
-    textDetails: PropTypes.string.isRequired,
+    textContent: PropTypes.string,
   }).isRequired,
 };

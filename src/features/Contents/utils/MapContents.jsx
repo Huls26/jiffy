@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import ContentComponents from '../components/ContentComponents';
 
-export default function MapContents({ contentsData, contentImg }) {
-  const displayContents = contentsData.map((content, idx) => (
+export default function MapContents({ contentsData }) {
+  const displayContents = contentsData?.map((doc, idx) => (
     <ContentComponents
       // eslint-disable-next-line react/no-array-index-key
       key={idx}
-      content={contentImg}
-      details={content}
+      doc={doc.data()}
     />
   ));
 
@@ -15,6 +14,6 @@ export default function MapContents({ contentsData, contentImg }) {
 }
 
 MapContents.propTypes = {
-  contentsData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  contentImg: PropTypes.string.isRequired,
+  contentsData: PropTypes.arrayOf(PropTypes.object),
+  // contentImg: PropTypes.string.isRequired,
 };
