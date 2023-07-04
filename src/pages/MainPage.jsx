@@ -1,4 +1,9 @@
-import { useLoaderData } from 'react-router-dom';
+import { Suspense } from 'react';
+import {
+  defer,
+  Await,
+  useLoaderData,
+} from 'react-router-dom';
 import {
   collection, getDocs,
   // doc, setDoc,
@@ -11,9 +16,9 @@ import HeadBanner from '@features/HeadBanner';
 import Contents from '@features/Contents';
 
 // to do
-// make a sample Post data from firebase
+// X make a sample Post data from firebase
 // may a context
-// fetch data from firebase
+// X fetch data from firebase
 // add loading section,
 // loader data, defer, await, suspence
 // then change the proptype to isRequired because loading component will run
@@ -22,19 +27,15 @@ import Contents from '@features/Contents';
 
 export async function loader() {
   const col = collection(db, 'posts');
-  const querySnapshot = await getDocs(col);
+  const querySnapshot = getDocs(col);
 
-  return [...querySnapshot.docs];
+  return defer({
+    querySnapshot,
+  });
 }
 
 export default function MainPage() {
-  const querySnapshot = useLoaderData();
-  // querySnapshot.forEach((docc) => {
-  //   // doc.data() is never undefined for query doc snapshots
-  //   console.log(docc.id, ' => ', docc.data());
-  // });
-  console.log(querySnapshot);
-
+  const { querySnapshot } = useLoaderData();
   // const testingData = {
   //   title: 'Hello world',
   //   content: 'url/helloworld',
@@ -69,7 +70,14 @@ export default function MainPage() {
     <main>
       <FilterTagSection />
       <HeadBanner />
-      <Contents querySnapshot={querySnapshot} />
+      <Suspense fallback={<h1>...Loading</h1>}>
+        <Await resolve={querySnapshot}>
+          {
+            (data) => <Contents querySnapshot={data.docs} />
+          }
+        </Await>
+      </Suspense>
+
     </main>
   );
 }
