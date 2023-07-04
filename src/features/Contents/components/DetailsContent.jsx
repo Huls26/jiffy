@@ -33,7 +33,7 @@ export default function DetailsContent({ details }) {
 
 DetailsContent.propTypes = {
   details: PropTypes.shape({
-    userImg: PropTypes.string,
+    userImg: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
     textContent: PropTypes.string,
   }).isRequired,

@@ -36,11 +36,11 @@ ContentComponents.propTypes = {
   // eslint-disable-next-line react/require-default-props
   doc: PropTypes.shape({
     content: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
+      PropTypes.object.isRequired,
+      PropTypes.string.isRequired,
     ]),
-    userImg: PropTypes.string,
-    username: PropTypes.string,
+    userImg: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
     textDetails: PropTypes.string,
-  }),
+  }).isRequired,
 };
