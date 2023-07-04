@@ -5,7 +5,9 @@ import ContentBtn from '@components/ContentBtn';
 import UserDetails from './UserDetails';
 
 export default function DetailsContent({ details }) {
-  const { userImg, username, textContent } = details;
+  const {
+    userImg, username, textContent, likes, peopleLikes,
+  } = details;
 
   return (
     <section className="
@@ -18,6 +20,8 @@ export default function DetailsContent({ details }) {
         userImg={userImg}
         username={username}
         textContent={textContent}
+        likes={likes}
+        peopleLikes={peopleLikes}
       />
 
       <ContentBtn text="Update/Delete" />
@@ -30,5 +34,7 @@ DetailsContent.propTypes = {
     userImg: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
     textContent: PropTypes.string,
+    likes: PropTypes.number.isRequired,
+    peopleLikes: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };
