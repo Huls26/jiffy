@@ -21,8 +21,8 @@ import Contents from '@features/Contents';
 // X fetch data from firebase
 // X add loading section,
 // X loader data, defer, await, suspence
-// then change the proptype to isRequired because loading component will run
-// when fetch data from firestore
+// X then change the proptype to isRequired because loading component will run
+// X when fetch data from firestore
 // clean up
 
 export async function loader() {
