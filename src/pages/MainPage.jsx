@@ -23,6 +23,8 @@ import Contents from '@features/Contents';
 // X loader data, defer, await, suspence
 // X then change the proptype to isRequired because loading component will run
 // X when fetch data from firestore
+// add filter: type value instead of comedy, video
+// filterTagSection type: Text, meme, photo
 // clean up
 
 export async function loader() {
@@ -67,7 +69,7 @@ export default function MainPage() {
   // addData();
 
   return (
-    <main>
+    <main className="pb-7">
       <FilterTagSection />
       <HeadBanner />
       <Suspense fallback={<h1>...Loading</h1>}>
@@ -78,6 +80,7 @@ export default function MainPage() {
         </Await>
       </Suspense>
 
+      <h1 className="text-center text-gray mt-5">Ow hi there you&apos;ve reach the bottom part</h1>
     </main>
   );
 }

@@ -15,5 +15,4 @@ export default function MapContents({ contentsData }) {
 
 MapContents.propTypes = {
   contentsData: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // contentImg: PropTypes.string.isRequired,
 };
