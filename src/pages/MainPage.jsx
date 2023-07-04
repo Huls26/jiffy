@@ -19,8 +19,8 @@ import Contents from '@features/Contents';
 // X make a sample Post data from firebase
 // may a context
 // X fetch data from firebase
-// add loading section,
-// loader data, defer, await, suspence
+// X add loading section,
+// X loader data, defer, await, suspence
 // then change the proptype to isRequired because loading component will run
 // when fetch data from firestore
 // clean up
