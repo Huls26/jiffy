@@ -29,21 +29,6 @@ function App() {
     });
   }, [auth]);
 
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //   // User is signed in, see docs for a list of available properties
-  //   // https://firebase.google.com/docs/reference/js/auth.user
-  //     const { uid } = user;
-  //     dispatch({
-  //       type: 'SET_USERID',
-  //       id: uid,
-  //     });
-  //   // ...
-  //   } else {
-  //   // User is signed out
-  //   // ...
-  //   }
-  // });
   return (
     <ContextProvider value={[detailsState, dispatch]}>
       <Routes />
