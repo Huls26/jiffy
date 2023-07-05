@@ -24,14 +24,14 @@ import Contents from '@features/Contents';
 // X then change the proptype to isRequired because loading component will run
 // X when fetch data from firestore
 // X firestore: add peopleLikes array of id that likes your posts
-// add create context and useReducer to set a state
-// when working with context use memo
-// add a context folder and reducer to organize
-// to prevent from rendering children components
+// X add create context and useReducer to set a state
+// X fix key prop in MapContents
+// X add a context folder and reducer to organize
 // if you like the posts the color of button should be green else bg-aqua-1
+// when working with context use memo
+// to prevent from rendering children components
 // add filter: type value instead of comedy, video
 // filterTagSection type: Text, meme, photo
-// X fix key prop in MapContents
 // clean up
 
 export async function loader() {
