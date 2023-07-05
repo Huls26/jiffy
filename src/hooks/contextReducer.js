@@ -1,13 +1,13 @@
 export const INITIAL_STATE = {
-  contentsData: [],
+  userId: '',
 };
 
 export default function reducerMethod(state, action) {
   switch (action.type) {
-    case 'SET_CONTENTSDATA': {
+    case 'SET_USERID': {
       return {
         ...state,
-        contentsData: [...action.contents],
+        userId: action.id,
       };
     }
     default:

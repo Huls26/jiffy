@@ -1,15 +1,21 @@
 import { useContext } from 'react';
+
 import ContentBtn from '@components/ContentBtn';
 import UserImage from '@components/UserImage';
+import { dataContext } from '@App';
 import { contentDataContext } from '../context';
 import shortenLikesValue from '../utils/shortenLikesValue';
 
 export default function UserDetails() {
+  const [userContext] = useContext(dataContext);
   const { doc } = useContext(contentDataContext);
   const {
     userImg, textContent, username, likes, // peopleLikes,
   } = doc;
   const likesValue = shortenLikesValue(likes);
+
+  console.log(doc.peopleLikes);
+  console.log(userContext);
 
   return (
     <div className="flex items-start space-x-3">
