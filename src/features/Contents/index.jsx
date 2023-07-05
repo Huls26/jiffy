@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import MapContents from './utils/MapContents';
+import MapContents from './components/MapContents';
 
 export default function Contents({ querySnapshot }) {
   return (

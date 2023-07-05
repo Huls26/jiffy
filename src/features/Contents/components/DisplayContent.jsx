@@ -1,6 +1,9 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { contentDataContext } from '../context';
 
-export default function DisplayContent({ content, textDetails }) {
+export default function DisplayContent() {
+  const { doc } = useContext(contentDataContext);
+  const { content, textDetails } = doc;
   const isImg = typeof content === 'string';
 
   const displayContent = isImg
@@ -23,9 +26,9 @@ export default function DisplayContent({ content, textDetails }) {
   );
 }
 
-DisplayContent.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  content: PropTypes.string,
-  // eslint-disable-next-line react/require-default-props
-  textDetails: PropTypes.string,
-};
+// DisplayContent.propTypes = {
+//   // eslint-disable-next-line react/require-default-props
+//   content: PropTypes.string,
+//   // eslint-disable-next-line react/require-default-props
+//   textDetails: PropTypes.string,
+// };

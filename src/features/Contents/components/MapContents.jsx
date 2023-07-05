@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import ContentComponents from '../components/ContentComponents';
+import ContentComponents from './ContentComponents';
+import ContentDataProvider from '../context';
 
 export default function MapContents({ contentsData }) {
   const displayContents = contentsData?.map((doc) => (
-    <ContentComponents
-      key={doc.id}
-      doc={doc.data()}
-    />
+    <ContentDataProvider key={doc.id} value={{ doc: doc.data(), id: doc.id }}>
+      <ContentComponents />
+    </ContentDataProvider>
   ));
 
   return displayContents;
