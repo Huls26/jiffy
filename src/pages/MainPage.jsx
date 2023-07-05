@@ -26,6 +26,7 @@ import Contents from '@features/Contents';
 // X firestore: add peopleLikes array of id that likes your posts
 // add create context and useReducer to set a state
 // when working with context use memo
+// add a context folder and reducer to organize
 // to prevent from rendering children components
 // if you like the posts the color of button should be green else bg-aqua-1
 // add filter: type value instead of comedy, video
