@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 import ContentBtn from '@components/ContentBtn';
-// import UserImage from '@components/UserImage';
 import UserDetails from './UserDetails';
 
 export default function DetailsContent({ details }) {

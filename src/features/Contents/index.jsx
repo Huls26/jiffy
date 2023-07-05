@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-// import sampleData from './data/dataSet';
 import MapContents from './utils/MapContents';
 
 export default function Contents({ querySnapshot }) {

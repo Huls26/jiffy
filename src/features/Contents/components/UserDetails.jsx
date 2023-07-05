@@ -1,12 +1,16 @@
+// import { useContext } from 'react';
+// import { dataContext } from '@App';
 import PropTypes from 'prop-types';
 import ContentBtn from '@components/ContentBtn';
 import UserImage from '@components/UserImage';
 import shortenLikesValue from '../utils/shortenLikesValue';
 
 export default function UserDetails({
-  userImg, textContent, username, likes, peopleLikes,
+  userImg, textContent, username, likes, // peopleLikes,
 }) {
+  // const context = useContext(dataContext);
   const likesValue = shortenLikesValue(likes);
+  // console.log(context);
 
   return (
     <div className="flex items-start space-x-3">
@@ -19,7 +23,6 @@ export default function UserDetails({
           <ContentBtn text="comment" />
         </div>
       </div>
-      {peopleLikes}
     </div>
   );
 }
@@ -30,5 +33,5 @@ UserDetails.propTypes = {
   // eslint-disable-next-line react/require-default-props
   textContent: PropTypes.string,
   likes: PropTypes.number.isRequired,
-  peopleLikes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // peopleLikes: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

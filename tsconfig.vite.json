@@ -23,6 +23,7 @@
     ".eslintrc.cjs"
   ],
   "paths": {
+    "@App/*": ["src/App/*"], 
     "@api/*": ["src/api/*"], 
     "@assets/*": ["src/assets/*"], 
     "@components/*": ["src/components/*"], 

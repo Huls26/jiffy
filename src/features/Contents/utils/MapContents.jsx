@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import ContentComponents from '../components/ContentComponents';
 
 export default function MapContents({ contentsData }) {
-  const displayContents = contentsData?.map((doc, idx) => (
+  const displayContents = contentsData?.map((doc) => (
     <ContentComponents
-      // eslint-disable-next-line react/no-array-index-key
-      key={idx}
+      key={doc.id}
       doc={doc.data()}
     />
   ));

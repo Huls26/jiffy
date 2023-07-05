@@ -23,11 +23,14 @@ import Contents from '@features/Contents';
 // X loader data, defer, await, suspence
 // X then change the proptype to isRequired because loading component will run
 // X when fetch data from firestore
-// firestore: add peopleLikes array of id that likes your posts
+// X firestore: add peopleLikes array of id that likes your posts
+// add create context and useReducer to set a state
+// when working with context use memo
+// to prevent from rendering children components
 // if you like the posts the color of button should be green else bg-aqua-1
 // add filter: type value instead of comedy, video
 // filterTagSection type: Text, meme, photo
-// fix key prop in MapContents
+// X fix key prop in MapContents
 // clean up
 
 export async function loader() {
@@ -81,9 +84,8 @@ export default function MainPage() {
             (data) => <Contents querySnapshot={data.docs} />
           }
         </Await>
+        <h1 className="text-center text-gray mt-5">Ow hi there you&apos;ve reach the bottom part</h1>
       </Suspense>
-
-      <h1 className="text-center text-gray mt-5">Ow hi there you&apos;ve reach the bottom part</h1>
     </main>
   );
 }
