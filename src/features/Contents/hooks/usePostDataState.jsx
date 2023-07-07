@@ -16,20 +16,25 @@ export default function usePostDataState() {
     reducerMethod, { ...docData },
   );
   const {
-    userImg, textContent, username, likes, peopleLikes, // contentId,
+    userImg, textContent, username, likes, peopleLikes,
   } = userState;
   const displayLikes = shortenLikesValue(likes);
   const isUserLike = peopleLikes.includes(userId);
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
   const contentRef = doc(db, 'posts', contentId);
 
+  // debouncing
   useEffect(() => {
-    (async function updateFirebase() {
+    async function updateFirebase() {
       await updateDoc(contentRef, {
         likes,
         peopleLikes,
       });
-    }());
+    }
+
+    const updateData = setTimeout(updateFirebase, 2000);
+
+    return () => clearTimeout(updateData);
   }, [peopleLikes, likes, contentRef]);
 
   return {
