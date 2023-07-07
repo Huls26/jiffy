@@ -5,22 +5,15 @@ export const INITIAL_STATE = {
 
 export default function reducerMethod(state, action) {
   switch (action.type) {
-    // to do: clean up code
+    // add likes when like, remove likes when unlike
+    // mininum likes should be 0
+    // max likes for now is 100M
     case 'USER_LIKE': {
-      // const { userId } = action;
-      // const { peopleLikes } = state;
-      // const setNewArray = [...peopleLikes];
-      // const index = setNewArray.indexOf(userId);
-
-      // if (index > -1) {
-      //   setNewArray.splice(index, 1);
-      // } else {
-      //   setNewArray.push(userId);
-      // }
-      const peopleLikes = setUserLike(state, action);
+      const { peopleLikes, likes } = setUserLike(state, action);
 
       return {
         ...state,
+        likes,
         peopleLikes,
       };
     }

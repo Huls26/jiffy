@@ -81,15 +81,6 @@ export default function MainPage() {
     <main className="pb-7">
       <FilterTagSection />
       <HeadBanner />
-      {/* <Suspense fallback={<h1>...Loading</h1>}>
-        <Await resolve={querySnapshot}>
-          {
-            (data) => <Contents querySnapshot={data.docs} />
-          }
-        </Await>
-        <h1 className="text-center text-gray mt-5">Ow
-        hi there you&apos;ve reach the bottom part</h1>
-      </Suspense> */}
       <SuspenseMainPage querySnapshot={querySnapshot} />
     </main>
   );

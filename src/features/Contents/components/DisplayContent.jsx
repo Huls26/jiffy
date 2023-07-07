@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { contentDataContext } from '../context';
 
 export default function DisplayContent() {
-  const { doc } = useContext(contentDataContext);
-  const { content, textDetails } = doc;
+  const { docData } = useContext(contentDataContext);
+  const { content, textDetails } = docData;
   const isImg = typeof content === 'string';
 
   const displayContent = isImg

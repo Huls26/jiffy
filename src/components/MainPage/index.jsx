@@ -17,5 +17,6 @@ export default function SuspenseMainPage({ querySnapshot }) {
 }
 
 SuspenseMainPage.propTypes = {
-  querySnapshot: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  querySnapshot: PropTypes.object.isRequired,
 };

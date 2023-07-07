@@ -4,7 +4,10 @@ import ContentDataProvider from '../context';
 
 export default function MapContents({ contentsData }) {
   const displayContents = contentsData?.map((doc) => (
-    <ContentDataProvider key={doc.id} value={{ doc: doc.data(), id: doc.id }}>
+    <ContentDataProvider
+      key={doc.id}
+      value={{ docData: doc.data(), contentId: doc.id }}
+    >
       <ContentComponents />
     </ContentDataProvider>
   ));
