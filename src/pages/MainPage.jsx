@@ -1,7 +1,7 @@
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
 import {
   defer,
-  Await,
+  // Await,
   useLoaderData,
 } from 'react-router-dom';
 import {
@@ -11,9 +11,10 @@ import {
 
 import { db } from '@api/FB';
 
+import SuspenseMainPage from '@components/MainPage';
 import FilterTagSection from '@features/FilterTagSection';
 import HeadBanner from '@features/HeadBanner';
-import Contents from '@features/Contents';
+// import Contents from '@features/Contents';
 
 // to do
 // X make a sample Post data from firebase
@@ -27,7 +28,8 @@ import Contents from '@features/Contents';
 // X add create context and useReducer to set a state
 // X fix key prop in MapContents
 // X add a context folder and reducer to organize
-// if you like the posts the color of button should be green else bg-aqua-1
+// X if you like the posts the color of button should be green else bg-aqua-1
+// update posts firebase
 // when working with context use memo
 // to prevent from rendering children components
 // add filter: type value instead of comedy, video
@@ -79,14 +81,16 @@ export default function MainPage() {
     <main className="pb-7">
       <FilterTagSection />
       <HeadBanner />
-      <Suspense fallback={<h1>...Loading</h1>}>
+      {/* <Suspense fallback={<h1>...Loading</h1>}>
         <Await resolve={querySnapshot}>
           {
             (data) => <Contents querySnapshot={data.docs} />
           }
         </Await>
-        <h1 className="text-center text-gray mt-5">Ow hi there you&apos;ve reach the bottom part</h1>
-      </Suspense>
+        <h1 className="text-center text-gray mt-5">Ow
+        hi there you&apos;ve reach the bottom part</h1>
+      </Suspense> */}
+      <SuspenseMainPage querySnapshot={querySnapshot} />
     </main>
   );
 }

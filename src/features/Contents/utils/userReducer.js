@@ -1,24 +1,27 @@
+import setUserLike from './setUserLike';
+
 export const INITIAL_STATE = {
 };
 
 export default function reducerMethod(state, action) {
   switch (action.type) {
-    // clean up code
+    // to do: clean up code
     case 'USER_LIKE': {
-      const { userId } = action;
-      const { peopleLikes } = state;
-      const setNewArray = [...peopleLikes];
-      const index = setNewArray.indexOf(userId);
+      // const { userId } = action;
+      // const { peopleLikes } = state;
+      // const setNewArray = [...peopleLikes];
+      // const index = setNewArray.indexOf(userId);
 
-      if (index > -1) {
-        setNewArray.splice(index, 1);
-      } else {
-        setNewArray.push(userId);
-      }
+      // if (index > -1) {
+      //   setNewArray.splice(index, 1);
+      // } else {
+      //   setNewArray.push(userId);
+      // }
+      const peopleLikes = setUserLike(state, action);
 
       return {
         ...state,
-        peopleLikes: setNewArray,
+        peopleLikes,
       };
     }
     default:
