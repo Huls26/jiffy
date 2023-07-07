@@ -5,7 +5,7 @@ export default function setUserLike(state, action) {
   const setNewArray = [...peopleLikes];
   const index = setNewArray.indexOf(userId);
 
-  if (index > -1) {
+  if (index > -1 && likes > 0) {
     likes -= 1;
     setNewArray.splice(index, 1);
   } else {
