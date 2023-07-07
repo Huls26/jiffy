@@ -11,7 +11,7 @@ import {
 
 import { db } from '@api/FB';
 
-import SuspenseMainPage from '@components/MainPage';
+import SuspenseMainPage from '@components/Mainpage';
 import FilterTagSection from '@features/FilterTagSection';
 import HeadBanner from '@features/HeadBanner';
 // import Contents from '@features/Contents';
