@@ -9,9 +9,13 @@ import shortenLikesValue from '../utils/shortenLikesValue';
 import reducerMethod from '../utils/userReducer';
 
 export default function usePostDataState() {
+  // getting user data/User id
   const [userContext] = useContext(dataContext);
   const { userId } = userContext;
+  // getting post data
   const { docData, contentId } = useContext(contentDataContext);
+  // setting post data to state
+  // updating post data
   const [userState, dispatch] = useReducer(
     reducerMethod, { ...docData },
   );
@@ -23,15 +27,15 @@ export default function usePostDataState() {
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
   const contentRef = doc(db, 'posts', contentId);
 
-  // debouncing
   useEffect(() => {
+    // updating firebase posts data
     async function updateFirebase() {
       await updateDoc(contentRef, {
         likes,
         peopleLikes,
       });
     }
-
+    // debouncing
     const updateData = setTimeout(updateFirebase, 2000);
 
     return () => clearTimeout(updateData);

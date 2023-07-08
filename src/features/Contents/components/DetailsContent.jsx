@@ -2,6 +2,7 @@ import ContentBtn from '@components/ContentBtn';
 import UserDetails from './UserDetails';
 
 export default function DetailsContent() {
+  console.log('Render DetailsContent');
   return (
     <section className="
         flex justify-between items-start

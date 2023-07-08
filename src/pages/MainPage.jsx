@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import {
   defer,
   useLoaderData,
@@ -12,7 +13,6 @@ import { db } from '@api/FB';
 import SuspenseMainPage from '@components/Mainpage';
 import FilterTagSection from '@features/FilterTagSection';
 import HeadBanner from '@features/HeadBanner';
-// import Contents from '@features/Contents';
 
 // to do
 // X make a sample Post data from firebase
@@ -27,9 +27,13 @@ import HeadBanner from '@features/HeadBanner';
 // X fix key prop in MapContents
 // X add a context folder and reducer to organize
 // X if you like the posts the color of button should be green else bg-aqua-1
-// update posts firebase
-// when working with context use memo
+// X update posts firebase
+// X when working with context use memo
 // to prevent from rendering children components
+// when user click comment, update, profile
+// user should redirect to decignated path
+// add user profile Photo
+// add login button when user is logout and logout button when user is not login
 // add filter: type value instead of comedy, video
 // filterTagSection type: Text, meme, photo
 // clean up
@@ -43,7 +47,7 @@ export async function loader() {
   });
 }
 
-export default function MainPage() {
+function MainPage() {
   const { querySnapshot } = useLoaderData();
   // const testingData = {
   //   title: 'Hello world',
@@ -76,7 +80,6 @@ export default function MainPage() {
   // }
 
   // addData();
-
   return (
     <main className="pb-7">
       <FilterTagSection />
@@ -85,3 +88,6 @@ export default function MainPage() {
     </main>
   );
 }
+
+const MemoMainPage = memo(MainPage);
+export default MemoMainPage;

@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import DisplayContent from './DisplayContent';
 import DetailsContent from './DetailsContent';
 
-export default function ContentComponents() {
+function ContentComponents() {
   return (
     <article className="mb-4 border-dark-2 border border-b-2 border-r-2 pb-3">
       <DisplayContent />
@@ -9,3 +10,6 @@ export default function ContentComponents() {
     </article>
   );
 }
+
+const memoContentsComponents = memo(ContentComponents);
+export default memoContentsComponents;

@@ -25,10 +25,3 @@ export default function DisplayContent() {
     </div>
   );
 }
-
-// DisplayContent.propTypes = {
-//   // eslint-disable-next-line react/require-default-props
-//   content: PropTypes.string,
-//   // eslint-disable-next-line react/require-default-props
-//   textDetails: PropTypes.string,
-// };

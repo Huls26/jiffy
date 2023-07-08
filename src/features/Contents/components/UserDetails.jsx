@@ -5,11 +5,11 @@ import usePostDataState from '../hooks/usePostDataState';
 export default function UserDetails() {
   const {
     dispatch, userImg, textContent, username,
-    displayLikes, btnBg, userId, contentId, userState,
+    displayLikes, btnBg, userId, // contentId, // userState,
   } = usePostDataState();
 
-  console.log(contentId);
-  console.log(userState);
+  // console.log(contentId);
+  // console.log(userState);
   return (
     <div className="flex items-start space-x-3">
       <UserImage userImg={userImg} />
