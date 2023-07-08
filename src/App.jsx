@@ -6,12 +6,16 @@ import {
 
 // reminder: set firebase rules
 
-import Routes from '@routes';
+import Router from '@router';
 import reducerMethod, { INITIAL_STATE } from '@hooks/contextReducer';
 
 const dataContext = createContext();
 const ContextProvider = dataContext.Provider;
 
+// to do:
+// clean up
+// App
+// Header
 function App() {
   const [detailsState, dispatch] = useReducer(reducerMethod, INITIAL_STATE);
   const auth = getAuth();
@@ -40,7 +44,7 @@ function App() {
 
   return (
     <ContextProvider value={[detailsState, dispatch]}>
-      <Routes />
+      <Router />
     </ContextProvider>
   );
 }

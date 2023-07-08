@@ -1,5 +1,5 @@
 import { Form } from 'react-router-dom';
-import LoginBtn from '@components/LoginBtn';
+import LoginBtn from '@components/Btn/LoginBtn';
 import SignupBtn from './components/SignupBtn';
 
 export default function SignupForm() {

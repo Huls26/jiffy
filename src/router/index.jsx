@@ -15,38 +15,46 @@ import ProfilePage from '@pages/ProfilePage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-      path="/"
-      element={<AppLayout />}
-    >
+    <Route>
       <Route
-        index
-        loader={loaderMainpage}
-        element={<MainPage />}
-      />
+        key="main"
+        path="/"
+        element={<AppLayout />}
+      >
+        <Route
+          index
+          loader={loaderMainpage}
+          element={<MainPage />}
+        />
+        <Route
+          path="view"
+          element={<ViewPage />}
+        />
+        <Route
+          path="profile/:id"
+          element={<ProfilePage />}
+        />
+      </Route>
+      ,
       <Route
+        key="login"
         path="login"
         action={actionLoginPage}
         element={<LoginPage />}
       />
+      ,
       <Route
+        key="signup"
         path="signup"
         action={actionSignupPage}
         element={<SignupPage />}
       />
-      <Route
-        path="view"
-        element={<ViewPage />}
-      />
-      <Route
-        path="profile/:id"
-        element={<ProfilePage />}
-      />
+      ,
     </Route>,
   ),
 );
 
-export default function Routes() {
+export default function Router() {
   return (
     <RouterProvider router={router} />
   );

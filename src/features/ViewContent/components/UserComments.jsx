@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import UserImage from '@components/UserImage';
-import ContentBtn from '@components/ContentBtn';
+import ContentBtn from '@components/Btn/ContentBtn';
 
 export default function UserComments({ commentsDetail }) {
   const {

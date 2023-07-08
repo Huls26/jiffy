@@ -1,4 +1,4 @@
-import ContentBtn from '@components/ContentBtn';
+import ContentBtn from '@components/Btn/ContentBtn';
 import UserImage from '@components/UserImage';
 import usePostDataState from '../hooks/usePostDataState';
 
@@ -10,6 +10,7 @@ export default function UserDetails() {
 
   // console.log(contentId);
   // console.log(userState);
+  console.log('Render userDetails');
   return (
     <div className="flex items-start space-x-3">
       <UserImage userImg={userImg} />

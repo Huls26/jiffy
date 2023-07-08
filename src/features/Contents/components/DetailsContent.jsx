@@ -1,4 +1,4 @@
-import ContentBtn from '@components/ContentBtn';
+import ContentBtn from '@components/Btn/ContentBtn';
 import UserDetails from './UserDetails';
 
 export default function DetailsContent() {

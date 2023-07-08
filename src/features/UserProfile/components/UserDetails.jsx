@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ContentBtn from '@components/ContentBtn';
+import ContentBtn from '@components/Btn/ContentBtn';
 import ProfilePhoto from './ProfilePhoto';
 
 export default function UserDetails({ userImg, username }) {

@@ -1,4 +1,7 @@
-import { memo, useContext } from 'react';
+import {
+  memo,
+  // useContext,
+} from 'react';
 import {
   defer,
   useLoaderData,
@@ -13,28 +16,12 @@ import { db } from '@api/FB';
 import SuspenseMainPage from '@components/Mainpage';
 import FilterTagSection from '@features/FilterTagSection';
 import HeadBanner from '@features/HeadBanner';
-import { dataContext } from '@App';
+// import { dataContext } from '@App';
 
 // to do
-// X make a sample Post data from firebase
-// may a context
-// X fetch data from firebase
-// X add loading section,
-// X loader data, defer, await, suspence
-// X then change the proptype to isRequired because loading component will run
-// X when fetch data from firestore
-// X firestore: add peopleLikes array of id that likes your posts
-// X add create context and useReducer to set a state
-// X fix key prop in MapContents
-// X add a context folder and reducer to organize
-// X if you like the posts the color of button should be green else bg-aqua-1
-// X update posts firebase
-// X when working with context use memo
-// to prevent from rendering children components
 // when user click comment, update, profile
 // user should redirect to decignated path
-// add user profile Photo
-// add login button when user is logout and logout button when user is not login
+// add sign out button,
 // add filter: type value instead of comedy, video
 // filterTagSection type: Text, meme, photo
 // clean up
@@ -50,8 +37,8 @@ export async function loader() {
 
 function MainPage() {
   const { querySnapshot } = useLoaderData();
-  const [userDetails] = useContext(dataContext);
-  console.log(userDetails);
+  // const [userDetails] = useContext(dataContext);
+  // console.log(userDetails);
   console.log('render Mainpage');
   // const testingData = {
   //   title: 'Hello world',
