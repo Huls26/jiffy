@@ -20,7 +20,7 @@ export default function UserDetails() {
           <ContentBtn
             text={`like (${displayLikes})`}
             bg={btnBg}
-            onClick={() => dispatch({ type: 'USER_LIKE', userId })}
+            onClick={() => userId && dispatch({ type: 'USER_LIKE', userId })}
           />
           <ContentBtn text="comment" />
         </div>

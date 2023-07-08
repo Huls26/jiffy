@@ -30,16 +30,18 @@ export default function usePostDataState() {
   useEffect(() => {
     // updating firebase posts data
     async function updateFirebase() {
-      await updateDoc(contentRef, {
-        likes,
-        peopleLikes,
-      });
+      if (userId) {
+        await updateDoc(contentRef, {
+          likes,
+          peopleLikes,
+        });
+      }
     }
     // debouncing
     const updateData = setTimeout(updateFirebase, 2000);
 
     return () => clearTimeout(updateData);
-  }, [peopleLikes, likes, contentRef]);
+  }, [peopleLikes, likes, contentRef, userId]);
 
   return {
     userState,

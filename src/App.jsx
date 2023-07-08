@@ -1,5 +1,10 @@
 import { useEffect, createContext, useReducer } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import {
+  getAuth, onAuthStateChanged,
+  // signOut,
+} from 'firebase/auth';
+
+// reminder: set firebase rules
 
 import Routes from '@routes';
 import reducerMethod, { INITIAL_STATE } from '@hooks/contextReducer';
@@ -27,6 +32,11 @@ function App() {
       }
     });
   }, [auth]);
+  // signOut(auth).then(() => {
+  //   console.log('signOUt user');
+  // }).catch((error) => {
+  //   console.log(error.message);
+  // });
 
   return (
     <ContextProvider value={[detailsState, dispatch]}>

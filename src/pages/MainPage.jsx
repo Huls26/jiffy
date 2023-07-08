@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import {
   defer,
   useLoaderData,
@@ -13,6 +13,7 @@ import { db } from '@api/FB';
 import SuspenseMainPage from '@components/Mainpage';
 import FilterTagSection from '@features/FilterTagSection';
 import HeadBanner from '@features/HeadBanner';
+import { dataContext } from '@App';
 
 // to do
 // X make a sample Post data from firebase
@@ -49,6 +50,9 @@ export async function loader() {
 
 function MainPage() {
   const { querySnapshot } = useLoaderData();
+  const [userDetails] = useContext(dataContext);
+  console.log(userDetails);
+  console.log('render Mainpage');
   // const testingData = {
   //   title: 'Hello world',
   //   content: 'https://images.pexels.com/photos/3768263/
