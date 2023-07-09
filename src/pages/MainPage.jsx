@@ -22,6 +22,7 @@ import HeadBanner from '@features/HeadBanner';
 // when user click comment, update, profile
 // user should redirect to decignated path
 // add sign out button,
+// to profile page
 // add filter: type value instead of comedy, video
 // filterTagSection type: Text, meme, photo
 // clean up

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { dataContext } from '@App';
+import { dataContext } from '@context/dataContext';
 
 import ContentBtn from '@components/Btn/ContentBtn';
 import UserCreatePostProfile from './UserCreatePostProfile';

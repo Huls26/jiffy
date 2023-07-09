@@ -2,7 +2,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@api/FB';
 
 import { useContext, useEffect, useReducer } from 'react';
-import { dataContext } from '@App';
+import { dataContext } from '@context/dataContext';
 import { contentDataContext } from '../context';
 
 import shortenLikesValue from '../utils/shortenLikesValue';
