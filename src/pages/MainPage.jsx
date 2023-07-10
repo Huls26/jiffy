@@ -21,10 +21,13 @@ import HeadBanner from '@features/HeadBanner';
 // to do
 // when user click comment, update, profile
 // user should redirect to decignated path
-// add sign out button,
-// to profile page
 // add filter: type value instead of comedy, video
 // filterTagSection type: Text, meme, photo
+// add errorComponents, not found page
+// fix ProfilePage refresh redirect to HomePage/Mainpage --
+// -- problem 1 when loader is trigger it redirect to homepage
+// -- solution save the current path to the url History check useHistory
+// add loading
 // clean up
 
 export async function loader() {

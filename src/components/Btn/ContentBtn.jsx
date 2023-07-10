@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 
-export default function ContentBtn({ text, bg, onClick }) {
+export default function ContentBtn({
+  text, bg, onClick, type,
+}) {
   const bgColor = bg || 'bg-yellow-1';
+
   return (
     <button
       onClick={onClick}
-      type="button"
+      type={!type ? 'button' : 'submit'}
       className={`
         ${bgColor} px-3 py-1
         font-A font-bold text-sm 
@@ -28,4 +31,6 @@ ContentBtn.propTypes = {
   bg: PropTypes.string,
   // eslint-disable-next-line react/require-default-props
   onClick: PropTypes.func,
+  // eslint-disable-next-line react/require-default-props
+  type: PropTypes.string,
 };

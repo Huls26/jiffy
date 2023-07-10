@@ -5,6 +5,7 @@ import reducerMethod, { INITIAL_STATE } from './contextReducer';
 export default function useUserReducer() {
   const [detailsState, dispatch] = useReducer(reducerMethod, INITIAL_STATE);
   const auth = getAuth();
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -15,9 +16,6 @@ export default function useUserReducer() {
           type: 'SET_USERID',
           id: uid,
         });
-        // ...
-      } else {
-        // User is signed out
         // ...
       }
     });
