@@ -9,6 +9,11 @@ export async function action({ request }) {
   const confirmPassword = formData.get('confirmPassword');
   const resMessage = '';
 
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [key, value] of formData.entries()) {
+    console.log(key, value);
+  }
+
   if (password === confirmPassword && email) {
     const res = await signupPage(email, password);
 
@@ -30,6 +35,7 @@ export default function SignupPage() {
   const actionData = useActionData();
 
   console.log(actionData);
+  console.log(new Date());
   return (
     <main>
       <SignupForm />
