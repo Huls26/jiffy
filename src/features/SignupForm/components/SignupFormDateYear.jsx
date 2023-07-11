@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 export default function SignupFormDateYear() {
   const defaultValue = {
-    date: null,
-    year: null,
+    date: undefined,
+    year: undefined,
   };
   const [formValue, setFormValue] = useState(defaultValue);
   const currentYear = new Date().getFullYear();
