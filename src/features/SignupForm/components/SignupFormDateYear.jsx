@@ -1,11 +1,33 @@
+import { useState } from 'react';
+
 export default function SignupFormDateYear() {
+  const defaultValue = {
+    date: null,
+    year: null,
+  };
+  const [formValue, setFormValue] = useState(defaultValue);
   const currentYear = new Date().getFullYear();
+
+  function handleChange(event) {
+    const { target } = event;
+    const {
+      value, min, max, name,
+    } = target;
+    const setMinMax = Math.max(min, Math.min(max, Number(value)));
+
+    setFormValue((prevValue) => ({
+      ...prevValue,
+      [name]: setMinMax,
+    }));
+  }
 
   return (
     <div className="flex space-x-4">
       <label htmlFor="date" className="flex flex-col">
         Date
         <input
+          onChange={handleChange}
+          value={formValue.date}
           type="number"
           id="date"
           name="date"
@@ -25,6 +47,8 @@ export default function SignupFormDateYear() {
       <label htmlFor="year" className="flex flex-col">
         Year
         <input
+          onChange={handleChange}
+          value={formValue.year}
           type="number"
           id="year"
           name="year"

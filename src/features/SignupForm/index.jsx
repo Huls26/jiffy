@@ -37,25 +37,6 @@ export default function SignupForm() {
       <div>
         <SignupFormInput label="password" name="password" type="password" placeholder="Password" />
         <SignupFormInput label="confirm password" name="confirmPassword" type="password" placeholder="Confirm Password" />
-        {/* <label htmlFor="confirmPassword">
-          Confirm Password
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  w-full
-                  rounded
-                  outline-none
-                  focus:border-blue
-                "
-            required
-            autoComplete="off"
-          />
-        </label> */}
       </div>
       <SignupBtn />
       <Link to="/login">
