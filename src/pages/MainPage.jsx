@@ -1,6 +1,5 @@
 import {
   memo,
-  // useContext,
 } from 'react';
 import {
   defer,
@@ -16,19 +15,6 @@ import { db } from '@api/FB';
 import SuspenseMainPage from '@components/Mainpage';
 import FilterTagSection from '@features/FilterTagSection';
 import HeadBanner from '@features/HeadBanner';
-// import { dataContext } from '@App';
-
-// to do
-// when user click comment, update, profile
-// user should redirect to decignated path
-// add filter: type value instead of comedy, video
-// filterTagSection type: Text, meme, photo
-// add errorComponents, not found page
-// fix ProfilePage refresh redirect to HomePage/Mainpage --
-// -- problem 1 when loader is trigger it redirect to homepage
-// -- solution save the current path to the url History check useHistory
-// add loading
-// clean up
 
 export async function loader() {
   const col = collection(db, 'posts');

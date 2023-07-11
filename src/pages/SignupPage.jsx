@@ -1,4 +1,4 @@
-import signupPage from '@api/signupPageAPI';
+// import signupPage from '@api/signupPageAPI';
 import SignupForm from '@features/SignupForm';
 
 export async function action({ request }) {
@@ -6,10 +6,11 @@ export async function action({ request }) {
   const email = formData.get('email');
   const password = formData.get('password');
 
-  if (email && password) {
-    const res = await signupPage(email, password);
-    console.log(res);
-  }
+  console.log(email, password);
+  // if (email && password) {
+  //   const res = await signupPage(email, password);
+  //   console.log(res);
+  // }
   return null;
 }
 

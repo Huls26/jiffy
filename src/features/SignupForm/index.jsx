@@ -1,6 +1,11 @@
-import { Form } from 'react-router-dom';
+import { Form, Link } from 'react-router-dom';
 import LoginBtn from '@components/Btn/LoginBtn';
+
+import SignupFormTitle from './components/SignupFormTitle';
 import SignupBtn from './components/SignupBtn';
+import SignupFormInput from './components/SignupFormInput';
+import SignupSelectMonth from './components/SignupSelectMonth';
+import SignupFormDateYear from './components/SignupFormDateYear';
 
 export default function SignupForm() {
   return (
@@ -16,169 +21,23 @@ export default function SignupForm() {
         rounded-lg
       "
     >
-      <div className="text-center mb-3">
-        <h1 className="
-      bg-dark-2 text-2xl font-LM text-purple drop-shadow-md
-        inline
-        px-2 py-1
-        rounded-full
-        hover:bg-green
-        shadow
-      "
-        >
-          Sign Up
-        </h1>
-      </div>
+      <SignupFormTitle />
 
-      <label htmlFor="firstname" className="block">
-        First name
-        <input
-          type="text"
-          id="firstname"
-          name="firstname"
-          placeholder="First name"
-          className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  w-full
-                  rounded
-                  outline-none
-                  focus:border-blue
-                "
-          required
-        />
-      </label>
-      <label htmlFor="lastname">
-        Last name(optional)
-        <input
-          type="text"
-          id="lastname"
-          name="lastname"
-          placeholder="Last name(optional)"
-          className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  w-full
-                  rounded
-                  outline-none
-                  focus:border-blue
-                "
-        />
-      </label>
-      <label htmlFor="email">
-        email
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="email"
-          className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  w-full
-                  rounded
-                  outline-none
-                  focus:border-blue
-                "
-          required
-        />
-      </label>
+      <SignupFormInput label="first name" name="firstname" placeholder="First name" />
+      <SignupFormInput label="last name" name="lastname" placeholder="Last name(optional)" />
+      <SignupFormInput label="username" name="username" placeholder="Username" />
+      <SignupFormInput label="email" name="email" type="email" placeholder="Email" />
+
       <div>
         <h1 className="block font-bold text-lg">Birth Date</h1>
-        <label htmlFor="month" className="flex flex-col">
-          Month
-          <select
-            name="month"
-            id="month"
-            placeholder="Month"
-            className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  rounded
-                  outline-none
-                  focus:border-blue
-                  capitalize
-                "
-            defaultValue="DEFAULT"
-          >
-            <option value="DEFAULT" disabled className="text-gray-dark opacity-80">Month</option>
-            <option value="january">january</option>
-            <option value="february">february</option>
-            <option value="march">march</option>
-            <option value="april">april</option>
-            <option value="may">may</option>
-            <option value="june">june</option>
-            <option value="july">july</option>
-            <option value="august">august</option>
-            <option value="september">september</option>
-            <option value="october">october</option>
-            <option value="november">november</option>
-            <option value="december">december</option>
-          </select>
-        </label>
-        <div className="flex space-x-4">
-          <label htmlFor="date" className="flex flex-col">
-            Date
-            <input
-              type="number"
-              id="date"
-              name="date"
-              placeholder="Date"
-              maxLength="2"
-              min={1}
-              max={31}
-              className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  rounded
-                  outline-none
-                  focus:border-blue
-                "
-            />
-          </label>
-          <label htmlFor="year" className="flex flex-col">
-            Year
-            <input
-              type="number"
-              id="year"
-              name="year"
-              placeholder="Year"
-              min={1}
-            // check current year and put to max
-              max={2023}
-              className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  rounded
-                  outline-none
-                  focus:border-blue
-                "
-            />
-          </label>
-        </div>
+        <SignupSelectMonth />
+        <SignupFormDateYear />
       </div>
 
       <div>
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            className="
-                border-dark-2 border border-r-2 border-b-2
-                  mb-3 p-1
-                  w-full
-                  rounded
-                  outline-none
-                  focus:border-blue
-                "
-            required
-            autoComplete="off"
-          />
-        </label>
-        <label htmlFor="confirmPassword">
+        <SignupFormInput label="password" name="password" type="password" placeholder="Password" />
+        <SignupFormInput label="confirm password" name="confirmPassword" type="password" placeholder="Confirm Password" />
+        {/* <label htmlFor="confirmPassword">
           Confirm Password
           <input
             type="password"
@@ -196,10 +55,12 @@ export default function SignupForm() {
             required
             autoComplete="off"
           />
-        </label>
+        </label> */}
       </div>
       <SignupBtn />
-      <LoginBtn />
+      <Link to="/login">
+        <LoginBtn />
+      </Link>
     </Form>
   );
 }
