@@ -1,6 +1,5 @@
 import { useActionData } from 'react-router-dom';
 import signupPage from '@api/signupPageAPI';
-import defaultUserData from '@api/defaultUserData';
 import SignupForm from '@features/SignupForm';
 
 export async function action({ request }) {
@@ -10,16 +9,8 @@ export async function action({ request }) {
   const confirmPassword = formData.get('confirmPassword');
   const resMessage = '';
 
-  // eslint-disable-next-line no-restricted-syntax
-  const setNewData = defaultUserData(formData);
-  console.log(setNewData);
-
   if (password === confirmPassword && email) {
-    const res = await signupPage(email, password);
-
-    // console.log('check for user email address');
-    // console.log('create user');
-    // console.log(email);
+    const res = await signupPage(email, password, formData);
     return res;
   }
 
@@ -35,7 +26,6 @@ export default function SignupPage() {
   const actionData = useActionData();
 
   console.log(actionData);
-  console.log(new Date());
   return (
     <main>
       <SignupForm />

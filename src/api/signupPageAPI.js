@@ -1,19 +1,25 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import {
-  doc,
-  // setDoc,
-} from 'firebase/firestore';
-import { auth, db } from './FB';
+  auth,
+  db,
+} from './FB';
+import defaultUserData from './defaultUserData';
 
-export default async function createUser(email, password) {
+// check response data
+export default async function createUser(email, password, formData) {
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth, email, password,
     );
     const { user } = userCredential;
-    const userRef = doc(db, 'users', user.id);
-    console.log(userRef);
-    return { uid: user.uid };
+
+    if (user) {
+      const setNewUser = defaultUserData(formData);
+      await setDoc(doc(db, 'users', user.uid), setNewUser);
+    }
+
+    return { uid: user.uid, formData };
   } catch (error) {
     const errorMessage = error.code.replace('auth/', '').split('-').join(' ');
     const errorEmail = errorMessage.includes('email');

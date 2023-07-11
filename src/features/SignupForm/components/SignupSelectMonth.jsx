@@ -15,6 +15,7 @@ export default function SignupSelectMonth() {
                   capitalize
                 "
         defaultValue="DEFAULT"
+        required
       >
         <option value="DEFAULT" disabled className="text-gray-dark opacity-80">Month</option>
         <option value="january">january</option>
