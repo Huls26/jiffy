@@ -23,14 +23,16 @@
     ".eslintrc.cjs"
   ],
   "paths": {
+    "@App/*": ["src/App/*"], 
     "@api/*": ["src/api/*"], 
     "@assets/*": ["src/assets/*"], 
     "@components/*": ["src/components/*"], 
+    "@context/*": ["src/context/*"], 
     "@features/*": ["src/features/*"],
     "@hooks/*": ["src/hooks/*"], 
     "@layout/*": ["src/layout/*"],
     "@pages/*": ["src/pages/*"], 
-    "@routes/*": ["src/routes/*"],
+    "@router/*": ["src/router/*"],
     "@utils/*": ["src/utils/*"],
   }
 }

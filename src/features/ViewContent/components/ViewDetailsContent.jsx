@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import ContentBtn from '@components/ContentBtn';
+import ContentBtn from '@components/Btn/ContentBtn';
 import UserImage from '@components/UserImage';
 
 export default function ViewDetailsContent({ details }) {

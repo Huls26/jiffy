@@ -1,8 +1,17 @@
 import PropTypes from 'prop-types';
-import ContentBtn from '@components/ContentBtn';
+
+import ContentBtn from '@components/Btn/ContentBtn';
+import CreatePostBtn from '@components/Header/components/CreatePostBtn';
+
+import useCheckId from '@hooks/useCheckId';
 import ProfilePhoto from './ProfilePhoto';
 
 export default function UserDetails({ userImg, username }) {
+  const isOwnProfile = useCheckId();
+  const logoutFollowBtn = isOwnProfile
+    ? <CreatePostBtn onClick={() => console.log('create post')} />
+    : <ContentBtn text="follow" bg="bg-purple" />;
+
   return (
     <section className="px-6 py-5 mb-3">
       <section className="flex space-x-3">
@@ -22,7 +31,7 @@ export default function UserDetails({ userImg, username }) {
         </section>
 
         <div>
-          <ContentBtn text="follow" bg="bg-purple" />
+          {logoutFollowBtn}
         </div>
       </section>
     </section>

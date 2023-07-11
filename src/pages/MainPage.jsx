@@ -1,25 +1,74 @@
-import { useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import {
+  memo,
+} from 'react';
+import {
+  defer,
+  useLoaderData,
+} from 'react-router-dom';
+import {
+  collection, getDocs,
+  // doc, setDoc,
+} from 'firebase/firestore';
+
 import { db } from '@api/FB';
 
+import SuspenseMainPage from '@components/Mainpage';
 import FilterTagSection from '@features/FilterTagSection';
 import HeadBanner from '@features/HeadBanner';
-import Contents from '@features/Contents';
 
-export default function MainPage() {
-  useEffect(() => {
-    (async function readData() {
-      const querySnapshot = await getDocs(collection(db, 'users'));
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-      });
-    }());
-  }, []);
+export async function loader() {
+  const col = collection(db, 'posts');
+  const querySnapshot = getDocs(col);
+
+  return defer({
+    querySnapshot,
+  });
+}
+
+function MainPage() {
+  const { querySnapshot } = useLoaderData();
+  // const [userDetails] = useContext(dataContext);
+  // console.log(userDetails);
+  console.log('render Mainpage');
+  // const testingData = {
+  //   title: 'Hello world',
+  //   content: 'https://images.pexels.com/photos/3768263/
+  // pexels-photo-3768263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  //   textContent: 'if content ? content : textContent',
+  //   createdBy: 'ad1230',
+  //   username: 'John Lee',
+  //   description: 'random text short long it depends',
+  //   likes: 0,
+  //   peopleLikes: [],
+  //   date: new Date(),
+  //   comments: [
+  //     'userCommentid1',
+  //     {
+  //       commentBy: 'userId' || 'username',
+  //       commentsText: 'comment goes here',
+  //       commentLike: 'optional',
+  //     },
+  //     {
+  //       commentBy: 'userId' || 'username',
+  //       commentsText: 'comment goes here',
+  //       commentLike: 'optional',
+  //     },
+  //   ],
+  // };
+
+  // async function addData() {
+  //   await setDoc(doc(db, 'posts', 'addManuallyTesting2'), testingData);
+  // }
+
+  // addData();
   return (
-    <main>
+    <main className="pb-7">
       <FilterTagSection />
       <HeadBanner />
-      <Contents />
+      <SuspenseMainPage querySnapshot={querySnapshot} />
     </main>
   );
 }
+
+const MemoMainPage = memo(MainPage);
+export default MemoMainPage;

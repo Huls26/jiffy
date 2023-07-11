@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import FilterBtn from '@components/FilterBtn';
+import FilterBtn from '@components/Btn/FilterBtn';
 import UserDetails from './UserDetails';
 
 export default function Header({ banner, userDetails }) {

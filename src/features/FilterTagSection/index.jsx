@@ -1,4 +1,4 @@
-import FilterBtn from '@components/FilterBtn';
+import FilterBtn from '@components/Btn/FilterBtn';
 
 export default function FilterTagSection() {
   const tagTextSample = ['Comedy', 'Video', 'Funny', 'Meme', 'Picture', 'Emote'];
