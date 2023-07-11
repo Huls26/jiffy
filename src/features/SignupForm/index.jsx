@@ -24,7 +24,7 @@ export default function SignupForm() {
       <SignupFormTitle />
 
       <SignupFormInput label="first name" name="firstname" placeholder="First name" />
-      <SignupFormInput label="last name" name="lastname" placeholder="Last name(optional)" />
+      <SignupFormInput label="last name" name="lastname" placeholder="Last name(optional)" required="false" />
       <SignupFormInput label="username" name="username" placeholder="Username" />
       <SignupFormInput label="email" name="email" type="email" placeholder="Email" />
 

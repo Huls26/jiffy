@@ -8,15 +8,24 @@ export default function defaultUserData(formData) {
     lastname: '',
     username: '',
     email: '',
+    month: '',
+    date: '',
+    year: '',
     followers: 0,
     posts: [],
     totalPosts: 0,
     description: "No such thing in life that's better than yours",
   };
 
-  console.log(formData.entries(), defaultData);
+  console.log(formData.entries());
+  // .serializeArray();
+  // formData.entries().forEach(([key, values]) => {
+  //   defaultData[key] = values;
+  // });
+
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
-    <div>{defaultUserImage}</div>
+    {
+      ...defaultData,
+    }
   );
 }

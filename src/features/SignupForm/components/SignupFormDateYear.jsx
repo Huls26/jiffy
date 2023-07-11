@@ -4,11 +4,15 @@ export default function SignupFormDateYear() {
   const currentYear = new Date().getFullYear();
   const maxLengthYear = `${currentYear}`.length;
 
+  // limit date and year length
   const inputHandler = (e) => {
     const { value, maxLength } = e.target;
-    if (String(value).length >= maxLength) {
+    const isValue = e.key !== 'Backspace';
+
+    if (String(value).length >= maxLength && isValue) {
       e.preventDefault();
     }
+    return value;
   };
 
   return (

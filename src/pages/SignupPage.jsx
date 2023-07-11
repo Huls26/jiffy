@@ -1,6 +1,7 @@
-import signupPage from '@api/signupPageAPI';
-import SignupForm from '@features/SignupForm';
 import { useActionData } from 'react-router-dom';
+import signupPage from '@api/signupPageAPI';
+import defaultUserData from '@api/defaultUserData';
+import SignupForm from '@features/SignupForm';
 
 export async function action({ request }) {
   const formData = await request.formData();
@@ -10,9 +11,8 @@ export async function action({ request }) {
   const resMessage = '';
 
   // eslint-disable-next-line no-restricted-syntax
-  for (const [key, value] of formData.entries()) {
-    console.log(key, value);
-  }
+  const setNewData = defaultUserData(formData);
+  console.log(setNewData);
 
   if (password === confirmPassword && email) {
     const res = await signupPage(email, password);
