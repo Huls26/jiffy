@@ -1,4 +1,4 @@
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useNavigation } from 'react-router-dom';
 import LoginBtn from '@components/Btn/LoginBtn';
 
 import SignupFormTitle from './components/SignupFormTitle';
@@ -8,10 +8,12 @@ import SignupSelectMonth from './components/SignupSelectMonth';
 import SignupFormDateYear from './components/SignupFormDateYear';
 
 export default function SignupForm() {
+  const { state } = useNavigation();
+  const isLoading = state === 'idle' ? '' : 'opacity-90';
   return (
     <Form
       method="post"
-      className="
+      className={`
         bg-orange
         text-base font-bold text-dark-2
         px-9 py-5
@@ -19,29 +21,33 @@ export default function SignupForm() {
         m-auto
         border-dark-2 border border-b-2 border-r-2
         rounded-lg
-      "
+        ${isLoading}
+      `}
     >
-      <SignupFormTitle />
+      <fieldset disabled={isLoading}>
+        <SignupFormTitle />
 
-      <SignupFormInput label="first name" name="firstname" placeholder="First name" />
-      <SignupFormInput label="last name" name="lastname" placeholder="Last name(optional)" required="false" />
-      <SignupFormInput label="username" name="username" placeholder="Username" />
-      <SignupFormInput label="email" name="email" type="email" placeholder="Email" />
+        <SignupFormInput label="first name" name="firstname" placeholder="First name" />
+        <SignupFormInput label="last name" name="lastname" placeholder="Last name(optional)" required="false" />
+        <SignupFormInput label="username" name="username" placeholder="Username" />
+        <SignupFormInput label="email" name="email" type="email" placeholder="Email" />
 
-      <div>
-        <h1 className="block font-bold text-lg">Birth Date</h1>
-        <SignupSelectMonth />
-        <SignupFormDateYear />
-      </div>
+        <div>
+          <h1 className="block font-bold text-lg">Birth Date</h1>
+          <SignupSelectMonth />
+          <SignupFormDateYear />
+        </div>
 
-      <div>
-        <SignupFormInput label="password" name="password" type="password" placeholder="Password" />
-        <SignupFormInput label="confirm password" name="confirmPassword" type="password" placeholder="Confirm Password" />
-      </div>
-      <SignupBtn />
-      <Link to="/login">
-        <LoginBtn />
-      </Link>
+        <div>
+          <SignupFormInput label="password" name="password" type="password" placeholder="Password" />
+          <SignupFormInput label="confirm password" name="confirmPassword" type="password" placeholder="Confirm Password" />
+        </div>
+        <SignupBtn />
+        <Link to="/login">
+          <LoginBtn />
+        </Link>
+
+      </fieldset>
     </Form>
   );
 }
