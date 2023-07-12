@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import {
   auth,
@@ -7,19 +7,33 @@ import {
 import defaultUserData from './defaultUserData';
 
 // check response data
-export default async function createUser(email, password, formData) {
+export default async function creatingUserValidation(
+  email, password, formData,
+) {
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth, email, password,
     );
     const { user } = userCredential;
+    let resMessage = '';
+    let isInvalid = false;
 
     if (user) {
       const setNewUser = defaultUserData(formData);
-      await setDoc(doc(db, 'users', user.uid), setNewUser);
+      await setDoc(doc(db, 'users', user.uid), setNewUser).then(() => {
+        resMessage = 'User Created';
+      }).catch((error) => {
+        deleteUser(user).then(() => {
+          resMessage = 'Try Again Something Went Wrong';
+          isInvalid = true;
+        })
+          .catch(() => {
+            console.log(error.message);
+          });
+      });
     }
 
-    return { uid: user.uid, formData };
+    return { isInvalid, resMessage };
   } catch (error) {
     const errorMessage = error.code.replace('auth/', '').split('-').join(' ');
     const errorEmail = errorMessage.includes('email');
@@ -38,15 +52,21 @@ export default async function createUser(email, password, formData) {
   }
 }
 
-export async function creatingUserValidation(request) {
+export async function createUser(request) {
   const formData = await request.formData();
   const email = formData.get('email');
   const password = formData.get('password');
   const confirmPassword = formData.get('confirmPassword');
+  const resMessage = 'Check Password';
 
-  if (password === confirmPassword) {
-    console.log('check for user email address');
-    console.log('create user');
-    console.log(email);
+  if (password === confirmPassword && email) {
+    const res = await creatingUserValidation(email, password, formData);
+    return res;
   }
+
+  return {
+    resMessage,
+    isInvalid: true,
+    error: { email: false, password: true, confirmPassword: true },
+  };
 }

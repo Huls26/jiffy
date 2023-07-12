@@ -16,7 +16,7 @@ export default function SignupForm() {
         text-base font-bold text-dark-2
         px-9 py-5
         max-w-[22em]
-        m-auto my-8
+        m-auto
         border-dark-2 border border-b-2 border-r-2
         rounded-lg
       "
