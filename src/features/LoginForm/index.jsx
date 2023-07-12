@@ -2,16 +2,19 @@ import PropTypes from 'prop-types';
 import {
   Link,
   Form,
+  useNavigation,
 } from 'react-router-dom';
 
 import LoginBtn from './components/LoginBtn';
 import emailPasswordBorderColor from './utils/emailPasswordBorder';
 
 export default function LoginForm({ actionData }) {
+  const { state } = useNavigation();
   const { error, email } = actionData || {};
   const {
     emailBorder, passwordBorder, isErrorEmail, isErrorPassword,
   } = emailPasswordBorderColor(error);
+  const isLoading = state === 'idle' ? '' : 'opacity-90';
 
   return (
     <Form
@@ -22,11 +25,13 @@ export default function LoginForm({ actionData }) {
           px-8 py-6
           max-w-[22em]
           rounded-xl
+          ${isLoading}
         `}
       replace
     >
-      <input
-        className={`         
+      <fieldset disabled={isLoading}>
+        <input
+          className={`         
                     ${emailBorder} border border-r-2 border-b-2
                     mb-3 p-1
                     w-full
@@ -34,13 +39,13 @@ export default function LoginForm({ actionData }) {
                     outline-none
                     focus:border-blue
                 `}
-        type="email"
-        placeholder={isErrorEmail ? 'Enter Email' : 'Email'}
-        name="email"
-        defaultValue={email}
-      />
-      <input
-        className={`
+          type="email"
+          placeholder={isErrorEmail ? 'Enter Email' : 'Email'}
+          name="email"
+          defaultValue={email}
+        />
+        <input
+          className={`
                     ${passwordBorder} border border-r-2 border-b-2
                     mb-3 p-1
                     w-full
@@ -48,40 +53,42 @@ export default function LoginForm({ actionData }) {
                     outline-none
                     focus:border-blue
                   `}
-        type="password"
-        placeholder={isErrorPassword ? 'Enter Password' : 'Password'}
-        name="password"
-        autoComplete="on"
-      />
-      {/* link react router dom */}
-      <div>
-        <Link
-          to="../signup"
-          className="
+          type="password"
+          placeholder={isErrorPassword ? 'Enter Password' : 'Password'}
+          name="password"
+          autoComplete="on"
+        />
+        {/* link react router dom */}
+        <div>
+          <Link
+            to="../signup"
+            className="
           text-gray-dark text-lg font-bold
             underline-offset-2
             decoration-2
             hover:underline
           "
-        >
-          Create Account
+          >
+            Create Account
 
-        </Link>
-        <LoginBtn />
-      </div>
+          </Link>
+          <LoginBtn />
+        </div>
 
-      <Link
-        to=".."
-        relative="path"
-        className="
+        <Link
+          to=".."
+          relative="path"
+          className="
           text-gray-dark text-base font-semibold
             underline-offset-2
             decoration-2
             hover:underline
           "
-      >
-        Forgot password?
-      </Link>
+        >
+          Forgot password?
+        </Link>
+
+      </fieldset>
     </Form>
   );
 }
