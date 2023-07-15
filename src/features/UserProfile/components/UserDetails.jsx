@@ -6,9 +6,12 @@ import CreatePostBtn from '@components/Header/components/CreatePostBtn';
 import useCheckId from '@hooks/useCheckId';
 import ProfilePhoto from './ProfilePhoto';
 
-export default function UserDetails({ userImg, username }) {
+export default function UserDetails({ details }) {
+  const {
+    userImg, username, email, followers, posts, description,
+  } = details;
   const isOwnProfile = useCheckId();
-  const logoutFollowBtn = isOwnProfile
+  const FollowBtn = isOwnProfile
     ? <CreatePostBtn onClick={() => console.log('create post')} />
     : <ContentBtn text="follow" bg="bg-purple" />;
 
@@ -20,18 +23,30 @@ export default function UserDetails({ userImg, username }) {
         <section className="font-LM leading-none text-justify text-dark-2">
           <h1 className="font-bold text-lg">{username}</h1>
           <div className="text-sm space-y-1 opacity-80 leading-none mb-3">
-            <h3>@emailaddress</h3>
-            <h3>(100) followers</h3>
-            <h3>69 posts</h3>
+            <h3>{email}</h3>
+            <div className="flex space-x-2">
+              <h3>
+                (
+                {`${followers}`}
+                ) followers
+              </h3>
+              <h3>
+                (
+                {`${posts.length}`}
+                )
+                {' '}
+                posts
+              </h3>
+            </div>
           </div>
           {/* add description nav */}
           <h3 className="text-sm opacity-80 text-left">
-            Lorem ipsum dolor sit amet consectetur adipisicing.
+            {description}
           </h3>
         </section>
 
         <div>
-          {logoutFollowBtn}
+          {FollowBtn}
         </div>
       </section>
     </section>
@@ -39,6 +54,6 @@ export default function UserDetails({ userImg, username }) {
 }
 
 UserDetails.propTypes = {
-  userImg: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  details: PropTypes.object.isRequired,
 };

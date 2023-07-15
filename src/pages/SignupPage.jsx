@@ -20,7 +20,6 @@ export default function SignupPage() {
     <main className="flex flex-col items-center my-8">
       <SuccessMessage actionData={actionData} />
       <ErrorMessage actionData={actionData} />
-      {/* <SignupForm /> */}
       <SignupLoadingComponent />
     </main>
   );

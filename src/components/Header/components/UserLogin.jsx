@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+// import { doc, getDoc } from 'firebase/firestore';
+// import { db } from '@api/FB';
 
 import { dataContext } from '@context/dataContext';
 // import useUserReducer from '@hooks/useUserReducer';
