@@ -5,7 +5,6 @@ import { useActionData } from 'react-router-dom';
 export async function action({ request }) {
   const formData = await request.formData();
   const imageFile = formData.get('imageFile');
-  console.log(imageFile.value);
 
   return imageFile;
 }
