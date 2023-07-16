@@ -7,11 +7,12 @@ import {
 
 import AppLayout from '@layout/AppLayout';
 
-import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
+import CreatePostPage from '@pages/CreatePostPage';
 import LoginPage, { action as actionLoginPage } from '@pages/LoginPage';
+import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
+import ProfilePage from '@pages/ProfilePage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
 import ViewPage from '@pages/ViewPage';
-import ProfilePage from '@pages/ProfilePage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,10 @@ const router = createBrowserRouter(
         <Route
           path="profile/:id"
           element={<ProfilePage />}
+        />
+        <Route
+          path="createpost"
+          element={<CreatePostPage />}
         />
       </Route>
       ,
