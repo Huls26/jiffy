@@ -7,7 +7,7 @@ import {
 
 import AppLayout from '@layout/AppLayout';
 
-import CreatePostPage from '@pages/CreatePostPage';
+import CreatePostPage, { action as actionCreatePostPage } from '@pages/CreatePostPage';
 import LoginPage, { action as actionLoginPage } from '@pages/LoginPage';
 import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
 import ProfilePage from '@pages/ProfilePage';
@@ -37,6 +37,7 @@ const router = createBrowserRouter(
         />
         <Route
           path="createpost"
+          action={actionCreatePostPage}
           element={<CreatePostPage />}
         />
       </Route>
