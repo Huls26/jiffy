@@ -1,18 +1,15 @@
 import UserPhoto from '@components/Header/components/UserPhoto';
 import CreatePostEditor from '@features/CreatePost/Components/CreatePostEditor';
-import { useActionData } from 'react-router-dom';
+// import { useActionData } from 'react-router-dom';
 
-export async function action({ request }) {
-  const formData = await request.formData();
-  const imageFile = formData.get('imageFile');
+// export async function action({ request }) {
+//   const formData = await request.formData();
+//   const imageFile = formData.get('imageFile');
 
-  return imageFile;
-}
+//   return imageFile;
+// }
 
 export default function CreatePostContent() {
-  const imageFile = useActionData();
-
-  console.log(imageFile);
   return (
     <main className="px-5 py-3">
       <h1 className="font-PS text-xl text-center font-bold">Create Post</h1>
