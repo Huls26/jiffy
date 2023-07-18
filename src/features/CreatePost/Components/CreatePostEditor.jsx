@@ -1,15 +1,15 @@
 import { useContext, useState } from 'react';
-import {
-  collection, addDoc,
-  // ref,
-} from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { dataContext } from '@context/dataContext';
+import { v4 as uuidv4 } from 'uuid';
 import {
   db,
-  // storage,
+  storage,
 } from '@api/FB';
 // import { Form } from 'react-router-dom';
 
+// clean up CreatePostEditor
 /* eslint-disable max-len */
 export default function CreatePostEditor() {
   // const imageValue = document.getElementById('imageFile');
@@ -30,7 +30,6 @@ export default function CreatePostEditor() {
     title: '',
     userImg,
     comments: [],
-    fileName: '',
   };
 
   function handleImageFile(event) {
@@ -48,27 +47,26 @@ export default function CreatePostEditor() {
     }
   }
 
-  async function createPost(docData) {
-    const docRef = await addDoc(collection(db, 'posts'), {
-      ...docData,
-      fileName: file.fileName,
-    });
+  async function createPost(docData, fileBody) {
+    const newId = uuidv4();
 
-    if (file.imgFile) {
-      // const pathStorage = `posts/${docRef.id}/${file.fileName}${docRef.id}`;
-      // const ImageRef = ref(storage, pathStorage);
-
+    if (fileBody.imgFile) {
+      const pathStorage = `posts/${userId}/${fileBody.fileName}${newId}`;
+      const ImageRef = ref(storage, pathStorage);
+      await uploadBytes(ImageRef, fileBody.imgFile);
+      const imageUrl = await getDownloadURL(ImageRef);
+      await setDoc(doc(db, 'posts', newId), {
+        ...docData,
+        content: imageUrl,
+      });
     }
-    console.log(docRef.id);
-    return docRef.id;
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
     if (file.imgFile) {
-      console.log(file.imgFile);
-      createPost(docDataPost);
+      createPost(docDataPost, file);
     }
   }
 
