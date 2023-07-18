@@ -22,8 +22,6 @@ export default function UserLogin() {
   // const displayLoginBtn = !currentURLPath && LinktoLogin;
 
   return (
-    <>
-      {userId ? <UserCreatePostProfile /> : LinktoLogin }
-    </>
+    userId ? <UserCreatePostProfile /> : LinktoLogin
   );
 }

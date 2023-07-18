@@ -8,11 +8,15 @@ import defaultUserData from './defaultUserData';
 
 // check response data
 export default async function creatingUserValidation(
-  email, password, formData,
+  email,
+  password,
+  formData,
 ) {
   try {
     const userCredential = await createUserWithEmailAndPassword(
-      auth, email, password,
+      auth,
+      email,
+      password,
     );
     const { user } = userCredential;
     let resMessage = '';

@@ -16,9 +16,7 @@ export default function usePostDataState() {
   const { docData, contentId } = useContext(contentDataContext);
   // setting post data to state
   // updating post data
-  const [userState, dispatch] = useReducer(
-    reducerMethod, { ...docData },
-  );
+  const [userState, dispatch] = useReducer(reducerMethod, { ...docData });
   const {
     userImg, textContent, username, likes, peopleLikes,
   } = userState;

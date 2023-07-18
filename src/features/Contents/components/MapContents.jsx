@@ -16,5 +16,6 @@ export default function MapContents({ contentsData }) {
 }
 
 MapContents.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   contentsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
