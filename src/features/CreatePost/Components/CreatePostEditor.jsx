@@ -12,12 +12,10 @@ import {
 // clean up CreatePostEditor
 /* eslint-disable max-len */
 export default function CreatePostEditor() {
-  // const imageValue = document.getElementById('imageFile');
-  // console.log(imageValue);
   const [data] = useContext(dataContext);
   const { userId, userData } = data;
   const { username, userImg } = userData;
-  const [file, setFile] = useState(() => ({ title: '' }));
+  const [file, setFile] = useState(() => ({ title: '', textContent: '' }));
   const docDataPost = {
     content: '',
     textContent: '',
@@ -36,10 +34,23 @@ export default function CreatePostEditor() {
     const { target } = event;
     const { value, name } = target;
 
-    setFile((fileData) => ({
-      ...fileData,
-      [name]: value,
-    }));
+    if (name === 'title') {
+      setFile((fileData) => ({
+        ...fileData,
+        [name]: value,
+      }));
+    } else if (name === 'textContent') {
+      // reset value of input type="file"
+      // reset value
+      document.getElementById('imageFile').value = null;
+      setFile((fileData) => ({
+        ...fileData,
+        [name]: value,
+        fileName: '',
+        imgFile: '',
+        imgFileValue: '',
+      }));
+    }
   }
 
   function handleImageFile(event) {
@@ -47,6 +58,7 @@ export default function CreatePostEditor() {
     const [fileName] = target.files;
 
     if (fileName) {
+      // cut the length of the word
       const maxLengthWord = 15;
       const isLong = fileName.name.length > maxLengthWord;
       const splitWord = fileName.name.split('').slice(0, maxLengthWord);
@@ -57,6 +69,8 @@ export default function CreatePostEditor() {
         ...dataFile,
         fileName: cutword,
         imgFile: fileName,
+        textContent: '',
+        imgFileValue: target.value,
       }));
     }
   }
@@ -65,6 +79,12 @@ export default function CreatePostEditor() {
     const newId = uuidv4();
 
     if (fileBody.imgFile) {
+      // create a url or a path name
+      // upload image
+      // get url of image in firestore storage
+      // set a document/object to firestore
+      // if content image is available set a url
+      // else store textContent
       const pathStorage = `posts/${userId}/${fileBody.fileName}${newId}`;
       const ImageRef = ref(storage, pathStorage);
       await uploadBytes(ImageRef, fileBody.imgFile);
@@ -72,7 +92,13 @@ export default function CreatePostEditor() {
       await setDoc(doc(db, 'posts', newId), {
         ...docData,
         content: imageUrl,
-        title: file.title,
+        title: fileBody.title,
+      });
+    } else if (fileBody.textContent) {
+      await setDoc(doc(db, 'posts', newId), {
+        ...docData,
+        textContent: fileBody.textContent,
+        title: fileBody.title,
       });
     }
   }
@@ -80,8 +106,11 @@ export default function CreatePostEditor() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (file.imgFile) {
+    // store to firebase if there is file
+    if (file.imgFile || file.textContent) {
       createPost(docDataPost, file);
+    } else {
+      console.log('Oops nothing is created');
     }
   }
 
@@ -93,8 +122,8 @@ export default function CreatePostEditor() {
           <input value={file.title} onChange={handleChange} type="text" id="title" name="title" className="w-full px-1 text-xl font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder="Write Title (optional)" maxLength="27" />
         </div>
         <div className="px-4 py-2 bg-primary-1 rounded-t-lg">
-          <label htmlFor="comment" className="sr-only">Your comment</label>
-          <textarea id="comment" rows="4" className="w-full px-1 text-lg font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder="Write Something..." />
+          <label htmlFor="textContent" className="sr-only">Your comment</label>
+          <textarea value={file.textContent} onChange={handleChange} name="textContent" id="textContent" rows="4" className="w-full px-1 text-lg font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder={file.imgFile ? `${file.imgFileValue} \n- Post Image` : 'Write Something...'} />
         </div>
         <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
           <button type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-PS font-bold text-center text-white bg-blue rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-aqua-1">

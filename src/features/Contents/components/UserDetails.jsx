@@ -7,6 +7,7 @@ export default function UserDetails() {
     dispatch, userImg, title, username,
     displayLikes, btnBg, userId, // contentId, // userState,
   } = usePostDataState();
+  const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
   // console.log(contentId);
   // console.log(userState);
@@ -15,7 +16,7 @@ export default function UserDetails() {
     <div className="flex items-start space-x-3">
       <UserImage userImg={userImg} />
       <div>
-        <h1 className="font-PS text-lg font-bold capitalize leading-none mb-1">{title}</h1>
+        <h1 className="font-PS text-lg font-bold capitalize leading-none mb-1">{modifyTitle}</h1>
         <h6 className="font-A text-base capitalize leading-none mb-2">{username}</h6>
         <div className="space-x-1">
           <ContentBtn
