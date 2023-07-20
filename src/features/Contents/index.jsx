@@ -11,6 +11,7 @@ export default function Contents({ querySnapshot }) {
 }
 
 Contents.propTypes = {
-  // eslint-disable-next-line react/require-default-props
+  // eslint-disable-next-line max-len
+  // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
   querySnapshot: PropTypes.arrayOf(PropTypes.object),
 };

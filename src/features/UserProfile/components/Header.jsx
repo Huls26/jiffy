@@ -1,19 +1,25 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { dataContext } from '@context/dataContext';
 import { Link } from 'react-router-dom';
 
 import FilterBtn from '@components/Btn/FilterBtn';
+
 import UserDetails from './UserDetails';
 
-export default function Header({ banner, userDetails }) {
-  const { userImg, username } = userDetails;
+export default function Header() {
+  const [data] = useContext(dataContext);
+  const details = data.userData;
+  const { userBanner } = details;
 
   return (
     <header className="mb-8">
       <div className="w-full h-36 bg-aqua-2">
-        <img src={banner} alt="banner" className="object-cover w-full h-full" />
+        <img src={userBanner} alt="banner" className="object-cover w-full h-full" />
       </div>
 
-      <UserDetails userImg={userImg} username={username} />
+      <UserDetails
+        details={details}
+      />
 
       <nav className="px-4 pb-3 space-x-2 shadow">
         <Link to=".." relative="path"><FilterBtn text="post" /></Link>
@@ -23,12 +29,3 @@ export default function Header({ banner, userDetails }) {
     </header>
   );
 }
-
-Header.propTypes = {
-  banner: PropTypes.string.isRequired,
-  userDetails: PropTypes.shape({
-    userImg: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    textDetails: PropTypes.string.isRequired,
-  }).isRequired,
-};

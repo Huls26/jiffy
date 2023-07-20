@@ -5,6 +5,7 @@ export default function ErrorMessage({ actionData }) {
       <h1 className="
     text-bright-red font-A text-xl font-bold
     mb-3
+    capitalize
   "
       >
         {actionData.resMessage}

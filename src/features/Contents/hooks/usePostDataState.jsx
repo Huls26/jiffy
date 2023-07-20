@@ -16,11 +16,9 @@ export default function usePostDataState() {
   const { docData, contentId } = useContext(contentDataContext);
   // setting post data to state
   // updating post data
-  const [userState, dispatch] = useReducer(
-    reducerMethod, { ...docData },
-  );
+  const [userState, dispatch] = useReducer(reducerMethod, { ...docData });
   const {
-    userImg, textContent, username, likes, peopleLikes,
+    userImg, textContent, username, likes, peopleLikes, title,
   } = userState;
   const displayLikes = shortenLikesValue(likes);
   const isUserLike = peopleLikes.includes(userId);
@@ -53,5 +51,6 @@ export default function usePostDataState() {
     btnBg,
     userId,
     contentId,
+    title,
   };
 }

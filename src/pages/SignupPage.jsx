@@ -1,34 +1,26 @@
 import { useActionData } from 'react-router-dom';
-import signupPage from '@api/signupPageAPI';
-import SignupForm from '@features/SignupForm';
+import { createUser } from '@api/signupPageAPI';
+// import SignupForm from '@features/SignupForm';
+import ErrorMessage from '@components/LoginPage/ErrorMessage';
+import SuccessMessage from '@components/SignupPage/SuccessMessage';
+import SignupLoadingComponent from '@features/SignupLoadingComponent';
 
 export async function action({ request }) {
-  const formData = await request.formData();
-  const email = formData.get('email');
-  const password = formData.get('password');
-  const confirmPassword = formData.get('confirmPassword');
-  const resMessage = '';
-
-  if (password === confirmPassword && email) {
-    const res = await signupPage(email, password, formData);
-    return res;
-  }
+  const res = await createUser(request);
 
   return {
-    email,
-    resMessage,
-    isInvalid: true,
-    error: { email: false, password: true, confirmPassword: true },
+    ...res,
   };
 }
 
 export default function SignupPage() {
   const actionData = useActionData();
 
-  console.log(actionData);
   return (
-    <main>
-      <SignupForm />
+    <main className="flex flex-col items-center my-8">
+      <SuccessMessage actionData={actionData} />
+      <ErrorMessage actionData={actionData} />
+      <SignupLoadingComponent />
     </main>
   );
 }

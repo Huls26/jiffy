@@ -21,8 +21,9 @@ const postsContentData = {
     createdBy: 'ad1230',
     username: 'John Lee',
     description: 'random text short long it depends',
-    likes: '12' || 12,
-    date: 'march 26, 2023',
+    likes: 12,
+    peopleLikes: [],
+    date: new Date(),
     comments: [
       'userCommentid1',
       {

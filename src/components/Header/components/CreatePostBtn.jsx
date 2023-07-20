@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function CreatePostBtn({ onClick }) {
   return (
-    <button
-      onClick={onClick}
-      type="button"
-      className="
+    <Link to="/createpost">
+      <button
+        onClick={onClick}
+        type="button"
+        className="
       bg-aqua-1
         font-A text-sm
         p-1
@@ -18,9 +20,10 @@ export default function CreatePostBtn({ onClick }) {
         hover:opacity-80
         active:bg-aqua-2
       "
-    >
-      ➕
-    </button>
+      >
+        ➕
+      </button>
+    </Link>
   );
 }
 

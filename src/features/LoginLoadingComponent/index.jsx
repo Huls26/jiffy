@@ -1,18 +1,21 @@
 import PropTypes from 'prop-types';
 import { useNavigation } from 'react-router-dom';
 import LoginForm from '../LoginForm';
+import SpinnerCard from '../../components/Loading/SpinnerCard';
 
 export default function LoginLoadingComponent({ actionData }) {
   const { state } = useNavigation();
-  const isLoading = state === 'idle'
-    ? <LoginForm actionData={actionData} /> : <h1>...Loading</h1>;
+  const isLoading = state !== 'idle';
 
   return (
-    isLoading
+    <section className="relative">
+      <LoginForm actionData={actionData} />
+      {isLoading && <SpinnerCard />}
+    </section>
   );
 }
 
-LoginForm.propTypes = {
+LoginLoadingComponent.propTypes = {
   // eslint-disable-next-line react/require-default-props
   actionData: PropTypes.shape({
     resMessage: PropTypes.string,

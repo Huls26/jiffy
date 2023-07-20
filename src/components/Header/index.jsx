@@ -14,7 +14,7 @@ export default function Header() {
     "
     >
       <Link to="/">
-        <h1 className="font-A text-2xl font-extrabold cursor-pointer">J I F F Y</h1>
+        <h1 className="font-A text-2xl font-extrabold cursor-pointer hover:opacity-80">J I F F Y</h1>
       </Link>
       <SearchForm />
       <UserLogin />

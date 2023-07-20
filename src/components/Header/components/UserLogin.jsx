@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+// import { doc, getDoc } from 'firebase/firestore';
+// import { db } from '@api/FB';
 
 import { dataContext } from '@context/dataContext';
 // import useUserReducer from '@hooks/useUserReducer';
@@ -20,8 +22,6 @@ export default function UserLogin() {
   // const displayLoginBtn = !currentURLPath && LinktoLogin;
 
   return (
-    <>
-      {userId ? <UserCreatePostProfile /> : LinktoLogin }
-    </>
+    userId ? <UserCreatePostProfile /> : LinktoLogin
   );
 }
