@@ -3,10 +3,11 @@ import { contentDataContext } from '../context';
 
 export default function DisplayContent() {
   const { docData } = useContext(contentDataContext);
-  const { content, textDetails } = docData;
-  const isImg = typeof content === 'string';
+  const { content, textContent } = docData;
+  // const isImg = typeof content === 'string';
+  console.log(content, textContent);
 
-  const displayContent = isImg
+  const displayContent = content
     ? (
       <img
         src={content}
@@ -17,10 +18,17 @@ export default function DisplayContent() {
                 "
       />
     )
-    : <div>{textDetails}</div>;
+    : (
+      <h1 className="w-full h-full flex items-center justify-center
+      text-2xl font-bold font-PS
+    "
+      >
+        {textContent}
+      </h1>
+    );
 
   return (
-    <div className="h-72 mb-2">
+    <div className="h-72 mb-2 bg-gradient-to-r from-blue via-purple to-pink shadow-lg">
       {displayContent}
     </div>
   );
