@@ -17,7 +17,7 @@ export default function UserCreatePostProfile() {
     ? <ContentBtn text="Logout" onClick={() => logoutUserAPI(dispatch)} />
     : (
       <div className="flex space-x-2 items-center">
-        <CreatePostBtn onClick={() => console.log('createPost')} />
+        <CreatePostBtn />
         <UserPhoto />
       </div>
     );

@@ -28,5 +28,6 @@ export default function CreatePostBtn({ onClick }) {
 }
 
 CreatePostBtn.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  onClick: PropTypes.func,
 };
