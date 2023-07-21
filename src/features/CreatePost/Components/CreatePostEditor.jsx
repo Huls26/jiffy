@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { dataContext } from '@context/dataContext';
@@ -17,7 +18,10 @@ export default function CreatePostEditor() {
   const [data] = useContext(dataContext);
   const { userId, userData } = data;
   const { username, userImg } = userData;
-  const [file, setFile] = useState(() => ({ title: '', textContent: '', errorMessage: '' }));
+  const navigate = useNavigate();
+  const [file, setFile] = useState(() => ({
+    title: '', textContent: '', errorMessage: '', isLoading: false,
+  }));
   const docDataPost = {
     content: '',
     textContent: '',
@@ -31,6 +35,7 @@ export default function CreatePostEditor() {
     userImg,
     comments: [],
   };
+  const disabledElement = file.isLoading ? 'opacity-50' : '';
 
   function handleChange(event) {
     const { target } = event;
@@ -92,8 +97,12 @@ export default function CreatePostEditor() {
     }
   }
 
-  async function createPost(docData, fileBody) {
+  async function createPost(docData, fileBody, setData) {
     const newId = uuidv4();
+    setData((postData) => ({
+      ...postData,
+      isLoading: true,
+    }));
 
     if (fileBody.imgFile) {
       // create a url or a path name
@@ -102,6 +111,7 @@ export default function CreatePostEditor() {
       // set a document/object to firestore
       // if content image is available set a url
       // else store textContent
+      // redirect user to main page after post is created
       const pathStorage = `posts/${userId}/${fileBody.fileName}${newId}`;
       const ImageRef = ref(storage, pathStorage);
       await uploadBytes(ImageRef, fileBody.imgFile);
@@ -111,12 +121,22 @@ export default function CreatePostEditor() {
         content: imageUrl,
         title: fileBody.title,
       });
+      setData((postData) => ({
+        ...postData,
+        isLoading: false,
+      }));
+      navigate('/');
     } else if (fileBody.textContent) {
       await setDoc(doc(db, 'posts', newId), {
         ...docData,
         textContent: fileBody.textContent,
         title: fileBody.title,
       });
+      setData((postData) => ({
+        ...postData,
+        isLoading: false,
+      }));
+      navigate('/');
     }
   }
 
@@ -125,7 +145,7 @@ export default function CreatePostEditor() {
 
     // store to firebase if there is file
     if (file.imgFile || file.textContent) {
-      createPost(docDataPost, file);
+      createPost(docDataPost, file, setFile);
     } else {
       setFile((dataFile) => ({
         ...dataFile,
@@ -137,18 +157,19 @@ export default function CreatePostEditor() {
   return (
     <>
       <ErrorMessage message={file.errorMessage} />
-      <form onSubmit={handleSubmit} method="post" className="outline-none">
+      {file.isLoading && <h1>...Loading</h1>}
+      <form onSubmit={handleSubmit} method="post" className={`${disabledElement} outline-none`}>
         <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50">
           <div className="px-4 py-2 bg-primary-1 rounded-t-lg">
             <label htmlFor="title" className="sr-only">Your comment</label>
-            <input value={file.title} onChange={handleChange} type="text" id="title" name="title" className="w-full px-1 text-xl font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder="Write Title (optional)" maxLength="27" />
+            <input value={file.title} onChange={handleChange} type="text" id="title" name="title" className="w-full px-1 text-xl font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder="Write Title (optional)" maxLength="27" disabled={file.isLoading} />
           </div>
           <div className="px-4 py-2 bg-primary-1 rounded-t-lg">
             <label htmlFor="textContent" className="sr-only">Your comment</label>
-            <textarea value={file.textContent} onChange={handleChange} name="textContent" id="textContent" rows="4" className="w-full px-1 text-lg font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder={file.imgFile ? `${file.imgFileValue} \n- Post Image` : 'Write Something...'} />
+            <textarea value={file.textContent} onChange={handleChange} name="textContent" id="textContent" rows="4" className="w-full px-1 text-lg font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder={file.imgFile ? `${file.imgFileValue} \n- Post Image` : 'Write Something...'} disabled={file.isLoading} />
           </div>
           <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-            <button type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-PS font-bold text-center text-white bg-blue rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-aqua-1">
+            <button type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-PS font-bold text-center text-white bg-blue rounded-lg active:opacity-80 active:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-aqua-1" disabled={file.isLoading}>
               Create Post
             </button>
             <div className="flex pl-0 sm:pl-2">
@@ -158,23 +179,8 @@ export default function CreatePostEditor() {
                 </svg>
                 <span className="sr-only">Upload image</span>
                 {file.fileName && <h1 className="text-gray-dark ml-1 opacity-75">{file.fileName}</h1>}
-                <input onChange={handleImageFile} type="file" id="imageFile" accept="image/*" name="imageFile" hidden />
+                <input onChange={handleImageFile} type="file" id="imageFile" accept="image/*" name="imageFile" disabled={file.isLoading} hidden />
               </label>
-              {/*
-              <label htmlFor="cancelFile" className="flex">
-                <h1 className="
-                            h-[16px] mt-1 p-1 bg-bright-red
-                            text-gray-light
-                            rounded-full leading-[5px]
-                            hover:text-white
-                            hover:bg-bRed
-                            active:bg-red
-                          "
-                >
-                  x
-                </h1>
-                <input type="button" onClick={handleCancelFile} name="cancelFile" id="cancelFile" hidden />
-              </label> */}
               {file.fileName && <CancelFileBtn onClick={() => handleCancelFile()} />}
             </div>
           </div>
