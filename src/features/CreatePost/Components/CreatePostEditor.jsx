@@ -27,7 +27,7 @@ export default function CreatePostEditor() {
           </div>
           <div className="px-4 py-2 bg-primary-1 rounded-t-lg">
             <label htmlFor="textContent" className="sr-only">Your comment</label>
-            <textarea value={file.textContent} onChange={handleChange} name="textContent" id="textContent" rows="4" className="w-full px-1 text-lg font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder={file.imgFile ? `${file.imgFileValue} \n- Post Image` : 'Write Something...'} disabled={file.isLoading} />
+            <textarea maxLength="252" value={file.textContent} onChange={handleChange} name="textContent" id="textContent" rows="4" className="w-full px-1 text-lg font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder={file.imgFile ? `${file.imgFileValue} \n- Post Image` : 'Write Something...'} disabled={file.isLoading} />
           </div>
           <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
             <button type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-PS font-bold text-center text-white bg-blue rounded-lg active:opacity-80 active:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-aqua-1" disabled={file.isLoading}>
