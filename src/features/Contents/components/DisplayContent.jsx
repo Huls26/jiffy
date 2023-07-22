@@ -28,7 +28,6 @@ export default function DisplayContent() {
 
     );
 
-  console.log(sliceWord);
   return (
     <div className="h-72 mb-2 bg-gradient-to-r from-blue via-purple to-pink shadow-lg">
       {displayContent}

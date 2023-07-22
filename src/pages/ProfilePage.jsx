@@ -1,21 +1,21 @@
-import { useContext, useEffect } from 'react';
 import {
-  useNavigate,
+  useEffect,
+} from 'react';
+import {
+  useNavigate, useParams,
 } from 'react-router-dom';
 
 import UserProfile from '@features/UserProfile';
-import { dataContext } from '@context/dataContext';
 
 export default function ProfilePage() {
   const navigate = useNavigate();
-  const [userDetails] = useContext(dataContext);
-  const { userId } = userDetails;
+  const { id } = useParams();
 
   useEffect(() => {
-    if (!userId) {
+    if (!id) {
       navigate('/');
     }
-  }, [navigate, userId]);
+  }, [id, navigate]);
 
   return (
     <main>
