@@ -10,3 +10,14 @@ export default function onSnapUserAuth() {
   }
   return { uid: '' };
 }
+
+export function getCurrentUser() {
+  const auth = getAuth();
+
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      unsubscribe();
+      resolve(user);
+    }, reject);
+  });
+}

@@ -10,7 +10,7 @@ import AppLayout from '@layout/AppLayout';
 import CreatePostPage from '@pages/CreatePostPage';
 import LoginPage, { action as actionLoginPage } from '@pages/LoginPage';
 import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
-import ProfilePage from '@pages/ProfilePage';
+import ProfilePage, { loader as loaderProfilePage } from '@pages/ProfilePage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
 import ViewPage from '@pages/ViewPage';
 
@@ -33,6 +33,7 @@ const router = createBrowserRouter(
         />
         <Route
           path="profile/:id"
+          loader={loaderProfilePage}
           element={<ProfilePage />}
         />
         <Route
