@@ -17,7 +17,7 @@ export default function UserDetails() {
       <UserImage userImg={userImg} />
       <div>
         <h1 className="font-PS text-lg font-bold capitalize leading-none mb-1">{modifyTitle}</h1>
-        <h6 className="font-A text-base capitalize leading-none mb-2">{username}</h6>
+        <h6 className="font-A text-base font-medium capitalize leading-none mb-2 opacity-90">{username}</h6>
         <div className="space-x-1">
           <ContentBtn
             text={`like (${displayLikes})`}
