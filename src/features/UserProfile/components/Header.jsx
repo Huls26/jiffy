@@ -1,4 +1,6 @@
 import { useContext } from 'react';
+// set dataContext to lazy
+// add suspense
 import { dataContext } from '@context/dataContext';
 import { Link } from 'react-router-dom';
 

@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import {
   createRoutesFromElements,
   createBrowserRouter,
@@ -7,12 +8,14 @@ import {
 
 import AppLayout from '@layout/AppLayout';
 
-import CreatePostPage from '@pages/CreatePostPage';
 import LoginPage, { action as actionLoginPage } from '@pages/LoginPage';
 import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
 import ProfilePage, { loader as loaderProfilePage } from '@pages/ProfilePage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
 import ViewPage from '@pages/ViewPage';
+
+// lazy loading
+const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
