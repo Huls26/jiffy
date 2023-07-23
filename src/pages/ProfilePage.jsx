@@ -1,9 +1,10 @@
-import {
-  useEffect,
-} from 'react';
+// import {
+//   // useEffect,
+// } from 'react';
 import {
   useLoaderData,
-  useNavigate, useParams,
+  // useNavigate, useParams,
+  redirect,
 } from 'react-router-dom';
 
 import { getCurrentUser } from '@api/onSnapUserAuth';
@@ -12,21 +13,25 @@ import UserProfile from '@features/UserProfile';
 export async function loader({ params }) {
   const urlId = params.id;
   const user = await getCurrentUser();
+  const isValidAuth = urlId === user?.uid;
 
-  return { urlId, userId: user.uid };
+  if (!isValidAuth) {
+    return redirect('/');
+  }
+  return { isValidAuth };
 }
 
 export default function ProfilePage() {
-  const urlId = useLoaderData();
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const { isValidAuth } = useLoaderData();
+  // const navigate = useNavigate();
+  // const { id } = useParams();
 
-  console.log(urlId);
-  useEffect(() => {
-    if (!id) {
-      navigate('/');
-    }
-  }, [id, navigate]);
+  console.log(isValidAuth);
+  // useEffect(() => {
+  //   if (!id) {
+  //     navigate('/');
+  //   }
+  // }, [id, navigate]);
 
   return (
     <main>
