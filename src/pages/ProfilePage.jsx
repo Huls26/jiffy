@@ -1,9 +1,5 @@
-// import {
-//   // useEffect,
-// } from 'react';
 import {
   useLoaderData,
-  // useNavigate, useParams,
   redirect,
 } from 'react-router-dom';
 
@@ -23,16 +19,8 @@ export async function loader({ params }) {
 
 export default function ProfilePage() {
   const { isValidAuth } = useLoaderData();
-  // const navigate = useNavigate();
-  // const { id } = useParams();
 
   console.log(isValidAuth);
-  // useEffect(() => {
-  //   if (!id) {
-  //     navigate('/');
-  //   }
-  // }, [id, navigate]);
-
   return (
     <main>
       <UserProfile />
