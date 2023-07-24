@@ -10,12 +10,16 @@ import AppLayout from '@layout/AppLayout';
 
 import LoginPage, { action as actionLoginPage } from '@pages/LoginPage';
 import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
-import ProfilePage, { loader as loaderProfilePage } from '@pages/ProfilePage';
+import ProfilePage from '@pages/ProfilePage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
-import ViewPage from '@pages/ViewPage';
+// import CreatePostPage from '@pages/CreatePostPage';
+// import ViewPage from '@pages/ViewPage';
+import { loader as loaderUserAuth } from '@api/onSnapUserAuth';
 
-// lazy loading
+// // lazy loading
+
 const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));
+const ViewPage = lazy(() => import('@pages/ViewPage'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,15 +37,19 @@ const router = createBrowserRouter(
         <Route
           path="view"
           element={<ViewPage />}
+          loader={loaderUserAuth}
+          // protected routes
         />
         <Route
           path="profile/:id"
-          loader={loaderProfilePage}
+          loader={loaderUserAuth}
           element={<ProfilePage />}
+           // protected routes
         />
         <Route
           path="createpost"
-          // action={actionCreatePostPage}
+          // protected routes
+          loader={loaderUserAuth}
           element={<CreatePostPage />}
         />
       </Route>

@@ -1,8 +1,9 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { contentDataContext } from '../context';
 
 export default function DisplayContent() {
-  const { docData } = useContext(contentDataContext);
+  const { docData, contentId } = useContext(contentDataContext);
   const { content, textContent } = docData;
   const maxLength = 252;
   // const isImg = typeof content === 'string';
@@ -29,8 +30,11 @@ export default function DisplayContent() {
     );
 
   return (
-    <div className="h-72 mb-2 bg-gradient-to-r from-blue via-purple to-pink shadow-lg">
-      {displayContent}
-    </div>
+    <Link to="view" state={{ docData, contentId }} preventScrollReset={false}>
+      <div className="h-72 mb-2 bg-gradient-to-r from-blue via-purple to-pink shadow-lg transition hover:transform-gpu hover:scale-[1.02]">
+        {displayContent}
+      </div>
+    </Link>
+
   );
 }

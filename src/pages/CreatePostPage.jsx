@@ -1,5 +1,20 @@
+import { redirect } from 'react-router-dom';
+
+import { getCurrentUser } from '@api/onSnapUserAuth';
 import CreatePostEditor from '@features/CreatePost/Components/CreatePostEditor';
 import UserProfile from '@features/CreatePost/Components/UserProfile';
+
+export async function loader({ params }) {
+  const urlId = params.id;
+  const user = await getCurrentUser();
+  const isValidAuth = urlId === user?.uid;
+
+  if (!isValidAuth || !user?.uid) {
+    return redirect('/');
+  }
+  // return { isValidAuth };
+  return null;
+}
 
 export default function CreatePostPage() {
   return (

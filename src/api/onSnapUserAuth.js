@@ -1,4 +1,5 @@
 import { getAuth } from 'firebase/auth';
+import { redirect } from 'react-router-dom';
 
 export default function onSnapUserAuth() {
   const auth = getAuth();
@@ -20,4 +21,16 @@ export function getCurrentUser() {
       resolve(user);
     }, reject);
   });
+}
+
+export async function loader() {
+  // const urlId = params.id;
+  const user = await getCurrentUser();
+  // const isValidAuth = urlId === user?.uid;
+
+  if (!user?.uid) {
+    return redirect('/');
+  }
+  // return { isValidAuth };
+  return null;
 }

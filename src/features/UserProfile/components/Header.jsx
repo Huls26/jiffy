@@ -1,10 +1,10 @@
-import { useContext } from 'react';
-// set dataContext to lazy
-// add suspense
-import { dataContext } from '@context/dataContext';
+import {
+  useContext,
+} from 'react';
 import { Link } from 'react-router-dom';
 
 import FilterBtn from '@components/Btn/FilterBtn';
+import { dataContext } from '@context/dataContext';
 import profileBannerBg from '@default';
 
 import UserDetails from './UserDetails';

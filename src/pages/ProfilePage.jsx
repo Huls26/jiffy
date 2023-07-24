@@ -1,10 +1,11 @@
+import { lazy } from 'react';
 import {
-  useLoaderData,
   redirect,
 } from 'react-router-dom';
 
 import { getCurrentUser } from '@api/onSnapUserAuth';
-import UserProfile from '@features/UserProfile';
+
+const UserProfile = lazy(() => import('@features/UserProfile'));
 
 export async function loader({ params }) {
   const urlId = params.id;
@@ -14,13 +15,11 @@ export async function loader({ params }) {
   if (!isValidAuth) {
     return redirect('/');
   }
-  return { isValidAuth };
+  // return { isValidAuth };
+  return null;
 }
 
 export default function ProfilePage() {
-  const { isValidAuth } = useLoaderData();
-
-  console.log(isValidAuth);
   return (
     <main>
       <UserProfile />
