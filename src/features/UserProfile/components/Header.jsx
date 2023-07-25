@@ -1,8 +1,11 @@
-import { useContext } from 'react';
-import { dataContext } from '@context/dataContext';
+import {
+  useContext,
+} from 'react';
 import { Link } from 'react-router-dom';
 
 import FilterBtn from '@components/Btn/FilterBtn';
+import { dataContext } from '@context/dataContext';
+import profileBannerBg from '@default';
 
 import UserDetails from './UserDetails';
 
@@ -11,10 +14,12 @@ export default function Header() {
   const details = data.userData;
   const { userBanner } = details;
 
+  console.log(data);
+  // bg-aqua-2
   return (
     <header className="mb-8">
-      <div className="w-full h-36 bg-aqua-2">
-        <img src={userBanner} alt="banner" className="object-cover w-full h-full" />
+      <div className={`w-full h-36 ${profileBannerBg}`}>
+        <img src={userBanner} alt="" className="object-cover w-full h-full" />
       </div>
 
       <UserDetails
@@ -27,5 +32,6 @@ export default function Header() {
         <Link to="description" relative="path"><FilterBtn text="description" /></Link>
       </nav>
     </header>
+
   );
 }

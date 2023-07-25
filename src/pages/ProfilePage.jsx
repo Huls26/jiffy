@@ -1,22 +1,25 @@
-import { useContext, useEffect } from 'react';
+import { lazy } from 'react';
 import {
-  useNavigate,
+  redirect,
 } from 'react-router-dom';
 
-import UserProfile from '@features/UserProfile';
-import { dataContext } from '@context/dataContext';
+import { getCurrentUser } from '@api/onSnapUserAuth';
+
+const UserProfile = lazy(() => import('@features/UserProfile'));
+
+export async function loader({ params }) {
+  const urlId = params.id;
+  const user = await getCurrentUser();
+  const isValidAuth = urlId === user?.uid;
+
+  if (!isValidAuth) {
+    return redirect('/');
+  }
+  // return { isValidAuth };
+  return null;
+}
 
 export default function ProfilePage() {
-  const navigate = useNavigate();
-  const [userDetails] = useContext(dataContext);
-  const { userId } = userDetails;
-
-  useEffect(() => {
-    if (!userId) {
-      navigate('/');
-    }
-  }, [navigate, userId]);
-
   return (
     <main>
       <UserProfile />

@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types';
+import profilePhotoBg from '@default';
 
 export default function ProfilePhoto({ userImg }) {
   return (
-    <div className="
+    <div className={`
+                ${profilePhotoBg}
                 w-24 h-24
                 rounded-full
                 shrink-0
                 grow-0
-              "
+              `}
     >
       <img
         src={userImg}
-        alt="userPhoto"
+        alt=""
         className="
                       w-full h-full object-cover
                       border-dark-1
@@ -24,5 +26,6 @@ export default function ProfilePhoto({ userImg }) {
 }
 
 ProfilePhoto.propTypes = {
-  userImg: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  userImg: PropTypes.string,
 };

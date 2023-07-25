@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import logoutUserAPI from '@api/logoutUserAPI';
 import ContentBtn from '@components/Btn/ContentBtn';
@@ -14,7 +15,12 @@ export default function UserCreatePostProfile() {
 
   const isOwnProfile = useCheckId();
   const logoutUserPhoto = isOwnProfile
-    ? <ContentBtn text="Logout" onClick={() => logoutUserAPI(dispatch)} />
+
+    ? (
+      <Link to="/">
+        <ContentBtn text="Logout" onClick={() => logoutUserAPI(dispatch)} />
+      </Link>
+    )
     : (
       <div className="flex space-x-2 items-center">
         <CreatePostBtn />

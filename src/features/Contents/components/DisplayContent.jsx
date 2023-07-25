@@ -1,35 +1,18 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
+import ContentDisplay from '@components/Content/ContentDisplay';
 import { contentDataContext } from '../context';
 
 export default function DisplayContent() {
-  const { docData } = useContext(contentDataContext);
-  const { content, textContent } = docData;
-  // const isImg = typeof content === 'string';
-  console.log(content, textContent);
-
-  const displayContent = content
-    ? (
-      <img
-        src={content}
-        alt="content"
-        className="
-                  w-full h-full
-                  object-cover
-                "
-      />
-    )
-    : (
-      <h1 className="w-full h-full flex items-center justify-center
-      text-2xl font-bold font-PS
-    "
-      >
-        {textContent}
-      </h1>
-    );
+  const { docData, contentId } = useContext(contentDataContext);
 
   return (
-    <div className="h-72 mb-2 bg-gradient-to-r from-blue via-purple to-pink shadow-lg">
-      {displayContent}
-    </div>
+    <Link to="view" state={{ docData, contentId }}>
+      <div className="h-72 mb-2 bg-gradient-to-r from-blue via-purple to-pink shadow-lg transition hover:transform-gpu hover:scale-[1.02]">
+        <ContentDisplay docData={docData} />
+      </div>
+    </Link>
+
   );
 }

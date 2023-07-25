@@ -42,5 +42,6 @@ export default function useUserReducer() {
       }
     });
   }, [auth, userId]);
+
   return [detailsState, dispatch];
 }

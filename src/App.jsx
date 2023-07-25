@@ -1,14 +1,17 @@
-import Router from '@router';
-import ContextProviderReducer from '@context/components/ContextProviderReducer';
+import { lazy, Suspense } from 'react';
+
+const Router = lazy(() => import('@router'));
+const ContextProviderReducer = lazy(() => import('@context/components/ContextProviderReducer'));
 
 // to do:
-// clean up
-// Header
+// fix loading components
 function App() {
   return (
-    <ContextProviderReducer>
-      <Router />
-    </ContextProviderReducer>
+    <Suspense fallback={<h1>...Loading</h1>}>
+      <ContextProviderReducer>
+        <Router />
+      </ContextProviderReducer>
+    </Suspense>
   );
 }
 
