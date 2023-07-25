@@ -1,25 +1,50 @@
+import { useContext, useEffect, useReducer } from 'react';
 import { useLocation } from 'react-router-dom';
+import { doc, updateDoc } from 'firebase/firestore';
 import PropTypes from 'prop-types';
 
+import { db } from '@api/FB';
 import ContentBtn from '@components/Btn/ContentBtn';
 import UserImage from '@components/UserImage';
 import { dataContext } from '@context/dataContext';
-import { useContext } from 'react';
-import shortenLikesValue from '../../Contents/utils/shortenLikesValue';
+import reducerMethod from '@features/Contents/utils/userReducer';
+
+import shortenLikesValue from '@features/Contents/utils/shortenLikesValue';
+// import usePostDataState from '../../Contents/hooks/usePostDataState';
 
 export default function ViewDetailsContent() {
+  // const somethingData = usePostDataState();
+  //  console.log(somethingData);
   const [userData] = useContext(dataContext);
   const { userId } = userData;
   const { state } = useLocation();
+  const { docData, contentId } = state;
+  const [userState, dispatch] = useReducer(reducerMethod, { ...docData });
   const {
     title, userImg, username, followers, likes, peopleLikes,
-  } = state.docData;
+  } = userState;
 
   const shortenLikes = shortenLikesValue(likes);
   const isUserLike = peopleLikes.includes(userId);
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
 
-  console.log(btnBg);
+  const contentRef = doc(db, 'posts', contentId);
+
+  useEffect(() => {
+    // updating firebase posts data
+    async function updateFirebase() {
+      if (userId) {
+        await updateDoc(contentRef, {
+          likes,
+          peopleLikes,
+        });
+      }
+    }
+    // debouncing
+    const updateData = setTimeout(updateFirebase, 2000);
+
+    return () => clearTimeout(updateData);
+  }, [peopleLikes, likes, contentRef, userId]);
 
   return (
     <section className="
@@ -47,7 +72,11 @@ export default function ViewDetailsContent() {
         </div>
 
         <div className="space-x-1">
-          <ContentBtn text={`likes (${shortenLikes})`} bg="bg-aqua-1" />
+          <ContentBtn
+            text={`likes (${shortenLikes})`}
+            bg={btnBg}
+            onClick={() => userId && dispatch({ type: 'USER_LIKE', userId })}
+          />
           <ContentBtn text="comment" />
         </div>
       </div>
