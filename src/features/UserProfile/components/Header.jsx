@@ -14,6 +14,7 @@ export default function Header() {
   const details = data.userData;
   const { userBanner } = details;
 
+  console.log(data);
   // bg-aqua-2
   return (
     <header className="mb-8">

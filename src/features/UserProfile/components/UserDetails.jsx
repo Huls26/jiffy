@@ -18,11 +18,11 @@ export default function UserDetails({ details }) {
 
   return (
     <section className="px-6 py-5 mb-3">
-      <section className="flex space-x-3">
+      <section className="w-full flex items-center">
         <ProfilePhoto userImg={userImg} />
 
-        <section className="font-LM leading-none text-justify text-dark-2">
-          <h1 className="font-bold text-lg">{username || 'username' }</h1>
+        <section className="ml-3 font-LM leading-none text-justify text-dark-2">
+          <h1 className="mb-2 font-bold font-A text-3xl">{username || 'username' }</h1>
           <div className="text-sm space-y-1 opacity-80 leading-none mb-3">
             <h3>{email || 'email'}</h3>
             <div className="flex space-x-2">
@@ -41,12 +41,12 @@ export default function UserDetails({ details }) {
             </div>
           </div>
           {/* add description nav */}
-          <h3 className="text-sm opacity-80 text-left">
+          <h3 className="font-PS text-sm tracking-wide opacity-80 text-left">
             {description || defaultDescription}
           </h3>
         </section>
 
-        <div>
+        <div className="ml-auto self-start">
           {FollowBtn}
         </div>
       </section>

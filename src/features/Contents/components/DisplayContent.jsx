@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import ContentTextDisplay from '@components/Content/ContentTextDisplay';
 import { contentDataContext } from '../context';
 
 export default function DisplayContent() {
@@ -9,6 +11,7 @@ export default function DisplayContent() {
   // const isImg = typeof content === 'string';
   const sliceWord = textContent.slice(0, maxLength);
 
+  // create to component COntent
   const displayContent = content
     ? (
       <img
@@ -21,12 +24,7 @@ export default function DisplayContent() {
       />
     )
     : (
-      <div className="w-full h-full px-11 flex items-center justify-center">
-        <p className="text-dark-1 text-2xl font-bold font-PS text-justify leading-tight opacity-90 text-ellipsis overflow-hidden break-words">
-          {sliceWord}
-        </p>
-      </div>
-
+      <ContentTextDisplay textContent={sliceWord} />
     );
 
   return (
