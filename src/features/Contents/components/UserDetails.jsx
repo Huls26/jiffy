@@ -13,7 +13,7 @@ export default function UserDetails() {
     displayLikes, btnBg, userId, // contentId, // userState,
   } = usePostDataState();
   const { docData, contentId } = useContext(contentDataContext);
-  // modifyTitle
+  // modifyTitle safety net
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
   // console.log(contentId);

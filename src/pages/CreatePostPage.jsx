@@ -4,6 +4,7 @@ import { getCurrentUser } from '@api/onSnapUserAuth';
 import CreatePostEditor from '@features/CreatePost/Components/CreatePostEditor';
 import UserProfile from '@features/CreatePost/Components/UserProfile';
 
+// delete loader if loader is available in api folder
 export async function loader({ params }) {
   const urlId = params.id;
   const user = await getCurrentUser();
