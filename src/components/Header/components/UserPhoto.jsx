@@ -11,12 +11,14 @@ export default function UserPhoto() {
 
   return (
     <Link to={linkTo}>
-      <div className="
+      <div
+        className="
                       bg-primary-1
                       w-10 h-10
                       text-dark2 text-[.7em] text-center
                       rounded-full
                     "
+        onMouseEnter={() => console.log('UserName display')}
       >
         <img
           className="

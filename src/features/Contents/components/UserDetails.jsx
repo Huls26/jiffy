@@ -13,10 +13,6 @@ export default function UserDetails() {
     displayLikes, btnBg, userId, // contentId, // userState,
   } = usePostDataState();
   const { docData, contentId } = useContext(contentDataContext);
-  // const {
-  //   dispatch, userImg, title, username,
-  //   displayLikes, btnBg, userId, // contentId, // userState,
-  // } = docData;
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
   // console.log(contentId);
