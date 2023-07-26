@@ -4,8 +4,8 @@ import useViewContentHooks from '../hooks/useViewContentHooks';
 
 export default function ViewDetailsContent() {
   const {
-    dispatch, title, userImg, username, followers, likes,
-    btnBg, userId, createdBy, ownPost, peopleFollows, // peopleLikes,
+    dispatch, title, userImg, username, likes, btnBg, userId,
+    createdBy, ownPost, followers, peopleFollows, btnBgFollow, // peopleLikes,
   } = useViewContentHooks();
 
   console.log(createdBy, peopleFollows);
@@ -30,7 +30,13 @@ export default function ViewDetailsContent() {
                 followers
               </h6>
             </div>
-            {!ownPost && <ContentBtn text="follow" bg="bg-purple" />}
+            {!ownPost && (
+            <ContentBtn
+              text="follow"
+              bg={btnBgFollow}
+              onClick={() => dispatch({ type: 'USER_FOLLOW', userId })}
+            />
+            )}
           </div>
         </div>
 

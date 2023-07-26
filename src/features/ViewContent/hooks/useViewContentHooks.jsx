@@ -7,6 +7,7 @@ import { dataContext } from '@context/dataContext';
 import reducerMethod from '@features/Contents/utils/userReducer';
 import shortenLikesValue from '@features/Contents/utils/shortenLikesValue';
 
+// code clean up
 export default function useViewContentHooks() {
   // get dataContext
   const [userData] = useContext(dataContext);
@@ -27,6 +28,13 @@ export default function useViewContentHooks() {
   const isUserLike = peopleLikes.includes(userId);
   // set button bg
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
+
+  // modify followers value
+  const shortenFollowers = shortenLikesValue(followers);
+  const isUserFollow = peopleFollows?.includes(userId);
+  // set button bg when user follow
+  const btnBgFollow = isUserFollow ? 'bg-green' : 'bg-purple';
+
   // modify title -safety net
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
@@ -54,13 +62,17 @@ export default function useViewContentHooks() {
   // update firebase user follow when user follow
   useEffect(() => {
     // updating firebase user data
-    const postDocRef = doc(db, 'users', userId);
-
+    const userDocRef = doc(db, 'users', createdBy);
+    const postDocRef = doc(db, 'posts', contentId);
     async function updateUserFollowers() {
-      if (userId === 'not to update') {
+      if (userId) {
+        await updateDoc(userDocRef, {
+          followers,
+          peopleFollows,
+        });
         await updateDoc(postDocRef, {
           followers,
-          peopleFollows: [userId],
+          peopleFollows,
         });
       }
     }
@@ -68,7 +80,7 @@ export default function useViewContentHooks() {
     const updateData = setTimeout(updateUserFollowers, 2000);
 
     return () => clearTimeout(updateData);
-  }, [contentId, followers, userId]);
+  }, [followers, peopleFollows, createdBy, userId]);
 
   return (
     {
@@ -76,7 +88,7 @@ export default function useViewContentHooks() {
       title: modifyTitle,
       userImg,
       username,
-      followers,
+      followers: shortenFollowers,
       peopleFollows,
       likes: shortenLikes,
       btnBg,
@@ -84,6 +96,7 @@ export default function useViewContentHooks() {
       createdBy,
       ownPost,
       contentId,
+      btnBgFollow,
     }
   );
 }

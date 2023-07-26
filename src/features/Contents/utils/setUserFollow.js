@@ -8,5 +8,5 @@ export default function setUserLike(state, action) {
     setNewArray,
   } = incrementFollowLike(followers, peopleFollows, userId);
 
-  return { followers: setNewValues, peopleLikes: [...setNewArray] };
+  return { followers: setNewValues, peopleFollows: [...setNewArray] };
 }

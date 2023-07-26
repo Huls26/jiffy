@@ -1,6 +1,6 @@
 export default function incrementFollowLike(values, arrays, userId) {
-  let setNewValues = values;
-  const setNewArray = [...arrays];
+  let setNewValues = values || 0;
+  const setNewArray = arrays ? [...arrays] : [];
   const index = setNewArray.indexOf(userId);
 
   if (index > -1 && setNewValues > 0) {

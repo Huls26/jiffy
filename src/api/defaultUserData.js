@@ -13,6 +13,7 @@ export default function defaultUserData(formData) {
     date: '',
     year: '',
     followers: 0,
+    peopleFollows: [],
     posts: [],
     totalPosts: 0,
     description: "No such thing in life that's better than yours",
