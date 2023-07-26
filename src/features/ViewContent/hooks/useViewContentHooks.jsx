@@ -18,7 +18,8 @@ export default function useViewContentHooks() {
   // update like button
   const [userState, dispatch] = useReducer(reducerMethod, { ...docData });
   const {
-    title, userImg, username, followers, likes, peopleLikes,
+    title, userImg, username, followers,
+    peopleFollows, likes, peopleLikes, createdBy,
   } = userState;
 
   // modify likes value
@@ -30,6 +31,8 @@ export default function useViewContentHooks() {
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
   const contentRef = doc(db, 'posts', contentId);
+  // check own post
+  const ownPost = userId === createdBy;
 
   // update firebase when user like the post
   useEffect(() => {
@@ -48,6 +51,25 @@ export default function useViewContentHooks() {
     return () => clearTimeout(updateData);
   }, [peopleLikes, likes, contentRef, userId]);
 
+  // update firebase user follow when user follow
+  useEffect(() => {
+    // updating firebase user data
+    const postDocRef = doc(db, 'users', userId);
+
+    async function updateUserFollowers() {
+      if (userId === 'not to update') {
+        await updateDoc(postDocRef, {
+          followers,
+          peopleFollows: [userId],
+        });
+      }
+    }
+    // debouncing
+    const updateData = setTimeout(updateUserFollowers, 2000);
+
+    return () => clearTimeout(updateData);
+  }, [contentId, followers, userId]);
+
   return (
     {
       dispatch,
@@ -55,9 +77,13 @@ export default function useViewContentHooks() {
       userImg,
       username,
       followers,
+      peopleFollows,
       likes: shortenLikes,
       btnBg,
       userId,
+      createdBy,
+      ownPost,
+      contentId,
     }
   );
 }

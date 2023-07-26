@@ -2,11 +2,11 @@ import incrementFollowLike from './incrementFollowLike';
 
 export default function setUserLike(state, action) {
   const { userId } = action;
-  const { likes, peopleLikes } = state;
+  const { followers, peopleFollows } = state;
   const {
     setNewValues,
     setNewArray,
-  } = incrementFollowLike(likes, peopleLikes, userId);
+  } = incrementFollowLike(followers, peopleFollows, userId);
 
-  return { likes: setNewValues, peopleLikes: [...setNewArray] };
+  return { followers: setNewValues, peopleLikes: [...setNewArray] };
 }

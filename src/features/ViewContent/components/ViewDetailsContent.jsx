@@ -4,9 +4,11 @@ import useViewContentHooks from '../hooks/useViewContentHooks';
 
 export default function ViewDetailsContent() {
   const {
-    dispatch, title, userImg, username,
-    followers, likes, btnBg, userId, // peopleLikes,
+    dispatch, title, userImg, username, followers, likes,
+    btnBg, userId, createdBy, ownPost, peopleFollows, // peopleLikes,
   } = useViewContentHooks();
+
+  console.log(createdBy, peopleFollows);
 
   return (
     <section className="
@@ -28,7 +30,7 @@ export default function ViewDetailsContent() {
                 followers
               </h6>
             </div>
-            <ContentBtn text="follow" bg="bg-purple" />
+            {!ownPost && <ContentBtn text="follow" bg="bg-purple" />}
           </div>
         </div>
 
