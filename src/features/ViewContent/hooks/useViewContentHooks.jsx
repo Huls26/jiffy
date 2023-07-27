@@ -38,12 +38,12 @@ export default function useViewContentHooks() {
   // modify title -safety net
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
-  const contentRef = doc(db, 'posts', contentId);
   // check own post
   const ownPost = userId === createdBy;
 
   // update firebase when user like the post
   useEffect(() => {
+    const contentRef = doc(db, 'posts', contentId);
     // updating firebase posts data
     async function updateFirebase() {
       if (userId) {
@@ -57,7 +57,7 @@ export default function useViewContentHooks() {
     const updateData = setTimeout(updateFirebase, 360);
 
     return () => clearTimeout(updateData);
-  }, [peopleLikes, likes, contentRef, userId]);
+  }, [peopleLikes, likes, contentId, userId]);
 
   // update firebase user follow when user follow
   useEffect(() => {
