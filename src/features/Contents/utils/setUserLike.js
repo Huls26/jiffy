@@ -1,17 +1,19 @@
-export default function setUserLike(state, action) {
-  const { userId } = action;
-  const { peopleLikes } = state;
-  let { likes } = state;
-  const setNewArray = [...peopleLikes];
-  const index = setNewArray.indexOf(userId);
+import incrementFollowLike from './incrementFollowLike';
 
-  if (index > -1 && likes > 0) {
-    likes -= 1;
-    setNewArray.splice(index, 1);
-  } else {
-    likes += 1;
-    setNewArray.push(userId);
+export default function setUserLike(state, action) {
+  // prevent number of likes to 1500;
+  const { userId } = action;
+  const { likes, peopleLikes } = state;
+  const maxLikes = 1500;
+
+  if (peopleLikes.length <= maxLikes) {
+    const {
+      setNewValues,
+      setNewArray,
+    } = incrementFollowLike(likes, peopleLikes, userId);
+
+    return { likes: setNewValues, peopleLikes: [...setNewArray] };
   }
 
-  return { likes, peopleLikes: [...setNewArray] };
+  return { likes, peopleLikes };
 }

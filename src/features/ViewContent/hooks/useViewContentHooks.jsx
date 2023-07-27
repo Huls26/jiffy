@@ -7,6 +7,7 @@ import { dataContext } from '@context/dataContext';
 import reducerMethod from '@features/Contents/utils/userReducer';
 import shortenLikesValue from '@features/Contents/utils/shortenLikesValue';
 
+// code clean up
 export default function useViewContentHooks() {
   // get dataContext
   const [userData] = useContext(dataContext);
@@ -18,7 +19,8 @@ export default function useViewContentHooks() {
   // update like button
   const [userState, dispatch] = useReducer(reducerMethod, { ...docData });
   const {
-    title, userImg, username, followers, likes, peopleLikes,
+    title, userImg, username, followers,
+    peopleFollows, likes, peopleLikes, createdBy,
   } = userState;
 
   // modify likes value
@@ -26,13 +28,22 @@ export default function useViewContentHooks() {
   const isUserLike = peopleLikes.includes(userId);
   // set button bg
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
+
+  // modify followers value
+  const shortenFollowers = shortenLikesValue(followers);
+  const isUserFollow = peopleFollows?.includes(userId);
+  // set button bg when user follow
+  const btnBgFollow = isUserFollow ? 'bg-green' : 'bg-purple';
+
   // modify title -safety net
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
-  const contentRef = doc(db, 'posts', contentId);
+  // check own post
+  const ownPost = userId === createdBy;
 
   // update firebase when user like the post
   useEffect(() => {
+    const contentRef = doc(db, 'posts', contentId);
     // updating firebase posts data
     async function updateFirebase() {
       if (userId) {
@@ -43,10 +54,33 @@ export default function useViewContentHooks() {
       }
     }
     // debouncing
-    const updateData = setTimeout(updateFirebase, 2000);
+    const updateData = setTimeout(updateFirebase, 360);
 
     return () => clearTimeout(updateData);
-  }, [peopleLikes, likes, contentRef, userId]);
+  }, [peopleLikes, likes, contentId, userId]);
+
+  // update firebase user follow when user follow
+  useEffect(() => {
+    // updating firebase user data
+    const userDocRef = doc(db, 'users', createdBy);
+    const postDocRef = doc(db, 'posts', contentId);
+    async function updateUserFollowers() {
+      if (userId) {
+        await updateDoc(userDocRef, {
+          followers,
+          peopleFollows,
+        });
+        await updateDoc(postDocRef, {
+          followers,
+          peopleFollows,
+        });
+      }
+    }
+    // debouncing
+    const updateData = setTimeout(updateUserFollowers, 360);
+
+    return () => clearTimeout(updateData);
+  }, [followers, peopleFollows, createdBy, userId, contentId]);
 
   return (
     {
@@ -54,10 +88,15 @@ export default function useViewContentHooks() {
       title: modifyTitle,
       userImg,
       username,
-      followers,
+      followers: shortenFollowers,
+      peopleFollows,
       likes: shortenLikes,
       btnBg,
       userId,
+      createdBy,
+      ownPost,
+      contentId,
+      btnBgFollow,
     }
   );
 }

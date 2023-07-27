@@ -8,7 +8,9 @@ import modifyFilename from '../utils/modifyFilename';
 export default function useHandleCreatePost() {
   const [data] = useContext(dataContext);
   const { userId, userData } = data;
-  const { username, userImg, followers } = userData;
+  const {
+    username, userImg, followers, peopleFollows,
+  } = userData;
   console.log(userData);
   const navigate = useNavigate();
   const [file, setFile] = useState(() => ({
@@ -27,6 +29,7 @@ export default function useHandleCreatePost() {
     userImg,
     comments: [],
     followers,
+    peopleFollows,
   };
   const disabledElement = file.isLoading ? 'opacity-50' : '';
 
