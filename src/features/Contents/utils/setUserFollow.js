@@ -3,10 +3,16 @@ import incrementFollowLike from './incrementFollowLike';
 export default function setUserLike(state, action) {
   const { userId } = action;
   const { followers, peopleFollows } = state;
-  const {
-    setNewValues,
-    setNewArray,
-  } = incrementFollowLike(followers, peopleFollows, userId);
+  const maxFollows = 1500;
 
-  return { followers: setNewValues, peopleFollows: [...setNewArray] };
+  if (peopleFollows.length <= maxFollows) {
+    const {
+      setNewValues,
+      setNewArray,
+    } = incrementFollowLike(followers, peopleFollows, userId);
+
+    return { followers: setNewValues, peopleFollows: [...setNewArray] };
+  }
+
+  return { followers, peopleFollows };
 }

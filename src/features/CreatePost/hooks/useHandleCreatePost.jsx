@@ -9,7 +9,7 @@ export default function useHandleCreatePost() {
   const [data] = useContext(dataContext);
   const { userId, userData } = data;
   const {
-    username, userImg, followers,
+    username, userImg, followers, peopleFollows,
   } = userData;
   console.log(userData);
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function useHandleCreatePost() {
     userImg,
     comments: [],
     followers,
-    peopleFollows: [],
+    peopleFollows,
   };
   const disabledElement = file.isLoading ? 'opacity-50' : '';
 

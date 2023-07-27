@@ -1,11 +1,12 @@
 import incrementFollowLike from './incrementFollowLike';
 
 export default function setUserLike(state, action) {
-  // prevent number of likes to 1 million;
+  // prevent number of likes to 1500;
   const { userId } = action;
   const { likes, peopleLikes } = state;
+  const maxLikes = 1500;
 
-  if (String(likes).length <= 7) {
+  if (peopleLikes.length <= maxLikes) {
     const {
       setNewValues,
       setNewArray,

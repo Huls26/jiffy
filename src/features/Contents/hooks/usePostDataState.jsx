@@ -36,7 +36,7 @@ export default function usePostDataState() {
       }
     }
     // debouncing
-    const updateData = setTimeout(updateFirebase, 2000);
+    const updateData = setTimeout(updateFirebase, 360);
 
     return () => clearTimeout(updateData);
   }, [peopleLikes, likes, contentRef, userId]);

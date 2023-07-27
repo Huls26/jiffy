@@ -54,7 +54,7 @@ export default function useViewContentHooks() {
       }
     }
     // debouncing
-    const updateData = setTimeout(updateFirebase, 2000);
+    const updateData = setTimeout(updateFirebase, 360);
 
     return () => clearTimeout(updateData);
   }, [peopleLikes, likes, contentRef, userId]);
@@ -77,10 +77,10 @@ export default function useViewContentHooks() {
       }
     }
     // debouncing
-    const updateData = setTimeout(updateUserFollowers, 2000);
+    const updateData = setTimeout(updateUserFollowers, 360);
 
     return () => clearTimeout(updateData);
-  }, [followers, peopleFollows, createdBy, userId]);
+  }, [followers, peopleFollows, createdBy, userId, contentId]);
 
   return (
     {
