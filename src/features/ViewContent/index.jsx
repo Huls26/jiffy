@@ -18,7 +18,7 @@ export default function ViewContent({ details }) {
         <ContentDisplay docData={docData} />
       </div>
 
-      <ViewDetailsContent details={details} />
+      <ViewDetailsContent />
       <DescriptionBox />
       <CommentSection details={details} />
     </article>

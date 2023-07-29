@@ -1,11 +1,10 @@
 import { useContext, useEffect, useReducer } from 'react';
 import { useLocation } from 'react-router-dom';
-import { doc, updateDoc } from 'firebase/firestore';
 
-import { db } from '@api/FB';
 import { dataContext } from '@context/dataContext';
 import reducerMethod from '@features/Contents/utils/userReducer';
-import shortenLikesValue from '@features/Contents/utils/shortenLikesValue';
+import modifyValueSetBg from '../utils/modifyValuesSetBg';
+import { updatePostLikeFirebase, updateUserFollowers } from '../utils/updateFirebase';
 
 // code clean up
 export default function useViewContentHooks() {
@@ -24,16 +23,10 @@ export default function useViewContentHooks() {
   } = userState;
 
   // modify likes value
-  const shortenLikes = shortenLikesValue(likes);
-  const isUserLike = peopleLikes.includes(userId);
-  // set button bg
-  const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
-
   // modify followers value
-  const shortenFollowers = shortenLikesValue(followers);
-  const isUserFollow = peopleFollows?.includes(userId);
-  // set button bg when user follow
-  const btnBgFollow = isUserFollow ? 'bg-green' : 'bg-purple';
+  // // set button bg
+  const [shortenLikes, btnBg] = modifyValueSetBg(likes, peopleLikes, userId, 'bg-aqua-1');
+  const [shortenFollowers, btnBgFollow] = modifyValueSetBg(followers, peopleFollows, userId, 'bg-purple');
 
   // modify title -safety net
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
@@ -43,41 +36,27 @@ export default function useViewContentHooks() {
 
   // update firebase when user like the post
   useEffect(() => {
-    const contentRef = doc(db, 'posts', contentId);
-    // updating firebase posts data
-    async function updateFirebase() {
-      if (userId) {
-        await updateDoc(contentRef, {
-          likes,
-          peopleLikes,
-        });
-      }
-    }
     // debouncing
-    const updateData = setTimeout(updateFirebase, 360);
+    const updateData = setTimeout(() => updatePostLikeFirebase(
+      contentId,
+      userId,
+      likes,
+      peopleLikes,
+    ), 360);
 
     return () => clearTimeout(updateData);
   }, [peopleLikes, likes, contentId, userId]);
 
   // update firebase user follow when user follow
   useEffect(() => {
-    // updating firebase user data
-    const userDocRef = doc(db, 'users', createdBy);
-    const postDocRef = doc(db, 'posts', contentId);
-    async function updateUserFollowers() {
-      if (userId) {
-        await updateDoc(userDocRef, {
-          followers,
-          peopleFollows,
-        });
-        await updateDoc(postDocRef, {
-          followers,
-          peopleFollows,
-        });
-      }
-    }
     // debouncing
-    const updateData = setTimeout(updateUserFollowers, 360);
+    const updateData = setTimeout(() => updateUserFollowers(
+      createdBy,
+      contentId,
+      userId,
+      followers,
+      peopleFollows,
+    ), 360);
 
     return () => clearTimeout(updateData);
   }, [followers, peopleFollows, createdBy, userId, contentId]);
