@@ -1,5 +1,6 @@
 import ContentBtn from '@components/Btn/ContentBtn';
 import UserImage from '@components/UserImage';
+import { Link } from 'react-router-dom';
 import useViewContentHooks from '../hooks/useViewContentHooks';
 
 export default function ViewDetailsContent() {
@@ -20,7 +21,9 @@ export default function ViewDetailsContent() {
       <h1 className="font-PS text-xl font-bold capitalize leading-none mb-3 block">{title}</h1>
       <div className="flex items-start justify-between">
         <div className="flex space-x-2">
-          <UserImage userImg={userImg} />
+          <Link to={`/profile/${createdBy}`} relative="path">
+            <UserImage userImg={userImg} />
+          </Link>
           <div className="flex items-start space-x-3">
             <div className="inline">
               <h6 className="font-A text-lg font-medium capitalize leading-none">{username}</h6>
