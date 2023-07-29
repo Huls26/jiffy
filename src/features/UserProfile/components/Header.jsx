@@ -1,7 +1,10 @@
 import {
   useContext,
 } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, redirect, useLoaderData } from 'react-router-dom';
+
+import { getCurrentUser } from '@api/onSnapUserAuth';
+import getUsersData from '@api/getUser';
 
 import FilterBtn from '@components/Btn/FilterBtn';
 import { dataContext } from '@context/dataContext';
@@ -9,12 +12,27 @@ import profileBannerBg from '@default';
 
 import UserDetails from './UserDetails';
 
+export async function loader({ params }) {
+  const urlId = params.id;
+  const user = await getCurrentUser();
+  const me = urlId === user?.uid;
+
+  if (!user?.uid) {
+    return redirect('/');
+  } if (!me) {
+    const userData = await getUsersData(urlId);
+    return userData;
+  }
+
+  return { me };
+}
+
 export default function Header() {
+  const userData = useLoaderData();
   const [data] = useContext(dataContext);
-  const details = data.userData;
+  const details = userData.me ? data.userData : userData;
   const { userBanner } = details;
 
-  console.log(data);
   // bg-aqua-2
   return (
     <header className="mb-8">

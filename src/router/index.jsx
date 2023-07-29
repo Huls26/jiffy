@@ -15,7 +15,7 @@ import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
 // import CreatePostPage from '@pages/CreatePostPage';
 import ViewPage from '@pages/ViewPage';
 import { loader as loaderUserAuth } from '@api/onSnapUserAuth';
-
+import { loader as loaderProfilePage } from '@features/UserProfile/components/Header';
 // // lazy loading
 
 const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));
@@ -42,7 +42,7 @@ const router = createBrowserRouter(
         />
         <Route
           path="profile/:id"
-          loader={loaderUserAuth}
+          loader={loaderProfilePage}
           element={<ProfilePage />}
            // protected routes
         />

@@ -10,7 +10,7 @@ import { contentDataContext } from '../context';
 export default function UserDetails() {
   const {
     dispatch, userImg, title, username,
-    displayLikes, btnBg, userId, // contentId, // userState,
+    displayLikes, btnBg, userId, createdBy, // contentId, // userState,
   } = usePostDataState();
   const { docData, contentId } = useContext(contentDataContext);
   // modifyTitle safety net
@@ -21,7 +21,7 @@ export default function UserDetails() {
   console.log('Render userDetails');
   return (
     <div className="flex items-start space-x-3">
-      <Link to={`profile/${userId}`}>
+      <Link to={`profile/${createdBy}`}>
         <UserImage userImg={userImg} />
       </Link>
       <div>
