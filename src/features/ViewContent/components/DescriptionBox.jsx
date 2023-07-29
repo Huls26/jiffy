@@ -1,5 +1,11 @@
+import { useLocation } from 'react-router-dom';
+import modifyTimeDate from '../utils/modifyTimeDate';
 /* eslint-disable react/jsx-curly-brace-presence */
 export default function DescriptionBox() {
+  const { state } = useLocation();
+  const { docData } = state;
+  const timeDate = modifyTimeDate(docData);
+
   return (
     <section className="
                   border-dark-2 border border-b-2 border-r-2
@@ -10,13 +16,11 @@ export default function DescriptionBox() {
                     text-gray-dark font-A
                   "
     >
-      <p className="font-bold mb-4">Jan 10, 2023</p>
+      <p className="font-bold mb-4">{timeDate}</p>
 
       <p className="font-semibold">
-        Post description
         {
-        // eslint-disable-next-line quotes
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, architecto error. Mollitia nam voluptate dolorem, ipsam minus totam sit ducimus saepe corporis. Eum blanditiis veniam deserunt? Quisquam fugiat quia aut!"
+          docData.description
         }
         &apos;&apos;&apos;add more button&apos;&apos;
       </p>

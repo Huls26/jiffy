@@ -6,10 +6,8 @@ import useViewContentHooks from '../hooks/useViewContentHooks';
 export default function ViewDetailsContent() {
   const {
     dispatch, title, userImg, username, likes, btnBg, userId,
-    createdBy, ownPost, followers, peopleFollows, btnBgFollow, // peopleLikes,
+    createdBy, ownPost, followers, btnBgFollow, // peopleLikes,
   } = useViewContentHooks();
-
-  console.log(createdBy, peopleFollows);
 
   return (
     <section className="
