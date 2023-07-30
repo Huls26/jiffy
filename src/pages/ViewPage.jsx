@@ -9,6 +9,7 @@ export default function ViewPage() {
     textDetails: 'something awesome text',
   };
 
+  // reset scroll view
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
