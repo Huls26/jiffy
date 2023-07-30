@@ -1,4 +1,6 @@
-import ContentComponents from '@features/ViewContent';
+import { lazy } from 'react';
+// import ContentComponents from '@features/ViewContent';
+const ContentComponents = lazy(() => import('@features/ViewContent'));
 
 export default function ViewPage() {
   // eslint-disable-next-line max-len
