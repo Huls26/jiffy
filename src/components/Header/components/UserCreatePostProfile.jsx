@@ -17,9 +17,12 @@ export default function UserCreatePostProfile() {
   const logoutUserPhoto = isOwnProfile
 
     ? (
-      <Link to="/">
-        <ContentBtn text="Logout" onClick={() => logoutUserAPI(dispatch)} />
-      </Link>
+      <div className="space-x-1">
+        <ContentBtn text="edit" bg="bg-aqua-1" />
+        <Link to="/">
+          <ContentBtn text="Logout" onClick={() => logoutUserAPI(dispatch)} />
+        </Link>
+      </div>
     )
     : (
       <div className="flex space-x-2 items-center">
