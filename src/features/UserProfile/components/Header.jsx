@@ -37,6 +37,8 @@ export default function Header() {
   const details = userData.me ? data.userData : userData;
   const { userBanner } = details;
 
+  // figure out where to put searchParam value
+  // and the component for ProfileEditForm
   console.log(userData.readyForEdit);
   // bg-aqua-2
   return (
