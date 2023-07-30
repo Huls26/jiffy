@@ -28,6 +28,7 @@ function ViewContent({ details }) {
 
 const ViewContentMemo = memo(ViewContent);
 export default ViewContentMemo;
+
 ViewContent.propTypes = {
   details: PropTypes.shape({
     userImg: PropTypes.string.isRequired,

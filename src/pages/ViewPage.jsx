@@ -15,7 +15,7 @@ export default function ViewPage() {
   }, []);
 
   return (
-    <main>
+    <main className="pt-24">
       <ContentComponents details={userDetails} />
     </main>
   );

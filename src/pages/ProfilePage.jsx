@@ -4,7 +4,7 @@ const UserProfile = lazy(() => import('@features/UserProfile'));
 
 export default function ProfilePage() {
   return (
-    <main>
+    <main className="pt-24">
       <UserProfile />
     </main>
   );
