@@ -6,7 +6,6 @@ export default function UserProfile() {
   return (
     <>
       <Header />
-
       {/* the data should fetch from the user */}
       {/* <section>
         <Contents />

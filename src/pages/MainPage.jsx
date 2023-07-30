@@ -31,7 +31,7 @@ function MainPage() {
   console.log('render Mainpage');
 
   return (
-    <main className="pb-7">
+    <main className="pt-16 pb-7">
       <FilterTagSection />
       <HeadBanner />
       <SuspenseMainPage querySnapshot={querySnapshot} />

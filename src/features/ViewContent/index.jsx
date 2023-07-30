@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 
@@ -8,7 +9,7 @@ import ViewDetailsContent from './components/ViewDetailsContent';
 import DescriptionBox from './components/DescriptionBox';
 import CommentSection from './components/CommentSection';
 
-export default function ViewContent({ details }) {
+function ViewContent({ details }) {
   const { state } = useLocation();
   const { docData } = state;
 
@@ -24,6 +25,9 @@ export default function ViewContent({ details }) {
     </article>
   );
 }
+
+const ViewContentMemo = memo(ViewContent);
+export default ViewContentMemo;
 
 ViewContent.propTypes = {
   details: PropTypes.shape({
