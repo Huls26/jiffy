@@ -22,11 +22,9 @@ export default function CreatePostEditor() {
 
         <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50">
           <div className="px-4 py-2 bg-primary-1 rounded-t-lg">
-            <label htmlFor="title" className="sr-only">Your comment</label>
             <input value={file.title} onChange={handleChange} type="text" id="title" name="title" className="w-full px-1 text-xl font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder="Write Title (optional)" maxLength="27" disabled={file.isLoading} />
           </div>
           <div className="px-4 py-2 bg-primary-1 rounded-t-lg">
-            <label htmlFor="textContent" className="sr-only">Your comment</label>
             <textarea maxLength="252" value={file.textContent} onChange={handleChange} name="textContent" id="textContent" rows="4" className="w-full px-1 text-lg font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder={file.imgFile ? `${file.imgFileValue} \n- Post Image` : 'Write Something...'} disabled={file.isLoading} />
           </div>
           <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">

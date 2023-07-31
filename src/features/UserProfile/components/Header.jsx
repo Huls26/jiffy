@@ -12,14 +12,10 @@ import profileBannerBg from '@default';
 
 import UserDetails from './UserDetails';
 
-export async function loader({ request, params }) {
+export async function loader({ params }) {
   const urlId = params.id;
   const user = await getCurrentUser();
   const me = urlId === user?.uid;
-
-  // get URL
-  const url = new URL(request.url);
-  const readyForEdit = url.searchParams.get('profile');
 
   if (!user?.uid) {
     return redirect('/');
@@ -28,7 +24,7 @@ export async function loader({ request, params }) {
     return userData;
   }
 
-  return { me, readyForEdit };
+  return { me };
 }
 
 export default function Header() {
