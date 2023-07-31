@@ -10,7 +10,6 @@ export default function UserProfileBannerEditForm() {
     firstname, lastname, username, userBanner, userImg,
   } = userData;
 
-  console.log(userData);
   return (
     <section className="py-3 text-center">
       <h1 className="font-PS font-bold text-lg text-gray-dark">
@@ -32,7 +31,7 @@ export default function UserProfileBannerEditForm() {
       <div className="w-full h-20">
         <img src={userBanner} alt="" />
       </div>
-      <div className="text-left mb-4">
+      <div className="text-left ml-1 mb-4">
         <ContentBtn text="upload new banner" bg="bg-aqua-2" />
       </div>
 
