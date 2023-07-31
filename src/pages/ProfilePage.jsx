@@ -1,11 +1,14 @@
 import { lazy } from 'react';
+import ProfileEditForm from '@features/ProfileEditForm';
 
 const UserProfile = lazy(() => import('@features/UserProfile'));
 
 export default function ProfilePage() {
   return (
-    <main className="pt-24">
+    // remove padding when user post is available
+    <main className="pt-24 pb-52">
       <UserProfile />
+      <ProfileEditForm />
     </main>
   );
 }
