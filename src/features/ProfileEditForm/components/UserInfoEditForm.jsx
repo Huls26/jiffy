@@ -12,13 +12,8 @@ export default function UserInfoEditForm({ handleButton }) {
         <SignupFormInput label="username" name="username" placeholder="Username" required="false" />
         <SignupFormInput label="email" name="email" type="email" placeholder="Email" required="false" />
 
-        <div>
-          <SignupFormInput label="password" name="password" type="password" placeholder="Update Password" required="false" />
-          <SignupFormInput label="confirm password" name="confirmPassword" type="password" placeholder="Confirm Password" required="false" />
-        </div>
-
-        <div className="mb-3 px-4 py-2 bg-white border rounded-md">
-          <label htmlFor="textContent" className="sr-only">Your comment</label>
+        <label htmlFor="textContent">Description</label>
+        <div className="mb-3 p-1 bg-white border rounded-md">
           <textarea
             maxLength="252"
             name="textContent"
@@ -33,6 +28,11 @@ export default function UserInfoEditForm({ handleButton }) {
             placeholder="Update Description..."
             disabled={() => console.log('change when loading')}
           />
+        </div>
+
+        <div className="mb-3">
+          <SignupFormInput label="password" name="password" type="password" placeholder="Update Password" required="false" />
+          <SignupFormInput label="confirm password" name="confirmPassword" type="password" placeholder="Confirm Password" required="false" />
         </div>
 
         <div className="space-x-1">
