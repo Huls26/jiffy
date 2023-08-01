@@ -1,9 +1,11 @@
 import { useContext } from 'react';
+import PropTypes from 'prop-types';
+
 import ContentBtn from '@components/Btn/ContentBtn';
 import { dataContext } from '@context/dataContext';
 import ProfilePhoto from '@features/UserProfile/components/ProfilePhoto';
 
-export default function UserProfileBannerEditForm() {
+export default function UserProfileBannerEditForm({ handleButton }) {
   const [data] = useContext(dataContext);
   const { userData } = data;
   const {
@@ -27,7 +29,7 @@ export default function UserProfileBannerEditForm() {
       </button>
 
       <div className="mb-2">
-        <ContentBtn text="Edit Profile info" />
+        <ContentBtn text="Edit Profile info" onClick={() => handleButton('profile', 'editInfo')} />
       </div>
 
       <div className="w-full h-24">
@@ -45,9 +47,13 @@ export default function UserProfileBannerEditForm() {
 
       <div className="mt-2 space-x-1">
         <ContentBtn text="Save changes" bg="bg-green" />
-        <ContentBtn text="Cancel" bg="bg-peach-1" />
+        <ContentBtn text="Cancel" bg="bg-peach-1" onClick={() => handleButton('profile')} />
       </div>
 
     </section>
   );
 }
+
+UserProfileBannerEditForm.propTypes = {
+  handleButton: PropTypes.func.isRequired,
+};

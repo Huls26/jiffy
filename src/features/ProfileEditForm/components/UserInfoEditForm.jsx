@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types';
 import ContentBtn from '@components/Btn/ContentBtn';
 import SignupFormInput from '@features/SignupForm/components/SignupFormInput';
 
-export default function EditForm() {
+export default function UserInfoEditForm({ handleButton }) {
+  console.log(handleButton);
   return (
     <form className="px-6 py-3 font-PS font-semibold text-base text-gray-dark">
       <fieldset>
@@ -35,9 +37,13 @@ export default function EditForm() {
 
         <div className="space-x-1">
           <ContentBtn text="update info" bg="bg-green" />
-          <ContentBtn text="Cancel" bg="bg-peach-1" />
+          <ContentBtn text="Cancel" bg="bg-peach-1" onClick={() => handleButton('profile')} />
         </div>
       </fieldset>
     </form>
   );
 }
+
+UserInfoEditForm.propTypes = {
+  handleButton: PropTypes.func.isRequired,
+};
