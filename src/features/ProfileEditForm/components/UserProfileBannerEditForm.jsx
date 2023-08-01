@@ -7,9 +7,11 @@ export default function UserProfileBannerEditForm() {
   const [data] = useContext(dataContext);
   const { userData } = data;
   const {
-    firstname, lastname, username, userBanner, userImg,
+    firstname, lastname, username, userImg, userBanner,
   } = userData;
 
+  // get the put to a state
+  // set the input for image
   return (
     <section className="py-3 text-center">
       <h1 className="font-PS font-bold text-lg text-gray-dark">
@@ -28,10 +30,10 @@ export default function UserProfileBannerEditForm() {
         <ContentBtn text="Edit Profile info" />
       </div>
 
-      <div className="w-full h-20">
-        <img src={userBanner} alt="" />
+      <div className="w-full h-24">
+        <img src={userBanner} alt="" className="w-full h-full" />
       </div>
-      <div className="text-left ml-1 mb-4">
+      <div className="text-left ml-1 -mt-6 mb-4">
         <ContentBtn text="upload new banner" bg="bg-aqua-2" />
       </div>
 
