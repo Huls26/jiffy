@@ -11,7 +11,7 @@ export default function useHandleCreatePost() {
   const {
     username, userImg, followers, peopleFollows,
   } = userData;
-  console.log(userData);
+
   const navigate = useNavigate();
   const [file, setFile] = useState(() => ({
     title: '', textContent: '', errorMessage: '', isLoading: false,

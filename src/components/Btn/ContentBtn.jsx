@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import PropTypes from 'prop-types';
 
 export default function ContentBtn({
@@ -26,11 +28,8 @@ export default function ContentBtn({
 }
 
 ContentBtn.propTypes = {
-  text: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/require-default-props
+  text: PropTypes.any.isRequired,
   bg: PropTypes.string,
-  // eslint-disable-next-line react/require-default-props
   onClick: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
   type: PropTypes.string,
 };

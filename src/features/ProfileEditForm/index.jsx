@@ -1,18 +1,45 @@
+/* eslint-disable react/jsx-no-bind */
+import { lazy } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import UserInfoEditForm from './components/UserInfoEditForm';
-import UserProfileBannerEditForm from './components/UserProfileBannerEditForm';
+
+const UserInfoEditForm = lazy(() => import('./components/UserInfoEditForm'));
+const UserProfileBannerEditForm = lazy(() => import('./components/UserProfileBannerEditForm'));
 
 export default function ProfileEditForm() {
-  const [searchParams] = useSearchParams();
-  console.log(searchParams.get('profile'));
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isProfileEdit = searchParams.get('profile');
+  const editProfilePhoto = isProfileEdit && isProfileEdit === 'edit';
+  const editProfileInfo = isProfileEdit && isProfileEdit === 'editInfo';
+  const editFormWidth = editProfilePhoto ? 'w-72' : 'w-96';
 
-  // change width when user edit user info
-  // userProfileBannerEditForm: w-72
-  // UserInfoEditForm: w-80
+  function handleParamsButton(key, value) {
+    setSearchParams((prevParams) => {
+      if (!value) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+
+      return prevParams;
+    });
+  }
+
   return (
-    <main className="w-96 absolute top-32 left-1/2 -translate-x-1/2 bg-aqua-3 border border-r-2 border-b-2 rounded-lg shadow-2xl">
-      {false && <UserProfileBannerEditForm />}
-      {true && <UserInfoEditForm />}
-    </main>
+    isProfileEdit
+      && (
+      <main className={`
+    ${editFormWidth} absolute top-32 left-1/2 -translate-x-1/2 
+    bg-aqua-3 border border-r-2 border-b-2 rounded-lg shadow-2xl`}
+      >
+        {editProfilePhoto
+      && (
+      <UserProfileBannerEditForm handleButton={handleParamsButton} />
+      )}
+        {editProfileInfo
+      && (
+        <UserInfoEditForm handleButton={handleParamsButton} />
+      )}
+      </main>
+      )
   );
 }

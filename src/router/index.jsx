@@ -19,7 +19,6 @@ import { loader as loaderProfilePage } from '@features/UserProfile/components/He
 // // lazy loading
 
 const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));
-const ProfileEditPage = lazy(() => import('@pages/ProfileEditPage'));
 // const ViewPage = lazy(() => import('@pages/ViewPage'));
 
 const router = createBrowserRouter(
@@ -46,10 +45,6 @@ const router = createBrowserRouter(
           loader={loaderProfilePage}
           element={<ProfilePage />}
            // protected routes
-        />
-        <Route
-          path="profile/:id/edit"
-          element={<ProfileEditPage />}
         />
         <Route
           path="createpost"
