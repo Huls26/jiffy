@@ -35,7 +35,6 @@ export default function Header() {
 
   // figure out where to put searchParam value
   // and the component for ProfileEditForm
-  console.log(userData.readyForEdit);
   // bg-aqua-2
   return (
     <header className="mb-8">

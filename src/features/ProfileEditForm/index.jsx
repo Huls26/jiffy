@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-no-bind */
+import { lazy } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import UserInfoEditForm from './components/UserInfoEditForm';
-import UserProfileBannerEditForm from './components/UserProfileBannerEditForm';
+
+const UserInfoEditForm = lazy(() => import('./components/UserInfoEditForm'));
+const UserProfileBannerEditForm = lazy(() => import('./components/UserProfileBannerEditForm'));
 
 export default function ProfileEditForm() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,18 +25,21 @@ export default function ProfileEditForm() {
   }
 
   return (
-    <main className={`
+    isProfileEdit
+      && (
+      <main className={`
     ${editFormWidth} absolute top-32 left-1/2 -translate-x-1/2 
     bg-aqua-3 border border-r-2 border-b-2 rounded-lg shadow-2xl`}
-    >
-      {editProfilePhoto
+      >
+        {editProfilePhoto
       && (
       <UserProfileBannerEditForm handleButton={handleParamsButton} />
       )}
-      {editProfileInfo
+        {editProfileInfo
       && (
         <UserInfoEditForm handleButton={handleParamsButton} />
       )}
-    </main>
+      </main>
+      )
   );
 }
