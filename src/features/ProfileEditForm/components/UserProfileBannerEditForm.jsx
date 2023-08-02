@@ -10,7 +10,10 @@ import {
 } from '@api/FB';
 import ContentBtn from '@components/Btn/ContentBtn';
 import { dataContext } from '@context/dataContext';
+import bgColor from '@default/bgColor';
 import ProfilePhoto from '@features/UserProfile/components/ProfilePhoto';
+
+import UpdatingFormLoading from './UpdatingFormLoading';
 
 // add save changes functionality
 // code clean up
@@ -21,11 +24,13 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     ...userData,
     userBannerFile: null,
     userImgFile: null,
+    isLoading: false,
   }));
   const {
     firstname, lastname, username, userImg,
     userBanner,
   } = uData;
+  const loadingComponent = uData.isLoading ? 'pointer-events-none animate-pulse relative' : '';
 
   function handleImageUpdate(event) {
     const { target } = event;
@@ -43,38 +48,63 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     }));
   }
 
+  async function UploadUserImage(uId, ImgFile, imageBannerProfile, newId) {
+    // create url path
+    // upload image to firebase storage
+    // get url
+    if (ImgFile) {
+      const imgFilePath = (
+        `users/${uId}/${imageBannerProfile}/${ImgFile.name}${newId}`
+      );
+      const profileImageRef = ref(storage, imgFilePath);
+      await uploadBytes(profileImageRef, ImgFile);
+      const ImageURL = await getDownloadURL(profileImageRef);
+
+      return ImageURL;
+    }
+
+    return null;
+  }
+
   async function handleSaveChanges(fileData, uId, userDataFile) {
     const newData = { ...fileData };
     const { userBannerFile, userImgFile } = newData;
     const newId = uuidv4();
 
-    console.log(userImgFile);
-    // update userImgFile upload to firebase storage and update userData url
+    setUData((prevData) => ({
+      ...prevData,
+      isLoading: true,
+    }));
+
     // add lazy loading for images: banner, profile photo
+    const userBannerNewURL = await UploadUserImage(
+      uId,
+      userBannerFile,
+      'userBanner',
+      newId,
+    );
+    const userImgNewURL = await UploadUserImage(
+      uId,
+      userImgFile,
+      'userImg',
+      newId,
+    );
 
-    if (userBannerFile) {
-      // create url path
-      // upload image to firebase storage
-      // get url
-      const bannerFilePath = (
-        `users/userBanner/${uId}/${userBannerFile.name}${newId}`
-      );
-      const bannerImageRef = ref(storage, bannerFilePath);
-      await uploadBytes(bannerImageRef, userBannerFile);
-      const bannerImageURL = await getDownloadURL(bannerImageRef);
+    await setDoc(doc(db, 'users', uId), {
+      ...userDataFile,
+      userImg: userImgNewURL || userDataFile.userImg,
+      userBanner: userBannerNewURL || userDataFile.userBanner,
+    });
 
-      // update firestore userBanner
-      await setDoc(doc(db, 'users', uId), {
-        ...userDataFile,
-        userBanner: bannerImageURL,
-      });
-
-      console.log('update user banner');
-    }
+    setUData((prevData) => ({
+      ...prevData,
+      isLoading: false,
+    }));
   }
 
   return (
-    <section className="py-3 text-center">
+    <section className={`py-3 text-center ${loadingComponent}`}>
+      <UpdatingFormLoading loading={uData.isLoading} />
       <h1 className="font-PS font-bold text-lg text-gray-dark">
         {firstname}
         {' '}
@@ -91,7 +121,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
         <ContentBtn text="Edit Profile info" onClick={() => handleButton('profile', 'editInfo')} />
       </div>
 
-      <div className="w-full h-24">
+      <div className={`w-full h-24 ${bgColor}`}>
         <img src={userBanner} alt="" className="w-full h-full" />
       </div>
 
@@ -113,7 +143,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
         <input onChange={handleImageUpdate} type="file" accept="image/*" name="userBanner" id="uploadBanner" hidden />
       </div>
 
-      <div className="flex justify-center mb-2 opacity-90">
+      <div className="flex justify-center mb-2 opacity-90 rounded-full">
         <ProfilePhoto userImg={userImg} />
       </div>
 
