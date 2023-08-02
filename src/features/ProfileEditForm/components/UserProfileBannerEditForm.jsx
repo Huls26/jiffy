@@ -1,13 +1,22 @@
 import { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
+import { doc, setDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
+import {
+  db,
+  storage,
+} from '@api/FB';
 import ContentBtn from '@components/Btn/ContentBtn';
 import { dataContext } from '@context/dataContext';
 import ProfilePhoto from '@features/UserProfile/components/ProfilePhoto';
 
+// add save changes functionality
+// code clean up
 export default function UserProfileBannerEditForm({ handleButton }) {
   const [data] = useContext(dataContext);
-  const { userData } = data;
+  const { userData, userId } = data;
   const [uData, setUData] = useState(() => ({
     ...userData,
     userBannerFile: null,
@@ -22,6 +31,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     const { target } = event;
     const { name, files } = target;
     const [imageData] = files;
+    // get the name key and add File at the end
     const updateFile = `${name}File`;
 
     const setLocalUrl = URL.createObjectURL(imageData);
@@ -29,8 +39,38 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     setUData((prevData) => ({
       ...prevData,
       [name]: setLocalUrl,
-      [updateFile]: files,
+      [updateFile]: imageData,
     }));
+  }
+
+  async function handleSaveChanges(fileData, uId, userDataFile) {
+    const newData = { ...fileData };
+    const { userBannerFile, userImgFile } = newData;
+    const newId = uuidv4();
+
+    console.log(userImgFile);
+    // update userImgFile upload to firebase storage and update userData url
+    // add lazy loading for images: banner, profile photo
+
+    if (userBannerFile) {
+      // create url path
+      // upload image to firebase storage
+      // get url
+      const bannerFilePath = (
+        `users/userBanner/${uId}/${userBannerFile.name}${newId}`
+      );
+      const bannerImageRef = ref(storage, bannerFilePath);
+      await uploadBytes(bannerImageRef, userBannerFile);
+      const bannerImageURL = await getDownloadURL(bannerImageRef);
+
+      // update firestore userBanner
+      await setDoc(doc(db, 'users', uId), {
+        ...userDataFile,
+        userBanner: bannerImageURL,
+      });
+
+      console.log('update user banner');
+    }
   }
 
   return (
@@ -93,7 +133,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       <input onChange={handleImageUpdate} type="file" accept="image/*" name="userImg" id="uploadPhoto" hidden />
 
       <div className="mt-2 space-x-1">
-        <ContentBtn text="Save changes" bg="bg-green" />
+        <ContentBtn text="Save changes" bg="bg-green" onClick={() => handleSaveChanges(uData, userId, userData)} />
         <ContentBtn text="Cancel" bg="bg-peach-1" onClick={() => handleButton('profile')} />
       </div>
 
