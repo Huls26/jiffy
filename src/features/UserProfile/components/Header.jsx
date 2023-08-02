@@ -39,7 +39,7 @@ export default function Header() {
   return (
     <header className="mb-8">
       <div className={`w-full h-36 ${profileBannerBg}`}>
-        <img src={userBanner} alt="" className="object-cover w-full h-full" />
+        <img src={userBanner} alt="" className="object-cover w-full h-full" loading="lazy" />
       </div>
 
       <UserDetails

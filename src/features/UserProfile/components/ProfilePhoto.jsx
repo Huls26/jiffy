@@ -20,6 +20,7 @@ export default function ProfilePhoto({ userImg }) {
                       border-[.2em]
                       rounded-full
                     "
+        loading="lazy"
       />
     </div>
   );

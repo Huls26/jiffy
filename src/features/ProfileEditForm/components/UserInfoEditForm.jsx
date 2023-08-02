@@ -3,7 +3,6 @@ import ContentBtn from '@components/Btn/ContentBtn';
 import SignupFormInput from '@features/SignupForm/components/SignupFormInput';
 
 export default function UserInfoEditForm({ handleButton }) {
-  console.log(handleButton);
   return (
     <form className="px-6 py-3 font-PS font-semibold text-base text-gray-dark">
       <fieldset>
@@ -26,7 +25,7 @@ export default function UserInfoEditForm({ handleButton }) {
             rounded-md outline-none
           "
             placeholder="Update Description..."
-            disabled={() => console.log('change when loading')}
+
           />
         </div>
 
