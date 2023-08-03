@@ -1,22 +1,60 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
-import ContentBtn from '@components/Btn/ContentBtn';
+import { Form } from 'react-router-dom';
+
 import SignupFormInput from '@features/SignupForm/components/SignupFormInput';
+import ContentBtn from '@components/Btn/ContentBtn';
+import { dataContext } from '@context/dataContext';
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const formDataKey = ['firstname', 'lastname', 'username', 'email', 'description', 'password'];
+  const setFormDataValue = formDataKey
+    .reduce((formDataKeyValue, key) => {
+      const value = formData.get(key);
+
+      if (value) {
+        const addValue = {
+          ...formDataKeyValue,
+          [key]: value,
+        };
+
+        return addValue;
+      }
+
+      return formDataKeyValue;
+    }, {});
+
+  console.log(setFormDataValue);
+
+  // push the value to useActionData
+  // merge the formDataValue to current userData
+  // update the userData to firestore
+  return { setFormDataValue };
+}
 
 export default function UserInfoEditForm({ handleButton }) {
+  const [data] = useContext(dataContext);
+  const { userData } = data;
+  // const sample1 = { name: 'gerald', last: '', img: 123 };
+  // const sample2 = { name: 'anderson', last: 'liam' };
+  // const merge = { ...sample1, ...sample2 };
+
+  console.log(userData);
   return (
-    <form className="px-6 py-3 font-PS font-semibold text-base text-gray-dark">
+    <Form method="post" className="px-6 py-3 font-PS font-semibold text-base text-gray-dark">
       <fieldset>
         <SignupFormInput label="first name" name="firstname" placeholder="First name" required="false" />
         <SignupFormInput label="last name" name="lastname" placeholder="Last name(optional)" required="false" />
         <SignupFormInput label="username" name="username" placeholder="Username" required="false" />
         <SignupFormInput label="email" name="email" type="email" placeholder="Email" required="false" />
 
-        <label htmlFor="textContent">Description</label>
+        <label htmlFor="description">Description</label>
         <div className="mb-3 p-1 bg-white border rounded-md">
           <textarea
             maxLength="252"
-            name="textContent"
-            id="textContent"
+            name="description"
+            id="description"
             rows="4"
             className="
             w-full
@@ -25,7 +63,7 @@ export default function UserInfoEditForm({ handleButton }) {
             rounded-md outline-none
           "
             placeholder="Update Description..."
-
+            required={false}
           />
         </div>
 
@@ -35,11 +73,11 @@ export default function UserInfoEditForm({ handleButton }) {
         </div>
 
         <div className="space-x-1">
-          <ContentBtn text="update info" bg="bg-green" />
+          <ContentBtn text="update info" bg="bg-green" type="submit" />
           <ContentBtn text="Cancel" bg="bg-peach-1" onClick={() => handleButton('profile')} />
         </div>
       </fieldset>
-    </form>
+    </Form>
   );
 }
 

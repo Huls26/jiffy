@@ -18,6 +18,8 @@ import { loader as loaderUserAuth } from '@api/onSnapUserAuth';
 import { loader as loaderProfilePage } from '@features/UserProfile/components/Header';
 // // lazy loading
 
+import { action as actionUserInfoEditForm } from '@features/ProfileEditForm/components/UserInfoEditForm';
+
 const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));
 // const ViewPage = lazy(() => import('@pages/ViewPage'));
 
@@ -43,6 +45,7 @@ const router = createBrowserRouter(
         <Route
           path="profile/:id"
           loader={loaderProfilePage}
+          action={actionUserInfoEditForm}
           element={<ProfilePage />}
            // protected routes
         />

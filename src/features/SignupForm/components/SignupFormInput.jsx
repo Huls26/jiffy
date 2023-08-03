@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export default function SignupFormInput({
-  label, type, name, placeholder,
+  label, type, name, placeholder, required,
 }) {
   return (
     <label htmlFor={name} className="capitalize">
@@ -19,7 +19,7 @@ export default function SignupFormInput({
               outline-none
               focus:border-blue
             "
-        required
+        required={required !== 'false'}
         autoComplete="off"
       />
     </label>
@@ -32,4 +32,6 @@ SignupFormInput.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  required: PropTypes.string,
 };
