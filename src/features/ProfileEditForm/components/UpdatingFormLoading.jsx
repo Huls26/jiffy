@@ -5,11 +5,11 @@ export default function UpdatingFormLoading({ loading }) {
     loading
     && (
     <h1 className="
-    absolute top-[38%] left-[4%]
-    font-LM font-bold text-yellow-2 text-3xl uppercase drop-shadow-md
-    animate-bounce
-    z-50
-  "
+      absolute top-[38%] left-[4%]
+      font-LM font-bold text-yellow-2 text-3xl uppercase drop-shadow-md
+      animate-bounce
+      z-50
+    "
     >
       ...updating
     </h1>

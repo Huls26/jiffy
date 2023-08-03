@@ -2,6 +2,8 @@ import {
   useContext,
 } from 'react';
 import { Link, redirect, useLoaderData } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { getCurrentUser } from '@api/onSnapUserAuth';
 import getUsersData from '@api/getUser';
@@ -36,10 +38,11 @@ export default function Header() {
   // figure out where to put searchParam value
   // and the component for ProfileEditForm
   // bg-aqua-2
+
   return (
     <header className="mb-8">
       <div className={`w-full h-36 ${profileBannerBg}`}>
-        <img src={userBanner} alt="" className="object-cover w-full h-full" loading="lazy" />
+        <LazyLoadImage alt="banner" className="object-cover w-screen h-36" src={userBanner} effect="blur" />
       </div>
 
       <UserDetails
