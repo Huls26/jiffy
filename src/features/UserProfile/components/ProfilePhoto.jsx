@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import profilePhotoBg from '@default';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 export default function ProfilePhoto({ userImg }) {
   return (
     <div className={`
@@ -11,16 +14,15 @@ export default function ProfilePhoto({ userImg }) {
                 grow-0
               `}
     >
-      <img
+      <LazyLoadImage
+        alt="profile photo"
+        className=" w-24 h-24 object-cover
+                  border-dark-1
+                    border-[.2em]
+                    rounded-full
+                  "
         src={userImg}
-        alt=""
-        className="
-                      w-full h-full object-cover
-                      border-dark-1
-                      border-[.2em]
-                      rounded-full
-                    "
-        loading="lazy"
+        effect="blur"
       />
     </div>
   );
