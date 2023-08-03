@@ -8,6 +8,7 @@ import { dataContext } from '@context/dataContext';
 
 export async function action({ request }) {
   const formData = await request.formData();
+  // get value from formData
   const formDataKey = ['firstname', 'lastname', 'username', 'email', 'description', 'password'];
   const setFormDataValue = formDataKey
     .reduce((formDataKeyValue, key) => {
