@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'react-router-dom';
+import { Form, useActionData } from 'react-router-dom';
 
 import SignupFormInput from '@features/SignupForm/components/SignupFormInput';
 import ContentBtn from '@components/Btn/ContentBtn';
@@ -8,7 +8,18 @@ import { dataContext } from '@context/dataContext';
 
 export async function action({ request }) {
   const formData = await request.formData();
-  // get value from formData
+  const password = formData.get('password');
+  const confirmPassword = formData.get('confirmPassword');
+
+  // validate password
+  if (password
+    && ((password?.length < 6) || (password !== confirmPassword))) {
+    return { error: true, errorM: 'Check Password' };
+  }
+
+  // get password with different object
+  // update the password in firebase auth
+  // i think i should update the password here in action function
   const formDataKey = ['firstname', 'lastname', 'username', 'email', 'description', 'password'];
   const setFormDataValue = formDataKey
     .reduce((formDataKeyValue, key) => {
@@ -26,22 +37,45 @@ export async function action({ request }) {
       return formDataKeyValue;
     }, {});
 
-  console.log(setFormDataValue);
-
   // push the value to useActionData
   // merge the formDataValue to current userData
   // update the userData to firestore
-  return { setFormDataValue };
+  return { error: false, updateFormDataValue: setFormDataValue };
 }
 
 export default function UserInfoEditForm({ handleButton }) {
+  // get FormData
+  // check FormData ready for update
+  // get the userData from dataContext
+  const actionData = useActionData();
+  const getFormDataValue = actionData?.updateFormDataValue;
+  const readyFormDataUpdate = getFormDataValue
+  && Object.keys(getFormDataValue).length;
   const [data] = useContext(dataContext);
   const { userData } = data;
-  // const sample1 = { name: 'gerald', last: '', img: 123 };
-  // const sample2 = { name: 'anderson', last: 'liam' };
-  // const merge = { ...sample1, ...sample2 };
 
-  console.log(userData);
+  console.log(actionData);
+  // get seperate email and password with different object
+  // update the email and password in firebase auth
+  if (readyFormDataUpdate) {
+    const getPasswordValue = getFormDataValue.password;
+    const getEmailValue = getFormDataValue.email;
+    delete getFormDataValue.password;
+    const updatedFormDataValue = { ...userData, ...getFormDataValue };
+    console.log(updatedFormDataValue);
+    console.log(getPasswordValue, getEmailValue);
+
+    if (getPasswordValue) {
+      console.log('update password to firebase');
+    }
+
+    if (getEmailValue) {
+      console.log('update user email');
+    }
+
+    console.log('update userinfo');
+  }
+
   return (
     <Form method="post" className="px-6 py-3 font-PS font-semibold text-base text-gray-dark">
       <fieldset>
