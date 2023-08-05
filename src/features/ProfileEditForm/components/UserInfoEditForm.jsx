@@ -23,35 +23,13 @@ import handlePasswordUpdateFormData from '../utils/handlePasswordUpdateFormData'
 // code clean up
 // test
 export async function action({ request }) {
-  // const formData = await request.formData();
-  // const password = formData.get('password');
-  // const confirmPassword = formData.get('confirmPassword');
-  // const validPassword = (password?.length >= 6)
-  //   && (password === confirmPassword);
-
-  // // validate password
-  // if (password
-  //   && (!validPassword)) {
-  //   return { error: true, errorM: 'Check Password' };
-  // }
-
-  // const getKeyValue = setFormDataValue(formData);
-
-  // // validate and update password
-  // // requires recent login to change passcode
-  // if (validPassword) {
-  //   const updatePasswordRes = updateUserPassword(password, getKeyValue);
-
-  //   return updatePasswordRes;
-  // }
-
-  // return { error: false, updateFormDataValue: getKeyValue };
+  // handle password change and updateFormDataValue
   const updateFormDataRes = await handlePasswordUpdateFormData(request);
 
   return updateFormDataRes;
 }
 
-async function updateUserEmail(newEmail, userId, newUserData) {
+async function updateUserEmailInfo(newEmail, userId, newUserData) {
   try {
     if (newEmail) {
       const auth = await getCurrentUser();
@@ -62,7 +40,7 @@ async function updateUserEmail(newEmail, userId, newUserData) {
     const userRef = doc(db, 'users', userId);
     await updateDoc(userRef, newUserData);
 
-    return { error: false, update: 'userInfo' };
+    return { error: false, update: 'Info' };
   } catch (error) {
     const errorMessage = error?.code.replace('auth/', '').split('-').join(' ');
     return { error: true, errorM: errorMessage };
@@ -80,12 +58,14 @@ export default function UserInfoEditForm({ handleButton }) {
   && Object.keys(getFormDataValue).length;
   const [data] = useContext(dataContext);
   const { userData, userId } = data;
+  const [userUpdateInfo, setUserUpdateInfo] = useState(() => {});
   const [isLoading, setIsLoading] = useState(false);
   const loadingStyle = isLoading ? 'pointer-events-none animate-pulse' : '';
   const successStyle = actionData?.update ? 'outline outline-4 outline-green' : '';
   const errorStyle = actionData?.error ? 'outline outline-4 outline-bRed' : '';
 
-  console.log(actionData);
+  // create success message when updating user info
+  console.log(userUpdateInfo);
   useEffect(() => {
     if (readyFormDataUpdate) {
       const getEmailValue = getFormDataValue?.email;
@@ -96,13 +76,13 @@ export default function UserInfoEditForm({ handleButton }) {
       setIsLoading(() => true);
 
       (async () => {
-        const resEmail = await updateUserEmail(
+        const resEmail = await updateUserEmailInfo(
           getEmailValue,
           userId,
           updatedFormDataValue,
         );
 
-        console.log(resEmail);
+        setUserUpdateInfo(() => ({ ...resEmail }));
         setIsLoading(() => false);
       })();
     }

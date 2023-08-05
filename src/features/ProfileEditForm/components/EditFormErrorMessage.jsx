@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 export default function EditFormErrorMessage({ actionData }) {
   return (
-    actionData?.error && <h1 className="font-bold text-xl text-red text-center capitalize">{actionData?.errorM}</h1>
+    actionData?.error && <h1 className="font-bold text-xl text-red text-center capitalize break-words">{actionData?.errorM}</h1>
   );
 }
 
