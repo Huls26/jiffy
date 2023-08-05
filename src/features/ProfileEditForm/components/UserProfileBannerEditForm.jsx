@@ -12,12 +12,14 @@ import ContentBtn from '@components/Btn/ContentBtn';
 import { dataContext } from '@context/dataContext';
 import bgColor from '@default/bgColor';
 import ProfilePhoto from '@features/UserProfile/components/ProfilePhoto';
+import useResetScrollView from '@hooks/useResetScrollView';
 
 import UpdatingFormLoading from './UpdatingFormLoading';
 
 // add save changes functionality
 // code clean up
 export default function UserProfileBannerEditForm({ handleButton }) {
+  useResetScrollView();
   const [data] = useContext(dataContext);
   const { userData, userId } = data;
   const [uData, setUData] = useState(() => ({
@@ -71,6 +73,11 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     const { userBannerFile, userImgFile } = newData;
     const newId = uuidv4();
 
+    if (!userBannerFile && !userImgFile) {
+      console.log('no update');
+      return;
+    }
+
     setUData((prevData) => ({
       ...prevData,
       isLoading: true,
@@ -99,7 +106,11 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     setUData((prevData) => ({
       ...prevData,
       isLoading: false,
+      userBannerFile: null,
+      userImgFile: null,
     }));
+
+    console.log('update form');
   }
 
   return (
@@ -163,7 +174,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       <input onChange={handleImageUpdate} type="file" accept="image/*" name="userImg" id="uploadPhoto" hidden />
 
       <div className="mt-2 space-x-1">
-        <ContentBtn text="Save changes" bg="bg-green" onClick={() => handleSaveChanges(uData, userId, userData)} />
+        { (uData.userBannerFile || uData.userImgFile) && <ContentBtn text="Save changes" bg="bg-green" onClick={() => handleSaveChanges(uData, userId, userData)} />}
         <ContentBtn text="Cancel" bg="bg-peach-1" onClick={() => handleButton('profile')} />
       </div>
 

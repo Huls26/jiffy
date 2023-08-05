@@ -1,7 +1,9 @@
 import {
   useContext,
 } from 'react';
-import { Link, redirect, useLoaderData } from 'react-router-dom';
+import {
+  Link, redirect, useLoaderData,
+} from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -34,10 +36,6 @@ export default function Header() {
   const [data] = useContext(dataContext);
   const details = userData.me ? data.userData : userData;
   const { userBanner } = details;
-
-  // figure out where to put searchParam value
-  // and the component for ProfileEditForm
-  // bg-aqua-2
 
   return (
     <header className="mb-8">

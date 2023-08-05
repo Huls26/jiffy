@@ -1,83 +1,137 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'react-router-dom';
+import { Form, useActionData } from 'react-router-dom';
+import {
+  updateEmail,
+  // updatePassword,
+} from 'firebase/auth';
+import { doc, updateDoc } from 'firebase/firestore';
 
+import { db } from '@api/FB';
+import { getCurrentUser } from '@api/onSnapUserAuth';
 import SignupFormInput from '@features/SignupForm/components/SignupFormInput';
 import ContentBtn from '@components/Btn/ContentBtn';
 import { dataContext } from '@context/dataContext';
+import useResetScrollView from '@hooks/useResetScrollView';
 
+import EditFormRenderMessage from './EditFormRenderMessage';
+import UpdatingFormLoading from './UpdatingFormLoading';
+// import setFormDataValue from '../utils/setFormDataValue';
+// import updateUserPassword from '../utils/updateUserPassword';
+import handlePasswordUpdateFormData from '../utils/handlePasswordUpdateFormData';
+
+// code clean up
+// test
 export async function action({ request }) {
-  const formData = await request.formData();
-  const formDataKey = ['firstname', 'lastname', 'username', 'email', 'description', 'password'];
-  const setFormDataValue = formDataKey
-    .reduce((formDataKeyValue, key) => {
-      const value = formData.get(key);
+  // handle password change and updateFormDataValue
+  const updateFormDataRes = await handlePasswordUpdateFormData(request);
 
-      if (value) {
-        const addValue = {
-          ...formDataKeyValue,
-          [key]: value,
-        };
+  return updateFormDataRes;
+}
 
-        return addValue;
+async function updateUserEmailInfo(newEmail, userId, newUserData) {
+  try {
+    if (newEmail) {
+      const auth = await getCurrentUser();
+      if (auth?.uid) {
+        await updateEmail(auth, newEmail);
       }
+    }
+    const userRef = doc(db, 'users', userId);
+    await updateDoc(userRef, newUserData);
 
-      return formDataKeyValue;
-    }, {});
-
-  console.log(setFormDataValue);
-
-  // push the value to useActionData
-  // merge the formDataValue to current userData
-  // update the userData to firestore
-  return { setFormDataValue };
+    return { error: false, update: 'Info' };
+  } catch (error) {
+    const errorMessage = error?.code.replace('auth/', '').split('-').join(' ');
+    return { error: true, errorM: errorMessage };
+  }
 }
 
 export default function UserInfoEditForm({ handleButton }) {
+  // get FormData
+  // check FormData ready for update
+  // get the userData from dataContext
+  useResetScrollView();
+  const actionData = useActionData();
+  const getFormDataValue = actionData?.updateFormDataValue;
+  const readyFormDataUpdate = getFormDataValue
+  && Object.keys(getFormDataValue).length;
   const [data] = useContext(dataContext);
-  const { userData } = data;
-  // const sample1 = { name: 'gerald', last: '', img: 123 };
-  // const sample2 = { name: 'anderson', last: 'liam' };
-  // const merge = { ...sample1, ...sample2 };
+  const { userData, userId } = data;
+  const [userUpdateInfo, setUserUpdateInfo] = useState(() => {});
+  const [isLoading, setIsLoading] = useState(false);
+  const loadingStyle = isLoading ? 'pointer-events-none animate-pulse' : '';
+  const successStyle = actionData?.update ? 'outline outline-4 outline-green' : '';
+  const errorStyle = actionData?.error ? 'outline outline-4 outline-bRed' : '';
 
-  console.log(userData);
+  // create success message when updating user info
+  console.log(userUpdateInfo);
+  useEffect(() => {
+    if (readyFormDataUpdate) {
+      const getEmailValue = getFormDataValue?.email;
+      delete getFormDataValue.password;
+      const updatedFormDataValue = { ...userData, ...getFormDataValue };
+
+      // set loading
+      setIsLoading(() => true);
+
+      (async () => {
+        const resEmail = await updateUserEmailInfo(
+          getEmailValue,
+          userId,
+          updatedFormDataValue,
+        );
+
+        setUserUpdateInfo(() => ({ ...resEmail }));
+        setIsLoading(() => false);
+      })();
+    }
+  }, [getFormDataValue, readyFormDataUpdate, userData, userId]);
+
   return (
-    <Form method="post" className="px-6 py-3 font-PS font-semibold text-base text-gray-dark">
-      <fieldset>
-        <SignupFormInput label="first name" name="firstname" placeholder="First name" required="false" />
-        <SignupFormInput label="last name" name="lastname" placeholder="Last name(optional)" required="false" />
-        <SignupFormInput label="username" name="username" placeholder="Username" required="false" />
-        <SignupFormInput label="email" name="email" type="email" placeholder="Email" required="false" />
+    <>
+      <UpdatingFormLoading loading={isLoading} />
+      <Form method="post" className={`relative px-6 py-3 font-PS font-semibold text-base text-gray-dark ${loadingStyle} ${successStyle} ${errorStyle} rounded-lg`}>
 
-        <label htmlFor="description">Description</label>
-        <div className="mb-3 p-1 bg-white border rounded-md">
-          <textarea
-            maxLength="252"
-            name="description"
-            id="description"
-            rows="4"
-            className="
+        {/* display success and error message */}
+        <EditFormRenderMessage actionData={actionData} />
+
+        <fieldset>
+          <SignupFormInput label="first name" name="firstname" placeholder={userData.firstname || 'Firstname'} required="false" />
+          <SignupFormInput label="last name" name="lastname" placeholder={userData.lastname || 'Lastname'} required="false" />
+          <SignupFormInput label="username" name="username" placeholder={userData.username || 'Username'} required="false" />
+          <SignupFormInput label="email" name="email" type="email" placeholder={userData.email || 'Email'} required="false" />
+
+          <label htmlFor="description">Description</label>
+          <div className="mb-3 p-1 bg-white border rounded-md">
+            <textarea
+              maxLength="252"
+              name="description"
+              id="description"
+              rows="4"
+              className="
             w-full
             text-lg font-A text-gray-dark
             bg-white
             rounded-md outline-none
           "
-            placeholder="Update Description..."
-            required={false}
-          />
-        </div>
+              placeholder={userData.description || 'Add Description...'}
+              required={false}
+            />
+          </div>
 
-        <div className="mb-3">
-          <SignupFormInput label="password" name="password" type="password" placeholder="Update Password" required="false" />
-          <SignupFormInput label="confirm password" name="confirmPassword" type="password" placeholder="Confirm Password" required="false" />
-        </div>
+          <div className="mb-3">
+            <SignupFormInput label="password" name="password" type="password" placeholder="Update Password" required="false" />
+            <SignupFormInput label="confirm password" name="confirmPassword" type="password" placeholder="Confirm Password" required="false" />
+          </div>
 
-        <div className="space-x-1">
-          <ContentBtn text="update info" bg="bg-green" type="submit" />
-          <ContentBtn text="Cancel" bg="bg-peach-1" onClick={() => handleButton('profile')} />
-        </div>
-      </fieldset>
-    </Form>
+          <div className="space-x-1">
+            <ContentBtn text="update info" bg="bg-green" type="submit" onClick={() => handleButton('profile', 'editInfo')} />
+            <ContentBtn text="Cancel" bg="bg-peach-1" onClick={() => handleButton('profile')} />
+          </div>
+        </fieldset>
+      </Form>
+    </>
   );
 }
 
