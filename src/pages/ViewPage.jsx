@@ -1,4 +1,5 @@
-import { lazy, useLayoutEffect } from 'react';
+import { lazy } from 'react';
+import useResetScrollView from '@hooks/useResetScrollView';
 // import ContentComponents from '@features/ViewContent';
 const ContentComponents = lazy(() => import('@features/ViewContent'));
 
@@ -10,9 +11,7 @@ export default function ViewPage() {
   };
 
   // reset scroll view
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useResetScrollView();
 
   return (
     <main className="pt-24">

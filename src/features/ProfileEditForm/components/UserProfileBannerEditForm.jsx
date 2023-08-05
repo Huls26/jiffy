@@ -12,12 +12,14 @@ import ContentBtn from '@components/Btn/ContentBtn';
 import { dataContext } from '@context/dataContext';
 import bgColor from '@default/bgColor';
 import ProfilePhoto from '@features/UserProfile/components/ProfilePhoto';
+import useResetScrollView from '@hooks/useResetScrollView';
 
 import UpdatingFormLoading from './UpdatingFormLoading';
 
 // add save changes functionality
 // code clean up
 export default function UserProfileBannerEditForm({ handleButton }) {
+  useResetScrollView();
   const [data] = useContext(dataContext);
   const { userData, userId } = data;
   const [uData, setUData] = useState(() => ({
