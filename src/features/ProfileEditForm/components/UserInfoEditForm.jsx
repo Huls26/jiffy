@@ -15,6 +15,7 @@ import { dataContext } from '@context/dataContext';
 import useResetScrollView from '@hooks/useResetScrollView';
 
 import UpdatingFormLoading from './UpdatingFormLoading';
+import setFormDataValue from '../utils/setFormDataValue';
 
 // code clean up
 // test
@@ -22,7 +23,6 @@ export async function action({ request }) {
   const formData = await request.formData();
   const password = formData.get('password');
   const confirmPassword = formData.get('confirmPassword');
-  const formDataKey = ['firstname', 'lastname', 'username', 'email', 'description'];
   const validPassword = (password?.length >= 6)
     && (password === confirmPassword);
 
@@ -32,21 +32,7 @@ export async function action({ request }) {
     return { error: true, errorM: 'Check Password' };
   }
 
-  const setFormDataValue = formDataKey
-    .reduce((formDataKeyValue, key) => {
-      const value = formData.get(key);
-
-      if (value) {
-        const addValue = {
-          ...formDataKeyValue,
-          [key]: value,
-        };
-
-        return addValue;
-      }
-
-      return formDataKeyValue;
-    }, {});
+  const getKeyValue = setFormDataValue(formData);
 
   // validate and update password
   // requires recent login to change passcode
@@ -56,7 +42,7 @@ export async function action({ request }) {
       const user = auth;
       await updatePassword(user, password);
 
-      return { error: false, updateFormDataValue: setFormDataValue, update: 'passcode' };
+      return { error: false, updateFormDataValue: getKeyValue, update: 'passcode' };
     } catch (error) {
       // testing this code below
       const errorMessage = error.code.replace('auth/', '').split('-').join(' ');
@@ -64,7 +50,7 @@ export async function action({ request }) {
     }
   }
 
-  return { error: false, updateFormDataValue: setFormDataValue };
+  return { error: false, updateFormDataValue: getKeyValue };
 }
 
 async function updateUserEmail(newEmail, userId, newUserData) {
@@ -125,10 +111,10 @@ export default function UserInfoEditForm({ handleButton }) {
       <UpdatingFormLoading loading={isLoading} />
       <Form method="post" className={`relative px-6 py-3 font-PS font-semibold text-base text-gray-dark ${loadingStyle}`}>
         <fieldset>
-          <SignupFormInput label="first name" name="firstname" placeholder={userData.firstname} required="false" />
-          <SignupFormInput label="last name" name="lastname" placeholder={userData.lastname} required="false" />
-          <SignupFormInput label="username" name="username" placeholder={userData.username} required="false" />
-          <SignupFormInput label="email" name="email" type="email" placeholder={userData.email} required="false" />
+          <SignupFormInput label="first name" name="firstname" placeholder={userData.firstname || 'Firstname'} required="false" />
+          <SignupFormInput label="last name" name="lastname" placeholder={userData.lastname || 'Lastname'} required="false" />
+          <SignupFormInput label="username" name="username" placeholder={userData.username || 'Username'} required="false" />
+          <SignupFormInput label="email" name="email" type="email" placeholder={userData.email || 'Email'} required="false" />
 
           <label htmlFor="description">Description</label>
           <div className="mb-3 p-1 bg-white border rounded-md">
@@ -143,7 +129,7 @@ export default function UserInfoEditForm({ handleButton }) {
             bg-white
             rounded-md outline-none
           "
-              placeholder={userData.description}
+              placeholder={userData.description || 'Add Description...'}
               required={false}
             />
           </div>

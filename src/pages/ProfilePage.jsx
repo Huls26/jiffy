@@ -6,6 +6,7 @@ const UserProfile = lazy(() => import('@features/UserProfile'));
 
 export default function ProfilePage() {
   useResetScrollView();
+
   return (
     // remove padding when user post is available
     <main className="pt-24 pb-80">
