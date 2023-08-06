@@ -1,19 +1,17 @@
 import {
-  useContext, useEffect, useState, memo,
+  memo,
 } from 'react';
 import PropTypes from 'prop-types';
-import { Form, useActionData } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 
 import SignupFormInput from '@features/SignupForm/components/SignupFormInput';
 import ContentBtn from '@components/Btn/ContentBtn';
-import { dataContext } from '@context/dataContext';
 import useResetScrollView from '@hooks/useResetScrollView';
 
 import EditFormRenderMessage from './EditFormRenderMessage';
 import UpdatingFormLoading from './UpdatingFormLoading';
-import handleDynamicStyle from '../utils/handleDynamicStyle';
 import handlePasswordUpdateFormData from '../utils/handlePasswordUpdateFormData';
-import setLoadingInfoState from '../utils/setLoadingInfoState';
+import useHandleEditForm from '../hooks/useHandleEditForm';
 
 // code clean up
 // test
@@ -25,29 +23,11 @@ export async function action({ request }) {
 }
 
 function UserInfoEditForm({ handleButton }) {
-  // get FormData
-  // check FormData ready for update
-  // get the userData from dataContext
+  // add defer, Await, Suspence submiting password
   useResetScrollView();
-  const actionData = useActionData();
-  const [data] = useContext(dataContext);
-  const { userData } = data;
-  const [userUpdateInfo, setUserUpdateInfo] = useState(() => {});
-  const [isLoading, setIsLoading] = useState(false);
-  const handleUpdateStyle = handleDynamicStyle(isLoading, userUpdateInfo);
-
-  useEffect(() => {
-    setUserUpdateInfo(() => ({ ...actionData }));
-  }, [actionData]);
-
-  useEffect(() => {
-    setLoadingInfoState(
-      actionData,
-      data,
-      setIsLoading,
-      setUserUpdateInfo,
-    );
-  }, [actionData, data]);
+  const {
+    handleUpdateStyle, isLoading, userData, userUpdateInfo,
+  } = useHandleEditForm();
 
   return (
     <>
@@ -58,10 +38,10 @@ function UserInfoEditForm({ handleButton }) {
         <EditFormRenderMessage actionData={userUpdateInfo} />
 
         <fieldset>
-          <SignupFormInput label="first name" name="firstname" placeholder={userData.firstname || 'Firstname'} required="false" />
-          <SignupFormInput label="last name" name="lastname" placeholder={userData.lastname || 'Lastname'} required="false" />
-          <SignupFormInput label="username" name="username" placeholder={userData.username || 'Username'} required="false" />
-          <SignupFormInput label="email" name="email" type="email" placeholder={userData.email || 'Email'} required="false" />
+          <SignupFormInput label="first name" name="firstname" placeholder={userData?.firstname || 'Firstname'} required="false" />
+          <SignupFormInput label="last name" name="lastname" placeholder={userData?.lastname || 'Lastname'} required="false" />
+          <SignupFormInput label="username" name="username" placeholder={userData?.username || 'Username'} required="false" />
+          <SignupFormInput label="email" name="email" type="email" placeholder={userData?.email || 'Email'} required="false" />
 
           <label htmlFor="description">Description</label>
           <div className="mb-3 p-1 bg-white border rounded-md">
@@ -76,7 +56,7 @@ function UserInfoEditForm({ handleButton }) {
             bg-white
             rounded-md outline-none
           "
-              placeholder={userData.description || 'Add Description...'}
+              placeholder={userData?.description || 'Add Description...'}
               required={false}
             />
           </div>
