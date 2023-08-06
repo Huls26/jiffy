@@ -13,8 +13,6 @@ import UpdatingFormLoading from './UpdatingFormLoading';
 import handlePasswordUpdateFormData from '../utils/handlePasswordUpdateFormData';
 import useHandleEditForm from '../hooks/useHandleEditForm';
 
-// code clean up
-// test
 export async function action({ request }) {
   // handle password change and updateFormDataValue
   const updateFormDataRes = await handlePasswordUpdateFormData(request);
