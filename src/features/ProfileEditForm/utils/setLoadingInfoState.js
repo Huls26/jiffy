@@ -1,13 +1,16 @@
 import updateUserEmailInfo from './updateUserEmailInfo';
 
 export default async function setLoadingInfoState(
-  readyFormDataUpdate,
-  getFormDataValue,
-  userData,
-  userId,
+  actionData,
+  data,
   setIsLoading,
   setUserUpdateInfo,
 ) {
+  const getFormDataValue = actionData?.updateFormDataValue;
+  const readyFormDataUpdate = getFormDataValue
+  && Object.keys(getFormDataValue).length;
+  const { userData, userId } = data;
+
   if (readyFormDataUpdate) {
     const formDataValueCopy = { ...getFormDataValue };
     const getEmailValue = formDataValueCopy?.email;

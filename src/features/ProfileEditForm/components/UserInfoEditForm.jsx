@@ -3,14 +3,7 @@ import {
 } from 'react';
 import PropTypes from 'prop-types';
 import { Form, useActionData } from 'react-router-dom';
-// import {
-//   updateEmail,
-//   // updatePassword,
-// } from 'firebase/auth';
-// import { doc, updateDoc } from 'firebase/firestore';
 
-// import { db } from '@api/FB';
-// import { getCurrentUser } from '@api/onSnapUserAuth';
 import SignupFormInput from '@features/SignupForm/components/SignupFormInput';
 import ContentBtn from '@components/Btn/ContentBtn';
 import { dataContext } from '@context/dataContext';
@@ -18,10 +11,8 @@ import useResetScrollView from '@hooks/useResetScrollView';
 
 import EditFormRenderMessage from './EditFormRenderMessage';
 import UpdatingFormLoading from './UpdatingFormLoading';
-// import setFormDataValue from '../utils/setFormDataValue';
-// import updateUserPassword from '../utils/updateUserPassword';
+import handleDynamicStyle from '../utils/handleDynamicStyle';
 import handlePasswordUpdateFormData from '../utils/handlePasswordUpdateFormData';
-// import updateUserEmailInfo from '../utils/updateUserEmailInfo';
 import setLoadingInfoState from '../utils/setLoadingInfoState';
 
 // code clean up
@@ -33,64 +24,35 @@ export async function action({ request }) {
   return updateFormDataRes;
 }
 
-// async function updateUserEmailInfo(newEmail, userId, newUserData) {
-//   try {
-//     if (newEmail) {
-//       const auth = await getCurrentUser();
-//       if (auth?.uid) {
-//         await updateEmail(auth, newEmail);
-//       }
-//     }
-//     const userRef = doc(db, 'users', userId);
-//     await updateDoc(userRef, newUserData);
-
-//     return { error: false, update: 'Info' };
-//   } catch (error) {
-//     const errorMessage = error?.code.replace
-// ('auth/', '').split('-').join(' ');
-//     return { error: true, errorM: errorMessage };
-//   }
-// }
-
 function UserInfoEditForm({ handleButton }) {
   // get FormData
   // check FormData ready for update
   // get the userData from dataContext
   useResetScrollView();
   const actionData = useActionData();
-  const getFormDataValue = actionData?.updateFormDataValue;
-  const readyFormDataUpdate = getFormDataValue
-  && Object.keys(getFormDataValue).length;
   const [data] = useContext(dataContext);
-  const { userData, userId } = data;
+  const { userData } = data;
   const [userUpdateInfo, setUserUpdateInfo] = useState(() => {});
   const [isLoading, setIsLoading] = useState(false);
-  const loadingStyle = isLoading ? 'pointer-events-none animate-pulse' : '';
-  const successStyle = userUpdateInfo?.update ? 'outline outline-4 outline-green' : '';
-  const errorStyle = userUpdateInfo?.error ? 'outline outline-4 outline-bRed' : '';
+  const handleUpdateStyle = handleDynamicStyle(isLoading, userUpdateInfo);
 
-  // create success message when updating user info
-  console.log(userUpdateInfo);
-  // console.log(actionData);
   useEffect(() => {
     setUserUpdateInfo(() => ({ ...actionData }));
   }, [actionData]);
 
   useEffect(() => {
     setLoadingInfoState(
-      readyFormDataUpdate,
-      getFormDataValue,
-      userData,
-      userId,
+      actionData,
+      data,
       setIsLoading,
       setUserUpdateInfo,
     );
-  }, [getFormDataValue, readyFormDataUpdate, userData, userId]);
+  }, [actionData, data]);
 
   return (
     <>
       <UpdatingFormLoading loading={isLoading} />
-      <Form method="post" className={`relative px-6 py-3 font-PS font-semibold text-base text-gray-dark ${loadingStyle} ${successStyle} ${errorStyle} rounded-lg`}>
+      <Form method="post" className={`relative px-6 py-3 font-PS font-semibold text-base text-gray-dark ${handleUpdateStyle} rounded-lg`}>
 
         {/* display success and error message */}
         <EditFormRenderMessage actionData={userUpdateInfo} />
