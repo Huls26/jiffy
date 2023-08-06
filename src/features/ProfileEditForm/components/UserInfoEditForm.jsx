@@ -21,7 +21,8 @@ import UpdatingFormLoading from './UpdatingFormLoading';
 // import setFormDataValue from '../utils/setFormDataValue';
 // import updateUserPassword from '../utils/updateUserPassword';
 import handlePasswordUpdateFormData from '../utils/handlePasswordUpdateFormData';
-import updateUserEmailInfo from '../utils/updateUserEmailInfo';
+// import updateUserEmailInfo from '../utils/updateUserEmailInfo';
+import setLoadingInfoState from '../utils/setLoadingInfoState';
 
 // code clean up
 // test
@@ -76,25 +77,14 @@ function UserInfoEditForm({ handleButton }) {
   }, [actionData]);
 
   useEffect(() => {
-    if (readyFormDataUpdate) {
-      const getEmailValue = getFormDataValue?.email;
-      delete getFormDataValue.password;
-      const updatedFormDataValue = { ...userData, ...getFormDataValue };
-
-      // set loading
-      setIsLoading(() => true);
-
-      (async () => {
-        const resEmail = await updateUserEmailInfo(
-          getEmailValue,
-          userId,
-          updatedFormDataValue,
-        );
-
-        setUserUpdateInfo(() => ({ ...resEmail }));
-        setIsLoading(() => false);
-      })();
-    }
+    setLoadingInfoState(
+      readyFormDataUpdate,
+      getFormDataValue,
+      userData,
+      userId,
+      setIsLoading,
+      setUserUpdateInfo,
+    );
   }, [getFormDataValue, readyFormDataUpdate, userData, userId]);
 
   return (
