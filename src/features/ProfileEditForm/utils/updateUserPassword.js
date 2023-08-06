@@ -14,6 +14,6 @@ export default async function updateUserPassword(password, getKeyValue) {
     // testing this code below
     console.clear();
     const errorMessage = error.code.replace('auth/', '').split('-').join(' ');
-    return { error: true, errorM: errorMessage };
+    return { error: true, errorM: `${errorMessage} updating password` };
   }
 }
