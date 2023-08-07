@@ -2,7 +2,10 @@ import { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { doc, setDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import {
+  getDownloadURL, ref, uploadBytes,
+  deleteObject,
+} from 'firebase/storage';
 
 import {
   db,
@@ -34,6 +37,17 @@ export default function UserProfileBannerEditForm({ handleButton }) {
   } = uData;
   const loadingComponent = uData.isLoading ? 'pointer-events-none animate-pulse relative' : '';
 
+  async function deletePrevImage(prevImgUrl) {
+    const getImageURL = new URL(prevImgUrl);
+    const urlPathname = getImageURL.pathname;
+    const [splitUrl] = urlPathname.split('/').slice(-1);
+    const userImgURL = splitUrl.replaceAll('%2F', '/');
+
+    const delImgRef = ref(storage, userImgURL);
+    // Delete the file
+    await deleteObject(delImgRef);
+  }
+
   function handleImageUpdate(event) {
     const { target } = event;
     const { name, files } = target;
@@ -50,7 +64,13 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     }));
   }
 
-  async function UploadUserImage(uId, ImgFile, imageBannerProfile, newId) {
+  async function UploadUserImage(
+    uId,
+    ImgFile,
+    imageBannerProfile,
+    newId,
+    prevImgUrl,
+  ) {
     // create url path
     // upload image to firebase storage
     // get url
@@ -61,6 +81,8 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       const profileImageRef = ref(storage, imgFilePath);
       await uploadBytes(profileImageRef, ImgFile);
       const ImageURL = await getDownloadURL(profileImageRef);
+      // save the prev image
+      await deletePrevImage(prevImgUrl);
 
       return ImageURL;
     }
@@ -70,7 +92,10 @@ export default function UserProfileBannerEditForm({ handleButton }) {
 
   async function handleSaveChanges(fileData, uId, userDataFile) {
     const newData = { ...fileData };
-    const { userBannerFile, userImgFile } = newData;
+    const {
+      // eslint-disable-next-line no-shadow
+      userBannerFile, userImgFile, userImg, userBanner,
+    } = newData;
     const newId = uuidv4();
 
     if (!userBannerFile && !userImgFile) {
@@ -89,12 +114,14 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       userBannerFile,
       'userBanner',
       newId,
+      userBanner,
     );
     const userImgNewURL = await UploadUserImage(
       uId,
       userImgFile,
       'userImg',
       newId,
+      userImg,
     );
 
     await setDoc(doc(db, 'users', uId), {
@@ -109,8 +136,6 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       userBannerFile: null,
       userImgFile: null,
     }));
-
-    console.log('update form');
   }
 
   return (
@@ -133,6 +158,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       </div>
 
       <div className={`w-full h-24 ${bgColor}`}>
+        {/* add loadingLazyImage */}
         <img src={userBanner} alt="" className="w-full h-full" />
       </div>
 
