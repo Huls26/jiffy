@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { doc, setDoc } from 'firebase/firestore';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 import {
   getDownloadURL, ref, uploadBytes,
   deleteObject,
@@ -135,7 +137,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       isLoading: true,
     }));
 
-    // add lazy loading for images: banner, profile photo
+    // upload image to firebase storage
     const userBannerNewURL = await UploadUserImage(
       uId,
       userBannerFile,
@@ -185,10 +187,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
         <ContentBtn text="Edit Profile info" onClick={() => handleButton('profile', 'editInfo')} />
       </div>
 
-      <div className={`w-full h-24 ${bgColor}`}>
-        {/* add loadingLazyImage */}
-        <img src={userBanner} alt="" className="w-full h-full" />
-      </div>
+      <LazyLoadImage alt="banner" className={`w-screen h-24 ${bgColor}`} src={userBanner} effect="blur" />
 
       <div className="text-left ml-1 -mt-6 mb-4">
         <label
@@ -201,6 +200,8 @@ export default function UserProfileBannerEditForm({ handleButton }) {
           capitalize
           hover:opacity-80
           active:bg-green
+          relative
+          z-50
         "
         >
           Upload New Photo
