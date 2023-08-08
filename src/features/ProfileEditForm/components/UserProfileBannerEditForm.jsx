@@ -5,8 +5,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import {
-  getDownloadURL, ref, uploadBytes,
-  deleteObject,
+  getDownloadURL, ref, uploadBytes, deleteObject,
 } from 'firebase/storage';
 
 import {
@@ -21,8 +20,9 @@ import useResetScrollView from '@hooks/useResetScrollView';
 
 import UpdatingFormLoading from './UpdatingFormLoading';
 import EditFormErrorMessage from './EditFormErrorMessage';
+// import deletePrevImage from '../api/deletePrevImage';
 
-// add save changes functionality
+// add onSnapShotState to update userDate when user update the profile images
 // code clean up
 export default function UserProfileBannerEditForm({ handleButton }) {
   useResetScrollView();
@@ -40,12 +40,13 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     firstname, lastname, username, userImg,
     userBanner,
   } = uData;
-  const [status] = useState(() => ({
+  const [status, setStatus] = useState(() => ({
     error: false,
     errorM: '',
   }));
   const loadingComponent = uData.isLoading ? 'pointer-events-none animate-pulse relative' : '';
 
+  // update uData
   useEffect(() => {
     setUData((prevValue) => ({
       ...prevValue,
@@ -53,12 +54,14 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     }));
   }, [userData]);
 
-  // fix this code
-  // instead of getting from uData
-  // get prevImg from UserData
-  // problem when user add a image udata is update the state of uData
-  // problem: -what happen is it change the url path to local
-  // problem: -url path check the code below to understand the problem
+  if (userData?.userBanner) {
+    const url = new URL(userData?.userBanner);
+    const urlPath = url.pathname;
+    const [splitUrl] = urlPath.split('/').slice(-1);
+    const userImgURL = splitUrl.replaceAll('%2F', '/').replaceAll('%', ' ');
+    console.log(userImgURL);
+  }
+
   async function deletePrevImage(prevImgUrl) {
     const getImageURL = new URL(prevImgUrl);
     const urlPathname = getImageURL.pathname;
@@ -71,6 +74,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       await deleteObject(delImgRef);
     } catch (error) {
       // do nothing
+      console.clear();
     }
   }
 
@@ -96,14 +100,16 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     imageBannerProfile,
     newId,
     prevImgUrl,
+    setS,
   ) {
     // create url path
     // upload image to firebase storage
     // get url
-    if (ImgFile) {
+    if (ImgFile && prevImgUrl) {
       try {
+        const removeSpaceName = ImgFile.name.replaceAll(' ', '');
         const imgFilePath = (
-          `users/${uId}/${imageBannerProfile}/${ImgFile.name}${newId}`
+          `users/${uId}/${imageBannerProfile}/${removeSpaceName}${newId}`
         );
         const profileImageRef = ref(storage, imgFilePath);
         await uploadBytes(profileImageRef, ImgFile);
@@ -113,7 +119,12 @@ export default function UserProfileBannerEditForm({ handleButton }) {
 
         return ImageURL;
       } catch (e) {
-        return { error: true, errorM: 'Oops! Something went wrong' };
+        console.clear();
+        setS((prevStatus) => ({
+          ...prevStatus,
+          error: true,
+          errorM: 'Oops! Something went wrong',
+        }));
       }
     }
 
@@ -123,7 +134,6 @@ export default function UserProfileBannerEditForm({ handleButton }) {
   async function handleSaveChanges(fileData, uId, userDataFile) {
     const newData = { ...fileData };
     const {
-      // eslint-disable-next-line no-shadow
       userBannerFile, userImgFile, userImgPrev, userBannerPrev,
     } = newData;
     const newId = uuidv4();
@@ -144,6 +154,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       'userBanner',
       newId,
       userBannerPrev,
+      setStatus,
     );
     const userImgNewURL = await UploadUserImage(
       uId,
@@ -151,6 +162,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       'userImg',
       newId,
       userImgPrev,
+      setStatus,
     );
 
     await setDoc(doc(db, 'users', uId), {
@@ -163,7 +175,9 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       ...prevData,
       isLoading: false,
       userBannerFile: null,
+      userBannerPrev: '',
       userImgFile: null,
+      userImgPrev: '',
     }));
   }
 

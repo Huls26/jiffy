@@ -4,6 +4,7 @@ import { createUser } from '@api/signupPageAPI';
 import ErrorMessage from '@components/LoginPage/ErrorMessage';
 import SuccessMessage from '@components/SignupPage/SuccessMessage';
 import SignupLoadingComponent from '@features/SignupLoadingComponent';
+import useResetScrollView from '@hooks/useResetScrollView';
 
 export async function action({ request }) {
   const res = await createUser(request);
@@ -14,6 +15,7 @@ export async function action({ request }) {
 }
 
 export default function SignupPage() {
+  useResetScrollView();
   const actionData = useActionData();
 
   return (
