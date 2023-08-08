@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { doc, setDoc } from 'firebase/firestore';
@@ -18,6 +18,7 @@ import ProfilePhoto from '@features/UserProfile/components/ProfilePhoto';
 import useResetScrollView from '@hooks/useResetScrollView';
 
 import UpdatingFormLoading from './UpdatingFormLoading';
+import EditFormErrorMessage from './EditFormErrorMessage';
 
 // add save changes functionality
 // code clean up
@@ -28,24 +29,47 @@ export default function UserProfileBannerEditForm({ handleButton }) {
   const [uData, setUData] = useState(() => ({
     ...userData,
     userBannerFile: null,
+    userBannerPrev: userData.userBanner,
     userImgFile: null,
+    userImgPrev: userData.userImg,
     isLoading: false,
   }));
   const {
     firstname, lastname, username, userImg,
     userBanner,
   } = uData;
+  const [status] = useState(() => ({
+    error: false,
+    errorM: '',
+  }));
   const loadingComponent = uData.isLoading ? 'pointer-events-none animate-pulse relative' : '';
 
+  useEffect(() => {
+    setUData((prevValue) => ({
+      ...prevValue,
+      ...userData,
+    }));
+  }, [userData]);
+
+  // fix this code
+  // instead of getting from uData
+  // get prevImg from UserData
+  // problem when user add a image udata is update the state of uData
+  // problem: -what happen is it change the url path to local
+  // problem: -url path check the code below to understand the problem
   async function deletePrevImage(prevImgUrl) {
     const getImageURL = new URL(prevImgUrl);
     const urlPathname = getImageURL.pathname;
     const [splitUrl] = urlPathname.split('/').slice(-1);
     const userImgURL = splitUrl.replaceAll('%2F', '/');
 
-    const delImgRef = ref(storage, userImgURL);
-    // Delete the file
-    await deleteObject(delImgRef);
+    try {
+      const delImgRef = ref(storage, userImgURL);
+      // Delete the file
+      await deleteObject(delImgRef);
+    } catch (error) {
+      // do nothing
+    }
   }
 
   function handleImageUpdate(event) {
@@ -75,16 +99,20 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     // upload image to firebase storage
     // get url
     if (ImgFile) {
-      const imgFilePath = (
-        `users/${uId}/${imageBannerProfile}/${ImgFile.name}${newId}`
-      );
-      const profileImageRef = ref(storage, imgFilePath);
-      await uploadBytes(profileImageRef, ImgFile);
-      const ImageURL = await getDownloadURL(profileImageRef);
-      // save the prev image
-      await deletePrevImage(prevImgUrl);
+      try {
+        const imgFilePath = (
+          `users/${uId}/${imageBannerProfile}/${ImgFile.name}${newId}`
+        );
+        const profileImageRef = ref(storage, imgFilePath);
+        await uploadBytes(profileImageRef, ImgFile);
+        const ImageURL = await getDownloadURL(profileImageRef);
+        // save the prev image
+        await deletePrevImage(prevImgUrl);
 
-      return ImageURL;
+        return ImageURL;
+      } catch (e) {
+        return { error: true, errorM: 'Oops! Something went wrong' };
+      }
     }
 
     return null;
@@ -94,12 +122,11 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     const newData = { ...fileData };
     const {
       // eslint-disable-next-line no-shadow
-      userBannerFile, userImgFile, userImg, userBanner,
+      userBannerFile, userImgFile, userImgPrev, userBannerPrev,
     } = newData;
     const newId = uuidv4();
 
     if (!userBannerFile && !userImgFile) {
-      console.log('no update');
       return;
     }
 
@@ -114,14 +141,14 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       userBannerFile,
       'userBanner',
       newId,
-      userBanner,
+      userBannerPrev,
     );
     const userImgNewURL = await UploadUserImage(
       uId,
       userImgFile,
       'userImg',
       newId,
-      userImg,
+      userImgPrev,
     );
 
     await setDoc(doc(db, 'users', uId), {
@@ -141,6 +168,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
   return (
     <section className={`py-3 text-center ${loadingComponent}`}>
       <UpdatingFormLoading loading={uData.isLoading} />
+      <EditFormErrorMessage actionData={status} />
       <h1 className="font-PS font-bold text-lg text-gray-dark">
         {firstname}
         {' '}
