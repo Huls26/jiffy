@@ -21,7 +21,7 @@ async function UploadUserImage(
   // create url path
   // upload image to firebase storage
   // get url
-  if (ImgFile && prevImgUrl) {
+  if (ImgFile) {
     try {
       const removeSpaceName = ImgFile.name.replaceAll(' ', '');
       const imgFilePath = (
@@ -60,45 +60,47 @@ export default async function handleSaveChanges(
   } = newData;
   const newId = uuidv4();
 
-  if (!userBannerFile && !userImgFile) {
-    return;
+  // if (!userBannerFile && !userImgFile) {
+  //   return;
+  // }
+
+  if (userBannerFile || userImgFile) {
+    setUData((prevData) => ({
+      ...prevData,
+      isLoading: true,
+    }));
+
+    // upload image to firebase storage
+    const userBannerNewURL = await UploadUserImage(
+      uId,
+      userBannerFile,
+      'userBanner',
+      newId,
+      userBannerPrev,
+      setStatus,
+    );
+    const userImgNewURL = await UploadUserImage(
+      uId,
+      userImgFile,
+      'userImg',
+      newId,
+      userImgPrev,
+      setStatus,
+    );
+
+    await setDoc(doc(db, 'users', uId), {
+      ...userDataFile,
+      userImg: userImgNewURL || userDataFile.userImg,
+      userBanner: userBannerNewURL || userDataFile.userBanner,
+    });
+
+    setUData((prevData) => ({
+      ...prevData,
+      isLoading: false,
+      userBannerFile: null,
+      userBannerPrev: '',
+      userImgFile: null,
+      userImgPrev: '',
+    }));
   }
-
-  setUData((prevData) => ({
-    ...prevData,
-    isLoading: true,
-  }));
-
-  // upload image to firebase storage
-  const userBannerNewURL = await UploadUserImage(
-    uId,
-    userBannerFile,
-    'userBanner',
-    newId,
-    userBannerPrev,
-    setStatus,
-  );
-  const userImgNewURL = await UploadUserImage(
-    uId,
-    userImgFile,
-    'userImg',
-    newId,
-    userImgPrev,
-    setStatus,
-  );
-
-  await setDoc(doc(db, 'users', uId), {
-    ...userDataFile,
-    userImg: userImgNewURL || userDataFile.userImg,
-    userBanner: userBannerNewURL || userDataFile.userBanner,
-  });
-
-  setUData((prevData) => ({
-    ...prevData,
-    isLoading: false,
-    userBannerFile: null,
-    userBannerPrev: '',
-    userImgFile: null,
-    userImgPrev: '',
-  }));
 }
