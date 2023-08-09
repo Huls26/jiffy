@@ -2,7 +2,6 @@ import { useReducer, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import {
   doc,
-  // getDoc,
   onSnapshot,
 } from 'firebase/firestore';
 import { db } from '@api/FB';
@@ -14,22 +13,6 @@ export default function useUserReducer() {
   const auth = getAuth();
   const { userId } = detailsState;
 
-  // async function getData(uid, DP) {
-  //   if (uid) {
-  //     const docRef = doc(db, 'users', uid);
-  //     const docSnap = await getDoc(docRef);
-
-  //     if (docSnap.exists()) {
-  //       DP({
-  //         type: 'SET_USERDATA',
-  //         userData: docSnap.data(),
-  //       });
-  //     }
-  //   }
-  // }
-
-  console.log(detailsState);
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -40,7 +23,6 @@ export default function useUserReducer() {
           type: 'SET_USERID',
           id: uid,
         });
-        // getData(uid, dispatch);
       } else {
         dispatch({
           type: 'LOGOUT_USER',

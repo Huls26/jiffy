@@ -5,7 +5,8 @@ export default async function deletePrevImage(prevImgUrl) {
   const getImageURL = new URL(prevImgUrl);
   const urlPathname = getImageURL.pathname;
   const [splitUrl] = urlPathname.split('/').slice(-1);
-  const userImgURL = splitUrl.replaceAll('%2F', '/').replaceAll('%', ' ');
+  const userImgURL = splitUrl.replaceAll('%2F', '/');
+
   try {
     const delImgRef = ref(storage, userImgURL);
     // Delete the file

@@ -5,7 +5,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import {
-  getDownloadURL, ref, uploadBytes, deleteObject,
+  getDownloadURL, ref, uploadBytes, // deleteObject,
 } from 'firebase/storage';
 
 import {
@@ -20,8 +20,8 @@ import useResetScrollView from '@hooks/useResetScrollView';
 
 import UpdatingFormLoading from './UpdatingFormLoading';
 import EditFormErrorMessage from './EditFormErrorMessage';
+import deletePrevImage from '../api/deletePrevImage';
 
-// add onSnapShotState to update userDate when user update the profile images
 // code clean up
 export default function UserProfileBannerEditForm({ handleButton }) {
   useResetScrollView();
@@ -53,29 +53,21 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     }));
   }, [userData]);
 
-  if (userData?.userBanner) {
-    const url = new URL(userData?.userBanner);
-    const urlPath = url.pathname;
-    const [splitUrl] = urlPath.split('/').slice(-1);
-    const userImgURL = splitUrl.replaceAll('%2F', '/').replaceAll('%', ' ');
-    console.log(userImgURL);
-  }
+  // async function deletePrevImage(prevImgUrl) {
+  //   const getImageURL = new URL(prevImgUrl);
+  //   const urlPathname = getImageURL.pathname;
+  //   const [splitUrl] = urlPathname.split('/').slice(-1);
+  //   const userImgURL = splitUrl.replaceAll('%2F', '/');
 
-  async function deletePrevImage(prevImgUrl) {
-    const getImageURL = new URL(prevImgUrl);
-    const urlPathname = getImageURL.pathname;
-    const [splitUrl] = urlPathname.split('/').slice(-1);
-    const userImgURL = splitUrl.replaceAll('%2F', '/');
-
-    try {
-      const delImgRef = ref(storage, userImgURL);
-      // Delete the file
-      await deleteObject(delImgRef);
-    } catch (error) {
-      // do nothing
-      console.clear();
-    }
-  }
+  //   try {
+  //     const delImgRef = ref(storage, userImgURL);
+  //     // Delete the file
+  //     await deleteObject(delImgRef);
+  //   } catch (error) {
+  //     // do nothing
+  //     console.clear();
+  //   }
+  // }
 
   function handleImageUpdate(event) {
     const { target } = event;

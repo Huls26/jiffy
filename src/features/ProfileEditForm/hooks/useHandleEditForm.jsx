@@ -18,10 +18,13 @@ export default function useHandleEditForm() {
   const handleUpdateStyle = handleDynamicStyle(isLoading, userUpdateInfo);
   const navigation = useNavigation();
 
+  console.log(actionData);
   // handle loading for action/password update
   useEffect(() => {
-    setIsLoading(() => navigation.state !== 'idle');
-  }, [navigation]);
+    if (actionData) {
+      setIsLoading(() => navigation.state !== 'idle');
+    }
+  }, [navigation, actionData]);
 
   // handle change actionDate
   useEffect(() => {
