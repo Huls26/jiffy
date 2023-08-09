@@ -1,17 +1,18 @@
+/* eslint-disable react/jsx-no-bind */
 import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { v4 as uuidv4 } from 'uuid';
-import { doc, setDoc } from 'firebase/firestore';
+// import { v4 as uuidv4 } from 'uuid';
+// import { doc, setDoc } from 'firebase/firestore';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import {
-  getDownloadURL, ref, uploadBytes, // deleteObject,
-} from 'firebase/storage';
+// import {
+//   getDownloadURL, ref, uploadBytes, // deleteObject,
+// } from 'firebase/storage';
 
-import {
-  db,
-  storage,
-} from '@api/FB';
+// import {
+//   db,
+//   storage,
+// } from '@api/FB';
 import ContentBtn from '@components/Btn/ContentBtn';
 import { dataContext } from '@context/dataContext';
 import bgColor from '@default/bgColor';
@@ -20,7 +21,9 @@ import useResetScrollView from '@hooks/useResetScrollView';
 
 import UpdatingFormLoading from './UpdatingFormLoading';
 import EditFormErrorMessage from './EditFormErrorMessage';
-import deletePrevImage from '../api/deletePrevImage';
+// import deletePrevImage from '../api/deletePrevImage';
+import handleSaveChanges from '../api/handleSaveChanges';
+import handleImageUpdate from '../utils/UserProfileBannerEditForm/handleImageUpdate';
 
 // code clean up
 export default function UserProfileBannerEditForm({ handleButton }) {
@@ -37,13 +40,13 @@ export default function UserProfileBannerEditForm({ handleButton }) {
   }));
   const {
     firstname, lastname, username, userImg,
-    userBanner,
+    userBanner, isLoading,
   } = uData;
   const [status, setStatus] = useState(() => ({
     error: false,
     errorM: '',
   }));
-  const loadingComponent = uData.isLoading ? 'pointer-events-none animate-pulse relative' : '';
+  const loadingComponent = isLoading ? 'pointer-events-none animate-pulse relative' : '';
 
   // update uData
   useEffect(() => {
@@ -53,123 +56,9 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     }));
   }, [userData]);
 
-  // async function deletePrevImage(prevImgUrl) {
-  //   const getImageURL = new URL(prevImgUrl);
-  //   const urlPathname = getImageURL.pathname;
-  //   const [splitUrl] = urlPathname.split('/').slice(-1);
-  //   const userImgURL = splitUrl.replaceAll('%2F', '/');
-
-  //   try {
-  //     const delImgRef = ref(storage, userImgURL);
-  //     // Delete the file
-  //     await deleteObject(delImgRef);
-  //   } catch (error) {
-  //     // do nothing
-  //     console.clear();
-  //   }
-  // }
-
-  function handleImageUpdate(event) {
-    const { target } = event;
-    const { name, files } = target;
-    const [imageData] = files;
-    // get the name key and add File at the end
-    const updateFile = `${name}File`;
-
-    const setLocalUrl = URL.createObjectURL(imageData);
-
-    setUData((prevData) => ({
-      ...prevData,
-      [name]: setLocalUrl,
-      [updateFile]: imageData,
-    }));
-  }
-
-  async function UploadUserImage(
-    uId,
-    ImgFile,
-    imageBannerProfile,
-    newId,
-    prevImgUrl,
-    setS,
-  ) {
-    // create url path
-    // upload image to firebase storage
-    // get url
-    if (ImgFile && prevImgUrl) {
-      try {
-        const removeSpaceName = ImgFile.name.replaceAll(' ', '');
-        const imgFilePath = (
-          `users/${uId}/${imageBannerProfile}/${removeSpaceName}${newId}`
-        );
-        const profileImageRef = ref(storage, imgFilePath);
-        await uploadBytes(profileImageRef, ImgFile);
-        const ImageURL = await getDownloadURL(profileImageRef);
-        // save the prev image
-        await deletePrevImage(prevImgUrl);
-
-        return ImageURL;
-      } catch (e) {
-        console.clear();
-        setS((prevStatus) => ({
-          ...prevStatus,
-          error: true,
-          errorM: 'Oops! Something went wrong',
-        }));
-      }
-    }
-
-    return null;
-  }
-
-  async function handleSaveChanges(fileData, uId, userDataFile) {
-    const newData = { ...fileData };
-    const {
-      userBannerFile, userImgFile, userImgPrev, userBannerPrev,
-    } = newData;
-    const newId = uuidv4();
-
-    if (!userBannerFile && !userImgFile) {
-      return;
-    }
-
-    setUData((prevData) => ({
-      ...prevData,
-      isLoading: true,
-    }));
-
-    // upload image to firebase storage
-    const userBannerNewURL = await UploadUserImage(
-      uId,
-      userBannerFile,
-      'userBanner',
-      newId,
-      userBannerPrev,
-      setStatus,
-    );
-    const userImgNewURL = await UploadUserImage(
-      uId,
-      userImgFile,
-      'userImg',
-      newId,
-      userImgPrev,
-      setStatus,
-    );
-
-    await setDoc(doc(db, 'users', uId), {
-      ...userDataFile,
-      userImg: userImgNewURL || userDataFile.userImg,
-      userBanner: userBannerNewURL || userDataFile.userBanner,
-    });
-
-    setUData((prevData) => ({
-      ...prevData,
-      isLoading: false,
-      userBannerFile: null,
-      userBannerPrev: '',
-      userImgFile: null,
-      userImgPrev: '',
-    }));
+  // handle upload img to firebase storage
+  function saveChanges() {
+    handleSaveChanges(uData, userId, userData, setUData, setStatus);
   }
 
   return (
@@ -211,7 +100,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
         >
           Upload New Photo
         </label>
-        <input onChange={handleImageUpdate} type="file" accept="image/*" name="userBanner" id="uploadBanner" hidden />
+        <input onChange={(event) => handleImageUpdate(event, setUData)} type="file" accept="image/*" name="userBanner" id="uploadBanner" hidden />
       </div>
 
       <div className="flex justify-center mb-2 opacity-90 rounded-full">
@@ -231,10 +120,10 @@ export default function UserProfileBannerEditForm({ handleButton }) {
       >
         Upload New Photo
       </label>
-      <input onChange={handleImageUpdate} type="file" accept="image/*" name="userImg" id="uploadPhoto" hidden />
+      <input onChange={(event) => handleImageUpdate(event, setUData)} type="file" accept="image/*" name="userImg" id="uploadPhoto" hidden />
 
       <div className="mt-2 space-x-1">
-        { (uData.userBannerFile || uData.userImgFile) && <ContentBtn text="Save changes" bg="bg-green" onClick={() => handleSaveChanges(uData, userId, userData)} />}
+        { (uData.userBannerFile || uData.userImgFile) && <ContentBtn text="Save changes" bg="bg-green" onClick={saveChanges} />}
         <ContentBtn text="Cancel" bg="bg-peach-1" onClick={() => handleButton('profile')} />
       </div>
 

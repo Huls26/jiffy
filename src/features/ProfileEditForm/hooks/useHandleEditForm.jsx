@@ -9,7 +9,6 @@ export default function useHandleEditForm() {
   // get FormData
   // check FormData ready for update
   // get the userData from dataContext
-
   const actionData = useActionData();
   const [data] = useContext(dataContext);
   const { userData } = data;
@@ -18,7 +17,6 @@ export default function useHandleEditForm() {
   const handleUpdateStyle = handleDynamicStyle(isLoading, userUpdateInfo);
   const navigation = useNavigation();
 
-  console.log(actionData);
   // handle loading for action/password update
   useEffect(() => {
     if (actionData) {

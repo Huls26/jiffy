@@ -27,8 +27,6 @@ function UserInfoEditForm({ handleButton }) {
     handleUpdateStyle, isLoading, userData, userUpdateInfo,
   } = useHandleEditForm();
 
-  console.log(isLoading);
-
   return (
     <>
       <UpdatingFormLoading loading={isLoading} />
