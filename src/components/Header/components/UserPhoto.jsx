@@ -11,7 +11,6 @@ export default function UserPhoto() {
   const linkTo = `profile/${userId}`;
   const profilePhotoBg = userImg ? bgColor : 'bg-primary-1';
 
-  console.log(userImg);
   return (
     <Link to={linkTo}>
       <div

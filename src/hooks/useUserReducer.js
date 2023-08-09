@@ -1,27 +1,34 @@
 import { useReducer, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import {
+  doc,
+  // getDoc,
+  onSnapshot,
+} from 'firebase/firestore';
 import { db } from '@api/FB';
 import reducerMethod, { INITIAL_STATE } from './contextReducer';
 
+// ready for clean up
 export default function useUserReducer() {
   const [detailsState, dispatch] = useReducer(reducerMethod, INITIAL_STATE);
   const auth = getAuth();
-  const userId = detailsState.id;
+  const { userId } = detailsState;
 
-  async function getData(uid, DP) {
-    if (uid) {
-      const docRef = doc(db, 'users', uid);
-      const docSnap = await getDoc(docRef);
+  // async function getData(uid, DP) {
+  //   if (uid) {
+  //     const docRef = doc(db, 'users', uid);
+  //     const docSnap = await getDoc(docRef);
 
-      if (docSnap.exists()) {
-        DP({
-          type: 'SET_USERDATA',
-          userData: docSnap.data(),
-        });
-      }
-    }
-  }
+  //     if (docSnap.exists()) {
+  //       DP({
+  //         type: 'SET_USERDATA',
+  //         userData: docSnap.data(),
+  //       });
+  //     }
+  //   }
+  // }
+
+  console.log(detailsState);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -33,15 +40,29 @@ export default function useUserReducer() {
           type: 'SET_USERID',
           id: uid,
         });
-        getData(uid, dispatch);
+        // getData(uid, dispatch);
       } else {
         dispatch({
-          type: 'SET_USERNAME',
-          username: '',
+          type: 'LOGOUT_USER',
         });
       }
     });
-  }, [auth, userId]);
+  }, [auth]);
+
+  useEffect(() => {
+    let unsub;
+
+    if (userId) {
+      unsub = onSnapshot(doc(db, 'users', userId), (docSnap) => {
+        dispatch({
+          type: 'SET_USERDATA',
+          userData: docSnap.data(),
+        });
+      });
+    }
+
+    return unsub;
+  }, [userId]);
 
   return [detailsState, dispatch];
 }

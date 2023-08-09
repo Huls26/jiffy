@@ -20,7 +20,6 @@ import useResetScrollView from '@hooks/useResetScrollView';
 
 import UpdatingFormLoading from './UpdatingFormLoading';
 import EditFormErrorMessage from './EditFormErrorMessage';
-// import deletePrevImage from '../api/deletePrevImage';
 
 // add onSnapShotState to update userDate when user update the profile images
 // code clean up

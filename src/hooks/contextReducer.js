@@ -20,6 +20,7 @@ export default function reducerMethod(state, action) {
     default:
       return {
         ...state,
+        userData: {},
       };
   }
 }
