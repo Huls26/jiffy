@@ -2,7 +2,7 @@ import {
   useContext,
 } from 'react';
 import {
-  redirect, useLoaderData, useSearchParams,
+  redirect, useLoaderData,
 } from 'react-router-dom';
 import {
   collection, query, where, getDocs,
@@ -17,6 +17,7 @@ import { getCurrentUser } from '@api/onSnapUserAuth';
 import FilterBtn from '@components/Btn/FilterBtn';
 import { dataContext } from '@context/dataContext';
 import profileBannerBg from '@default';
+import useHandleSearchParams from '@hooks/useHandleSearchParams';
 
 import UserDetails from './UserDetails';
 
@@ -42,23 +43,9 @@ export async function loader({ params }) {
 export default function Header() {
   const userData = useLoaderData();
   const [data] = useContext(dataContext);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { handleSetSearchParams } = useHandleSearchParams();
   const details = userData.me ? data.userData : userData;
   const { userBanner } = details;
-
-  console.log(searchParams);
-
-  function handleProfileHeaderNav(key, value) {
-    setSearchParams((prevParams) => {
-      if (!value) {
-        prevParams.delete(key);
-      } else {
-        prevParams.set(key, value);
-      }
-
-      return prevParams;
-    });
-  }
 
   return (
     <header className="mb-8">
@@ -71,9 +58,9 @@ export default function Header() {
       />
 
       <nav className="px-4 pb-3 space-x-2 shadow">
-        <FilterBtn text="All" onClick={() => handleProfileHeaderNav('f')} />
-        <FilterBtn text="photo" onClick={() => handleProfileHeaderNav('f', 'photo')} />
-        <FilterBtn text="text" onClick={() => handleProfileHeaderNav('f', 'text')} />
+        <FilterBtn text="All" onClick={() => handleSetSearchParams('f')} />
+        <FilterBtn text="photo" onClick={() => handleSetSearchParams('f', 'content')} />
+        <FilterBtn text="text" onClick={() => handleSetSearchParams('f', 'textContent')} />
       </nav>
     </header>
 
