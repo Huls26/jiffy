@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 const UserInfoEditForm = lazy(() => import('./components/UserInfoEditForm'));
 const UserProfileBannerEditForm = lazy(() => import('./components/UserProfileBannerEditForm'));
 
+// clean up
 export default function ProfileEditForm() {
   const [searchParams, setSearchParams] = useSearchParams();
   const isProfileEdit = searchParams.get('profile');

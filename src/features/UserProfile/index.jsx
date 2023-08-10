@@ -8,7 +8,6 @@ export default function UserProfile() {
   return (
     <>
       <Header />
-
       <UserPosts />
       {/* the data should fetch from the user */}
       {/* <section>
