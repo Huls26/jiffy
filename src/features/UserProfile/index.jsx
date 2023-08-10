@@ -1,5 +1,7 @@
 import { lazy } from 'react';
 
+import UserPosts from './components/UserPosts';
+
 const Header = lazy(() => import('./components/Header'));
 
 export default function UserProfile() {
@@ -7,6 +9,7 @@ export default function UserProfile() {
     <>
       <Header />
 
+      <UserPosts />
       {/* the data should fetch from the user */}
       {/* <section>
         <Contents />

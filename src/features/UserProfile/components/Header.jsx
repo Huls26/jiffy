@@ -4,11 +4,15 @@ import {
 import {
   Link, redirect, useLoaderData,
 } from 'react-router-dom';
+import {
+  collection, query, where, getDocs,
+} from 'firebase/firestore';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import { getCurrentUser } from '@api/onSnapUserAuth';
+import { db } from '@api/FB';
 import getUsersData from '@api/getUser';
+import { getCurrentUser } from '@api/onSnapUserAuth';
 
 import FilterBtn from '@components/Btn/FilterBtn';
 import { dataContext } from '@context/dataContext';
@@ -28,7 +32,11 @@ export async function loader({ params }) {
     return userData;
   }
 
-  return { me };
+  // fetch user posts data
+  const q = query(collection(db, 'posts'), where('createdBy', '==', urlId));
+  const querySnapshot = await getDocs(q);
+
+  return { me, querySnapshot };
 }
 
 export default function Header() {

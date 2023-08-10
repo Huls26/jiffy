@@ -1,5 +1,9 @@
-import { doc, setDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import {
+  doc, setDoc, updateDoc, arrayUnion,
+} from 'firebase/firestore';
+import {
+  getDownloadURL, ref, uploadBytes,
+} from 'firebase/storage';
 import {
   db,
   storage,
@@ -19,12 +23,20 @@ export async function firebaseUploadTextContent(
   docData,
   setData,
   navigate,
+  data,
 ) {
+  const { userId, userData } = data;
+
   await setDoc(doc(db, 'posts', newId), {
     ...docData,
     textContent: fileBody.textContent,
     title: fileBody.title,
   });
+  await updateDoc(doc(db, 'users', userId), {
+    ...userData,
+    posts: arrayUnion(newId),
+  });
+
   setData((postData) => ({
     ...postData,
     isLoading: false,
@@ -38,7 +50,9 @@ export async function firebaseUploadImage(
   docData,
   setData,
   navigate,
+  data,
 ) {
+  const { userData } = data;
   const { userId, newId } = ids;
   const pathStorage = `posts/${userId}/${fileBody.fileName}${newId}`;
   const ImageRef = ref(storage, pathStorage);
@@ -49,6 +63,11 @@ export async function firebaseUploadImage(
     content: imageUrl,
     title: fileBody.title,
   });
+  await updateDoc(doc(db, 'users', userId), {
+    ...userData,
+    posts: arrayUnion(newId),
+  });
+
   setData((postData) => ({
     ...postData,
     isLoading: false,

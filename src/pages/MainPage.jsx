@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import {
   collection, getDocs,
-  // doc, setDoc,
 } from 'firebase/firestore';
 
 import { db } from '@api/FB';

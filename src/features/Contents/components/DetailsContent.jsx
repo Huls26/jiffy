@@ -11,7 +11,6 @@ export default function DetailsContent() {
   const { docData, contentId } = useContext(contentDataContext);
   const usersPost = docData.createdBy === userData.userId;
 
-  console.log(userData);
   return (
     <section className="
         flex justify-between items-start
