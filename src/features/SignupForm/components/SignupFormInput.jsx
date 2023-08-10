@@ -21,6 +21,7 @@ export default function SignupFormInput({
             "
         required={required !== 'false'}
         autoComplete="off"
+        maxLength={36}
       />
     </label>
   );
