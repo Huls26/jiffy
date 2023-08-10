@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export default function FilterBtn({ text }) {
+export default function FilterBtn({ text, onClick }) {
   return (
     <button
       className="
@@ -17,6 +17,7 @@ export default function FilterBtn({ text }) {
         active:bg-yellow-2
       "
       type="button"
+      onClick={onClick}
     >
       {text}
 
@@ -26,4 +27,6 @@ export default function FilterBtn({ text }) {
 
 FilterBtn.propTypes = {
   text: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  onClick: PropTypes.func,
 };

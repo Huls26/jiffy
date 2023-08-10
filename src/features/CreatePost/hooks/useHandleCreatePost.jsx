@@ -103,6 +103,7 @@ export default function useHandleCreatePost() {
         docData,
         setData,
         navigate,
+        data,
       );
     } else if (fileBody.textContent) {
       firebaseUploadTextContent(
@@ -111,6 +112,7 @@ export default function useHandleCreatePost() {
         docData,
         setData,
         navigate,
+        data,
       );
     }
   }

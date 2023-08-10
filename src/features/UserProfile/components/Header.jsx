@@ -2,13 +2,17 @@ import {
   useContext,
 } from 'react';
 import {
-  Link, redirect, useLoaderData,
+  redirect, useLoaderData, useSearchParams,
 } from 'react-router-dom';
+import {
+  collection, query, where, getDocs,
+} from 'firebase/firestore';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import { getCurrentUser } from '@api/onSnapUserAuth';
+import { db } from '@api/FB';
 import getUsersData from '@api/getUser';
+import { getCurrentUser } from '@api/onSnapUserAuth';
 
 import FilterBtn from '@components/Btn/FilterBtn';
 import { dataContext } from '@context/dataContext';
@@ -28,14 +32,33 @@ export async function loader({ params }) {
     return userData;
   }
 
-  return { me };
+  // fetch user posts data
+  const q = query(collection(db, 'posts'), where('createdBy', '==', urlId));
+  const querySnapshot = await getDocs(q);
+
+  return { me, querySnapshot };
 }
 
 export default function Header() {
   const userData = useLoaderData();
   const [data] = useContext(dataContext);
+  const [searchParams, setSearchParams] = useSearchParams();
   const details = userData.me ? data.userData : userData;
   const { userBanner } = details;
+
+  console.log(searchParams);
+
+  function handleProfileHeaderNav(key, value) {
+    setSearchParams((prevParams) => {
+      if (!value) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+
+      return prevParams;
+    });
+  }
 
   return (
     <header className="mb-8">
@@ -48,9 +71,9 @@ export default function Header() {
       />
 
       <nav className="px-4 pb-3 space-x-2 shadow">
-        <Link to=".." relative="path"><FilterBtn text="post" /></Link>
-        <Link to="photo" relative="path"><FilterBtn text="photo" /></Link>
-        <Link to="description" relative="path"><FilterBtn text="description" /></Link>
+        <FilterBtn text="All" onClick={() => handleProfileHeaderNav('f')} />
+        <FilterBtn text="photo" onClick={() => handleProfileHeaderNav('f', 'photo')} />
+        <FilterBtn text="text" onClick={() => handleProfileHeaderNav('f', 'text')} />
       </nav>
     </header>
 
