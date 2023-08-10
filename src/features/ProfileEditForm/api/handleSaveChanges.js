@@ -60,10 +60,6 @@ export default async function handleSaveChanges(
   } = newData;
   const newId = uuidv4();
 
-  // if (!userBannerFile && !userImgFile) {
-  //   return;
-  // }
-
   if (userBannerFile || userImgFile) {
     setUData((prevData) => ({
       ...prevData,
@@ -98,9 +94,9 @@ export default async function handleSaveChanges(
       ...prevData,
       isLoading: false,
       userBannerFile: null,
-      userBannerPrev: '',
+      userBannerPrev: userBannerNewURL || userDataFile.userBanner,
       userImgFile: null,
-      userImgPrev: '',
+      userImgPrev: userImgNewURL || userDataFile.userImg,
     }));
   }
 }

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { dataContext } from '@context/dataContext';
 
 import handleSaveChanges from '../api/handleSaveChanges';
@@ -6,7 +6,6 @@ import handleSaveChanges from '../api/handleSaveChanges';
 export default function useProfileBannerState() {
   const [data] = useContext(dataContext);
   const { userData, userId } = data;
-  console.log(userData);
   const [uData, setUData] = useState(() => ({
     ...userData,
     userBannerFile: null,
@@ -20,16 +19,6 @@ export default function useProfileBannerState() {
     error: false,
     errorM: '',
   }));
-
-  // update uData
-  useEffect(() => {
-    setUData((prevValue) => ({
-      ...prevValue,
-      ...userData,
-      userBannerPrev: userData.userBanner,
-      userImgPrev: userData.userImg,
-    }));
-  }, [userData]);
 
   // handle upload img to firebase storage
   function saveChanges() {
