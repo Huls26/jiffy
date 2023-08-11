@@ -3,18 +3,28 @@ import PropTypes from 'prop-types';
 import ContentBtn from '@components/Btn/ContentBtn';
 import CreatePostBtn from '@components/Header/components/CreatePostBtn';
 import { message as defaultDescription } from '@default';
-
+import useViewContentHooks from '@features/ViewContent/hooks/useViewContentHooks';
 import useCheckId from '@hooks/useCheckId';
+
 import ProfilePhoto from './ProfilePhoto';
 
 export default function UserDetails({ details }) {
   const {
-    userImg, username, email, followers, posts, description,
+    dispatch, followers, btnBgFollow, userId,
+  } = useViewContentHooks();
+  const {
+    userImg, username, email, posts, description,
   } = details;
   const isOwnProfile = useCheckId();
   const FollowBtn = isOwnProfile
     ? <CreatePostBtn />
-    : <ContentBtn text="follow" bg="bg-purple" />;
+    : (
+      <ContentBtn
+        text="follow"
+        bg={btnBgFollow}
+        onClick={() => dispatch({ type: 'USER_FOLLOW', userId })}
+      />
+    );
 
   return (
     <section className="px-6 py-5 mb-3">

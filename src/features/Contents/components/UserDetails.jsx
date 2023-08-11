@@ -21,7 +21,7 @@ export default function UserDetails() {
   console.log('Render userDetails');
   return (
     <div className="flex items-start space-x-3">
-      <Link to={`profile/${createdBy}`}>
+      <Link to={`profile/${createdBy}`} state={{ docData, contentId }}>
         <UserImage userImg={userImg} />
       </Link>
       <div>

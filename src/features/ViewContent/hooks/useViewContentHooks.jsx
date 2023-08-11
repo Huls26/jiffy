@@ -14,6 +14,7 @@ export default function useViewContentHooks() {
   // get the link state
   const { state } = useLocation();
   const { docData, contentId } = state;
+
   // store the docData
   // update like button
   const [userState, dispatch] = useReducer(reducerMethod, { ...docData });
