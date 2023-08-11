@@ -14,7 +14,7 @@ import { db } from '@api/FB';
 import getUsersData from '@api/getUser';
 import { getCurrentUser } from '@api/onSnapUserAuth';
 
-import FilterBtn from '@components/Btn/FilterBtn';
+import FilterNavBtn from '@components/FilterNavBtn';
 import { dataContext } from '@context/dataContext';
 import profileBannerBg from '@default';
 
@@ -55,11 +55,7 @@ export default function Header() {
         details={details}
       />
 
-      <nav className="px-4 pb-3 space-x-2 shadow">
-        <FilterBtn text="all" activeStyle={(params) => params === null} />
-        <FilterBtn text="photos" activeStyle={(params) => params === 'content'} />
-        <FilterBtn text="text content" activeStyle={(params) => params === 'textContent'} />
-      </nav>
+      <FilterNavBtn />
     </header>
 
   );
