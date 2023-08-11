@@ -17,7 +17,6 @@ import { getCurrentUser } from '@api/onSnapUserAuth';
 import FilterBtn from '@components/Btn/FilterBtn';
 import { dataContext } from '@context/dataContext';
 import profileBannerBg from '@default';
-import useHandleSearchParams from '@hooks/useHandleSearchParams';
 
 import UserDetails from './UserDetails';
 
@@ -43,7 +42,6 @@ export async function loader({ params }) {
 export default function Header() {
   const userData = useLoaderData();
   const [data] = useContext(dataContext);
-  const { handleSetSearchParams } = useHandleSearchParams();
   const details = userData.me ? data.userData : userData;
   const { userBanner } = details;
 
@@ -58,9 +56,9 @@ export default function Header() {
       />
 
       <nav className="px-4 pb-3 space-x-2 shadow">
-        <FilterBtn text="All" onClick={() => handleSetSearchParams('f')} />
-        <FilterBtn text="photo" onClick={() => handleSetSearchParams('f', 'content')} />
-        <FilterBtn text="text" onClick={() => handleSetSearchParams('f', 'textContent')} />
+        <FilterBtn text="all" activeStyle={(params) => params === null} />
+        <FilterBtn text="photos" activeStyle={(params) => params === 'content'} />
+        <FilterBtn text="text content" activeStyle={(params) => params === 'textContent'} />
       </nav>
     </header>
 
