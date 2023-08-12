@@ -1,4 +1,7 @@
 import PropTypes from 'prop-types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 import ContentTextDisplay from './ContentTextDisplay';
 
 export default function ContentDisplay({ docData }) {
@@ -10,13 +13,11 @@ export default function ContentDisplay({ docData }) {
   return (
     content
       ? (
-        <img
-          src={content}
+        <LazyLoadImage
           alt="content"
-          className="
-                  w-full h-full
-                  object-cover
-                "
+          src={content}
+          className="w-screen h-72 object-cover"
+          effect="blur"
         />
       )
       : (

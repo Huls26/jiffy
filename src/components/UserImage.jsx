@@ -1,23 +1,29 @@
 import PropTypes from 'prop-types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
+import bgColor from '@default/bgColor';
 
 export default function UserImage({ userImg }) {
   return (
-    <div className="
-                w-11 h-11
+    <div className={
+                `w-11 h-11
+                ${bgColor}
                 rounded-full
                 shrink-0
-                grow-0
-              "
+                grow-0`
+    }
     >
-      <img
+      <LazyLoadImage
+        alt="content"
         src={userImg}
-        alt="userPhoto"
         className="
-                      w-full h-full object-cover
-                      border-dark-1
-                      border-[.2em]
-                      rounded-full
-                    "
+            w-11 h-11
+            object-cover
+          border-dark-1 border-[.2em]
+            rounded-full
+          "
+        effect="blur"
       />
     </div>
   );
