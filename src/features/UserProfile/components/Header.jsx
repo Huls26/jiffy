@@ -25,24 +25,24 @@ export async function loader({ params }) {
   const user = await getCurrentUser();
   const me = urlId === user?.uid;
 
+  // fetch user posts data
+  const q = query(collection(db, 'posts'), where('createdBy', '==', urlId));
+  const querySnapshot = await getDocs(q);
+
   if (!user?.uid) {
     return redirect('/');
   } if (!me) {
     const userData = await getUsersData(urlId);
-    return userData;
+    return { userData, querySnapshot };
   }
-
-  // fetch user posts data
-  const q = query(collection(db, 'posts'), where('createdBy', '==', urlId));
-  const querySnapshot = await getDocs(q);
 
   return { me, querySnapshot };
 }
 
 export default function Header() {
-  const userData = useLoaderData();
+  const { userData, me } = useLoaderData();
   const [data] = useContext(dataContext);
-  const details = userData.me ? data.userData : userData;
+  const details = me ? data.userData : userData;
   const { userBanner } = details;
 
   return (
