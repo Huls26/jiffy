@@ -77,6 +77,7 @@ export default function useViewContentHooks() {
       ownPost,
       contentId,
       btnBgFollow,
+      docData,
     }
   );
 }

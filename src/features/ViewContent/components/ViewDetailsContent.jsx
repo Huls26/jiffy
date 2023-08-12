@@ -6,8 +6,9 @@ import useViewContentHooks from '../hooks/useViewContentHooks';
 export default function ViewDetailsContent() {
   const {
     dispatch, title, userImg, username, likes, btnBg, userId,
-    createdBy, ownPost, followers, btnBgFollow,
+    createdBy, ownPost, followers, btnBgFollow, docData, contentId,
   } = useViewContentHooks();
+  const profileLink = `../profile/${createdBy}`;
 
   return (
     <section className="
@@ -19,7 +20,7 @@ export default function ViewDetailsContent() {
       <h1 className="font-PS text-xl font-bold capitalize leading-none mb-3 block">{title}</h1>
       <div className="flex items-start justify-between">
         <div className="flex space-x-2">
-          <Link to={`/profile/${createdBy}`} relative="path">
+          <Link to={profileLink} state={{ docData, contentId }}>
             <UserImage userImg={userImg} />
           </Link>
           <div className="flex items-start space-x-3">

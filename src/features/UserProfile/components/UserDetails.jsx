@@ -8,10 +8,11 @@ import useCheckId from '@hooks/useCheckId';
 
 import ProfilePhoto from './ProfilePhoto';
 
-export default function UserDetails({ details }) {
+export default function UserDetails({ details, isMe }) {
   const {
     dispatch, followers, btnBgFollow, userId,
-  } = useViewContentHooks();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  } = !isMe ? useViewContentHooks() : details;
   const {
     userImg, username, email, posts, description,
   } = details;
@@ -68,4 +69,5 @@ UserDetails.propTypes = {
   // eslint-disable-next-line max-len
   // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
   details: PropTypes.any,
+  isMe: PropTypes.bool.isRequired,
 };

@@ -53,6 +53,7 @@ export default function Header() {
 
       <UserDetails
         details={details}
+        isMe={me}
       />
 
       <FilterNavBtn />

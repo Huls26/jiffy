@@ -21,7 +21,7 @@ export default function UserDetails() {
   console.log('Render userDetails');
   return (
     <div className="flex items-start space-x-3">
-      <Link to={`profile/${createdBy}`} state={{ docData, contentId }}>
+      <Link to={`../profile/${createdBy}`} state={{ docData, contentId }}>
         <UserImage userImg={userImg} />
       </Link>
       <div>
@@ -33,7 +33,7 @@ export default function UserDetails() {
             bg={btnBg}
             onClick={() => userId && dispatch({ type: 'USER_LIKE', userId })}
           />
-          <Link to="view" state={{ docData, contentId }}>
+          <Link to="../view" state={{ docData, contentId }}>
             <ContentBtn text="comment" />
           </Link>
         </div>
