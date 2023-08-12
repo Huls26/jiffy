@@ -15,7 +15,7 @@ import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
 // import CreatePostPage from '@pages/CreatePostPage';
 import ViewPage from '@pages/ViewPage';
 import { loader as loaderUserAuth } from '@api/onSnapUserAuth';
-import { loader as loaderProfilePage } from '@features/UserProfile/components/Header';
+import loaderProfilePage from '@features/UserProfile/loader';
 // // lazy loading
 
 import { action as actionUserInfoEditForm } from '@features/ProfileEditForm/components/UserInfoEditForm';

@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import PropTypes from 'prop-types';
 
 import ContentBtn from '@components/Btn/ContentBtn';
@@ -66,8 +67,7 @@ export default function UserDetails({ details, isMe }) {
 }
 
 UserDetails.propTypes = {
-  // eslint-disable-next-line max-len
-  // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
+  // eslint-disable-next-line react/forbid-prop-types
   details: PropTypes.any,
-  isMe: PropTypes.bool.isRequired,
+  isMe: PropTypes.bool,
 };
