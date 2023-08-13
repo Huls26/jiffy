@@ -1,11 +1,14 @@
-import { lazy } from 'react';
+import {
+  lazy,
+  memo,
+} from 'react';
 
 import useResetScrollView from '@hooks/useResetScrollView';
 
 const UserProfile = lazy(() => import('@features/UserProfile'));
 const ProfileEditForm = lazy(() => import('@features/ProfileEditForm'));
 
-export default function ProfilePage() {
+function ProfilePage() {
   useResetScrollView();
 
   return (
@@ -15,3 +18,6 @@ export default function ProfilePage() {
     </main>
   );
 }
+// export default ProfilePage;
+const MemoProfilePage = memo(ProfilePage);
+export default MemoProfilePage;
