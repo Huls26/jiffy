@@ -7,13 +7,15 @@ import { message as defaultDescription } from '@default';
 import useViewContentHooks from '@features/ViewContent/hooks/useViewContentHooks';
 import useCheckId from '@hooks/useCheckId';
 
+import { useLocation } from 'react-router-dom';
 import ProfilePhoto from './ProfilePhoto';
 
 export default function UserDetails({ details, isMe }) {
+  const { state } = useLocation();
   const {
     dispatch, followers, btnBgFollow, userId,
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  } = !isMe ? useViewContentHooks() : details;
+  } = !isMe && state?.contentId ? useViewContentHooks() : details;
   const {
     userImg, username, email, posts, description,
   } = details;

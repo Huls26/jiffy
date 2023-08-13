@@ -3,10 +3,10 @@ export default function ErrorMessage({ actionData }) {
   && actionData?.isInvalid
     ? (
       <h1 className="
-    text-bright-red font-A text-xl font-bold
-    mb-3
-    capitalize
-  "
+    text-bright-red font-A text-xl font-bold text-center
+      mb-3 whitespace-pre-line
+      capitalize
+    "
       >
         {actionData.resMessage}
       </h1>

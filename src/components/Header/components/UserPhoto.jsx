@@ -12,7 +12,7 @@ export default function UserPhoto() {
   const profilePhotoBg = userImg ? bgColor : 'bg-primary-1';
 
   return (
-    <Link to={linkTo}>
+    <Link to={linkTo} state>
       <div
         className={`
                      ${profilePhotoBg}

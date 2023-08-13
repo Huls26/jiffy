@@ -1,10 +1,10 @@
-import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '@api/FB';
-
 import { useContext, useEffect, useReducer } from 'react';
-import { dataContext } from '@context/dataContext';
-import { contentDataContext } from '../context';
+import { doc, updateDoc } from 'firebase/firestore';
 
+import { db } from '@api/FB';
+import { dataContext } from '@context/dataContext';
+
+import { contentDataContext } from '../context';
 import shortenLikesValue from '../utils/shortenLikesValue';
 import reducerMethod from '../utils/userReducer';
 
@@ -23,12 +23,12 @@ export default function usePostDataState() {
   const displayLikes = shortenLikesValue(likes);
   const isUserLike = peopleLikes.includes(userId);
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
-  const contentRef = doc(db, 'posts', contentId);
 
   useEffect(() => {
     // updating firebase posts data
     async function updateFirebase() {
       if (userId) {
+        const contentRef = doc(db, 'posts', contentId);
         await updateDoc(contentRef, {
           likes,
           peopleLikes,
@@ -39,7 +39,7 @@ export default function usePostDataState() {
     const updateData = setTimeout(updateFirebase, 360);
 
     return () => clearTimeout(updateData);
-  }, [peopleLikes, likes, contentRef, userId]);
+  }, [peopleLikes, likes, userId, contentId]);
 
   return {
     userState,
@@ -53,5 +53,6 @@ export default function usePostDataState() {
     contentId,
     title,
     createdBy,
+    docData,
   };
 }

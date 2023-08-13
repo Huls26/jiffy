@@ -18,6 +18,6 @@ function ProfilePage() {
     </main>
   );
 }
-// export default ProfilePage;
+
 const MemoProfilePage = memo(ProfilePage);
 export default MemoProfilePage;

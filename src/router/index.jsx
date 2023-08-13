@@ -8,7 +8,7 @@ import {
 
 import AppLayout from '@layout/AppLayout';
 
-import LoginPage, { action as actionLoginPage } from '@pages/LoginPage';
+import LoginPage, { action as actionLoginPage, loader as loaderLoginPage } from '@pages/LoginPage';
 import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
 import ProfilePage from '@pages/ProfilePage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
@@ -60,6 +60,7 @@ const router = createBrowserRouter(
       <Route
         key="login"
         path="login"
+        loader={loaderLoginPage}
         action={actionLoginPage}
         element={<LoginPage />}
       />

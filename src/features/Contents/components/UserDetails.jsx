@@ -1,19 +1,16 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import ContentBtn from '@components/Btn/ContentBtn';
 import UserImage from '@components/UserImage';
 
 import usePostDataState from '../hooks/usePostDataState';
-import { contentDataContext } from '../context';
 
 export default function UserDetails() {
   const {
     dispatch, userImg, title, username,
-    displayLikes, btnBg, userId, createdBy,
+    displayLikes, btnBg, userId, createdBy, docData, contentId,
   } = usePostDataState();
 
-  const { docData, contentId } = useContext(contentDataContext);
   // modifyTitle safety net
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 

@@ -1,5 +1,6 @@
 import {
   memo,
+  lazy,
 } from 'react';
 import {
   defer,
@@ -10,10 +11,10 @@ import {
 } from 'firebase/firestore';
 
 import { db } from '@api/FB';
-
-import SuspenseMainPage from '@components/Mainpage';
 import FilterTagSection from '@features/FilterTagSection';
 import HeadBanner from '@features/HeadBanner';
+
+const SuspenseMainPage = lazy(() => import('@components/Mainpage'));
 
 export async function loader() {
   const col = collection(db, 'posts');
