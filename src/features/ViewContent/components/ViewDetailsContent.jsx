@@ -1,14 +1,31 @@
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import ContentBtn from '@components/Btn/ContentBtn';
 import UserImage from '@components/UserImage';
-import { Link } from 'react-router-dom';
+import useHandleSearchParams from '@hooks/useHandleSearchParams';
+
 import useViewContentHooks from '../hooks/useViewContentHooks';
 
-export default function ViewDetailsContent() {
+export default function ViewDetailsContent({ stateLocation }) {
   const {
     dispatch, title, userImg, username, likes, btnBg, userId,
     createdBy, ownPost, followers, btnBgFollow, docData, contentId,
-  } = useViewContentHooks();
+  } = useViewContentHooks(stateLocation);
+  const { searchParams, handleSetSearchParams } = useHandleSearchParams();
+  const displayComments = searchParams.get('view') === 'comments';
+  const commentBtnStyle = displayComments ? 'bg-green' : null;
   const profileLink = `../profile/${createdBy}`;
+
+  // turn on/off comment button
+  function handleCommentBtn() {
+    // i like this code
+    if (displayComments) {
+      handleSetSearchParams('view');
+    } else {
+      handleSetSearchParams('view', 'comments');
+    }
+  }
 
   return (
     <section className="
@@ -48,9 +65,14 @@ export default function ViewDetailsContent() {
             bg={btnBg}
             onClick={() => userId && dispatch({ type: 'USER_LIKE', userId })}
           />
-          <ContentBtn text="comment" />
+          <ContentBtn text="comment" onClick={() => handleCommentBtn()} bg={commentBtnStyle} />
         </div>
       </div>
     </section>
   );
 }
+
+ViewDetailsContent.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  stateLocation: PropTypes.object.isRequired,
+};

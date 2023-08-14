@@ -1,13 +1,8 @@
-import { useLocation } from 'react-router-dom';
-// import { useState } from 'react';
+import PropTypes from 'prop-types';
 import DisplayTimeDate from './DisplayTimeDate';
 import DisplayDescriptionText from './DisplayDescriptionText';
 
-// code clean up
-export default function DescriptionBox() {
-  const { state } = useLocation();
-  const { docData } = state;
-
+export default function DescriptionBox({ docData }) {
   return (
     <section className="
                   border-dark-2 border border-b-2 border-r-2
@@ -23,3 +18,8 @@ export default function DescriptionBox() {
     </section>
   );
 }
+
+DescriptionBox.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  docData: PropTypes.object.isRequired,
+};

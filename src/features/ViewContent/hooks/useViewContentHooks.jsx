@@ -7,13 +7,14 @@ import modifyValueSetBg from '../utils/modifyValuesSetBg';
 import { updatePostLikeFirebase, updateUserFollowers } from '../utils/updateFirebase';
 
 // code clean up
-export default function useViewContentHooks() {
+export default function useViewContentHooks(linkState) {
+  console.log(linkState);
   // get dataContext
   const [userData] = useContext(dataContext);
   const { userId } = userData;
   // get the link state
   const { state } = useLocation();
-  const { docData, contentId } = state;
+  const { docData, contentId } = state || linkState;
 
   // store the docData
   // update like button
