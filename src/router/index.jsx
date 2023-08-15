@@ -8,14 +8,14 @@ import {
 
 import AppLayout from '@layout/AppLayout';
 
-import LoginPage, { action as actionLoginPage } from '@pages/LoginPage';
+import LoginPage, { action as actionLoginPage, loader as loaderLoginPage } from '@pages/LoginPage';
 import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
 import ProfilePage from '@pages/ProfilePage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
 // import CreatePostPage from '@pages/CreatePostPage';
 import ViewPage from '@pages/ViewPage';
 import { loader as loaderUserAuth } from '@api/onSnapUserAuth';
-import { loader as loaderProfilePage } from '@features/UserProfile/components/Header';
+import loaderProfilePage from '@features/UserProfile/loader';
 // // lazy loading
 
 import { action as actionUserInfoEditForm } from '@features/ProfileEditForm/components/UserInfoEditForm';
@@ -60,6 +60,7 @@ const router = createBrowserRouter(
       <Route
         key="login"
         path="login"
+        loader={loaderLoginPage}
         action={actionLoginPage}
         element={<LoginPage />}
       />

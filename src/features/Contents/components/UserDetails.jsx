@@ -1,27 +1,23 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import ContentBtn from '@components/Btn/ContentBtn';
 import UserImage from '@components/UserImage';
 
 import usePostDataState from '../hooks/usePostDataState';
-import { contentDataContext } from '../context';
 
 export default function UserDetails() {
   const {
     dispatch, userImg, title, username,
-    displayLikes, btnBg, userId, createdBy, // contentId, // userState,
+    displayLikes, btnBg, userId, createdBy, docData, contentId,
   } = usePostDataState();
-  const { docData, contentId } = useContext(contentDataContext);
+
   // modifyTitle safety net
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
-  // console.log(contentId);
-  // console.log(userState);
   console.log('Render userDetails');
   return (
     <div className="flex items-start space-x-3">
-      <Link to={`profile/${createdBy}`}>
+      <Link to={`../profile/${createdBy}`} state={{ docData, contentId }}>
         <UserImage userImg={userImg} />
       </Link>
       <div>
@@ -33,7 +29,7 @@ export default function UserDetails() {
             bg={btnBg}
             onClick={() => userId && dispatch({ type: 'USER_LIKE', userId })}
           />
-          <Link to="view" state={{ docData, contentId }}>
+          <Link to="../view" state={{ docData, contentId }}>
             <ContentBtn text="comment" />
           </Link>
         </div>

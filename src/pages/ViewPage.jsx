@@ -1,6 +1,9 @@
 import { lazy } from 'react';
+
 import useResetScrollView from '@hooks/useResetScrollView';
-// import ContentComponents from '@features/ViewContent';
+
+import StateContext from '@features/ViewContent/context/StateContext';
+
 const ContentComponents = lazy(() => import('@features/ViewContent'));
 
 export default function ViewPage() {
@@ -15,7 +18,10 @@ export default function ViewPage() {
 
   return (
     <main className="pt-24">
-      <ContentComponents details={userDetails} />
+      <StateContext>
+        <ContentComponents details={userDetails} />
+      </StateContext>
+
     </main>
   );
 }

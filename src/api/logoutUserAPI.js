@@ -7,6 +7,7 @@ export default async function logoutUserAPI(dispatch) {
       type: 'SET_USERID',
       id: '',
     });
+    localStorage.clear();
   }).catch((error) => {
     throw new Error(error.message);
   });

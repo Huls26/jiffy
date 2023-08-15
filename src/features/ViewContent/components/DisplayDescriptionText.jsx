@@ -6,10 +6,10 @@ export default function DisplayDescriptionText({ docData }) {
     btn: false,
   }));
   const longWord = 54;
-  const isLongWord = docData.description.length >= longWord;
+  const isLongWord = docData.description?.length >= longWord;
 
   // reduce the length of description text
-  const descView = showMore.btn
+  const descView = showMore?.btn
     ? docData.description
     : `${docData.description.slice(0, longWord)}`;
 
@@ -19,6 +19,7 @@ export default function DisplayDescriptionText({ docData }) {
       btn: !prevValue.btn,
     }));
   }
+
   return (
     <p className="font-semibold">
       {/* check description text length and slice max length word */}

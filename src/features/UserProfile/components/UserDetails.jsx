@@ -1,20 +1,34 @@
+/* eslint-disable react/require-default-props */
 import PropTypes from 'prop-types';
 
 import ContentBtn from '@components/Btn/ContentBtn';
 import CreatePostBtn from '@components/Header/components/CreatePostBtn';
 import { message as defaultDescription } from '@default';
-
+import useViewContentHooks from '@features/ViewContent/hooks/useViewContentHooks';
 import useCheckId from '@hooks/useCheckId';
+
+import { useLocation } from 'react-router-dom';
 import ProfilePhoto from './ProfilePhoto';
 
-export default function UserDetails({ details }) {
+export default function UserDetails({ details, isMe }) {
+  const { state } = useLocation();
   const {
-    userImg, username, email, followers, posts, description,
+    dispatch, followers, btnBgFollow, userId,
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  } = !isMe && state?.contentId ? useViewContentHooks() : details;
+  const {
+    userImg, username, email, posts, description,
   } = details;
   const isOwnProfile = useCheckId();
   const FollowBtn = isOwnProfile
     ? <CreatePostBtn />
-    : <ContentBtn text="follow" bg="bg-purple" />;
+    : (
+      <ContentBtn
+        text="follow"
+        bg={btnBgFollow}
+        onClick={() => dispatch({ type: 'USER_FOLLOW', userId })}
+      />
+    );
 
   return (
     <section className="px-6 py-5 mb-3">
@@ -55,7 +69,7 @@ export default function UserDetails({ details }) {
 }
 
 UserDetails.propTypes = {
-  // eslint-disable-next-line max-len
-  // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
+  // eslint-disable-next-line react/forbid-prop-types
   details: PropTypes.any,
+  isMe: PropTypes.bool,
 };

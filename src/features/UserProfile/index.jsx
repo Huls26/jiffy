@@ -9,10 +9,6 @@ export default function UserProfile() {
     <>
       <Header />
       <UserPosts />
-      {/* the data should fetch from the user */}
-      {/* <section>
-        <Contents />
-      </section> */}
     </>
   );
 }
