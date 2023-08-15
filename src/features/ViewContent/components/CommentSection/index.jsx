@@ -59,11 +59,13 @@ export default function CommentSection() {
     ));
 
   return (
-    <section className={`${isDisplay} px-3 py-4`}>
-      <CreateComment />
+    (
+      <section className={`${isDisplay} px-3 py-4`}>
+        <CreateComment />
 
-      {renderComments}
-    </section>
+        {renderComments}
+      </section>
+    )
   );
 }
 

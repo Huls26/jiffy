@@ -1,9 +1,16 @@
-import { memo, useEffect, useState } from 'react';
+import {
+  memo, useEffect, useState,
+} from 'react';
 import PropTypes from 'prop-types';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 
 import ContentDisplay from '@components/Content/ContentDisplay';
 import bgColor from '@default/bgColor';
+// eslint-disable-next-line max-len
+// import linkStateContext from '@features/ViewContent/context/linkStateContext';
 
 import ViewDetailsContent from './components/ViewDetailsContent';
 import DescriptionBox from './components/DescriptionBox';
@@ -12,6 +19,7 @@ import CommentSection from './components/CommentSection';
 // clean up
 function ViewContent({ details }) {
   const { state } = useLocation();
+  // add localStorage to store and retrieve data in state link
   const navigate = useNavigate();
   const [stateLocation, setStateLocation] = useState(() => ({ ...state }));
   const { docData } = stateLocation;

@@ -8,7 +8,6 @@ import { updatePostLikeFirebase, updateUserFollowers } from '../utils/updateFire
 
 // code clean up
 export default function useViewContentHooks(linkState) {
-  console.log(linkState);
   // get dataContext
   const [userData] = useContext(dataContext);
   const { userId } = userData;
