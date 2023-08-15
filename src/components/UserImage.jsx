@@ -30,5 +30,6 @@ export default function UserImage({ userImg }) {
 }
 
 UserImage.propTypes = {
-  userImg: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  userImg: PropTypes.string,
 };
