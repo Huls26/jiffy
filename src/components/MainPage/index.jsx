@@ -1,11 +1,13 @@
 import { Suspense } from 'react';
 import { Await } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import LoadingContents from '@components/MainPage/LoadingContents';
 import Contents from '@features/Contents';
 
 export default function SuspenseMainPage({ querySnapshot }) {
   return (
-    <Suspense fallback={<h1>...Loading</h1>}>
+    <Suspense fallback={<LoadingContents />}>
       <Await resolve={querySnapshot}>
         {
         (data) => <Contents querySnapshot={data.docs} />

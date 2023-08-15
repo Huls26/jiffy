@@ -1,16 +1,17 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+// import { useContext } from 'react';
+// import { Link } from 'react-router-dom';
 
-import { dataContext } from '@context/dataContext';
-import ContentBtn from '@components/Btn/ContentBtn';
+// import { dataContext } from '@context/dataContext';
+// import ContentBtn from '@components/Btn/ContentBtn';
 import UserDetails from './UserDetails';
-import { contentDataContext } from '../context';
+// import { contentDataContext } from '../context';
 
 export default function DetailsContent() {
-  const [userData] = useContext(dataContext);
-  const { docData, contentId } = useContext(contentDataContext);
-  const usersPost = docData.createdBy === userData.userId;
+  // const [userData] = useContext(dataContext);
+  // const { docData, contentId } = useContext(contentDataContext);
+  // const usersPost = docData.createdBy === userData.userId;
 
+  // remove update/delete btn for now
   return (
     <section className="
         flex justify-between items-start
@@ -19,9 +20,9 @@ export default function DetailsContent() {
       "
     >
       <UserDetails />
-      <Link to="view" state={{ docData, contentId }}>
+      {/* <Link to="../view" state={{ docData, contentId }}>
         {usersPost && <ContentBtn text="Update/Delete" />}
-      </Link>
+      </Link> */}
     </section>
   );
 }

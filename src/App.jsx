@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react';
 
+import LoadingApp from '@components/Loading/LoadingApp';
+
 const Router = lazy(() => import('@router'));
 const ContextProviderReducer = lazy(() => import('@context/components/ContextProviderReducer'));
 
@@ -7,7 +9,7 @@ const ContextProviderReducer = lazy(() => import('@context/components/ContextPro
 // fix loading components
 function App() {
   return (
-    <Suspense fallback={<h1>...Loading</h1>}>
+    <Suspense fallback={<LoadingApp />}>
       <ContextProviderReducer>
         <Router />
       </ContextProviderReducer>
