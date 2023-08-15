@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore';
 
 import { db } from '@api/FB';
+import SkeletonMainPage from '@components/MainPage/SkeletonMainPage';
 import FilterTagSection from '@features/FilterTagSection';
 import HeadBanner from '@features/HeadBanner';
 
@@ -28,12 +29,11 @@ export async function loader() {
 function MainPage() {
   const { querySnapshot } = useLoaderData();
 
-  console.log('render Mainpage');
-
   return (
     <main className="pt-16 pb-7">
       <FilterTagSection />
       <HeadBanner />
+      <SkeletonMainPage />
       <SuspenseMainPage querySnapshot={querySnapshot} />
     </main>
   );
