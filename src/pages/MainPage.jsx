@@ -12,10 +12,11 @@ import {
 
 import { db } from '@api/FB';
 import FilterTagSection from '@features/FilterTagSection';
-import HeadBanner from '@features/HeadBanner';
+// import HeadBanner from '@features/HeadBanner';
 
 const SuspenseMainPage = lazy(() => import('@components/Mainpage'));
 
+// remove HeadBanner: to be continued feature
 export async function loader() {
   const col = collection(db, 'posts');
   const querySnapshot = getDocs(col);
@@ -31,7 +32,7 @@ function MainPage() {
   return (
     <main className="pt-16 pb-7">
       <FilterTagSection />
-      <HeadBanner />
+      {/* <HeadBanner /> */}
       <SuspenseMainPage querySnapshot={querySnapshot} />
     </main>
   );
