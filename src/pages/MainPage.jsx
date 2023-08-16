@@ -28,8 +28,6 @@ export async function loader() {
 function MainPage() {
   const { querySnapshot } = useLoaderData();
 
-  console.log('render Mainpage');
-
   return (
     <main className="pt-16 pb-7">
       <FilterTagSection />
