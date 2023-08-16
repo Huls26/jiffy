@@ -1,11 +1,15 @@
-import { Link, useParams } from 'react-router-dom';
+import {
+  Link,
+  // useParams,
+} from 'react-router-dom';
 import resetScrollView from '@utils/resetScrollView';
 import UserLogin from './components/UserLogin';
-import SearchForm from './components/SearchForm';
+// import SearchForm from './components/SearchForm';
 
+// remove searchBar: to be continued
 export default function Header() {
   // const enterText = 'U+02192';
-  const { id } = useParams();
+  // const { id } = useParams();
 
   return (
     <header className="
@@ -24,7 +28,7 @@ export default function Header() {
       </Link>
 
       {/* render searchBar and remove searchBar when viewProfile */}
-      {!id && <SearchForm />}
+      {/* {!id && <SearchForm />} */}
       <UserLogin />
     </header>
   );

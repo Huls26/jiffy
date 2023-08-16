@@ -13,6 +13,7 @@
 body {
   overflow-x: hidden;
   background-color: #fff1e8;
+  min-width: 31.24em;
 }
 
 main {
