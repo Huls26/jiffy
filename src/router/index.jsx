@@ -20,8 +20,11 @@ import loaderProfilePage from '@features/UserProfile/loader';
 // // lazy loading
 import { action as actionUserInfoEditForm } from '@features/ProfileEditForm/components/UserInfoEditForm';
 
-const ErrorPage = lazy(() => import('@pages/ErrorPage'));
 const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));
+
+// handle errors and not found page
+const ErrorPage = lazy(() => import('@pages/ErrorPage'));
+const NotFoundPage = lazy(() => import('@pages/NotFoundPage'));
 // const ViewPage = lazy(() => import('@pages/ViewPage'));
 
 const router = createBrowserRouter(
@@ -33,6 +36,7 @@ const router = createBrowserRouter(
         element={<AppLayout />}
         errorElement={<ErrorPage />}
       >
+        <Route path="*" element={<NotFoundPage />} />
         <Route
           index
           loader={loaderMainpage}
