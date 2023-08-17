@@ -35,11 +35,11 @@ export async function loader({ request }) {
 
   const querySnapshot = getFirestoreData(({
     query, collection, db, where,
-  }) => {
-    const f = filterTag;
-
-    return f ? query(collection(db, 'posts'), where(f, '!=', '')) : collection(db, 'posts');
-  });
+  }) => (
+    filterTag
+      ? query(collection(db, 'posts'), where(filterTag, '!=', ''))
+      : collection(db, 'posts')
+  ));
 
   return defer({
     querySnapshot,
