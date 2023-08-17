@@ -21,7 +21,7 @@ function ContentDisplay({ docData, scrollPosition }) {
         <LazyLoadImage
           alt="content"
           src={content}
-          className="w-screen h-72 object-cover"
+          className="w-screen h-72 object-cover md:rounded-t-sm"
           effect="blur"
           scrollPosition={scrollPosition}
         />

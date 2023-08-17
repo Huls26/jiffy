@@ -12,7 +12,7 @@ function ProfilePage() {
   useResetScrollView();
 
   return (
-    <main className="pt-24 pb-9">
+    <main className="pt-20 pb-9">
       <UserProfile />
       <ProfileEditForm />
     </main>

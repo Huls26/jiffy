@@ -7,7 +7,7 @@ import DetailsContent from './DetailsContent';
 // hover:backdrop-contrast-50 transition-all ease-in-out
 function ContentComponents() {
   return (
-    <article className="mb-4 border-dark-2 border border-b-2 border-r-2 pb-3">
+    <article className="mb-4 border-dark-2 border border-b-2 border-r-2 pb-3 md:rounded-lg shadow-lg">
       <DisplayContent />
       <DetailsContent />
     </article>

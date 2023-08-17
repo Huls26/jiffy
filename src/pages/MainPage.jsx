@@ -6,20 +6,40 @@ import {
   defer,
   useLoaderData,
 } from 'react-router-dom';
-import {
-  collection, getDocs,
-} from 'firebase/firestore';
+// import {
+//   collection, getDocs,
+// } from 'firebase/firestore';
 
-import { db } from '@api/FB';
+// import { db } from '@api/FB';
+import getFirestoreData from '@api/getFirestoreData';
 import FilterTagSection from '@features/FilterTagSection';
+
 // import HeadBanner from '@features/HeadBanner';
 
 const SuspenseMainPage = lazy(() => import('@components/Mainpage'));
 
 // remove HeadBanner: to be continued feature
-export async function loader() {
-  const col = collection(db, 'posts');
-  const querySnapshot = getDocs(col);
+// export async function loader() {
+//   const col = collection(db, 'posts');
+//   const querySnapshot = getDocs(col);
+
+//   console.log('render loader');
+//   return defer({
+//     querySnapshot,
+//   });
+// }
+
+export async function loader({ request }) {
+  const url = new URL(request.url);
+  const filterTag = url.searchParams.get('f');
+
+  const querySnapshot = getFirestoreData(({
+    query, collection, db, where,
+  }) => {
+    const f = filterTag;
+
+    return f ? query(collection(db, 'posts'), where(f, '!=', '')) : collection(db, 'posts');
+  });
 
   return defer({
     querySnapshot,
