@@ -1,13 +1,8 @@
 import {
-  doc, setDoc, updateDoc, arrayUnion,
-} from 'firebase/firestore';
-import {
   getDownloadURL, ref, uploadBytes,
 } from 'firebase/storage';
-import {
-  db,
-  storage,
-} from '@api/FB';
+import { storage } from '@api/FB';
+import setPostData from './setPostData';
 
 // create a url or a path name
 // upload image
@@ -26,17 +21,17 @@ export async function firebaseUploadTextContent(
   data,
 ) {
   const { userId, userData } = data;
-
-  await setDoc(doc(db, 'posts', newId), {
-    ...docData,
-    textContent: fileBody.textContent,
+  const setArguments = {
+    newId,
+    docData,
+    userId,
+    userData,
+    keyContent: 'textContent',
+    valueContent: fileBody.textContent,
     title: fileBody.title,
-  });
-  await updateDoc(doc(db, 'users', userId), {
-    ...userData,
-    posts: arrayUnion(newId),
-  });
+  };
 
+  await setPostData(setArguments);
   setData((postData) => ({
     ...postData,
     isLoading: false,
@@ -58,16 +53,16 @@ export async function firebaseUploadImage(
   const ImageRef = ref(storage, pathStorage);
   await uploadBytes(ImageRef, fileBody.imgFile);
   const imageUrl = await getDownloadURL(ImageRef);
-  await setDoc(doc(db, 'posts', newId), {
-    ...docData,
-    content: imageUrl,
+  const setArguments = {
+    newId,
+    docData,
+    userId,
+    userData,
+    keyContent: 'content',
+    valueContent: imageUrl,
     title: fileBody.title,
-  });
-  await updateDoc(doc(db, 'users', userId), {
-    ...userData,
-    posts: arrayUnion(newId),
-  });
-
+  };
+  await setPostData(setArguments);
   setData((postData) => ({
     ...postData,
     isLoading: false,
