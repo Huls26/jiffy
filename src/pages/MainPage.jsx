@@ -34,11 +34,11 @@ export async function loader({ request }) {
   const filterTag = url.searchParams.get('f');
 
   const querySnapshot = getFirestoreData(({
-    query, collection, db, where,
+    query, collection, db, where, orderBy,
   }) => (
     filterTag
-      ? query(collection(db, 'posts'), where(filterTag, '!=', ''))
-      : collection(db, 'posts')
+      ? query(collection(db, 'posts'), where(filterTag, '!=', ''), orderBy('date'))
+      : query(collection(db, 'posts'), orderBy('date', 'desc'))
   ));
 
   return defer({
