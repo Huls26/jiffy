@@ -5,7 +5,9 @@ export default function AppLayout() {
   return (
     <>
       <Header />
-      <Outlet />
+      <section className="max-w-3xl m-auto">
+        <Outlet />
+      </section>
     </>
   );
 }

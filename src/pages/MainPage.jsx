@@ -6,19 +6,40 @@ import {
   defer,
   useLoaderData,
 } from 'react-router-dom';
-import {
-  collection, getDocs,
-} from 'firebase/firestore';
+// import {
+//   collection, getDocs,
+// } from 'firebase/firestore';
 
-import { db } from '@api/FB';
+// import { db } from '@api/FB';
+import getFirestoreData from '@api/getFirestoreData';
 import FilterTagSection from '@features/FilterTagSection';
-import HeadBanner from '@features/HeadBanner';
+
+// import HeadBanner from '@features/HeadBanner';
 
 const SuspenseMainPage = lazy(() => import('@components/Mainpage'));
 
-export async function loader() {
-  const col = collection(db, 'posts');
-  const querySnapshot = getDocs(col);
+// remove HeadBanner: to be continued feature
+// export async function loader() {
+//   const col = collection(db, 'posts');
+//   const querySnapshot = getDocs(col);
+
+//   console.log('render loader');
+//   return defer({
+//     querySnapshot,
+//   });
+// }
+
+export async function loader({ request }) {
+  const url = new URL(request.url);
+  const filterTag = url.searchParams.get('f');
+
+  const querySnapshot = getFirestoreData(({
+    query, collection, db, where, orderBy,
+  }) => (
+    filterTag
+      ? query(collection(db, 'posts'), where(filterTag, '!=', ''), orderBy('date'))
+      : query(collection(db, 'posts'), orderBy('date', 'desc'))
+  ));
 
   return defer({
     querySnapshot,
@@ -31,7 +52,7 @@ function MainPage() {
   return (
     <main className="pt-16 pb-7">
       <FilterTagSection />
-      <HeadBanner />
+      {/* <HeadBanner /> */}
       <SuspenseMainPage querySnapshot={querySnapshot} />
     </main>
   );

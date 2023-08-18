@@ -17,7 +17,7 @@ export default function LoadingContents() {
   const displaySkeleton = skeleton.map((s) => s);
 
   return (
-    <div className="pt-20">
+    <div className="max-w-3xl m-auto pt-20">
       {displaySkeleton}
     </div>
   );

@@ -19,8 +19,13 @@ export default function Header() {
 
   return (
     <header className="mb-8">
-      <div className={`w-full h-36 ${profileBannerBg}`}>
-        <LazyLoadImage alt="banner" className="object-cover w-screen h-36" src={userBanner} effect="blur" />
+      <div className={`
+        w-full h-36 ${profileBannerBg} 
+        md:border md:border-gray
+        md:rounded
+      `}
+      >
+        <LazyLoadImage alt="banner" className="object-cover w-screen h-36  md:rounded" src={userBanner} effect="blur" />
       </div>
 
       <UserDetails
