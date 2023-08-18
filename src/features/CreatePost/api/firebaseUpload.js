@@ -1,7 +1,8 @@
+import { doc, deleteDoc } from 'firebase/firestore';
 import {
-  getDownloadURL, ref, uploadBytes,
+  getDownloadURL, ref, uploadBytes, deleteObject,
 } from 'firebase/storage';
-import { storage } from '@api/FB';
+import { db, storage } from '@api/FB';
 import setPostData from './setPostData';
 
 // create a url or a path name
@@ -12,6 +13,8 @@ import setPostData from './setPostData';
 // else store textContent
 // redirect user to main page after post is created
 
+// this should be good right now
+// ready for code improvement
 export async function firebaseUploadTextContent(
   fileBody,
   newId,
@@ -30,13 +33,24 @@ export async function firebaseUploadTextContent(
     valueContent: fileBody.textContent,
     title: fileBody.title,
   };
+  try {
+    await setPostData(setArguments);
 
-  await setPostData(setArguments);
-  setData((postData) => ({
-    ...postData,
-    isLoading: false,
-  }));
-  navigate('/');
+    setData((postData) => ({
+      ...postData,
+      isLoading: false,
+    }));
+    navigate('/');
+  } catch (error) {
+    await deleteDoc(doc(db, 'posts', newId));
+    await deleteDoc(doc(db, 'users', userId));
+
+    setData((postData) => ({
+      ...postData,
+      isLoading: false,
+      errorMessage: 'Sorry, something went wrong. Try refreshing the page.',
+    }));
+  }
 }
 
 export async function firebaseUploadImage(
@@ -51,21 +65,35 @@ export async function firebaseUploadImage(
   const { userId, newId } = ids;
   const pathStorage = `posts/${userId}/${fileBody.fileName}${newId}`;
   const ImageRef = ref(storage, pathStorage);
-  await uploadBytes(ImageRef, fileBody.imgFile);
-  const imageUrl = await getDownloadURL(ImageRef);
-  const setArguments = {
-    newId,
-    docData,
-    userId,
-    userData,
-    keyContent: 'content',
-    valueContent: imageUrl,
-    title: fileBody.title,
-  };
-  await setPostData(setArguments);
-  setData((postData) => ({
-    ...postData,
-    isLoading: false,
-  }));
-  navigate('/');
+  try {
+    await uploadBytes(ImageRef, fileBody.imgFile);
+    const imageUrl = await getDownloadURL(ImageRef);
+    const setArguments = {
+      newId,
+      docData,
+      userId,
+      userData,
+      keyContent: 'content',
+      valueContent: imageUrl,
+      title: fileBody.title,
+    };
+    await setPostData(setArguments);
+    setData((postData) => ({
+      ...postData,
+      isLoading: false,
+    }));
+    navigate('/');
+  } catch (error) {
+    await deleteDoc(doc(db, 'posts', newId));
+    await deleteDoc(doc(db, 'users', userId));
+    deleteObject(ImageRef).catch(() => {
+      console.clear();
+    });
+
+    setData((postData) => ({
+      ...postData,
+      isLoading: false,
+      errorMessage: 'Sorry, something went wrong. Try refreshing the page.',
+    }));
+  }
 }
