@@ -13,7 +13,7 @@ export default function SuspenseMainPage({ querySnapshot }) {
         (data) => <Contents querySnapshot={data.docs} />
       }
       </Await>
-      <h1 className="text-center text-gray mt-5">Ow hi there you&apos;ve reach the bottom part</h1>
+      <h1 className="text-center text-gray -mt-3">Ow hi there you&apos;ve reach the bottom part</h1>
     </Suspense>
   );
 }

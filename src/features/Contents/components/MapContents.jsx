@@ -1,42 +1,50 @@
 import PropTypes from 'prop-types';
-// import useHandleSearchParams from '@hooks/useHandleSearchParams';
+import { FixedSizeList as List } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
 import ContentComponents from './ContentComponents';
 import ContentDataProvider from '../context';
-// import filterContent from '../utils/filterContent';
+import '../style/mapContents.css';
 
-// replace map with react-window for pagination
-// clean up
+// set a react-window for pagination
 export default function MapContents({ contentsData }) {
-  // const { searchParams } = useHandleSearchParams();
-  // const displayContents = contentsData?.reduce((contents, doc) => {
-  //   const c = (
-  //     <ContentDataProvider
-  //       key={doc.id}
-  //       value={{ docData: doc.data(), contentId: doc.id }}
-  //     >
-  //       <ContentComponents />
-  //     </ContentDataProvider>
-  //   );
+  const contentsLength = contentsData.length;
+  const content = ({ data, index, style }) => {
+    const jiffyContent = data[index];
 
-  //   const newArray = filterContent(contents, doc, searchParams, c);
-
-  //   return newArray;
-  // }, []);
-  const displayContents = contentsData?.map((content) => {
-    const c = (
+    return (
       <ContentDataProvider
-        key={content.id}
-        value={{ docData: content.data(), contentId: content.id }}
+        value={{ docData: jiffyContent.data(), contentId: jiffyContent.id }}
       >
-        <ContentComponents />
+        <ContentComponents style={style} />
       </ContentDataProvider>
     );
+  };
 
-    return c;
-  });
-
-  return displayContents;
+  return (
+    <section
+      style={{
+        height: '100vh',
+        overflow: 'hidden',
+      }}
+    >
+      <AutoSizer>
+        {({ height, width }) => (
+          <List
+            style={{ 'overflow-x': 'hidden' }}
+            itemData={contentsData}
+            className="List"
+            height={height - 18}
+            width={width}
+            itemCount={contentsLength}
+            itemSize={405}
+          >
+            {content}
+          </List>
+        )}
+      </AutoSizer>
+    </section>
+  );
 }
 
 MapContents.propTypes = {

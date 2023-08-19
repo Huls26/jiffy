@@ -22,7 +22,7 @@ import { action as actionUserInfoEditForm } from '@features/ProfileEditForm/comp
 const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));
 
 // handle errors and not found page
-const ErrorPage = lazy(() => import('@pages/ErrorPage'));
+// const ErrorPage = lazy(() => import('@pages/ErrorPage'));
 const NotFoundPage = lazy(() => import('@pages/NotFoundPage'));
 // const ViewPage = lazy(() => import('@pages/ViewPage'));
 
@@ -33,7 +33,7 @@ const router = createBrowserRouter(
         key="main"
         path="/"
         element={<AppLayout />}
-        errorElement={<ErrorPage />}
+        // errorElement={<ErrorPage />}
       >
         <Route path="*" element={<NotFoundPage />} />
         <Route
