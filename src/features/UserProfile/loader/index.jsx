@@ -2,7 +2,6 @@ import {
   redirect,
 } from 'react-router-dom';
 
-// import { db } from '@api/FB';
 import getUsersData from '@api/getUser';
 import { getCurrentUser } from '@api/onSnapUserAuth';
 import getFirestoreData from '@api/getFirestoreData';
@@ -16,11 +15,11 @@ export default async function loader({ request, params }) {
 
   // fetch user posts data
   const querySnapshot = await getFirestoreData(({
-    query, collection, db, where,
+    query, collection, db, where, orderBy,
   }) => (
     filterTag
       ? query(collection(db, 'posts'), where('createdBy', '==', urlId), where(filterTag, '!=', ''))
-      : query(collection(db, 'posts'), where('createdBy', '==', urlId))
+      : query(collection(db, 'posts'), where('createdBy', '==', urlId), orderBy('date', 'desc'))
   ));
 
   if (!user?.uid) {

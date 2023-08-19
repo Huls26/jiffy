@@ -10,7 +10,6 @@ import {
 //   collection, getDocs,
 // } from 'firebase/firestore';
 
-// import { db } from '@api/FB';
 import getFirestoreData from '@api/getFirestoreData';
 import FilterTagSection from '@features/FilterTagSection';
 
@@ -29,15 +28,16 @@ const SuspenseMainPage = lazy(() => import('@components/Mainpage'));
 //   });
 // }
 
+// ? query(collection(db, 'posts'), where(filterTag, '!=', ''))
 export async function loader({ request }) {
   const url = new URL(request.url);
   const filterTag = url.searchParams.get('f');
 
   const querySnapshot = getFirestoreData(({
-    query, collection, db, where, orderBy,
+    query, collection, orderBy, db, where,
   }) => (
     filterTag
-      ? query(collection(db, 'posts'), where(filterTag, '!=', ''), orderBy('date'))
+      ? query(collection(db, 'posts'), where(filterTag, '!=', ''))
       : query(collection(db, 'posts'), orderBy('date', 'desc'))
   ));
 
