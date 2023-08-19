@@ -12,7 +12,6 @@ import LoginPage, { action as actionLoginPage, loader as loaderLoginPage } from 
 import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
 import ProfilePage from '@pages/ProfilePage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
-// import CreatePostPage from '@pages/CreatePostPage';
 import ViewPage from '@pages/ViewPage';
 import { loader as loaderUserAuth } from '@api/onSnapUserAuth';
 import loaderProfilePage from '@features/UserProfile/loader';
