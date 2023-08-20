@@ -12,7 +12,7 @@ import DetailsContent from './DetailsContent';
 function ContentComponents({ style }) {
   const inlineStyle = style || {};
   return (
-    <article style={inlineStyle} className="mb-4 border-dark-2 border border-b-2 border-r-2 pb-3 md:rounded-lg shadow-lg">
+    <article style={inlineStyle} className="border-dark-2 border border-b-2 border-r-2 pb-3 md:rounded-lg shadow-lg">
       <DisplayContent />
       <DetailsContent />
     </article>
