@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { FixedSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
+import SkeletonMainPage from '@components/MainPage/SkeletonMainPage';
 import ContentComponents from './ContentComponents';
 import ContentDataProvider from '../context';
 import '../style/mapContents.css';
@@ -9,14 +10,32 @@ import '../style/mapContents.css';
 // set a react-window for pagination
 export default function MapContents({ contentsData }) {
   const contentsLength = contentsData.length;
-  const content = ({ data, index, style }) => {
+  const content = ({
+    data, index, style, isScrolling,
+  }) => {
     const jiffyContent = data[index];
+    // add gutter space
+    const styleTop = style.top;
+    // i like this method. Simply same as adding margin bottom
+    const addSpace = styleTop + (18 * index);
 
+    // render content and loading component when user scroll
     return (
       <ContentDataProvider
         value={{ docData: jiffyContent.data(), contentId: jiffyContent.id }}
       >
-        <ContentComponents style={style} />
+        {
+        isScrolling
+          ? <SkeletonMainPage style={{ ...style, top: addSpace }} />
+          : (
+            <ContentComponents
+              style={{
+                ...style,
+                top: addSpace,
+              }}
+            />
+          )
+      }
       </ContentDataProvider>
     );
   };
@@ -31,13 +50,14 @@ export default function MapContents({ contentsData }) {
       <AutoSizer>
         {({ height, width }) => (
           <List
-            style={{ 'overflow-x': 'hidden' }}
+            style={{ overflowX: 'hidden' }}
             itemData={contentsData}
             className="List"
             height={height - 18}
             width={width}
             itemCount={contentsLength}
             itemSize={405}
+            useIsScrolling
           >
             {content}
           </List>

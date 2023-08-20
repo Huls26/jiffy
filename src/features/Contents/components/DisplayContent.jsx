@@ -9,7 +9,7 @@ export default function DisplayContent() {
 
   return (
     <Link to="../view" state={{ docData, contentId }}>
-      <div className="h-72 mb-2 bg-gradient-to-r from-blue via-purple to-pink shadow-lg transition hover:transform-gpu hover:scale-[1.02] md:rounded-t-sm">
+      <div className="h-72 mb-2 bg-gradient-to-r from-blue via-purple to-pink shadow-lg transition hover:transform-gpu hover:scale-[1.02] hover:rounded-lg md:rounded-t-sm">
         <ContentDisplay docData={docData} />
       </div>
     </Link>
