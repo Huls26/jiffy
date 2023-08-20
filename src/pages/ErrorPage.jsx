@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 export default function ErrorPage() {
   const error = useRouteError();
   useEffect(() => {
-
+    console.clear();
   });
 
   return (

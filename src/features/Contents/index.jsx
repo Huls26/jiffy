@@ -5,7 +5,6 @@ import MapContents from './components/MapContents';
 
 // add npm react-window for pagination
 export default function Contents({ querySnapshot }) {
-  console.log('render Contents');
   return (
     <section>
       <MapContents contentsData={querySnapshot} />

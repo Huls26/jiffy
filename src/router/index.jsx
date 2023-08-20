@@ -9,7 +9,7 @@ import {
 import AppLayout from '@layout/AppLayout';
 
 import LoginPage, { action as actionLoginPage, loader as loaderLoginPage } from '@pages/LoginPage';
-import MainPage, { loader as loaderMainpage } from '@pages/MainPage';
+import MainPage from '@pages/MainPage';
 import ProfilePage from '@pages/ProfilePage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
 import ViewPage from '@pages/ViewPage';
@@ -18,6 +18,7 @@ import loaderProfilePage from '@features/UserProfile/loader';
 
 // // lazy loading
 import { action as actionUserInfoEditForm } from '@features/ProfileEditForm/components/UserInfoEditForm';
+import loaderMainpage from '@components/MainPage/utils/loaderMainPage';
 
 const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));
 

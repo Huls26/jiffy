@@ -14,7 +14,6 @@ export default function UserDetails() {
   // modifyTitle safety net
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
-  console.log('Render userDetails');
   return (
     <div className="flex items-start space-x-3">
       <Link to={`../profile/${createdBy}`} state={{ docData, contentId }}>
