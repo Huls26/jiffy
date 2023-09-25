@@ -3,7 +3,6 @@
 import PropTypes from 'prop-types';
 import MapContents from './components/MapContents';
 
-// add npm react-window for pagination
 export default function Contents({ querySnapshot }) {
   return (
     <section>

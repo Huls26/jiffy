@@ -10,6 +10,7 @@ import '../style/mapContents.css';
 // set a react-window for pagination
 export default function MapContents({ contentsData }) {
   const contentsLength = contentsData.length;
+  // content
   const content = ({
     data, index, style, isScrolling,
   }) => {
@@ -43,7 +44,7 @@ export default function MapContents({ contentsData }) {
   return (
     <section
       style={{
-        height: '100vh',
+        height: '90vh',
         overflow: 'hidden',
       }}
     >
@@ -63,6 +64,7 @@ export default function MapContents({ contentsData }) {
           </List>
         )}
       </AutoSizer>
+
     </section>
   );
 }
