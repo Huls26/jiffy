@@ -44,7 +44,7 @@ export default function MapContents({ contentsData }) {
   return (
     <section
       style={{
-        height: '90vh',
+        height: '100vh',
         overflow: 'hidden',
       }}
     >

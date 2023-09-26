@@ -11,6 +11,7 @@ import DetailsContent from './DetailsContent';
 // hover:backdrop-contrast-50 transition-all ease-in-out
 function ContentComponents({ style }) {
   const inlineStyle = style || {};
+
   return (
     <article style={inlineStyle} className="border-dark-2 border border-b-2 border-r-2 pb-3 md:rounded-lg shadow-lg">
       <DisplayContent />
