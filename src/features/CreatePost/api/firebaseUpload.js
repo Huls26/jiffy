@@ -43,7 +43,7 @@ export async function firebaseUploadTextContent(
     navigate('/');
   } catch (error) {
     await deleteDoc(doc(db, 'posts', newId));
-    await deleteDoc(doc(db, 'users', userId));
+    // await deleteDoc(doc(db, 'users', userId));
 
     setData((postData) => ({
       ...postData,
@@ -65,6 +65,7 @@ export async function firebaseUploadImage(
   const { userId, newId } = ids;
   const pathStorage = `posts/${userId}/${fileBody.fileName}${newId}`;
   const ImageRef = ref(storage, pathStorage);
+
   try {
     await uploadBytes(ImageRef, fileBody.imgFile);
     const imageUrl = await getDownloadURL(ImageRef);
@@ -85,7 +86,8 @@ export async function firebaseUploadImage(
     navigate('/');
   } catch (error) {
     await deleteDoc(doc(db, 'posts', newId));
-    await deleteDoc(doc(db, 'users', userId));
+    // await deleteDoc(doc(db, 'users', userId));
+
     deleteObject(ImageRef).catch(() => {
       console.clear();
     });
