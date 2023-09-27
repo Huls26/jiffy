@@ -5,9 +5,7 @@ import {
 import { useLoaderData } from 'react-router-dom';
 
 import FilterTagSection from '@features/FilterTagSection';
-
 // import HeadBanner from '@features/HeadBanner';
-
 const SuspenseMainPage = lazy(() => import('@components/Mainpage'));
 
 // remove HeadBanner: to be continued feature
