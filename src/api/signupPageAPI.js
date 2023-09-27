@@ -1,4 +1,6 @@
-import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword, deleteUser, getAuth, signOut,
+} from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import {
   auth,
@@ -19,6 +21,7 @@ export default async function creatingUserValidation(
       password,
     );
     const { user } = userCredential;
+    const authSignOut = getAuth();
     let resMessage = '';
     let isInvalid = false;
 
@@ -35,6 +38,7 @@ export default async function creatingUserValidation(
             console.log(error.message);
           });
       });
+      await signOut(authSignOut);
     }
 
     return { isInvalid, resMessage };
