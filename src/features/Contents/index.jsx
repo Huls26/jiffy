@@ -1,12 +1,31 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/forbid-prop-types */
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import MapContents from './components/MapContents';
 
 export default function Contents({ querySnapshot }) {
+  const isValidList = querySnapshot.length;
+
   return (
     <section>
-      <MapContents contentsData={querySnapshot} />
+      {
+        isValidList
+          ? <MapContents contentsData={querySnapshot} />
+          : (
+            <Link to="/createpost">
+              <h1 className="
+                  font-A font-bold
+                  text-lg text-center text-gray-dark
+                  hover:opacity-80
+                  active:text-purple
+                "
+              >
+                No Posts Available.
+              </h1>
+            </Link>
+          )
+      }
     </section>
   );
 }
