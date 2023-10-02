@@ -25,7 +25,7 @@ export default function Header() {
         md:rounded
       `}
       >
-        <LazyLoadImage alt="banner" className="object-cover w-screen h-36  md:rounded" src={userBanner} effect="blur" />
+        <LazyLoadImage alt="banner" className="object-cover min-w-[450px] w-screen h-36  md:rounded" src={userBanner} effect="blur" />
       </div>
 
       <UserDetails
