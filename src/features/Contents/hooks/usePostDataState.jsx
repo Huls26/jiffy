@@ -24,7 +24,10 @@ export default function usePostDataState() {
   const isUserLike = peopleLikes.includes(userId);
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
 
+  // problem here i think instead of using useEffect
+  // direct update the firebase using useReducer dispatch
   useEffect(() => {
+    console.log('like update');
     // updating firebase posts data
     async function updateFirebase() {
       if (userId) {
