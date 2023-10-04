@@ -17,7 +17,7 @@ export default function MapContents({ contentsData }) {
     const jiffyContent = data[index];
     // add gutter space
     const styleTop = style.top;
-    // i like this method. Simply same as adding margin bottom
+    // i like this code. Simply same as adding margin bottom
     const addSpace = styleTop + (18 * index);
 
     // render content and loading component when user scroll

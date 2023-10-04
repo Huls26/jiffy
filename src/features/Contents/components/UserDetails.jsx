@@ -8,7 +8,7 @@ import usePostDataState from '../hooks/usePostDataState';
 export default function UserDetails() {
   const {
     dispatch, userImg, title, username,
-    displayLikes, btnBg, userId, createdBy, docData, contentId,
+    displayLikes, btnBg, userId, createdBy, contentId, userState,
   } = usePostDataState();
 
   // modifyTitle safety net
@@ -16,7 +16,10 @@ export default function UserDetails() {
 
   return (
     <div className="flex items-start space-x-3">
-      <Link to={`../profile/${createdBy}`} state={{ docData, contentId }}>
+      <Link
+        to={`../profile/${createdBy}`}
+        state={{ docData: userState, contentId }}
+      >
         <UserImage userImg={userImg} />
       </Link>
       <div>
@@ -28,7 +31,7 @@ export default function UserDetails() {
             bg={btnBg}
             onClick={() => userId && dispatch({ type: 'USER_LIKE', userId })}
           />
-          <Link to="../view" state={{ docData, contentId }}>
+          <Link to="../view" state={{ docData: userState, contentId }}>
             <ContentBtn text="comment" />
           </Link>
         </div>
