@@ -23,7 +23,8 @@ export default function MapContents({ contentsData }) {
     // render content and loading component when user scroll
     return (
       <ContentDataProvider
-        value={{ docData: jiffyContent.data(), contentId: jiffyContent.id }}
+        docData={jiffyContent.data()}
+        contentId={jiffyContent.id}
       >
         {
         isScrolling
