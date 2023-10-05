@@ -6,7 +6,7 @@ export const INITIAL_STATE = {
 
 export default function reducerMethod(state, action) {
   switch (action.type) {
-    // max likes for now is 100M
+    // max follows for now is 1500
     case 'USER_FOLLOW': {
       const { peopleFollows, followers } = setUserFollow(state, action);
 
@@ -16,7 +16,7 @@ export default function reducerMethod(state, action) {
         peopleFollows,
       };
     }
-    // max likes for now is 100M
+    // max likes for now is 1500
     case 'USER_LIKE': {
       const { peopleLikes, likes } = setUserLike(state, action);
 

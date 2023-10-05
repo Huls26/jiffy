@@ -29,7 +29,7 @@ export default function UserDetails() {
           <ContentBtn
             text={`like (${displayLikes})`}
             bg={btnBg}
-            onClick={() => userId && dispatch({ type: 'USER_LIKE', userId })}
+            onClick={() => userId && dispatch({ type: 'USER_LIKE', userId, contentId })}
           />
           <Link to="../view" state={{ docData: userState, contentId }}>
             <ContentBtn text="comment" />
