@@ -1,4 +1,7 @@
-import { useContext, useEffect, useReducer } from 'react';
+import {
+  useContext,
+  useEffect,
+} from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 
 import { db } from '@api/FB';
@@ -6,17 +9,16 @@ import { dataContext } from '@context/dataContext';
 
 import { contentDataContext } from '../context';
 import shortenLikesValue from '../utils/shortenLikesValue';
-import reducerMethod from '../utils/userReducer';
 
 export default function usePostDataState() {
   // getting user data/User id
   const [userContext] = useContext(dataContext);
   const { userId } = userContext;
   // getting post data
-  const { docData, contentId } = useContext(contentDataContext);
-  // setting post data to state
-  // updating post data
-  const [userState, dispatch] = useReducer(reducerMethod, { ...docData });
+  // handle post state
+  const {
+    docData, contentId, userState, dispatch,
+  } = useContext(contentDataContext);
   const {
     userImg, textContent, username, likes, peopleLikes, title, createdBy,
   } = userState;
@@ -24,7 +26,6 @@ export default function usePostDataState() {
   const isUserLike = peopleLikes.includes(userId);
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
 
-  console.log(docData);
   // problem here i think instead of using useEffect
   // direct update the firebase using useReducer dispatch
   useEffect(() => {
