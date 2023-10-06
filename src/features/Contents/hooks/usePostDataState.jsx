@@ -1,17 +1,13 @@
 import { useContext } from 'react';
-import { dataContext } from '@context/dataContext';
 
 import { contentDataContext } from '../context';
 import shortenLikesValue from '../utils/shortenLikesValue';
 
 export default function usePostDataState() {
-  // getting user data/User id
-  const [userContext] = useContext(dataContext);
-  const { userId } = userContext;
   // getting post data
   // handle post state
   const {
-    docData, contentId, userState, dispatch,
+    docData, contentId, userState, dispatch, userId,
   } = useContext(contentDataContext);
   const {
     userImg, textContent, username, likes, peopleLikes, title, createdBy,
@@ -20,7 +16,7 @@ export default function usePostDataState() {
   const isUserLike = peopleLikes.includes(userId);
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
 
-  console.log(contentId, userContext);
+  // console.log(contentId, userContext);
   return {
     userState,
     dispatch,

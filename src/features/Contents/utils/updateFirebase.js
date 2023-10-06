@@ -27,7 +27,7 @@ function debounce(callback) {
         contentId,
         likes,
         peopleLikes,
-      ), 360);
+      ), 720);
     }
   );
 }
