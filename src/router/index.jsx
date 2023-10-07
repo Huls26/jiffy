@@ -23,11 +23,9 @@ import loaderMainpage from '@components/MainPage/utils/loaderMainPage';
 const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));
 
 // handle errors and not found page
-// const ErrorPage = lazy(() => import('@pages/ErrorPage'));
+const ErrorPage = lazy(() => import('@pages/ErrorPage'));
 const NotFoundPage = lazy(() => import('@pages/NotFoundPage'));
 // const ViewPage = lazy(() => import('@pages/ViewPage'));
-
-console.log('You remove errorElement');
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,7 +34,7 @@ const router = createBrowserRouter(
         key="main"
         path="/"
         element={<AppLayout />}
-        // errorElement={<ErrorPage />}
+        errorElement={<ErrorPage />}
       >
         <Route path="*" element={<NotFoundPage />} />
         <Route
@@ -45,21 +43,21 @@ const router = createBrowserRouter(
           element={<MainPage />}
         />
         <Route
+         // protected routes
           path="view"
           element={<ViewPage />}
           loader={loaderUserAuth}
-          // protected routes
         />
         <Route
+         // protected routes
           path="profile/:id"
           loader={loaderProfilePage}
           action={actionUserInfoEditForm}
           element={<ProfilePage />}
-           // protected routes
         />
         <Route
-          path="createpost"
           // protected routes
+          path="createpost"
           loader={loaderUserAuth}
           element={<CreatePostPage />}
         />
