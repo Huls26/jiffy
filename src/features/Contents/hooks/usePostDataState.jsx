@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { contentDataContext } from '../context';
+import contentDataContext from '../context/contentDataContext';
 import shortenLikesValue from '../utils/shortenLikesValue';
 
 export default function usePostDataState() {
