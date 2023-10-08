@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Link, useRouteError } from 'react-router-dom';
 import ContentBtn from '@components/Btn/ContentBtn';
 import { useEffect } from 'react';
