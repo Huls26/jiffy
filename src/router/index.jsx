@@ -8,13 +8,21 @@ import {
 
 import AppLayout from '@layout/AppLayout';
 
+// login page
 import LoginPage from '@pages/LoginPage';
 import loaderLoginPage from '@pages/login/loader';
 import actionLoginPage from '@pages/login/action';
+// main page
 import MainPage from '@pages/MainPage';
+// profile page
 import ProfilePage from '@pages/ProfilePage';
-import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
+// signup page
+import SignupPage from '@pages/SignupPage';
+import actionSignupPage from '@pages/signup/action';
+// view page
 import ViewPage from '@pages/ViewPage';
+
+// loader
 import { loader as loaderUserAuth } from '@api/onSnapUserAuth';
 import loaderProfilePage from '@features/UserProfile/loader';
 
