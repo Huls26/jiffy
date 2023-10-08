@@ -14,6 +14,8 @@ export default function UserPhoto() {
   const profilePhotoBg = userImg ? backGroundColor : 'bg-primary-1';
   const hoverTransition = hoverProfile ? '' : 'opacity-0';
 
+  // img style
+  //  before:bg-[url('backGroundColor')]
   return (
     <Link to={linkTo} state>
       <div
@@ -40,7 +42,6 @@ export default function UserPhoto() {
 
         <img
           className={`
-              before:bg-[url('backGroundColor')] 
               w-full h-full object-cover
             border-dark-1 border-[.2em] border-b-2
               border-r-2 rounded-full
