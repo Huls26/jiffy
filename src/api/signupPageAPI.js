@@ -35,6 +35,7 @@ export default async function creatingUserValidation(
           isInvalid = true;
         })
           .catch(() => {
+            // eslint-disable-next-line no-console
             console.log(error.message);
           });
       });

@@ -12,6 +12,7 @@ export default async function updateUserPassword(password, getKeyValue) {
     return { error: false, updateFormDataValue: getKeyValue, update: 'password' };
   } catch (error) {
     // testing this code below
+    // eslint-disable-next-line no-console
     console.clear();
     const errorMessage = error.code.replace('auth/', '').split('-').join(' ');
     return { error: true, errorM: `${errorMessage} updating password` };
