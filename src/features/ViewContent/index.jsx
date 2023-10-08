@@ -23,6 +23,7 @@ function ViewContent({ details }) {
   const navigate = useNavigate();
   const [stateLocation, setStateLocation] = useState(() => ({ ...state }));
   const { docData } = stateLocation;
+  const bGC = bgColor;
 
   useEffect(() => {
     if (!docData) {
@@ -38,7 +39,7 @@ function ViewContent({ details }) {
 
   return (
     <article className="mb-4 border-dark-2 border border-b-2 border-r-2 pb-3 rounded">
-      <div className={`h-72 mb-2 ${bgColor}`}>
+      <div className={`h-72 mb-2 ${bGC}`}>
         {docData && <ContentDisplay docData={docData} />}
       </div>
 

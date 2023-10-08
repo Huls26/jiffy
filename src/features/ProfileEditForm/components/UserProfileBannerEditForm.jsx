@@ -21,6 +21,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
     userData, uData, status, setUData, saveChanges,
   } = useProfileBannerState();
   const loadingComponent = uData?.isLoading ? 'pointer-events-none animate-pulse relative' : '';
+  const BGC = bgColor;
 
   return (
     <section className={`py-3 text-center ${loadingComponent}`}>
@@ -32,7 +33,7 @@ export default function UserProfileBannerEditForm({ handleButton }) {
         <ContentBtn text="Edit Profile info" onClick={() => handleButton('profile', 'editInfo')} />
       </div>
 
-      <LazyLoadImage alt="banner" className={`w-screen h-24 ${bgColor}`} src={uData?.userBanner} effect="blur" />
+      <LazyLoadImage alt="banner" className={`w-screen h-24 ${BGC}`} src={uData?.userBanner} effect="blur" />
 
       <div className="text-left ml-1 -mt-6 mb-4">
         <UploadPhotoBtn

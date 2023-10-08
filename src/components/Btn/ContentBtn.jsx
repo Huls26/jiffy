@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 export default function ContentBtn({
   text, bg, onClick, type,
 }) {
-  const bgColor = bg || 'bg-yellow-1';
+  const bgCol = bg || 'bg-yellow-1';
 
   return (
     <button
       onClick={onClick}
       type={!type ? 'button' : 'submit'}
       className={`
-        ${bgColor} px-3 py-1
+        ${bgCol} px-3 py-1
         font-A font-bold text-sm 
         grow-0 basis-0
         border-dark-2

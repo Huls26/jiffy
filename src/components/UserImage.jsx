@@ -5,10 +5,12 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import bgColor from '@default/bgColor';
 
 export default function UserImage({ userImg }) {
+  const bgC = bgColor;
+
   return (
     <div className={
                 `w-11 h-11
-                ${bgColor}
+                ${bgC}
                 rounded-full
                 shrink-0
                 grow-0`
