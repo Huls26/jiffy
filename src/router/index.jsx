@@ -8,7 +8,9 @@ import {
 
 import AppLayout from '@layout/AppLayout';
 
-import LoginPage, { action as actionLoginPage, loader as loaderLoginPage } from '@pages/LoginPage';
+import LoginPage from '@pages/LoginPage';
+import loaderLoginPage from '@pages/login/loader';
+import actionLoginPage from '@pages/login/action';
 import MainPage from '@pages/MainPage';
 import ProfilePage from '@pages/ProfilePage';
 import SignupPage, { action as actionSignupPage } from '@pages/SignupPage';
