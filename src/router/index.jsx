@@ -16,6 +16,7 @@ import actionLoginPage from '@pages/login/action';
 import MainPage from '@pages/MainPage';
 // profile page
 import ProfilePage from '@pages/ProfilePage';
+import actionUserInfoEditForm from '@features/ProfileEditForm/utils/editFormAction';
 // signup page
 import SignupPage from '@pages/SignupPage';
 import actionSignupPage from '@pages/signup/action';
@@ -27,7 +28,6 @@ import { loader as loaderUserAuth } from '@api/onSnapUserAuth';
 import loaderProfilePage from '@features/UserProfile/loader';
 
 // // lazy loading
-import { action as actionUserInfoEditForm } from '@features/ProfileEditForm/components/UserInfoEditForm';
 import loaderMainpage from '@components/MainPage/utils/loaderMainPage';
 
 const CreatePostPage = lazy(() => import('@pages/CreatePostPage'));

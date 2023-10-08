@@ -1,6 +1,3 @@
-import {
-  memo,
-} from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-router-dom';
 
@@ -10,17 +7,9 @@ import useResetScrollView from '@hooks/useResetScrollView';
 
 import EditFormRenderMessage from './EditFormRenderMessage';
 import UpdatingFormLoading from './UpdatingFormLoading';
-import handlePasswordUpdateFormData from '../utils/handlePasswordUpdateFormData';
 import useHandleEditForm from '../hooks/useHandleEditForm';
 
-export async function action({ request }) {
-  // handle password change and updateFormDataValue
-  const updateFormDataRes = await handlePasswordUpdateFormData(request);
-
-  return updateFormDataRes;
-}
-
-function UserInfoEditForm({ handleButton }) {
+export default function UserInfoEditForm({ handleButton }) {
   // add defer, Await, Suspence submiting password
   useResetScrollView();
   const {
@@ -77,6 +66,3 @@ function UserInfoEditForm({ handleButton }) {
 UserInfoEditForm.propTypes = {
   handleButton: PropTypes.func.isRequired,
 };
-
-const memoUserInfoEditForm = memo(UserInfoEditForm);
-export default memoUserInfoEditForm;
