@@ -43,7 +43,6 @@ export default function UserPhoto() {
 
         <img
           className={`
-              before:bg-[url('backGroundColor')]
               w-full h-full object-cover
             border-dark-1 border-[.2em] border-b-2
               border-r-2 rounded-full
