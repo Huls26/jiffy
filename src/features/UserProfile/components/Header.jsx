@@ -7,7 +7,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import FilterNavBtn from '@components/FilterNavBtn';
 import { dataContext } from '@context/dataContext';
-import profileBannerBg from '@default';
+import bgColor from '@defaultSetting/bgColor';
 
 import UserDetails from './UserDetails';
 
@@ -16,6 +16,7 @@ export default function Header() {
   const [data] = useContext(dataContext);
   const details = me ? data.userData : userData;
   const { userBanner } = details;
+  const profileBannerBg = bgColor;
 
   return (
     <header className="mb-8">

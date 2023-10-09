@@ -28,7 +28,7 @@
     "@assets/*": ["src/assets/*"], 
     "@components/*": ["src/components/*"], 
     "@context/*": ["src/context/*"], 
-    "@default/*": ["src/default/*"],
+    "@defaultSetting/*": ["src/defaultSetting/*"],
     "@features/*": ["src/features/*"],
     "@hooks/*": ["src/hooks/*"], 
     "@layout/*": ["src/layout/*"],

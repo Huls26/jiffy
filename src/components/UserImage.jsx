@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import bgColor from '@default/bgColor';
+import bgColor from '@defaultSetting/bgColor';
 
 export default function UserImage({ userImg }) {
   const bgC = bgColor;

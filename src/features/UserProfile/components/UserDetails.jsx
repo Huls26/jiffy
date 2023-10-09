@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ContentBtn from '@components/Btn/ContentBtn';
 import CreatePostBtn from '@components/Header/components/CreatePostBtn';
-import { message as defaultDescription } from '@default';
+import defaultDescription from '@defaultSetting/message';
 import useViewContentHooks from '@features/ViewContent/hooks/useViewContentHooks';
 import useCheckId from '@hooks/useCheckId';
 
