@@ -1,7 +1,4 @@
-import {
-  memo,
-  lazy,
-} from 'react';
+import { lazy } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 import FilterTagSection from '@features/FilterTagSection';
@@ -10,7 +7,7 @@ const SuspenseMainPage = lazy(() => import('@components/Mainpage'));
 
 // remove HeadBanner: to be continued feature
 // check loader in router
-function MainPage() {
+export default function MainPage() {
   const { querySnapshot } = useLoaderData();
 
   return (
@@ -21,6 +18,3 @@ function MainPage() {
     </main>
   );
 }
-
-const MemoMainPage = memo(MainPage);
-export default MemoMainPage;
