@@ -89,6 +89,7 @@ export async function firebaseUploadImage(
     // await deleteDoc(doc(db, 'users', userId));
 
     deleteObject(ImageRef).catch(() => {
+      // eslint-disable-next-line no-console
       console.clear();
     });
 

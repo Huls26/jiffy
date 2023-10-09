@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useNavigation } from 'react-router-dom';
+import SpinnerCard from '@components/Loading/SpinnerCard';
 import LoginForm from '../LoginForm';
-import SpinnerCard from '../../components/Loading/SpinnerCard';
 
 export default function LoginLoadingComponent({ actionData }) {
   const { state } = useNavigation();

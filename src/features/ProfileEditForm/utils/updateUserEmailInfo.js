@@ -23,6 +23,7 @@ export default async function updateUserEmailInfo(
 
     return { error: false, update: 'Info' };
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.clear();
     const errorMessage = error?.code.replace('auth/', '').split('-').join(' ');
     return { error: true, errorM: `${errorMessage} updating email` };

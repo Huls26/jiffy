@@ -1,6 +1,3 @@
-// import SearchForm from '../Header/components/SearchForm';
-// import UserLogin from '../Header/components/UserLogin';
-
 export default function LoadingHeader() {
   return (
     <header className="

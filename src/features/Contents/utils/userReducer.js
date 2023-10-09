@@ -1,9 +1,6 @@
 import setUserLike from './setUserLike';
 import setUserFollow from './setUserFollow';
 
-export const INITIAL_STATE = {
-};
-
 export default function reducerMethod(state, action) {
   switch (action.type) {
     // max follows for now is 1500

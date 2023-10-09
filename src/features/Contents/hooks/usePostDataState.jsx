@@ -16,7 +16,6 @@ export default function usePostDataState() {
   const isUserLike = peopleLikes.includes(userId);
   const btnBg = isUserLike ? 'bg-green' : 'bg-aqua-1';
 
-  // console.log(contentId, userContext);
   return {
     userState,
     dispatch,

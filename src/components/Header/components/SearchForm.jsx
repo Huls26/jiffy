@@ -15,7 +15,6 @@ export default function SearchForm() {
       />
       <button
         type="button"
-        onClick={() => console.log('submit')}
         className="
       bg-yellow-1 rounded-r-full
         pr-3 pl-1 py-1

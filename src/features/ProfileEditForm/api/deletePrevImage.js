@@ -13,6 +13,7 @@ export default async function deletePrevImage(prevImgUrl) {
     await deleteObject(delImgRef);
   } catch (error) {
     // do nothing
+    // eslint-disable-next-line no-console
     console.clear();
   }
 }

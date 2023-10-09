@@ -1,5 +1,3 @@
-// import { useState } from 'react';
-
 export default function SignupFormDateYear() {
   const currentYear = new Date().getFullYear();
   const maxLengthYear = `${currentYear}`.length;

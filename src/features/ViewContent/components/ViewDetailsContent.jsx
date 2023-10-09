@@ -27,8 +27,6 @@ export default function ViewDetailsContent({ stateLocation }) {
     }
   }
 
-  console.log('code clean up');
-
   return (
     <section className="
         w-full

@@ -9,8 +9,6 @@ import {
 
 import ContentDisplay from '@components/Content/ContentDisplay';
 import bgColor from '@defaultSetting/bgColor';
-// eslint-disable-next-line max-len
-// import linkStateContext from '@features/ViewContent/context/linkStateContext';
 
 import ViewDetailsContent from './components/ViewDetailsContent';
 import DescriptionBox from './components/DescriptionBox';

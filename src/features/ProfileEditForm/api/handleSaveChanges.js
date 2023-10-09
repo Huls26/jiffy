@@ -35,6 +35,7 @@ async function UploadUserImage(
 
       return ImageURL;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.clear();
       setS((prevStatus) => ({
         ...prevStatus,
