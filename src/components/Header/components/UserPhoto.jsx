@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { dataContext } from '@context/dataContext';
-import bgColor from '@defaultSetting/bgColor';
+// import bgColor from '@defaultSetting/bgColor';
 import profilePhoto from '@defaultSetting/profilePhotoBannerImages.js';
 
 export default function UserPhoto() {
@@ -11,8 +11,8 @@ export default function UserPhoto() {
   const [hoverProfile, setHoverProfile] = useState(() => false);
   const { defaultUserImage } = profilePhoto();
   const linkTo = `profile/${userId}`;
-  const backGroundColor = bgColor;
-  const profilePhotoBg = userImg ? `${backGroundColor}` : 'bg-primary-1';
+  // const backGroundColor = bgColor;
+  // const profilePhotoBg = userImg ? `${backGroundColor}` : 'bg-primary-1';
   const hoverTransition = hoverProfile ? '' : 'opacity-0';
 
   // img style
@@ -21,7 +21,7 @@ export default function UserPhoto() {
     <Link to={linkTo} state>
       <div
         className={`
-                     ${profilePhotoBg}
+                     bg-primary-1
                       w-10 h-10
                       text-dark2 text-[.7em] text-center
                       rounded-full
@@ -42,11 +42,11 @@ export default function UserPhoto() {
         </h1>
 
         <img
-          className={`
+          className="
               w-full h-full object-cover
             border-dark-1 border-[.2em] border-b-2
               border-r-2 rounded-full
-            `}
+          "
           src={userImg || defaultUserImage}
           alt=""
         />
