@@ -12,7 +12,7 @@ export default function UserPhoto() {
   const { defaultUserImage } = profilePhoto();
   const linkTo = `profile/${userId}`;
   const backGroundColor = bgColor;
-  const profilePhotoBg = userImg ? backGroundColor : 'bg-primary-1';
+  const profilePhotoBg = userImg ? `${backGroundColor}` : 'bg-primary-1';
   const hoverTransition = hoverProfile ? '' : 'opacity-0';
 
   // img style
