@@ -1,3 +1,10 @@
+// optimize by using dynamic imports
+// import()
+// only import initializeApp
+// export app
+// with getAuth, getFirestore, getStoreage, getAnalytics
+// import dynamically when method is needed to the file
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
