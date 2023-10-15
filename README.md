@@ -11,10 +11,16 @@ https://jiffyview.netlify.app/
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./src/assets/IMG1.png)
+![App Screenshot](./src/assets/IMG2.png)
+![App Screenshot](./src/assets/IMG3.png)
+![App Screenshot](./src/assets/IMG4.png)
+![App Screenshot](./src/assets/IMG5.png)
+![App Screenshot](./src/assets/IMG6.png)
+![App Screenshot](./src/assets/IMG7.png)
 
 
-## Authors
+## Author
 
 - [@JulesMoreno(Huls26)](https://github.com/Huls26)
 
