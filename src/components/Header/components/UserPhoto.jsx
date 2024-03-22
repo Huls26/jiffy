@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { dataContext } from '@context/dataContext';
-import profilePhoto from '@defaultSetting/profilePhotoBannerImages.js';
+import { dataContext } from '@/context/dataContext';
+import profilePhoto from '@/defaultSetting/profilePhotoBannerImages.js';
 
 export default function UserPhoto() {
   const [data] = useContext(dataContext);

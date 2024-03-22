@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 import PropTypes from 'prop-types';
-import useHandleSearchParams from '@hooks/useHandleSearchParams';
+import useHandleSearchParams from '@/hooks/useHandleSearchParams';
 
 export default function FilterBtn({ text, activeStyle }) {
   const { searchParams, handleSetSearchParams } = useHandleSearchParams();

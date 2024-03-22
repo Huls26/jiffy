@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import ContentBtn from '@components/Btn/ContentBtn';
-import UserImage from '@components/UserImage';
+import ContentBtn from '@/components/Btn/ContentBtn';
+import UserImage from '@/components/UserImage';
 
 import usePostDataState from '../hooks/usePostDataState';
 

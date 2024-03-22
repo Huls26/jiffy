@@ -18,19 +18,26 @@ export default defineConfig({
     css: true,
   },
   resolve: {
-    alias: {
-      '@App': path.resolve(__dirname, './src/App'),
-      '@api': path.resolve(__dirname, './src/api'),
-      '@assets': path.resolve(__dirname, './src/assets'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@context': path.resolve(__dirname, './src/context'),
-      '@defaultSetting': path.resolve(__dirname, './src/defaultSetting'),
-      '@features': path.resolve(__dirname, './src/features'),
-      '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@layout': path.resolve(__dirname, './src/layout'),
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@router': path.resolve(__dirname, './src/router'),
-      '@utils': path.resolve(__dirname, './src/utils'),
-    },
+    // update the src with new format fix the bug
+    alias:
+      [{
+        find: '@',
+        replacement: path.resolve(__dirname, './src/'),
+      },
+      ],
+    // {
+    //   '@App': path.resolve(__dirname, './src/App'),
+    //   '@api': path.resolve(__dirname, './src/api'),
+    //   '@assets': path.resolve(__dirname, './src/assets'),
+    //   '@components': path.resolve(__dirname, './src/components'),
+    //   '@context': path.resolve(__dirname, './src/context'),
+    //   '@defaultSetting': path.resolve(__dirname, './src/defaultSetting'),
+    //   '@features': path.resolve(__dirname, './src/features'),
+    //   '@hooks': path.resolve(__dirname, './src/hooks'),
+    //   '@layout': path.resolve(__dirname, './src/layout'),
+    //   '@pages': path.resolve(__dirname, './src/pages'),
+    //   '@router': path.resolve(__dirname, './src/router'),
+    //   '@utils': path.resolve(__dirname, './src/utils'),
+    // },
   },
 });

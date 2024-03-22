@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Link, useRouteError } from 'react-router-dom';
-import ContentBtn from '@components/Btn/ContentBtn';
 import { useEffect } from 'react';
+import ContentBtn from '@/components/Btn/ContentBtn';
 
 export default function ErrorPage() {
   const error = useRouteError();

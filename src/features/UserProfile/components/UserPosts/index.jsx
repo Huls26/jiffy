@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 
-import Contents from '@features/Contents';
+import Contents from '@/features/Contents';
 
 export default function UserPosts() {
   const { querySnapshot } = useLoaderData();

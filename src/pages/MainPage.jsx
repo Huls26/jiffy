@@ -1,9 +1,9 @@
 import { lazy } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
-import FilterTagSection from '@features/FilterTagSection';
+import FilterTagSection from '@/features/FilterTagSection';
 // import HeadBanner from '@features/HeadBanner';
-const SuspenseMainPage = lazy(() => import('@components/Mainpage'));
+const SuspenseMainPage = lazy(() => import('@/components/MainPage'));
 
 // remove HeadBanner: to be continued feature
 // check loader in router

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 import { lazy } from 'react';
 
-import useHandleSearchParams from '@hooks/useHandleSearchParams';
+import useHandleSearchParams from '@/hooks/useHandleSearchParams';
 
 const UserInfoEditForm = lazy(() => import('./components/UserInfoEditForm'));
 const UserProfileBannerEditForm = lazy(() => import('./components/UserProfileBannerEditForm'));

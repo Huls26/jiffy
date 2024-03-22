@@ -2,9 +2,9 @@ import {
   redirect,
 } from 'react-router-dom';
 
-import getUsersData from '@api/getUser';
-import { getCurrentUser } from '@api/onSnapUserAuth';
-import getFirestoreData from '@api/getFirestoreData';
+import getUsersData from '@/api/getUser';
+import { getCurrentUser } from '@/api/onSnapUserAuth';
+import getFirestoreData from '@/api/getFirestoreData';
 
 export default async function loader({ request, params }) {
   const url = new URL(request.url);

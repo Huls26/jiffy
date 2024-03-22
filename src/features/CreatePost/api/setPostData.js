@@ -3,7 +3,7 @@ import {
 } from 'firebase/firestore';
 import {
   db,
-} from '@api/FB';
+} from '@/api/FB';
 
 export default async function setPostData({
   newId, docData, keyContent, valueContent, title, userId, userData,

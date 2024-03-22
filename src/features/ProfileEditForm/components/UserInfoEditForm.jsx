@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { Form } from 'react-router-dom';
 
-import SignupFormInput from '@features/SignupForm/components/SignupFormInput';
-import ContentBtn from '@components/Btn/ContentBtn';
-import useResetScrollView from '@hooks/useResetScrollView';
+import SignupFormInput from '@/features/SignupForm/components/SignupFormInput';
+import ContentBtn from '@/components/Btn/ContentBtn';
+import useResetScrollView from '@/hooks/useResetScrollView';
 
 import EditFormRenderMessage from './EditFormRenderMessage';
 import UpdatingFormLoading from './UpdatingFormLoading';

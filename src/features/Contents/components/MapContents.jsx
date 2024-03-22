@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { FixedSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-import SkeletonMainPage from '@components/MainPage/SkeletonMainPage';
+import SkeletonMainPage from '@/components/MainPage/SkeletonMainPage';
 import ContentComponents from './ContentComponents';
 import ContentDataProvider from '../context';
 import '../style/mapContents.css';

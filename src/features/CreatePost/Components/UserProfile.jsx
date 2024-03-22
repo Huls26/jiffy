@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { dataContext } from '@context/dataContext';
-import UserPhoto from '@components/Header/components/UserPhoto';
+import { dataContext } from '@/context/dataContext';
+import UserPhoto from '@/components/Header/components/UserPhoto';
 
 export default function UserProfile() {
   const [data] = useContext(dataContext);

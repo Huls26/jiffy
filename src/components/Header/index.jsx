@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import resetScrollView from '@utils/resetScrollView';
+import resetScrollView from '@/utils/resetScrollView';
 import UserLogin from './components/UserLogin';
 // import SearchForm from './components/SearchForm';
 

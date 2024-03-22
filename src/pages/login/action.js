@@ -1,4 +1,4 @@
-import loginValidation from '@api/loginPageAPI';
+import loginValidation from '@/api/loginPageAPI';
 
 export default async function action({ request }) {
   const isLoggingIn = loginValidation(request);

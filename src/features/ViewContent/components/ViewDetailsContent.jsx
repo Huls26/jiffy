@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import ContentBtn from '@components/Btn/ContentBtn';
-import UserImage from '@components/UserImage';
-import useHandleSearchParams from '@hooks/useHandleSearchParams';
+import ContentBtn from '@/components/Btn/ContentBtn';
+import UserImage from '@/components/UserImage';
+import useHandleSearchParams from '@/hooks/useHandleSearchParams';
 
 import useViewContentHooks from '../hooks/useViewContentHooks';
 

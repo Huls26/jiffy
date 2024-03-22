@@ -1,10 +1,10 @@
 import { lazy } from 'react';
 import { useActionData, useLoaderData } from 'react-router-dom';
 
-import LoginLoadingComponent from '@features/LoginLoadingComponent';
+import LoginLoadingComponent from '@/features/LoginLoadingComponent';
 
-const ErrorMessage = lazy(() => import('@components/LoginPage/ErrorMessage'));
-const RedirectingCD = lazy(() => import('@components/LoginPage/RedirectingCD'));
+const ErrorMessage = lazy(() => import('@/components/LoginPage/ErrorMessage'));
+const RedirectingCD = lazy(() => import('@/components/LoginPage/RedirectingCD'));
 
 export default function LoginPage() {
   const loaderData = useLoaderData();

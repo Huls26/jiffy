@@ -1,5 +1,5 @@
 import { defer } from 'react-router-dom';
-import getFirestoreData from '@api/getFirestoreData';
+import getFirestoreData from '@/api/getFirestoreData';
 
 export default async function loader({ request }) {
   const url = new URL(request.url);

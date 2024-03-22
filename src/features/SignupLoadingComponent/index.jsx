@@ -1,5 +1,5 @@
 import { useNavigation } from 'react-router-dom';
-import SpinnerCard from '@components/Loading/SpinnerCard';
+import SpinnerCard from '@/components/Loading/SpinnerCard';
 import SignupForm from '../SignupForm';
 
 export default function SignupLoadingComponent() {

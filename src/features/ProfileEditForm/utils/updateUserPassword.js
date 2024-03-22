@@ -1,5 +1,5 @@
 import { updatePassword } from 'firebase/auth';
-import { getCurrentUser } from '@api/onSnapUserAuth';
+import { getCurrentUser } from '@/api/onSnapUserAuth';
 
 export default async function updateUserPassword(password, getKeyValue) {
   // validate and update password

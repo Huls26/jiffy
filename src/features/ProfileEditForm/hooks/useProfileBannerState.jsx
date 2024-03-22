@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { dataContext } from '@context/dataContext';
+import { dataContext } from '@/context/dataContext';
 
 import handleSaveChanges from '../api/handleSaveChanges';
 

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import bgColor from '@defaultSetting/bgColor';
-
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+
+import bgColor from '@/defaultSetting/bgColor';
 
 export default function ProfilePhoto({ userImg }) {
   const profilePhotoBg = bgColor;

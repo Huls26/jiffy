@@ -1,5 +1,5 @@
-import CreatePostEditor from '@features/CreatePost/Components/CreatePostEditor';
-import UserProfile from '@features/CreatePost/Components/UserProfile';
+import CreatePostEditor from '@/features/CreatePost/Components/CreatePostEditor';
+import UserProfile from '@/features/CreatePost/Components/UserProfile';
 
 export default function CreatePostPage() {
   return (

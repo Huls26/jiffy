@@ -1,5 +1,5 @@
-import useUserReducer from '@hooks/useUserReducer';
-import ContextProvider from '@context/dataContext';
+import useUserReducer from '@/hooks/useUserReducer';
+import ContextProvider from '@/context/dataContext';
 
 // eslint-disable-next-line react/prop-types
 export default function ContextProviderReducer({ children }) {

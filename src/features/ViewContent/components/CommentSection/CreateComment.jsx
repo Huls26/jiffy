@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useContext, useState } from 'react';
 
-import ContentBtn from '@components/Btn/ContentBtn';
-import UserImage from '@components/UserImage';
-import { dataContext } from '@context/dataContext';
+import ContentBtn from '@/components/Btn/ContentBtn';
+import UserImage from '@/components/UserImage';
+import { dataContext } from '@/context/dataContext';
 
 export default function CreateComment() {
   const [data] = useContext(dataContext);

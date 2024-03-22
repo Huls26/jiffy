@@ -1,10 +1,9 @@
 import { lazy } from 'react';
 
-import useResetScrollView from '@hooks/useResetScrollView';
+import useResetScrollView from '@/hooks/useResetScrollView';
+import StateContext from '@/features/ViewContent/context/StateContext';
 
-import StateContext from '@features/ViewContent/context/StateContext';
-
-const ContentComponents = lazy(() => import('@features/ViewContent'));
+const ContentComponents = lazy(() => import('@/features/ViewContent'));
 
 export default function ViewPage() {
   const userDetails = {

@@ -1,4 +1,4 @@
-import FilterBtn from '@components/Btn/FilterBtn';
+import FilterBtn from '@/components/Btn/FilterBtn';
 
 export default function FilterNavBtn() {
   return (

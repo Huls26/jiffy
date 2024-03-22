@@ -1,5 +1,5 @@
 import { Form, Link, useNavigation } from 'react-router-dom';
-import LoginBtn from '@components/Btn/LoginBtn';
+import LoginBtn from '@/components/Btn/LoginBtn';
 
 import SignupFormTitle from './components/SignupFormTitle';
 import SignupBtn from './components/SignupBtn';

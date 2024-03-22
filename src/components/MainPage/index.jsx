@@ -2,8 +2,8 @@ import { Suspense } from 'react';
 import { Await } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import LoadingContents from '@components/MainPage/LoadingContents';
-import Contents from '@features/Contents';
+import LoadingContents from '@/components/MainPage/LoadingContents';
+import Contents from '@/features/Contents';
 
 export default function SuspenseMainPage({ querySnapshot }) {
   return (

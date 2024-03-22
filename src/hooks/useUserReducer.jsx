@@ -4,7 +4,7 @@ import {
   doc,
   onSnapshot,
 } from 'firebase/firestore';
-import { db } from '@api/FB';
+import { db } from '@/api/FB';
 import reducerMethod, { INITIAL_STATE } from './contextReducer';
 
 // ready for clean up

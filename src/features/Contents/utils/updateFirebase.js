@@ -1,5 +1,5 @@
 import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '@api/FB';
+import { db } from '@/api/FB';
 
 export default async function updateFirebase(
   userId,

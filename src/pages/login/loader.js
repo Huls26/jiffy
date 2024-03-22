@@ -1,4 +1,4 @@
-import { getCurrentUser } from '@api/onSnapUserAuth';
+import { getCurrentUser } from '@/api/onSnapUserAuth';
 
 export default async function loader() {
   const user = await getCurrentUser();

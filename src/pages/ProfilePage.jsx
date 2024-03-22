@@ -3,10 +3,10 @@ import {
   memo,
 } from 'react';
 
-import useResetScrollView from '@hooks/useResetScrollView';
+import useResetScrollView from '@/hooks/useResetScrollView';
 
-const UserProfile = lazy(() => import('@features/UserProfile'));
-const ProfileEditForm = lazy(() => import('@features/ProfileEditForm'));
+const UserProfile = lazy(() => import('@/features/UserProfile'));
+const ProfileEditForm = lazy(() => import('@/features/ProfileEditForm'));
 
 function ProfilePage() {
   useResetScrollView();

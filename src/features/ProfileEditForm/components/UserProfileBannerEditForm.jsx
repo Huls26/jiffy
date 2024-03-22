@@ -2,10 +2,10 @@
 import PropTypes from 'prop-types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import ContentBtn from '@components/Btn/ContentBtn';
-import bgColor from '@defaultSetting/bgColor';
-import ProfilePhoto from '@features/UserProfile/components/ProfilePhoto';
-import useResetScrollView from '@hooks/useResetScrollView';
+import ContentBtn from '@/components/Btn/ContentBtn';
+import bgColor from '@/defaultSetting/bgColor';
+import ProfilePhoto from '@/features/UserProfile/components/ProfilePhoto';
+import useResetScrollView from '@/hooks/useResetScrollView';
 
 import EditFormErrorMessage from './EditFormErrorMessage';
 import RenderName from './RenderName';

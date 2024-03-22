@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { dataContext } from '@context/dataContext';
+import { dataContext } from '@/context/dataContext';
 import { firebaseUploadImage, firebaseUploadTextContent } from '../api/firebaseUpload';
 import modifyFilename from '../utils/modifyFilename';
 

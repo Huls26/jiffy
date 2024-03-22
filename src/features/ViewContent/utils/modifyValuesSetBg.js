@@ -1,5 +1,5 @@
 /* eslint-disable default-param-last */
-import shortenLikesValue from '@features/Contents/utils/shortenLikesValue';
+import shortenLikesValue from '@/features/Contents/utils/shortenLikesValue';
 
 export default function modifyValueSetBg(values, array, userId, setBg) {
   // modify values

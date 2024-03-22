@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   db,
   storage,
-} from '@api/FB';
+} from '@/api/FB';
 import deletePrevImage from './deletePrevImage';
 
 async function UploadUserImage(
@@ -23,7 +23,9 @@ async function UploadUserImage(
   // get url
   if (ImgFile) {
     try {
-      const removeSpaceName = ImgFile.name.replaceAll(' ', '');
+      // ImgFile?.name.replaceAll(' ', '');
+      const [name] = ImgFile;
+      const removeSpaceName = name.replaceAll(' ', '');
       const imgFilePath = (
         `users/${uId}/${imageBannerProfile}/${removeSpaceName}${newId}`
       );

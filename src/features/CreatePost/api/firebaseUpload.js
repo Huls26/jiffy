@@ -2,7 +2,7 @@ import { doc, deleteDoc } from 'firebase/firestore';
 import {
   getDownloadURL, ref, uploadBytes, deleteObject,
 } from 'firebase/storage';
-import { db, storage } from '@api/FB';
+import { db, storage } from '@/api/FB';
 import setPostData from './setPostData';
 
 // create a url or a path name

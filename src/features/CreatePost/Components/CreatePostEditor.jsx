@@ -1,4 +1,4 @@
-import SpinnerCard from '@components/Loading/SpinnerCard';
+import SpinnerCard from '@/components/Loading/SpinnerCard';
 import useHandleCreatePost from '../hooks/useHandleCreatePost';
 import ErrorMessage from './ErrorMessage';
 import CancelFileBtn from './CancelFileBtn';

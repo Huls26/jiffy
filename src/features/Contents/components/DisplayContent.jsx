@@ -2,7 +2,7 @@ import { lazy, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import contentDataContext from '../context/contentDataContext';
 
-const ContentDisplay = lazy(() => import('@components/Content/ContentDisplay'));
+const ContentDisplay = lazy(() => import('@/components/Content/ContentDisplay'));
 
 export default function DisplayContent() {
   const { docData, contentId } = useContext(contentDataContext);

@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import PropTypes from 'prop-types';
 
-import useHandleSearchParams from '@hooks/useHandleSearchParams';
+import useHandleSearchParams from '@/hooks/useHandleSearchParams';
 import UserComments from './UserComments';
 
 const CreateComment = lazy(() => import('./CreateComment'));

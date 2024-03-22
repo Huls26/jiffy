@@ -5,9 +5,9 @@ import { useLoaderData } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import FilterNavBtn from '@components/FilterNavBtn';
-import { dataContext } from '@context/dataContext';
-import bgColor from '@defaultSetting/bgColor';
+import FilterNavBtn from '@/components/FilterNavBtn';
+import { dataContext } from '@/context/dataContext';
+import bgColor from '@/defaultSetting/bgColor';
 
 import UserDetails from './UserDetails';
 

@@ -1,6 +1,6 @@
 import { redirect } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@api/FB';
+import { auth } from '@/api/FB';
 
 export async function login(email, password) {
   const resMessage = 'Incorrect Email or Password Try again';

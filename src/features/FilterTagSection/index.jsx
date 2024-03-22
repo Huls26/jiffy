@@ -1,4 +1,4 @@
-import FilterNavBtn from '@components/FilterNavBtn';
+import FilterNavBtn from '@/components/FilterNavBtn';
 
 export default function FilterTagSection() {
   return (

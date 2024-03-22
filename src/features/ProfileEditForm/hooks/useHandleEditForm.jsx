@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useActionData, useNavigation } from 'react-router-dom';
 
-import { dataContext } from '@context/dataContext';
+import { dataContext } from '@/context/dataContext';
 import handleDynamicStyle from '../utils/handleDynamicStyle';
 import setLoadingInfoState from '../utils/setLoadingInfoState';
 

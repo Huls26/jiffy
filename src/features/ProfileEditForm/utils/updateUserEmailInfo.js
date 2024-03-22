@@ -3,8 +3,8 @@ import {
 } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 
-import { db } from '@api/FB';
-import { getCurrentUser } from '@api/onSnapUserAuth';
+import { db } from '@/api/FB';
+import { getCurrentUser } from '@/api/onSnapUserAuth';
 
 export default async function updateUserEmailInfo(
   newEmail,

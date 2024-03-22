@@ -1,5 +1,5 @@
 import { ref, deleteObject } from 'firebase/storage';
-import { storage } from '@api/FB';
+import { storage } from '@/api/FB';
 
 export default async function deletePrevImage(prevImgUrl) {
   const getImageURL = new URL(prevImgUrl);

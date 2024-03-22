@@ -1,4 +1,4 @@
-import useCheckId from '@hooks/useCheckId';
+import useCheckId from '@/hooks/useCheckId';
 
 import CreatePostBtn from './CreatePostBtn';
 import UserPhoto from './UserPhoto';

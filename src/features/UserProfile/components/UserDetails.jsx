@@ -1,13 +1,13 @@
 /* eslint-disable react/require-default-props */
 import PropTypes from 'prop-types';
-
-import ContentBtn from '@components/Btn/ContentBtn';
-import CreatePostBtn from '@components/Header/components/CreatePostBtn';
-import defaultDescription from '@defaultSetting/message';
-import useViewContentHooks from '@features/ViewContent/hooks/useViewContentHooks';
-import useCheckId from '@hooks/useCheckId';
-
 import { useLocation } from 'react-router-dom';
+
+import ContentBtn from '@/components/Btn/ContentBtn';
+import CreatePostBtn from '@/components/Header/components/CreatePostBtn';
+import defaultDescription from '@/defaultSetting/message';
+import useViewContentHooks from '@/features/ViewContent/hooks/useViewContentHooks';
+import useCheckId from '@/hooks/useCheckId';
+
 import ProfilePhoto from './ProfilePhoto';
 
 export default function UserDetails({ details, isMe }) {

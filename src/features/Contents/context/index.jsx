@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import { useContext, useReducer } from 'react';
 
-import { dataContext } from '@context/dataContext';
+import { dataContext } from '@/context/dataContext';
 
 import contentDataContext from './contentDataContext';
 import reducerMethod from '../utils/userReducer';

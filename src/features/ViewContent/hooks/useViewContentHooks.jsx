@@ -1,8 +1,8 @@
 import { useContext, useEffect, useReducer } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { dataContext } from '@context/dataContext';
-import reducerMethod from '@features/Contents/utils/userReducer';
+import { dataContext } from '@/context/dataContext';
+import reducerMethod from '@/features/Contents/utils/userReducer';
 import modifyValueSetBg from '../utils/modifyValuesSetBg';
 import { updatePostLikeFirebase, updateUserFollowers } from '../utils/updateFirebase';
 

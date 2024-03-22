@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import ContentBtn from '@components/Btn/ContentBtn';
+import ContentBtn from '@/components/Btn/ContentBtn';
 
 export default function NotFoundPage() {
   return (

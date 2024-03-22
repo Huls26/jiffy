@@ -7,8 +7,8 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-import ContentDisplay from '@components/Content/ContentDisplay';
-import bgColor from '@defaultSetting/bgColor';
+import ContentDisplay from '@/components/Content/ContentDisplay';
+import bgColor from '@/defaultSetting/bgColor';
 
 import ViewDetailsContent from './components/ViewDetailsContent';
 import DescriptionBox from './components/DescriptionBox';

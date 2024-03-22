@@ -1,11 +1,11 @@
 import { lazy } from 'react';
 import { useActionData } from 'react-router-dom';
 
-import SuccessMessage from '@components/SignupPage/SuccessMessage';
-import SignupLoadingComponent from '@features/SignupLoadingComponent';
-import useResetScrollView from '@hooks/useResetScrollView';
+import SuccessMessage from '@/components/SignupPage/SuccessMessage';
+import SignupLoadingComponent from '@/features/SignupLoadingComponent';
+import useResetScrollView from '@/hooks/useResetScrollView';
 
-const ErrorMessage = lazy(() => import('@components/LoginPage/ErrorMessage'));
+const ErrorMessage = lazy(() => import('@/components/LoginPage/ErrorMessage'));
 
 export default function SignupPage() {
   useResetScrollView();

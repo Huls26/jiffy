@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import ContentBtn from '@components/Btn/ContentBtn';
+import ContentBtn from '@/components/Btn/ContentBtn';
 
 export default function ProfileEditBtn() {
   const [searchParams, setSearchParams] = useSearchParams();
