@@ -17,7 +17,7 @@ export default function ContentDisplay({ docData, scrollPosition }) {
         <LazyLoadImage
           alt="content"
           src={content}
-          className="w-screen h-72 object-cover md:rounded-t-sm"
+          className="w-screen h-72 object-contain md:rounded-t-sm"
           effect="blur"
           scrollPosition={scrollPosition}
         />
