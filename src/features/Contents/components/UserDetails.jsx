@@ -4,6 +4,7 @@ import ContentBtn from '@/components/Btn/ContentBtn';
 import UserImage from '@/components/UserImage';
 
 import usePostDataState from '../hooks/usePostDataState';
+import styles from '../style/userDetails';
 
 export default function UserDetails() {
   const {
@@ -15,7 +16,7 @@ export default function UserDetails() {
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
   return (
-    <div className="flex items-start space-x-3">
+    <div className={styles.containerStyle}>
       <Link
         to={`../profile/${createdBy}`}
         state={{ docData: userState, contentId }}
@@ -23,8 +24,8 @@ export default function UserDetails() {
         <UserImage userImg={userImg} />
       </Link>
       <div>
-        <h1 className="font-PS text-lg font-bold capitalize leading-none mb-1">{modifyTitle}</h1>
-        <h6 className="font-A text-base font-medium capitalize leading-none mb-2 opacity-90">{username}</h6>
+        <h1 className={styles.titleStyle}>{modifyTitle}</h1>
+        <h6 className={styles.userNameStyle}>{username}</h6>
         <div className="space-x-1">
           <ContentBtn
             text={`like (${displayLikes})`}

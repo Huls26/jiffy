@@ -7,6 +7,8 @@ import { areEqual } from 'react-window';
 import { Link } from 'react-router-dom';
 import MapContents from './components/MapContents';
 
+// import contentStyle from './style/ContentsStyle';
+
 function Contents({ querySnapshot }) {
   const isValidList = querySnapshot.length;
 
