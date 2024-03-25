@@ -1,13 +1,9 @@
 import UserDetails from './UserDetails';
+import style from '../style/displayDetailsContentStyle';
 
 export default function DetailsContent() {
   return (
-    <section className="
-        flex justify-between items-start
-        w-full
-        px-3 text-dark-2
-      "
-    >
+    <section className={style().detailsStyle}>
       <UserDetails />
     </section>
   );
