@@ -4,7 +4,7 @@
 import PropTypes from 'prop-types';
 import DisplayContent from './DisplayContent';
 import DetailsContent from './DetailsContent';
-import componentStyle from '../style/contentsStyle';
+import componentStyle from '../style/contentStyle';
 
 // hover:contrast-150
 // hover:brightness-150
