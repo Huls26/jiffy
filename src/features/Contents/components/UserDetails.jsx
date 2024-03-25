@@ -16,7 +16,7 @@ export default function UserDetails() {
   const modifyTitle = title.length >= 27 ? title.slice(0, 27) : title;
 
   return (
-    <div className={styles.containerStyle}>
+    <div className={styles().containerStyle}>
       <Link
         to={`../profile/${createdBy}`}
         state={{ docData: userState, contentId }}
@@ -24,8 +24,8 @@ export default function UserDetails() {
         <UserImage userImg={userImg} />
       </Link>
       <div>
-        <h1 className={styles.titleStyle}>{modifyTitle}</h1>
-        <h6 className={styles.userNameStyle}>{username}</h6>
+        <h1 className={styles().titleStyle}>{modifyTitle}</h1>
+        <h6 className={styles().userNameStyle}>{username}</h6>
         <div className="space-x-1">
           <ContentBtn
             text={`like (${displayLikes})`}
