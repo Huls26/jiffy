@@ -1,4 +1,5 @@
 import SpinnerCard from '@/components/Loading/SpinnerCard';
+import CreatePostTitleInput from './CreatePostTitleInput';
 import useHandleCreatePost from '../hooks/useHandleCreatePost';
 import ErrorMessage from './ErrorMessage';
 import CancelFileBtn from './CancelFileBtn';
@@ -21,9 +22,10 @@ export default function CreatePostEditor() {
         {file.isLoading && <SpinnerCard />}
 
         <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50">
-          <div className="px-4 py-2 bg-primary-1 rounded-t-lg">
-            <input value={file.title} onChange={handleChange} type="text" id="title" name="title" className="w-full px-1 text-xl font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder="Write Title (optional)" maxLength="27" disabled={file.isLoading} />
-          </div>
+          <CreatePostTitleInput file={file} handleChange={handleChange} />
+          {
+            // separate element create component for composable
+          }
           <div className="px-4 py-2 bg-primary-1 rounded-t-lg">
             <textarea maxLength="252" value={file.textContent} onChange={handleChange} name="textContent" id="textContent" rows="4" className="w-full px-1 text-lg font-A text-dark-1 bg-white border border-primary-1 focus:border-gray rounded-md dark:bg-primary-1 focus:ring-0 dark:placeholder-gray outline-none" placeholder={file.imgFile ? `${file.imgFileValue} \n- Post Image` : 'Write Something...'} disabled={file.isLoading} />
           </div>
