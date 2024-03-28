@@ -3,6 +3,7 @@ import CreatePostTitleInput from './CreatePostTitleInput';
 import useHandleCreatePost from '../hooks/useHandleCreatePost';
 import ErrorMessage from './ErrorMessage';
 import CancelFileBtn from './CancelFileBtn';
+import CreatePostBtn from './CreatePostBtn';
 import CreatePostTextArea from './CreatePostTextArea';
 
 /* eslint-disable max-len */
@@ -29,9 +30,10 @@ export default function CreatePostEditor() {
             // separate element create component for composable
           }
           <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-            <button type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-PS font-bold text-center text-white bg-blue rounded-lg active:opacity-80 active:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-aqua-1" disabled={file.isLoading}>
+            <CreatePostBtn file={file} />
+            {/* <button type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-PS font-bold text-center text-white bg-blue rounded-lg active:opacity-80 active:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-aqua-1" disabled={file.isLoading}>
               Create Post
-            </button>
+            </button> */}
             <div className="flex pl-0 sm:pl-2">
               <label htmlFor="imageFile" className="inline-flex justify-center items-center p-1 text-dark-1 rounded cursor-pointer hover:text-white hover:bg-gray active:bg-gray-dark">
                 <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
