@@ -70,7 +70,6 @@ export default function LoginForm({ actionData }) {
           "
           >
             Create Account
-
           </Link>
           <LoginBtn />
         </div>
