@@ -5,6 +5,7 @@ import {
   useNavigation,
 } from 'react-router-dom';
 
+import InputEmail from './components/InputEmail';
 import LoginBtn from './components/LoginBtn';
 import emailPasswordBorderColor from './utils/emailPasswordBorder';
 
@@ -30,8 +31,13 @@ export default function LoginForm({ actionData }) {
       replace
     >
       <fieldset disabled={isLoading}>
-        <input
-          className={`         
+        <InputEmail
+          emailBorder={emailBorder}
+          isErrorEmail={isErrorEmail}
+          email={email}
+        />
+        {/* <input
+          className={`
                     ${emailBorder} border border-r-2 border-b-2
                     mb-3 p-1
                     w-full
@@ -43,7 +49,7 @@ export default function LoginForm({ actionData }) {
           placeholder={isErrorEmail ? 'Enter Email' : 'Email'}
           name="email"
           defaultValue={email}
-        />
+        /> */}
         <input
           className={`
                     ${passwordBorder} border border-r-2 border-b-2
