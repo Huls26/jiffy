@@ -16,7 +16,7 @@ export default function InputEmail({ emailBorder, isErrorEmail, email }) {
       placeholder={isErrorEmail ? 'Enter Email' : 'Email'}
       name="email"
       defaultValue={email}
-      data-testid="email-border"
+      data-testid="login-email-border"
     />
   );
 }
