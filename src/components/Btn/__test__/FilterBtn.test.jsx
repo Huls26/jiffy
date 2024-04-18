@@ -1,12 +1,12 @@
 import {
-  describe, it, expect, vi,
+  describe, it, expect,
 } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import FilterBtn from '../FilterBtn';
 
-describe.skip('FilterBtn', () => {
+describe('FilterBtn', () => {
   it('should apply the active style based on the text prop value', () => {
-    const activeStyle = vi.fn((text) => (text === 'Photos' ? 'bg-green' : 'bg-yellow-1'));
+    const activeStyle = (text) => (text === 'Photos' ? 'bg-green' : 'bg-yellow-1');
     render(<FilterBtn text="Photos" activeStyle={activeStyle} />);
 
     const btn = screen.getByRole('button');
