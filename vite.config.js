@@ -16,6 +16,17 @@ export default defineConfig({
     // you might want to disable it, if you don't have tests that rely on CSS
     // since parsing CSS is slow
     css: true,
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.{js,ts,jsx,tsx}'],
+      exclude: ['src/**/*.test.{js,ts,jsx,tsx}'],
+      reporter: {
+        v8: {
+          text: ['lcov', 'text-summary'],
+          html: 'lcov-report',
+        },
+      },
+    },
   },
   resolve: {
     alias:

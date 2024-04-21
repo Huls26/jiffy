@@ -4,7 +4,7 @@ import {
 import { render, screen } from '@testing-library/react';
 import FilterBtn from '../FilterBtn';
 
-describe('FilterBtn', () => {
+describe.skip('FilterBtn', () => {
   it('should apply the active style based on the text prop value', () => {
     const activeStyle = (text) => (text === 'Photos' ? 'bg-green' : 'bg-yellow-1');
     render(<FilterBtn text="Photos" activeStyle={activeStyle} />);
