@@ -1,14 +1,16 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'node:path';
-import eslint from 'vite-plugin-eslint';
+import eslintPlugin from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), eslint()],
+  plugins: [react(), eslintPlugin({
+    // ESLint options
+    cache: false,
+    fix: true,
+    // other options...
+  })],
   test: {
     globals: true,
     environment: 'jsdom',
@@ -29,11 +31,8 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias:
-      [{
-        find: '@',
-        replacement: path.resolve(__dirname, './src/'),
-      },
-      ],
+    alias: {
+      '@': path.resolve(__dirname, './src/'),
+    },
   },
 });
