@@ -1,6 +1,6 @@
-// eslint-disable-next-line no-undef
 module.exports = {
-  env: { browser: true, es2020: true },
+  root: true,
+  env: { node: true, browser: true, es2021: true },
   extends: [
     'airbnb',
     'airbnb/hooks',
@@ -9,19 +9,31 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
     'plugin:react/recommended',
-    'plugin:vitest/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: 'tsconfig.vite.json',
-  },
+  // parserOptions: {
+  //   ecmaFeatures: {
+  //     jsx: true,
+  //   },
+  //   ecmaVersion: 'latest',
+  //   sourceType: 'module',
+  //   project: './tsconfig.eslint.json',
+  // },
+  overrides: [
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      parserOptions: {
+        project: './tsconfig.eslint.json',
+        createDefaultProgram: true,
+      },
+    },
+  ],
   plugins: [
+    '@typescript-eslint',
     'react-refresh',
     'react',
-    'vitest',
   ],
   rules: {
     'react-refresh/only-export-components': 'warn',
@@ -36,7 +48,7 @@ module.exports = {
       },
     }],
   },
-  ignorePatterns: ['test-utils.tsx'],
+  ignorePatterns: ['test-utils.tsx', 'vite.config.js', 'vitest.d.ts'],
   settings: {
     react: {
       version: 'detect',
