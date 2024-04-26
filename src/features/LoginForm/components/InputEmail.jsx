@@ -23,6 +23,7 @@ export default function InputEmail({ emailBorder, isErrorEmail, email }) {
 
 InputEmail.propTypes = {
   emailBorder: PropTypes.string.isRequired,
-  isErrorEmail: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  isErrorEmail: PropTypes.any,
   email: PropTypes.any.isRequired,
 };

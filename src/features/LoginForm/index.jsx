@@ -11,7 +11,7 @@ import emailPasswordBorderColor from './utils/emailPasswordBorder';
 
 export default function LoginForm({ actionData }) {
   const { state } = useNavigation();
-  const { error, email } = actionData || {};
+  const { error, email } = actionData || { email: '' };
   const {
     emailBorder, passwordBorder, isErrorEmail, isErrorPassword,
   } = emailPasswordBorderColor(error);
