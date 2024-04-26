@@ -1,19 +1,66 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-shadow */
-import { describe, test, expect } from 'vitest';
-import { db } from '@/api/FB';
+import {
+  describe, test, expect, vi,
+} from 'vitest';
 import getFirestoreData from '../getFirestoreData';
+import { db } from '@/api/FB';
+
+vi.mock('@/api/FB', async (importOriginal) => {
+  const mockCollection = vi.fn().mockReturnValue({
+    where: vi.fn().mockReturnValue({
+      orderBy: vi.fn().mockReturnValue({
+        get: vi.fn().mockResolvedValue({
+          docs: [{
+            id: '1',
+            data: () => ({
+              title: 'Hello World!',
+              body: 'This is the body',
+              createdAt: 1623587200000,
+            }),
+          }],
+        }),
+      }),
+    }),
+  });
+
+  const mockDb = {
+    collection: mockCollection,
+    where: vi.fn().mockReturnValue({
+      orderBy: vi.fn().mockReturnValue({
+        get: vi.fn().mockResolvedValue({
+          docs: [{
+            id: '1',
+            data: () => ({
+              title: 'Hello World!',
+              body: 'This is the body',
+              createdAt: 1623587200000,
+            }),
+          }],
+        }),
+      }),
+    }),
+    query: vi.fn(),
+    posts: 'posts',
+    orderBy: vi.fn(),
+  };
+
+  const mod = await importOriginal();
+  return {
+    ...mod,
+    db: mockDb,
+  };
+});
 
 describe.skip('getFirestoreData', () => {
   test('should test the functionality of the getFirestoreData function', async () => {
     // Arrange
-    const mockCallback = (args) => {
+    const mockCallback = vi.fn((args) => {
       const {
         query, collection, db, posts, where, orderBy,
       } = args;
       const q = query(collection(db, posts), where('title', '==', 'Hello World!'), orderBy('createdAt', 'desc'));
       return q;
-    };
+    });
 
     // Act
     const result = await getFirestoreData(mockCallback);
@@ -25,13 +72,13 @@ describe.skip('getFirestoreData', () => {
 
   test('should test the correctness of the callback argument passed to the function', () => {
     // Arrange
-    const mockCallback = (args) => {
+    const mockCallback = vi.fn((args) => {
       const {
         query, collection, db, posts, where, orderBy,
       } = args;
       const q = query(collection(db, posts), where('title', '==', 'Hello World!'), orderBy('createdAt', 'desc'));
       return q;
-    };
+    });
 
     // Act
     const result = getFirestoreData(mockCallback);
@@ -39,24 +86,24 @@ describe.skip('getFirestoreData', () => {
     // Assert
     expect(result).toBeDefined();
     expect(mockCallback).toHaveBeenCalledWith({
-      query,
-      collection,
+      query: db.query,
+      collection: db.collection,
       db,
       posts: 'posts',
-      where,
-      orderBy,
+      where: db.where,
+      orderBy: db.orderBy,
     });
   });
 
   test('should test the correctness of the q variable created inside the function', () => {
     // Arrange
-    const mockCallback = (args) => {
+    const mockCallback = vi.fn((args) => {
       const {
         query, collection, db, posts, where, orderBy,
       } = args;
       const q = query(collection(db, posts), where('title', '==', 'Hello World!'), orderBy('createdAt', 'desc'));
       return q;
-    };
+    });
 
     // Act
     const result = getFirestoreData(mockCallback);
@@ -76,13 +123,13 @@ describe.skip('getFirestoreData', () => {
 
   test('should test the correctness of the querySnapshot variable returned by the function', async () => {
     // Arrange
-    const mockCallback = (args) => {
+    const mockCallback = vi.fn((args) => {
       const {
         query, collection, db, posts, where, orderBy,
       } = args;
       const q = query(collection(db, posts), where('title', '==', 'Hello World!'), orderBy('createdAt', 'desc'));
       return q;
-    };
+    });
 
     // Act
     const result = await getFirestoreData(mockCallback);
