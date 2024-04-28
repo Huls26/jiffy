@@ -48,7 +48,7 @@ module.exports = {
       },
     }],
   },
-  ignorePatterns: ['test-utils.tsx', 'vite.config.js', 'vitest.d.ts'],
+  ignorePatterns: ['test-utils.tsx', 'vite.config.js', 'vitest.d.ts', 'postcss.config.js'],
   settings: {
     react: {
       version: 'detect',
