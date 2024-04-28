@@ -8,7 +8,6 @@ const ContentTextDisplay = lazy(() => import('./ContentTextDisplay'));
 export default function ContentDisplay({ docData, scrollPosition }) {
   const { content, textContent } = docData;
   const maxLength = 252;
-  // const isImg = typeof content === 'string';
   const sliceWord = textContent.slice(0, maxLength);
 
   return (
