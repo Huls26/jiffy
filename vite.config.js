@@ -9,4 +9,12 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./vitest.setup.js",
   },
+  resolve: {
+    alias: [
+      {
+        find: "@",
+        replacement: path.resolve(__dirname, "./src/"),
+      },
+    ],
+  },
 });
