@@ -11,10 +11,10 @@ import LoginForm from "@/features/LoginForm";
       className="
                   flex flex-col 
                   m-auto mt-10 max-w-md p-10 rounded-md sm:p-10 
-                  dark:bg-gray-900 dark:text-gray-100
+                  dark:bg-gray-900 dark:text-gray-100 
                 "
     >
-      <section className="mb-8 text-center">
+      <section className="mb-8 text-center cursor-not-allowed">
         <h1 className="my-3 text-4xl font-bold">Sign in</h1>
         <p className="text-sm dark:text-gray-600">
           Sign in to access your account
