@@ -9,10 +9,8 @@ export default function index() {
     <form noValidate="" action="" className="space-y-12">
       <section className="space-y-4">
         <InputEmail />
-        <div>
-          <ForgotPassword />
-          <InputPassword />
-        </div>
+        <ForgotPassword />
+        <InputPassword />
       </section>
       <section className="space-y-2">
         <SignInButton />
