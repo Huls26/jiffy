@@ -1,21 +1,11 @@
-import CreateAccountSection from "./components/CreateAccountSection";
-import ForgotPassword from "./components/ForgotPassword";
-import InputEmail from "./components/InputEmail";
-import InputPassword from "./components/InputPassword";
-import SignInButton from "./components/SignInButton";
+import ButtonSection from "./sections/ButtonSection";
+import InputSection from "./sections/InputSection";
 
 export default function index() {
   return (
     <form noValidate="" action="" className="space-y-12">
-      <section className="space-y-4">
-        <InputEmail />
-        <ForgotPassword />
-        <InputPassword />
-      </section>
-      <section className="space-y-2">
-        <SignInButton />
-        <CreateAccountSection />
-      </section>
+      <InputSection />
+      <ButtonSection />
     </form>
   );
 }
