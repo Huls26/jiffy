@@ -1,4 +1,11 @@
+import { LoginContext } from "@/pages/LoginPage";
+import { useContext } from "react";
+
 export default function InputEmail() {
+  const state = useContext(LoginContext);
+
+  console.log(state);
+
   return (
     <section>
       <label htmlFor="email" className="block mb-2 text-sm">
