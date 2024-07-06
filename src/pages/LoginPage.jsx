@@ -1,6 +1,12 @@
 import LoginForm from "@/features/LoginForm";
 import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
 
+import { createContext } from "react";
+
+const LoginContext = createContext();
+
+export { LoginContext };
+
 /**
  * This is the main component for the login page.
  * It renders a form for users to sign in.
@@ -15,8 +21,10 @@ import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
                   dark:bg-gray-900 dark:text-gray-100 
                 "
     >
-      <SignInTextSection />
-      <LoginForm />
+      <LoginContext.Provider value={{ email: "", password: "" }}>
+        <SignInTextSection />
+        <LoginForm />
+      </LoginContext.Provider>
     </main>
   );
 }
