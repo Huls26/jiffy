@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
 import { vi } from "vitest";
 import "@testing-library/jest-dom";
 import { LoginContext } from "@/pages/LoginPage";
