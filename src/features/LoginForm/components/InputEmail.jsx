@@ -1,9 +1,26 @@
 import { LoginContext } from "@/pages/LoginPage";
 import { useContext } from "react";
+import LoginFormInput from "./LoginFormInput";
 
+/**
+ * This component renders an email input field for the login form.
+ * It uses the LoginContext to manage the form state.
+ *
+ * @returns {JSX.Element} - The JSX representation of the email input field.
+ */
 export default function InputEmail() {
+  /**
+   * The state and dispatch function from the LoginContext.
+   * @type {Array}
+   */
   const [state, dispatch] = useContext(LoginContext);
 
+  /**
+   * Handles the change event of the email input field.
+   * Updates the email state in the LoginContext.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
+   */
   function handleChange(event) {
     dispatch({
       type: "UPDATE_EMAIL",
@@ -16,7 +33,7 @@ export default function InputEmail() {
       <label htmlFor="email" className="block mb-2 text-sm">
         Email address
       </label>
-      <input
+      <LoginFormInput
         type="email"
         name="email"
         id="email"
@@ -24,7 +41,6 @@ export default function InputEmail() {
         onChange={handleChange}
         autoComplete="username"
         placeholder="leroy@jenkins.com"
-        className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
       />
     </section>
   );
