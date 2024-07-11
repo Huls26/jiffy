@@ -1,5 +1,6 @@
 import { LoginContext } from "@/pages/LoginPage";
 import { useContext } from "react";
+import handleChange from "../utils/handleChange";
 import LoginFormInput from "./LoginFormInput";
 
 /**
@@ -15,19 +16,6 @@ export default function InputEmail() {
    */
   const [state, dispatch] = useContext(LoginContext);
 
-  /**
-   * Handles the change event of the email input field.
-   * Updates the email state in the LoginContext.
-   *
-   * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
-   */
-  function handleChange(event) {
-    dispatch({
-      type: "UPDATE_EMAIL",
-      payload: `${event.target.value}`,
-    });
-  }
-
   return (
     <section>
       <label htmlFor="email" className="block mb-2 text-sm">
@@ -38,7 +26,7 @@ export default function InputEmail() {
         name="email"
         id="email"
         value={state.email}
-        onChange={handleChange}
+        onChange={(event) => handleChange(event, dispatch, "UPDATE_EMAIL")}
         autoComplete="username"
         placeholder="leroy@jenkins.com"
       />
