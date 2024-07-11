@@ -2,6 +2,12 @@ import { LoginContext } from "@/pages/LoginPage";
 import { useContext } from "react";
 import handleChange from "../utils/handleChange";
 
+/**
+ * This function renders an input field for password input in a login form.
+ * It uses React's useContext hook to access the login context and updates the password state.
+ *
+ * @returns {JSX.Element} - A React input element for password input.
+ */
 export default function InputPassword() {
   const [state, dispatch] = useContext(LoginContext);
 
