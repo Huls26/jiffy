@@ -1,5 +1,6 @@
-import { LoginContext } from "@/pages/LoginPage";
 import { useContext } from "react";
+
+import { loginContext } from "../context/LoginContextProvider";
 import handleChange from "../utils/handleChange";
 import LoginFormInput from "./LoginFormInput";
 
@@ -14,7 +15,7 @@ export default function InputEmail() {
    * The state and dispatch function from the LoginContext.
    * @type {Array}
    */
-  const [state, dispatch] = useContext(LoginContext);
+  const [state, dispatch] = useContext(loginContext);
 
   return (
     <section>

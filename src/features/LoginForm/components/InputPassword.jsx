@@ -1,5 +1,5 @@
-import { LoginContext } from "@/pages/LoginPage";
 import { useContext } from "react";
+import { loginContext } from "../context/LoginContextProvider";
 import handleChange from "../utils/handleChange";
 
 /**
@@ -9,7 +9,11 @@ import handleChange from "../utils/handleChange";
  * @returns {JSX.Element} - A React input element for password input.
  */
 export default function InputPassword() {
-  const [state, dispatch] = useContext(LoginContext);
+  /**
+   * The state and dispatch function from the LoginContext.
+   * @type {Array}
+   */
+  const [state, dispatch] = useContext(loginContext);
 
   return (
     <input
