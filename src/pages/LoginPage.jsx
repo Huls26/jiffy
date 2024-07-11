@@ -1,11 +1,12 @@
 import LoginForm from "@/features/LoginForm";
+import LoginContextProvider from "@/features/LoginForm/context/LoginContextProvider";
 import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
 
 import { createContext, useReducer } from "react";
 
-const LoginContext = createContext();
+// const LoginContext = createContext();
 
-export { LoginContext };
+// export { LoginContext };
 
 /**
  * This is the main component for the login page.
@@ -38,10 +39,10 @@ export { LoginContext };
                   dark:bg-gray-900 dark:text-gray-100 
                 "
     >
-      <LoginContext.Provider value={[state, dispatch]}>
+      <LoginContextProvider value={[state, dispatch]}>
         <SignInTextSection />
         <LoginForm />
-      </LoginContext.Provider>
+      </LoginContextProvider>
     </main>
   );
 }
