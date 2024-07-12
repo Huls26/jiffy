@@ -1,8 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import "@testing-library/jest-dom";
-import { LoginContext } from "@/pages/LoginPage";
+
 import InputEmail from "../components/InputEmail";
+import LoginContextProvider from "../context/LoginContextProvider";
 
 describe("InputEmail Component", () => {
   it("should render the input field with the correct initial value and handle change event", () => {
@@ -10,9 +11,9 @@ describe("InputEmail Component", () => {
     const initialState = { email: "test@example.com" };
 
     render(
-      <LoginContext.Provider value={[initialState, mockDispatch]}>
+      <LoginContextProvider value={[initialState, mockDispatch]}>
         <InputEmail />
-      </LoginContext.Provider>,
+      </LoginContextProvider>,
     );
 
     const input = screen.getByPlaceholderText("leroy@jenkins.com");

@@ -1,8 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import "@testing-library/jest-dom";
-import { LoginContext } from "@/pages/LoginPage";
+
 import InputPassword from "../components/InputPassword";
+import LoginContextProvider from "../context/LoginContextProvider";
 
 describe("InputPassword Component", () => {
   it("should render the input field with the correct initial value and handle change event", () => {
@@ -10,9 +11,9 @@ describe("InputPassword Component", () => {
     const initialState = { password: "initialPassword" };
 
     render(
-      <LoginContext.Provider value={[initialState, mockDispatch]}>
+      <LoginContextProvider value={[initialState, mockDispatch]}>
         <InputPassword />
-      </LoginContext.Provider>,
+      </LoginContextProvider>,
     );
 
     const input = screen.getByPlaceholderText("*****");
