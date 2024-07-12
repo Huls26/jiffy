@@ -4,10 +4,6 @@ import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
 
 import { createContext, useReducer } from "react";
 
-// const LoginContext = createContext();
-
-// export { LoginContext };
-
 /**
  * This is the main component for the login page.
  * It renders a form for users to sign in.
