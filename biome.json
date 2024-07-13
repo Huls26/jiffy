@@ -11,7 +11,6 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
       "a11y": {
         "noSvgWithoutTitle": "off",
         "useAltText": "off"
@@ -19,10 +18,18 @@
       "complexity": {
         "noBannedTypes": "off"
       },
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      },
+      "nursery": {
+        "noConsole": "error"
+      },
       "style": {
         "useImportType": "error",
         "useExportType": "error"
-      }
+      },
+      "recommended": true
     }
   },
   "overrides": [
