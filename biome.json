@@ -23,11 +23,12 @@
         "noUnusedVariables": "error"
       },
       "nursery": {
-        "noConsole": "error"
+        "noConsole": "error",
+        "noUnusedFunctionParameters": "error"
       },
       "style": {
-        "useImportType": "error",
-        "useExportType": "error"
+        "useExportType": "error",
+        "useImportType": "error"
       },
       "recommended": true
     }
