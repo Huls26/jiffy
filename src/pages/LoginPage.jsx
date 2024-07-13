@@ -2,7 +2,7 @@ import LoginForm from "@/features/LoginForm";
 import LoginContextProvider from "@/features/LoginForm/context/LoginContextProvider";
 import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
 
-import { createContext, useReducer } from "react";
+import useLoginContext from "@/hooks/LoginPageHooks/useLoginContext";
 
 /**
  * This is the main component for the login page.
@@ -10,22 +10,7 @@ import { createContext, useReducer } from "react";
  *
  * @returns {JSX.Element} - The JSX element for the login page.
  */ export default function LoginPage() {
-  const InitialState = {
-    email: "",
-    password: "",
-  };
-  function reducerMethod(state, action) {
-    switch (action.type) {
-      case "UPDATE_EMAIL":
-        return { ...state, email: action.payload };
-      case "UPDATE_PASSWORD":
-        return { ...state, password: action.payload };
-      default:
-        throw new Error("Invalid action type", action.type, action.payload);
-    }
-  }
-
-  const [state, dispatch] = useReducer(reducerMethod, InitialState);
+  const [state, dispatch] = useLoginContext();
 
   return (
     <main
