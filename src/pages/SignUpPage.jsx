@@ -48,6 +48,7 @@ export default function SignUpPage() {
                 className="px-2 py-1 w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-900 dark:border-gray-300 focus:dark:ring-blue-600"
               />
             </div>
+            <br />
             <div className="col-span-full sm:col-span-3">
               <label htmlFor="email" className="text-sm">
                 Email
@@ -59,14 +60,26 @@ export default function SignUpPage() {
                 className="px-2 py-1 w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-900 dark:border-gray-300 focus:dark:ring-blue-600"
               />
             </div>
-            <div className="col-span-full">
-              <label htmlFor="address" className="text-sm">
-                Address
+            <br />
+            <div className="col-span-3">
+              <label htmlFor="password" className="text-sm">
+                Password
               </label>
               <input
-                id="address"
-                type="text"
-                placeholder=""
+                id="password"
+                type="password"
+                placeholder="*******"
+                className="px-2 py-1 w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-900 dark:border-gray-300 focus:dark:ring-blue-600"
+              />
+            </div>
+            <div className="col-span-3">
+              <label htmlFor="confirmPassword" className="text-sm">
+                Confirm Password
+              </label>
+              <input
+                id="confirmPassword"
+                type="confirmPassword"
+                placeholder="*******"
                 className="px-2 py-1 w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-900 dark:border-gray-300 focus:dark:ring-blue-600"
               />
             </div>
