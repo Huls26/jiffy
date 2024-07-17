@@ -1,6 +1,8 @@
-import { useContext } from "react";
+import FormInput from "@/components/FormInput";
 import { loginContext } from "../context/LoginContextProvider";
 import handleChange from "../utils/handleChange";
+
+import { useContext } from "react";
 
 /**
  * This function renders an input field for password input in a login form.
@@ -16,7 +18,7 @@ export default function InputPassword() {
   const [state, dispatch] = useContext(loginContext);
 
   return (
-    <input
+    <FormInput
       type="password"
       name="password"
       id="password"
