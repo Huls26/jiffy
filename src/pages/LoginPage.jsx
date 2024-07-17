@@ -1,3 +1,4 @@
+import LoginSignUpContainer from "@/components/componentContainers/LoginSignUpContainer";
 import LoginForm from "@/features/LoginForm";
 import LoginContextProvider from "@/features/LoginForm/context/LoginContextProvider";
 import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
@@ -9,7 +10,7 @@ import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
  * @returns {JSX.Element} - The JSX element for the login page.
  */ export default function LoginPage() {
   return (
-    <main
+    <LoginSignUpContainer
       className="
                   flex flex-col 
                   m-auto mt-10 max-w-md p-10 rounded-md sm:p-10 
@@ -20,6 +21,6 @@ import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
         <SignInTextSection />
         <LoginForm />
       </LoginContextProvider>
-    </main>
+    </LoginSignUpContainer>
   );
 }
