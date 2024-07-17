@@ -1,8 +1,8 @@
 import { useContext } from "react";
 
+import FormInput from "@/components/FormInput";
 import { loginContext } from "../context/LoginContextProvider";
 import handleChange from "../utils/handleChange";
-import LoginFormInput from "./LoginFormInput";
 
 /**
  * This component renders an email input field for the login form.
@@ -22,7 +22,7 @@ export default function InputEmail() {
       <label htmlFor="email" className="block mb-2 text-sm">
         Email address
       </label>
-      <LoginFormInput
+      <FormInput
         type="email"
         name="email"
         id="email"
