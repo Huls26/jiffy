@@ -1,6 +1,9 @@
 import LoginSignUpContainer from "@/components/componentContainers/LoginSignUpContainer";
+import ReducerContextProvider from "@/contexts/ReducerContextProvider";
 import LoginForm from "@/features/LoginForm";
-import LoginContextProvider from "@/features/LoginForm/context/LoginContextProvider";
+import reducerMethod, {
+  INITIAL_STATE,
+} from "@/features/LoginForm/context/LoginPageContextReducer";
 import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
 
 /**
@@ -17,10 +20,13 @@ import SignInTextSection from "@/features/LoginForm/sections/SignInTextSection";
                   dark:bg-gray-900 dark:text-gray-100 
                 "
     >
-      <LoginContextProvider>
+      <ReducerContextProvider
+        reducerMethod={reducerMethod}
+        INITIAL_STATE={INITIAL_STATE}
+      >
         <SignInTextSection />
         <LoginForm />
-      </LoginContextProvider>
+      </ReducerContextProvider>
     </LoginSignUpContainer>
   );
 }
