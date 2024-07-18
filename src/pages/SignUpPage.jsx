@@ -1,6 +1,6 @@
 import LoginSignUpContainer from "@/components/componentContainers/LoginSignUpContainer";
+import ReducerContextProvider from "@/contexts/ReducerContextProvider";
 import LoginForm from "@/features/LoginForm";
-import LoginContextProvider from "../features/LoginForm/context/LoginContextProvider";
 
 export default function SignUpPage() {
   return (
@@ -11,10 +11,10 @@ export default function SignUpPage() {
                   dark:bg-gray-900 dark:text-gray-100 
                 "
     >
-      <LoginContextProvider>
+      <ReducerContextProvider>
         <h1>sign up page</h1>
         <LoginForm />
-      </LoginContextProvider>
+      </ReducerContextProvider>
     </LoginSignUpContainer>
   );
 }
