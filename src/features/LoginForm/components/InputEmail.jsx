@@ -1,9 +1,8 @@
-import { useContext } from "react";
-
 import FormInput from "@/components/FormInput";
-import { loginContext } from "../context/LoginContextProvider";
+import { reducerContext } from "@/contexts/ReducerContextProvider";
 import handleChange from "../utils/handleChange";
 
+import { useContext } from "react";
 /**
  * This component renders an email input field for the login form.
  * It uses the LoginContext to manage the form state.
@@ -15,7 +14,7 @@ export default function InputEmail() {
    * The state and dispatch function from the LoginContext.
    * @type {Array}
    */
-  const [state, dispatch] = useContext(loginContext);
+  const [state, dispatch] = useContext(reducerContext);
 
   return (
     <section>
