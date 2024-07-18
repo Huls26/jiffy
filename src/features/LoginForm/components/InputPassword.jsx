@@ -1,5 +1,5 @@
 import FormInput from "@/components/FormInput";
-import { loginContext } from "../context/LoginContextProvider";
+import { reducerContext } from "@/contexts/ReducerContextProvider";
 import handleChange from "../utils/handleChange";
 
 import { useContext } from "react";
@@ -15,7 +15,7 @@ export default function InputPassword() {
    * The state and dispatch function from the LoginContext.
    * @type {Array}
    */
-  const [state, dispatch] = useContext(loginContext);
+  const [state, dispatch] = useContext(reducerContext);
 
   return (
     <FormInput
