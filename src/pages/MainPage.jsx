@@ -9,6 +9,7 @@ const SuspenseMainPage = lazy(() => import('@/components/MainPage'));
 // check loader in router
 export default function MainPage() {
   const { querySnapshot } = useLoaderData();
+  console.log('install firebase to new nvm')
 
   return (
     <main className="pt-16 pb-7">
