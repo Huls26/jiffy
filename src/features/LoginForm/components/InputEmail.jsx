@@ -27,7 +27,7 @@ export default function InputEmail() {
         id="email"
         value={state.email}
         onChange={(event) => handleChange(event, dispatch, "UPDATE_EMAIL")}
-        autoComplete="username"
+        autoComplete="email"
         placeholder="aquino@mail.com"
       />
     </section>
