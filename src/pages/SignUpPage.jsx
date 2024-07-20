@@ -78,7 +78,19 @@ export default function SignUpPage() {
               />
             </section>
           </section>
-          <SubmitFullBtn text="Create Account" />
+          <section className="space-y-2">
+            <SubmitFullBtn text="Create Account" />
+            <p className="px-6 text-sm text-center dark:text-gray-600 cursor-default">
+              Already have an account?
+              <a
+                rel="noopener noreferrer"
+                href="/signup"
+                className="pl-1 hover:underline dark:text-blue-600"
+              >
+                Login.
+              </a>
+            </p>
+          </section>
         </form>
       </ReducerContextProvider>
     </LoginSignUpContainer>
