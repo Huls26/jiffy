@@ -14,6 +14,7 @@ export default function SignUpPage() {
     >
       <ReducerContextProvider>
         <section className="mb-8 text-center cursor-not-allowed">
+          {/* create a component for reusable purposes same a the login component */}
           <h1 className="my-3 text-4xl font-bold">Create account</h1>
           <p className="text-sm dark:text-gray-600">
             Create an account and connect with others.
@@ -22,6 +23,7 @@ export default function SignUpPage() {
         <form action="POST" className="space-y-12">
           <section className="space-y-4">
             <section>
+              {/* create a component for reusable purposes same a the login component */}
               <label htmlFor="email" className="block mb-2 text-sm">
                 Email address
               </label>
@@ -50,6 +52,7 @@ export default function SignUpPage() {
               />
             </section>
             <section>
+              {/* create a component for reusable purposes same a the login component */}
               <label htmlFor="password" className="block mb-2 text-sm">
                 Password
               </label>
@@ -64,6 +67,7 @@ export default function SignUpPage() {
               />
             </section>
             <section>
+              {/* create a component for reusable purposes same a the login component */}
               <label htmlFor="confirmPassword" className="block mb-2 text-sm">
                 Confirm Password
               </label>
@@ -82,6 +86,7 @@ export default function SignUpPage() {
             <SubmitFullBtn text="Create Account" />
             <p className="px-6 text-sm text-center dark:text-gray-600 cursor-default">
               Already have an account?
+              {/* create a component for reusable purposes same a the login component */}
               <a
                 rel="noopener noreferrer"
                 href="/signup"
