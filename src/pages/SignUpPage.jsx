@@ -1,4 +1,5 @@
 import FormInput from "@/components/FormInput";
+import ModalHeaderText from "@/components/ModalHeaderText";
 import SubmitFullBtn from "@/components/buttons/SubmitFullBtn";
 import LoginSignUpContainer from "@/components/componentContainers/LoginSignUpContainer";
 import ReducerContextProvider from "@/contexts/ReducerContextProvider";
@@ -13,13 +14,10 @@ export default function SignUpPage() {
                 "
     >
       <ReducerContextProvider>
-        <section className="mb-8 text-center cursor-not-allowed">
-          {/* create a component for reusable purposes same a the login component */}
-          <h1 className="my-3 text-4xl font-bold">Create account</h1>
-          <p className="text-sm dark:text-gray-600">
-            Create an account and connect with others.
-          </p>
-        </section>
+        <ModalHeaderText
+          title={"Create account"}
+          body={"Create an account and connect with others."}
+        />
         <form action="POST" className="space-y-12">
           <section className="space-y-4">
             <section>
