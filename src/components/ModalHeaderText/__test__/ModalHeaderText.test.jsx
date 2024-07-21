@@ -1,4 +1,4 @@
-import ModalHeaderText from "@/components/ModalHeaderText"; // Adjust the import path as needed
+import ModalHeaderText from "@/components/ModalHeaderText";
 import { render, screen } from "@testing-library/react";
 
 describe("ModalHeaderText", () => {
