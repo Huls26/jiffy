@@ -14,7 +14,7 @@ import PropTypes from "prop-types";
  *
  * @returns {JSX.Element} - The JSX element representing the input field.
  */
-export default function LoginFormInput({
+export default function FormInput({
   type,
   name,
   id,
@@ -40,7 +40,7 @@ export default function LoginFormInput({
 /**
  * The PropTypes for the LoginFormInput component.
  */
-LoginFormInput.propTypes = {
+FormInput.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
