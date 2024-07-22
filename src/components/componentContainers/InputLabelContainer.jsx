@@ -2,6 +2,7 @@ import FormInput from "@/components/FormInput";
 import { reducerContext } from "@/contexts/ReducerContextProvider";
 import handleChange from "@/utils/handleChange";
 
+import PropTypes from "prop-types";
 import { useContext } from "react";
 /**
  * This component renders an email input field for the login form.
@@ -33,7 +34,7 @@ export default function InputLabelContainer({
         type={type}
         name={name}
         id={id}
-        value={state.email}
+        value={state[type]}
         onChange={(event) => handleChange(event, dispatch, dispatchType)}
         autoComplete={autoComplete}
         placeholder={placeholder}
@@ -41,3 +42,13 @@ export default function InputLabelContainer({
     </section>
   );
 }
+
+InputLabelContainer.propTypes = {
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  dispatchType: PropTypes.string,
+  autoComplete: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
+};
