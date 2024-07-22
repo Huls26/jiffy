@@ -1,6 +1,6 @@
 import FormInput from "@/components/FormInput";
 import { reducerContext } from "@/contexts/ReducerContextProvider";
-import handleChange from "../utils/handleChange";
+import handleChange from "@/utils/handleChange";
 
 import { useContext } from "react";
 
