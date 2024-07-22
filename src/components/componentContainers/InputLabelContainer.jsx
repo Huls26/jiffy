@@ -27,7 +27,7 @@ export default function InputLabelContainer({
 
   return (
     <section>
-      <label htmlFor="email" className="block mb-2 text-sm">
+      <label htmlFor={id} className="block mb-2 text-sm">
         {label}
       </label>
       <FormInput
