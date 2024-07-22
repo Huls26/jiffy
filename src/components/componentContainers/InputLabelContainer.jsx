@@ -48,7 +48,7 @@ InputLabelContainer.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  dispatchType: PropTypes.string,
+  dispatchType: PropTypes.string.isRequired,
   autoComplete: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
 };
