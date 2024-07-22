@@ -38,7 +38,7 @@ export default function FormInput({
 }
 
 /**
- * The PropTypes for the LoginFormInput component.
+ * The PropTypes for the FormInput component.
  */
 FormInput.propTypes = {
   type: PropTypes.string.isRequired,
