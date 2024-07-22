@@ -3,7 +3,7 @@ import { vi } from "vitest";
 import "@testing-library/jest-dom";
 
 import InputEmail from "../components/InputEmail";
-import LoginContextProvider from "../context/LoginContextProvider";
+// import LoginContextProvider from "../context/LoginContextProvider";
 
 describe.skip("InputEmail Component", () => {
   it("should render the input field with the correct initial value and handle change event", () => {
