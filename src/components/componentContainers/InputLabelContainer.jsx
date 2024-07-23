@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 /**
  * This component renders an email input field for the login form.
- * It uses the LoginContext to manage the form state.
+ * It uses the reducerContext to manage the form state.
  *
  * @returns {JSX.Element} - The JSX representation of the email input field.
  */
@@ -35,7 +35,7 @@ export default function InputLabelContainer({
         type={type}
         name={name}
         id={id}
-        value={state[type]}
+        value={state[name]}
         onChange={(event) => handleChange(event, dispatch, dispatchType)}
         autoComplete={autoComplete}
         placeholder={placeholder}
