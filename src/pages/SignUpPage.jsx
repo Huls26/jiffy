@@ -1,11 +1,12 @@
+import AuthPrompt from "@/components/AuthPrompt";
 import ModalHeaderText from "@/components/ModalHeaderText";
 import SubmitFullBtn from "@/components/buttons/SubmitFullBtn";
+import InputLabelContainer from "@/components/componentContainers/InputLabelContainer";
 import LoginSignUpContainer from "@/components/componentContainers/LoginSignUpContainer";
 import ReducerContextProvider from "@/contexts/ReducerContextProvider";
 import reducerMethod, {
   INITIAL_STATE,
 } from "@/contexts/SignUpPageContextReducer";
-import InputLabelContainer from "../components/componentContainers/InputLabelContainer";
 
 export default function SignUpPage() {
   return (
@@ -37,7 +38,7 @@ export default function SignUpPage() {
             />
             <InputLabelContainer
               label="Username"
-              type="username"
+              type="text"
               name="username"
               id="username"
               dispatchType="UPDATE_USERNAME"
@@ -55,27 +56,21 @@ export default function SignUpPage() {
             />
             <InputLabelContainer
               label="Confirm Password"
-              type="confirmPassword"
+              type="password"
               name="confirmPassword"
               id="confirmPassword"
               dispatchType="UPDATE_CONFIRM_PASSWORD"
-              autoComplete="confirmPassword"
+              autoComplete=""
               placeholder="********"
             />
           </section>
           <section className="space-y-2">
             <SubmitFullBtn text="Create Account" />
-            <p className="px-6 text-sm text-center dark:text-gray-600 cursor-default">
-              Already have an account?
-              {/* create a component for reusable purposes same a the login component */}
-              <a
-                rel="noopener noreferrer"
-                href="/signup"
-                className="pl-1 hover:underline dark:text-blue-600"
-              >
-                Login.
-              </a>
-            </p>
+            <AuthPrompt
+              message="Already have an account?"
+              url="/login"
+              linkText="Login"
+            />
           </section>
         </form>
       </ReducerContextProvider>
