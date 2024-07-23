@@ -3,6 +3,10 @@ import ModalHeaderText from "@/components/ModalHeaderText";
 import SubmitFullBtn from "@/components/buttons/SubmitFullBtn";
 import LoginSignUpContainer from "@/components/componentContainers/LoginSignUpContainer";
 import ReducerContextProvider from "@/contexts/ReducerContextProvider";
+import reducerMethod, {
+  INITIAL_STATE,
+} from "@/contexts/SignUpPageContextReducer";
+import InputLabelContainer from "../components/componentContainers/InputLabelContainer";
 
 export default function SignUpPage() {
   return (
@@ -13,28 +17,25 @@ export default function SignUpPage() {
                   dark:bg-gray-900 dark:text-gray-100 
                 "
     >
-      <ReducerContextProvider>
+      <ReducerContextProvider
+        reducerMethod={reducerMethod}
+        INITIAL_STATE={INITIAL_STATE}
+      >
         <ModalHeaderText
           title={"Create account"}
           body={"Create an account and connect with others."}
         />
         <form action="POST" className="space-y-12">
           <section className="space-y-4">
-            <section>
-              {/* create a component for reusable purposes same a the login component */}
-              <label htmlFor="email" className="block mb-2 text-sm">
-                Email address
-              </label>
-              <FormInput
-                type="email"
-                name="email"
-                id="email"
-                // value={state.email}
-                // onChange={(event) => handleChange(event, dispatch, "UPDATE_EMAIL")}
-                autoComplete="username"
-                placeholder="aquino@mail.com"
-              />
-            </section>
+            <InputLabelContainer
+              label="Email address"
+              type="email"
+              name="email"
+              id="email"
+              dispatchType="UPADATE_EMAIL"
+              autoComplete="username"
+              placeholder="aquino@mail.com"
+            />
             <section>
               <label htmlFor="username" className="block mb-2 text-sm">
                 Username
