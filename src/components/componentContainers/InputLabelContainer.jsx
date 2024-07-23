@@ -4,6 +4,7 @@ import handleChange from "@/utils/handleChange";
 
 import PropTypes from "prop-types";
 import { useContext } from "react";
+
 /**
  * This component renders an email input field for the login form.
  * It uses the LoginContext to manage the form state.
