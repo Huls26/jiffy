@@ -32,24 +32,19 @@ export default function SignUpPage() {
               type="email"
               name="email"
               id="email"
-              dispatchType="UPADATE_EMAIL"
+              dispatchType="UPDATE_EMAIL"
               autoComplete="username"
               placeholder="aquino@mail.com"
             />
-            <section>
-              <label htmlFor="username" className="block mb-2 text-sm">
-                Username
-              </label>
-              <FormInput
-                type="username"
-                name="username"
-                id="username"
-                // value={state.email}
-                // onChange={(event) => handleChange(event, dispatch, "UPDATE_EMAIL")}
-                autoComplete="username"
-                placeholder="Kiki Aquino"
-              />
-            </section>
+            <InputLabelContainer
+              label="Username"
+              type="username"
+              name="username"
+              id="username"
+              dispatchType="UPDATE_USERNAME"
+              autoComplete="username"
+              placeholder="Kiki Aquino"
+            />
             <section>
               {/* create a component for reusable purposes same a the login component */}
               <label htmlFor="password" className="block mb-2 text-sm">
