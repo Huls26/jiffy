@@ -1,4 +1,3 @@
-import FormInput from "@/components/FormInput";
 import ModalHeaderText from "@/components/ModalHeaderText";
 import SubmitFullBtn from "@/components/buttons/SubmitFullBtn";
 import LoginSignUpContainer from "@/components/componentContainers/LoginSignUpContainer";
@@ -45,36 +44,24 @@ export default function SignUpPage() {
               autoComplete="username"
               placeholder="Kiki Aquino"
             />
-            <section>
-              {/* create a component for reusable purposes same a the login component */}
-              <label htmlFor="password" className="block mb-2 text-sm">
-                Password
-              </label>
-              <FormInput
-                type="password"
-                name="password"
-                id="password"
-                // value={state.email}
-                // onChange={(event) => handleChange(event, dispatch, "UPDATE_EMAIL")}
-                autoComplete="password"
-                placeholder="********"
-              />
-            </section>
-            <section>
-              {/* create a component for reusable purposes same a the login component */}
-              <label htmlFor="confirmPassword" className="block mb-2 text-sm">
-                Confirm Password
-              </label>
-              <FormInput
-                type="confirmPassword"
-                name="confirmPassword"
-                id="confirmPassword"
-                // value={state.email}
-                // onChange={(event) => handleChange(event, dispatch, "UPDATE_EMAIL")}
-                autoComplete="confirmPassword"
-                placeholder="********"
-              />
-            </section>
+            <InputLabelContainer
+              label="Password"
+              type="password"
+              name="password"
+              id="password"
+              dispatchType="UPDATE_PASSWORD"
+              autoComplete="password"
+              placeholder="********"
+            />
+            <InputLabelContainer
+              label="Confirm Password"
+              type="confirmPassword"
+              name="confirmPassword"
+              id="confirmPassword"
+              dispatchType="UPDATE_CONFIRM_PASSWORD"
+              autoComplete="confirmPassword"
+              placeholder="********"
+            />
           </section>
           <section className="space-y-2">
             <SubmitFullBtn text="Create Account" />
