@@ -1,6 +1,14 @@
 import PropTypes from "prop-types";
 
-export default function SignInButton({ text }) {
+/**
+ * A React functional component that renders a full-width button with custom styles.
+ *
+ * @function SubmitFullButton
+ * @param {object} props - The component's props.
+ * @param {string} props.text - The text to be displayed on the button.
+ * @returns {JSX.Element} - A JSX element representing the button.
+ */
+export default function SubmitFullButton({ text }) {
   return (
     <button
       type="button"
