@@ -1,11 +1,15 @@
+import AuthPrompt from "@/components/AuthPrompt";
 import SubmitFullBtn from "@/components/buttons/SubmitFullBtn";
-import CreateAccountSection from "./CreateAccountSection";
 
 export default function ButtonSection() {
   return (
     <section className="space-y-2">
       <SubmitFullBtn text="Sign in" />
-      <CreateAccountSection />
+      <AuthPrompt
+        message="Don't have an account yet?"
+        url="/signup"
+        linkText="Sign up."
+      />
     </section>
   );
 }
