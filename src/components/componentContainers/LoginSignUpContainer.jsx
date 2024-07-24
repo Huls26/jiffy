@@ -1,3 +1,12 @@
+/**
+ * A container component for login and sign-up forms.
+ * It provides a consistent layout and styling for these forms.
+ *
+ * @param {Object} props - The component's props.
+ * @param {React.ReactNode} props.children - The child components to be rendered inside the container.
+ *
+ * @returns {React.ReactElement} - The rendered main container component.
+ */
 export default function LoginSignUpContainer({ children }) {
   return (
     <main
