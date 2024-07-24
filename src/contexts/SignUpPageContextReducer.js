@@ -2,6 +2,7 @@ export const INITIAL_STATE = {
   email: "",
   username: "",
   password: "",
+  confirmPassword: "",
 };
 
 /**
@@ -26,6 +27,8 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
       return { ...state, username: action.payload };
     case "UPDATE_PASSWORD":
       return { ...state, password: action.payload };
+    case "UPDATE_CONFIRM_PASSWORD":
+      return { ...state, confirmPassword: action.payload };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }
