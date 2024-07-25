@@ -24,6 +24,6 @@ export default function SubmitFullButton({ text }) {
   );
 }
 
-SignInButton.propTypes = {
+SubmitFullButton.propTypes = {
   text: PropTypes.string.isRequired,
 };
