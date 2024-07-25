@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom"; // for the "toBeInTheDocument" matcher
-import SubmitFullButton from "@/components/SubmitFullButton";
+import SubmitFullBtn from "@/components/buttons/SubmitFullBtn";
 
 describe("SubmitFullButton Component", () => {
   test("renders the button with the correct text", () => {
     const buttonText = "Submit";
 
-    render(<SubmitFullButton text={buttonText} />);
+    render(<SubmitFullBtn text={buttonText} />);
 
     const buttonElement = screen.getByRole("button", { name: buttonText });
     expect(buttonElement).toBeInTheDocument();
@@ -16,7 +16,7 @@ describe("SubmitFullButton Component", () => {
   test("has the correct classes applied", () => {
     const buttonText = "Submit";
 
-    render(<SubmitFullButton text={buttonText} />);
+    render(<SubmitFullBtn text={buttonText} />);
 
     const buttonElement = screen.getByRole("button", { name: buttonText });
     expect(buttonElement).toHaveClass(
@@ -35,7 +35,7 @@ describe("SubmitFullButton Component", () => {
   test("has type 'button'", () => {
     const buttonText = "Submit";
 
-    render(<SubmitFullButton text={buttonText} />);
+    render(<SubmitFullBtn text={buttonText} />);
 
     const buttonElement = screen.getByRole("button", { name: buttonText });
     expect(buttonElement).toHaveAttribute("type", "button");
