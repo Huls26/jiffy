@@ -11,18 +11,18 @@ import { Link } from "react-router-dom";
  * @returns {JSX.Element} - The rendered AuthPrompt component.
  */
 const AuthPrompt = ({ url, message, linkText }) => (
-  <p className="px-6 text-sm text-center dark:text-gray-600 cursor-default">
-    {message}
-    <Link to={url} className="pl-1 hover:underline dark:text-blue-600">
-      {linkText}
-    </Link>
-  </p>
+	<p className="text-sm text-center sm500:px-6 dark:text-gray-600 cursor-default">
+		{message}
+		<Link to={url} className="ml-1 hover:underline dark:text-blue-600">
+			{linkText}
+		</Link>
+	</p>
 );
 
 AuthPrompt.propTypes = {
-  url: PropTypes.string.isRequired,
-  message: PropTypes.string,
-  linkText: PropTypes.string,
+	url: PropTypes.string.isRequired,
+	message: PropTypes.string,
+	linkText: PropTypes.string,
 };
 
 export default AuthPrompt;
