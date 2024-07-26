@@ -4,6 +4,14 @@ export default {
   darkMode: "class", // or'media' or 'class'
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      sm500: "500px",
+      sm: "576px",
+      md: "768px",
+      lg: "992px",
+      xl: "1200px",
+      xxl: "1400px",
+    },
     extend: {},
   },
   plugins: [],
