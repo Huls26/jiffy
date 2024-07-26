@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 /**
  * A functional component that renders a prompt with a link to an external URL.
@@ -12,13 +13,9 @@ import PropTypes from "prop-types";
 const AuthPrompt = ({ url, message, linkText }) => (
   <p className="px-6 text-sm text-center dark:text-gray-600 cursor-default">
     {message}
-    <a
-      rel="noopener noreferrer"
-      href={url}
-      className="pl-1 hover:underline dark:text-blue-600"
-    >
+    <Link to={url} className="pl-1 hover:underline dark:text-blue-600">
       {linkText}
-    </a>
+    </Link>
   </p>
 );
 
