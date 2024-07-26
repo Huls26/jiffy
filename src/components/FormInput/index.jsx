@@ -15,37 +15,37 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element} - The JSX element representing the input field.
  */
 export default function FormInput({
-  type,
-  name,
-  id,
-  value,
-  onChange,
-  autoComplete,
-  placeholder,
+	type,
+	name,
+	id,
+	value,
+	onChange,
+	autoComplete,
+	placeholder,
 }) {
-  return (
-    <input
-      type={type}
-      name={name}
-      id={id}
-      value={value}
-      onChange={onChange}
-      autoComplete={autoComplete}
-      placeholder={placeholder}
-      className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:outline-blue-500"
-    />
-  );
+	return (
+		<input
+			type={type}
+			name={name}
+			id={id}
+			value={value}
+			onChange={onChange}
+			autoComplete={autoComplete}
+			placeholder={placeholder}
+			className="w-full px-2 py-1 sm500:px-3 sm500:py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:outline-blue-500"
+		/>
+	);
 }
 
 /**
  * The PropTypes for the FormInput component.
  */
 FormInput.propTypes = {
-  type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  autoComplete: PropTypes.string,
-  placeholder: PropTypes.string,
+	type: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
+	value: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
+	autoComplete: PropTypes.string,
+	placeholder: PropTypes.string,
 };
