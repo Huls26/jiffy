@@ -20,8 +20,10 @@ export default function InputSection() {
         autoComplete="email"
         placeholder="aquino@mail.com"
       />
-      <ForgotPassword />
-      <InputPassword />
+      <section>
+        <ForgotPassword />
+        <InputPassword />
+      </section>
     </section>
   );
 }
