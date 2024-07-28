@@ -27,7 +27,7 @@ export default function SignUpInputSection() {
         name="password"
         id="password"
         dispatchType="UPDATE_PASSWORD"
-        autoComplete="password"
+        autoComplete="new-password"
         placeholder="********"
       />
       <InputLabelContainer
@@ -36,7 +36,7 @@ export default function SignUpInputSection() {
         name="confirmPassword"
         id="confirmPassword"
         dispatchType="UPDATE_CONFIRM_PASSWORD"
-        autoComplete=""
+        autoComplete="new-password"
         placeholder="********"
       />
     </section>
