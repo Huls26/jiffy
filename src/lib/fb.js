@@ -2,14 +2,16 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { addDoc, collection } from "firebase/firestore";
 
+console.log(import.meta.env);
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDpmIdoj8THgtb8g6jQx3OOKvmQU3DkM-s",
-  authDomain: "jiffy-ver-2.firebaseapp.com",
-  projectId: "jiffy-ver-2",
-  storageBucket: "jiffy-ver-2.appspot.com",
-  messagingSenderId: "7344292796",
-  appId: "1:7344292796:web:8fe78c8304add4e97e61b9",
-  measurementId: "G-BJPPB2E6P4",
+  apiKey: import.meta.env.VITE_FBK_KEY,
+  authDomain: import.meta.env.VITE_FBK_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID,
+  measurementId: import.meta.env.VITE_MEASUREMENTID,
 };
 
 const app = initializeApp(firebaseConfig);
