@@ -3,7 +3,7 @@ import LoginSignUpContainer from "@/components/componentContainers/LoginSignUpCo
 import ReducerContextProvider from "@/contexts/ReducerContextProvider";
 import LoginForm from "@/features/LoginForm";
 import reducerMethod, {
-	INITIAL_STATE,
+  INITIAL_STATE,
 } from "@/features/LoginForm/context/LoginPageContextReducer";
 
 /**
@@ -12,18 +12,18 @@ import reducerMethod, {
  *
  * @returns {JSX.Element} - The JSX element for the login page.
  */ export default function LoginPage() {
-	return (
-		<LoginSignUpContainer>
-			<ReducerContextProvider
-				reducerMethod={reducerMethod}
-				INITIAL_STATE={INITIAL_STATE}
-			>
-				<ModalHeaderText
-					title={"Sign in"}
-					body={"Sign in to access your account"}
-				/>
-				<LoginForm />
-			</ReducerContextProvider>
-		</LoginSignUpContainer>
-	);
+  return (
+    <LoginSignUpContainer>
+      <ReducerContextProvider
+        reducerMethod={reducerMethod}
+        INITIAL_STATE={INITIAL_STATE}
+      >
+        <ModalHeaderText
+          title={"Sign in"}
+          body={"Sign in to access your account"}
+        />
+        <LoginForm />
+      </ReducerContextProvider>
+    </LoginSignUpContainer>
+  );
 }
