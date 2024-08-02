@@ -45,6 +45,8 @@ export default function ReducerContextProvider({
   const [state, dispatch] = useReducer(reducerMethod, INITIAL_STATE);
 
   return (
+    // I could use ContextProvider here, instead of reducerContextProvider
+    // but right this is probably fine for now
     <reducerContext.Provider value={[state, dispatch]}>
       {children}
     </reducerContext.Provider>
