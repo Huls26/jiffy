@@ -28,6 +28,6 @@ export { Context };
  * @returns {React.ReactElement} - The wrapped child components with the Context.Provider.
  */
 export default function ContextProvider({ children, value }) {
-  console.log("write documentation and test cases");
+  console.log("add test cases");
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }
