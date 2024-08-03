@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { connectAuthEmulator, getAuth } from "firebase/auth";
 import {
   FieldValue,
   connectFirestoreEmulator,
@@ -18,9 +19,14 @@ const firebaseConfig = {
 // Initialize Firebase app
 const app = initializeApp(firebaseConfig);
 
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
+// Enable authentication emulator
+connectAuthEmulator(auth, "http://127.0.0.1:9099");
+
 //firestore
 const db = getFirestore(app);
-// for firestore emulator
+// firestore emulator
 connectFirestoreEmulator(db, "127.0.0.1", 8080);
 
-export { app, FieldValue, db };
+export { app, auth, FieldValue, db };
