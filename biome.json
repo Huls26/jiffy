@@ -36,11 +36,14 @@
   },
   "overrides": [
     {
-      "include": ["**/*.test.ts"],
+      "include": ["**/*.test.js", "**/*.test.jsx"],
       "linter": {
         "rules": {
           "suspicious": {
             "noExplicitAny": "off"
+          },
+          "correctness": {
+            "noUndeclaredVariables": "off"
           }
         }
       }
