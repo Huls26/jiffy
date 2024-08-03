@@ -29,4 +29,6 @@ const db = getFirestore(app);
 // firestore emulator
 connectFirestoreEmulator(db, "127.0.0.1", 8080);
 
+// seedDatabase(db);
+
 export { app, auth, FieldValue, db };
