@@ -1,5 +1,5 @@
-// NOTE: replace 'NvPY9M9MzFTARQ6M816YAzDJxZ72' with your Firebase auth user id (can be taken from Firebase)
-export function seedDatabase(firebase) {
+import { addDoc, collection } from "firebase/firestore";
+export function seedDatabase(db) {
   const users = [
     {
       userId: "NvPY9M9MzFTARQ6M816YAzDJxZ72",
@@ -39,10 +39,20 @@ export function seedDatabase(firebase) {
     },
   ];
 
-  // eslint-disable-next-line prefer-const
-  for (let k = 0; k < users.length; k++) {
-    firebase.firestore().collection("users").add(users[k]);
-  }
+  const addUsersToFirestore = async (users) => {
+    try {
+      for (let k = 0; k < users.length; k++) {
+        await addDoc(collection(db, "users"), users[k]);
+      }
+      // biome-ignore lint/nursery/noConsole: <explanation>
+      console.log("Users added successfully!");
+    } catch (error) {
+      // biome-ignore lint/nursery/noConsole: <explanation>
+      console.error("Error adding users: ", error);
+    }
+  };
+
+  addUsersToFirestore(users);
 
   // replace imageSrc
   // for (let i = 1; i <= 5; ++i) {
