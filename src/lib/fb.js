@@ -5,6 +5,8 @@ import {
   connectFirestoreEmulator,
   getFirestore,
 } from "firebase/firestore";
+import { connectStorageEmulator, getStorage } from "firebase/storage";
+// import { seedDatabase } from "./seed";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FBK_KEY,
@@ -24,11 +26,19 @@ const auth = getAuth(app);
 // Enable authentication emulator
 connectAuthEmulator(auth, "http://127.0.0.1:9099");
 
-//firestore
+// Initialize firestore
 const db = getFirestore(app);
 // firestore emulator
 connectFirestoreEmulator(db, "127.0.0.1", 8080);
 
+// Initialize Firebase Storage and get a reference to the service
+const storage = getStorage(app);
+// storage emulator
+if (location.hostname === "localhost") {
+  // Point to the Storage emulator running on localhost.
+  connectStorageEmulator(storage, "127.0.0.1", 9199);
+}
+
 // seedDatabase(db);
 
-export { app, auth, FieldValue, db };
+export { app, auth, FieldValue, db, storage };
