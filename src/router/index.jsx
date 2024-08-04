@@ -1,7 +1,9 @@
-import LoginPage from "@/pages/LoginPage";
-import MainPage from "@/pages/MainPage";
-import NotFoundPage from "@/pages/NotFoundPage";
-import SignUpPage from "@/pages/SignUpPage";
+import { lazy } from "react";
+
+const LoginPage = lazy(() => import("@/pages/LoginPage"));
+const MainPage = lazy(() => import("@/pages/MainPage"));
+const SignUpPage = lazy(() => import("@/pages/SignUpPage"));
+const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 import {
   Route,
