@@ -1,6 +1,7 @@
 import path from "node:path";
 import react from "@vitejs/plugin-react";
 
+import autoprefixer from "autoprefixer";
 import tailwindcss from "tailwindcss";
 import { defineConfig } from "vite";
 
@@ -25,7 +26,7 @@ export default defineConfig({
       // PostCSS plugins to process CSS
       plugins: [
         tailwindcss(), // Adds Tailwind CSS processing
-        require("autoprefixer"), // Adds vendor prefixes to CSS rules for better browser compatibility
+        autoprefixer, // Adds vendor prefixes to CSS rules for better browser compatibility
       ],
     },
   },
