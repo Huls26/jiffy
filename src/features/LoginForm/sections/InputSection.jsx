@@ -12,6 +12,7 @@ export default function InputSection() {
   return (
     <section className="space-y-4">
       <InputLabelContainer
+        ariaLabel="Enter Email"
         label="Email address"
         type="email"
         name="email"
