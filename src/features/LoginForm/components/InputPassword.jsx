@@ -19,6 +19,7 @@ export default function InputPassword() {
 
   return (
     <FormInput
+      ariaLabel="Enter password"
       type="password"
       name="password"
       id="password"
