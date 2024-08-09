@@ -43,7 +43,7 @@ export default function FormInput({
  * The PropTypes for the FormInput component.
  */
 FormInput.propTypes = {
-  ariaLabel: PropTypes.string,
+  ariaLabel: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
