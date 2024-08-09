@@ -19,6 +19,7 @@ export default function InputLabelContainer({
   dispatchType,
   autoComplete,
   placeholder,
+  ariaLabel,
 }) {
   /**
    * The state and dispatch function from the LoginContext.
@@ -32,6 +33,7 @@ export default function InputLabelContainer({
         {label}
       </label>
       <FormInput
+        ariaLabel={ariaLabel}
         type={type}
         name={name}
         id={id}
@@ -45,6 +47,7 @@ export default function InputLabelContainer({
 }
 
 InputLabelContainer.propTypes = {
+  ariaLabel: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
