@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
  * @function SubmitFullButton
  * @param {object} props - The component's props.
  * @param {string} props.text - The text to be displayed on the button.
+ * @param {boolean} [props.isInvalid=false] - A flag indicating whether the button is invalid.
  * @returns {JSX.Element} - A JSX element representing the button.
  */
 export default function SubmitFullButton({ text, isInvalid = false }) {
