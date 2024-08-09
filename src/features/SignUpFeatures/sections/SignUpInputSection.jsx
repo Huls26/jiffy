@@ -4,6 +4,7 @@ export default function SignUpInputSection() {
   return (
     <section className="space-y-4">
       <InputLabelContainer
+        ariaLabel="Enter email address"
         label="Email address"
         type="email"
         name="email"
@@ -13,6 +14,7 @@ export default function SignUpInputSection() {
         placeholder="aquino@mail.com"
       />
       <InputLabelContainer
+        ariaLabel="Enter username"
         label="Username"
         type="text"
         name="username"
@@ -22,6 +24,7 @@ export default function SignUpInputSection() {
         placeholder="Kiki Aquino"
       />
       <InputLabelContainer
+        ariaLabel="Enter password"
         label="Password"
         type="password"
         name="password"
@@ -31,6 +34,7 @@ export default function SignUpInputSection() {
         placeholder="********"
       />
       <InputLabelContainer
+        ariaLabel="confirm password"
         label="Confirm Password"
         type="password"
         name="confirmPassword"
