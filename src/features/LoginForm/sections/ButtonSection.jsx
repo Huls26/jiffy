@@ -12,6 +12,7 @@ import { useContext } from "react";
 export default function ButtonSection() {
   const [loginInputState] = useContext(reducerContext);
   const { email, password } = loginInputState;
+  // check if the email and password were provided
   const isValidInput = !(email && password);
 
   return (
