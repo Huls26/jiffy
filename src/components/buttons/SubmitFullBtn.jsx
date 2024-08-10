@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
  * @param {boolean} [props.isInvalid=false] - A flag indicating whether the button is invalid.
  * @returns {JSX.Element} - A JSX element representing the button.
  */
-export default function SubmitFullButton({ text, isInvalid = false }) {
+export default function SubmitFullBtn({ text, isInvalid = false }) {
   const baseStyle = `
     w-full px-8 py-3 
     font-semibold rounded-md 
@@ -34,7 +34,7 @@ export default function SubmitFullButton({ text, isInvalid = false }) {
   );
 }
 
-SubmitFullButton.propTypes = {
+SubmitFullBtn.propTypes = {
   isInvalid: PropTypes.bool,
   text: PropTypes.string.isRequired,
 };
