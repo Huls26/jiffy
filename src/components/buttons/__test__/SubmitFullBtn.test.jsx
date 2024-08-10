@@ -2,42 +2,38 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom"; // for the "toBeInTheDocument" matcher
 import SubmitFullBtn from "@/components/buttons/SubmitFullBtn";
 
-describe("SubmitFullButton Component", () => {
-  test("renders the button with the correct text", () => {
-    const buttonText = "Submit";
+// passed from my test suite
+describe("SubmitFullButton", () => {
+  it("should render the button with the correct text and default style", () => {
+    render(<SubmitFullBtn text="Submit" />);
 
-    render(<SubmitFullBtn text={buttonText} />);
-
-    const buttonElement = screen.getByRole("button", { name: buttonText });
-    expect(buttonElement).toBeInTheDocument();
-    expect(buttonElement).toHaveTextContent(buttonText);
-  });
-
-  test("has the correct classes applied", () => {
-    const buttonText = "Submit";
-
-    render(<SubmitFullBtn text={buttonText} />);
-
-    const buttonElement = screen.getByRole("button", { name: buttonText });
-    expect(buttonElement).toHaveClass(
-      "w-full",
-      "px-8",
-      "py-3",
-      "font-semibold",
-      "rounded-md",
-      "dark:text-gray-50",
-      "dark:bg-blue-600",
-      "hover:opacity-70",
-      "active:opacity-55",
+    const button = screen.getByText("Submit");
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass(
+      "w-full px-8 py-3 font-semibold rounded-md dark:text-gray-50 dark:bg-blue-600 hover:opacity-70 active:opacity-55",
     );
+    expect(button).not.toBeDisabled();
   });
 
-  test("has type 'button'", () => {
-    const buttonText = "Submit";
+  it("should render the button as disabled and with invalid styles when isInvalid is true", () => {
+    render(<SubmitFullBtn text="Submit" isInvalid />);
 
-    render(<SubmitFullBtn text={buttonText} />);
+    const button = screen.getByText("Submit");
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass(
+      "w-full px-8 py-3 font-semibold rounded-md dark:text-gray-50 dark:bg-blue-600 opacity-70 cursor-not-allowed",
+    );
+    expect(button).toBeDisabled();
+  });
 
-    const buttonElement = screen.getByRole("button", { name: buttonText });
-    expect(buttonElement).toHaveAttribute("type", "button");
+  it("should render the button with the correct text and default style when isInvalid is false", () => {
+    render(<SubmitFullBtn text="Submit" isInvalid={false} />);
+
+    const button = screen.getByText("Submit");
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass(
+      "w-full px-8 py-3 font-semibold rounded-md dark:text-gray-50 dark:bg-blue-600 hover:opacity-70 active:opacity-55",
+    );
+    expect(button).not.toBeDisabled();
   });
 });
