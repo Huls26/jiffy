@@ -13,7 +13,7 @@ import { useContext, useState } from "react";
 ​ *
 ​ * @returns {JSX.Element} - The JSX element for the login form.
 ​ */
-export default function index() {
+export default function LoginForm() {
   const [loginState] = useContext(reducerContext);
   const { email, password } = loginState;
   const [errorState, setErrorState] = useState(false);
