@@ -25,7 +25,7 @@ export default function SubmitFullBtn({ text, isInvalid = false }) {
   return (
     <button
       disabled={isInvalid}
-      type="button"
+      type="submit"
       className={buttonClassNames}
       aria-disabled={isInvalid}
     >
