@@ -1,6 +1,5 @@
-import { reducerContext } from "@/contexts/ReducerContextProvider";
 import PropTypes from "prop-types";
-import { useContext } from "react";
+import useContextStyleClass from "./hooks/useContextStyleClass";
 
 /**
  * A reusable component for rendering an input field in a login form.
@@ -26,15 +25,10 @@ export default function FormInput({
   placeholder,
   ariaLabel,
 }) {
-  // TODO: create custom hooks for context style properties
-  const [stateReducer] = useContext(reducerContext);
   const defaultStyle =
     "w-full px-2 py-1 sm500:px-3 sm500:py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:outline-blue-500";
   const errorStyle = "outline outline-red-500";
-  const inputStyleClasses = !stateReducer.isErrorAuth
-    ? defaultStyle
-    : `${defaultStyle} ${errorStyle}`;
-  console.log("TODO: create custom hooks for context style properties");
+  const inputStyleClasses = useContextStyleClass(defaultStyle, errorStyle);
 
   return (
     <input
