@@ -6,7 +6,7 @@ import ErrorMessage from "./components/ErrorMessage";
 import ButtonSection from "./sections/ButtonSection";
 import InputSection from "./sections/InputSection";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 /**
 ​ * The main component for handling user login.
@@ -14,9 +14,8 @@ import { useContext, useState } from "react";
 ​ * @returns {JSX.Element} - The JSX element for the login form.
 ​ */
 export default function LoginForm() {
-  const [loginState] = useContext(reducerContext);
-  const { email, password } = loginState;
-  const [errorState, setErrorState] = useState(false);
+  const [loginState, dispatch] = useContext(reducerContext);
+  const { email, password, isErrorAuth } = loginState;
 
   /**
 ​   * Handles the form submission by preventing the default action and calling the signIn function.
@@ -36,9 +35,9 @@ export default function LoginForm() {
         // Signed in
         const user = userCredential.user;
         console.log("User signed in:", user);
-        setErrorState(false);
+        dispatch({ type: "UPDATE_VALIDAUTH" });
       } catch (error) {
-        setErrorState(true);
+        dispatch({ type: "UPDATE_INVALIDAUTH" });
         console.error("Error signing in:", error);
       }
     }
@@ -48,7 +47,7 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-12">
-      <ErrorMessage isError={errorState} />
+      <ErrorMessage isError={isErrorAuth} />
       <InputSection />
       <ButtonSection />
     </form>
