@@ -15,7 +15,5 @@ export default function useContextStyleClass(defaultStyle, errorStyle) {
     ? defaultStyle
     : `${defaultStyle} ${errorStyle}`;
 
-  console.log("write test");
-
   return inputStyleClasses;
 }
