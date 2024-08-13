@@ -7,6 +7,7 @@ import ButtonSection from "./sections/ButtonSection";
 import InputSection from "./sections/InputSection";
 
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 /**
 ​ * The main component for handling user login.
@@ -16,6 +17,19 @@ import { useContext } from "react";
 export default function LoginForm() {
   const [loginState, dispatch] = useContext(reducerContext);
   const { email, password, isErrorAuth } = loginState;
+  const navigate = useNavigate();
+
+  async function signIn(email, password) {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // Signed in
+      dispatch({ type: "UPDATE_VALIDAUTH" });
+      navigate("/");
+      // biome-ignore lint/correctness/noUnusedVariables: <explanation>
+    } catch (error) {
+      dispatch({ type: "UPDATE_INVALIDAUTH" });
+    }
+  }
 
   /**
 ​   * Handles the form submission by preventing the default action and calling the signIn function.
@@ -24,24 +38,6 @@ export default function LoginForm() {
 ​   */
   function handleSubmit(event) {
     event.preventDefault();
-
-    async function signIn(email, password) {
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password,
-        );
-        // Signed in
-        const user = userCredential.user;
-        console.log("User signed in:", user);
-        dispatch({ type: "UPDATE_VALIDAUTH" });
-      } catch (error) {
-        dispatch({ type: "UPDATE_INVALIDAUTH" });
-        console.error("Error signing in:", error);
-      }
-    }
-
     signIn(email, password);
   }
 
