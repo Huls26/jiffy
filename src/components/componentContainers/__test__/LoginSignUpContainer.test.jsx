@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom"; // for better assertions
+import "@testing-library/jest-dom";
 import LoginSignUpContainer from "../LoginSignUpContainer";
 
 test("renders LoginSignUpContainer with children", () => {
@@ -23,12 +23,14 @@ test("has correct classes applied", () => {
   expect(mainElement).toHaveClass(
     "flex",
     "flex-col",
-    "m-auto",
-    "mt-10",
+    "mx-8",
+    "my-16",
     "max-w-md",
-    "p-10",
+    "p-5",
     "rounded-md",
-    "sm:p-10",
+    "sm500:m-auto",
+    "sm500:mt-10",
+    // "sm:p-10",
     "dark:bg-gray-900",
     "dark:text-gray-100",
   );
