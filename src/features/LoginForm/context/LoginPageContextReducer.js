@@ -27,7 +27,8 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
     case "UPDATE_VALIDAUTH":
       return { ...state, isErrorAuth: false };
     case "UPDATE_INVALIDAUTH":
-      return { ...state, isErrorAuth: true };
+      // this will set error state to true and set password to ''
+      return { ...state, password: "", isErrorAuth: true };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }
