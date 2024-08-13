@@ -19,6 +19,7 @@ export default function LoginForm() {
   const { email, password, isErrorAuth } = loginState;
   const navigate = useNavigate();
 
+  console.log("to rewrite login");
   async function signIn(email, password) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
