@@ -1,10 +1,8 @@
 import { reducerContext } from "@/contexts/ReducerContextProvider";
-import { auth } from "@/lib/fb";
-
-import { signInWithEmailAndPassword } from "firebase/auth";
 import ErrorMessage from "./components/ErrorMessage";
 import ButtonSection from "./sections/ButtonSection";
 import InputSection from "./sections/InputSection";
+import loginUser from "./utils/loginUser";
 
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,27 +17,21 @@ export default function LoginForm() {
   const { email, password, isErrorAuth } = loginState;
   const navigate = useNavigate();
 
-  console.log("to rewrite login");
-  async function signIn(email, password) {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // Signed in
-      dispatch({ type: "UPDATE_VALIDAUTH" });
-      navigate("/");
-      // biome-ignore lint/correctness/noUnusedVariables: <explanation>
-    } catch (error) {
-      dispatch({ type: "UPDATE_INVALIDAUTH" });
-    }
-  }
-
-  /**
-​   * Handles the form submission by preventing the default action and calling the signIn function.
-​   *
-​   * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
-​   */
   function handleSubmit(event) {
     event.preventDefault();
-    signIn(email, password);
+    loginUser(email, password, dispatch, navigate)
+      .then((res) => {
+        if (res) {
+          dispatch({ type: "UPDATE_VALIDAUTH" });
+          navigate("/");
+        }
+      })
+      .catch(() => {
+        console.error(
+          "Login failed. Please check your credentials and try again.",
+        );
+        dispatch({ type: "UPDATE_INVALIDAUTH" });
+      });
   }
 
   return (
