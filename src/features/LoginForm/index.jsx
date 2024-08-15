@@ -15,11 +15,8 @@ export default function LoginForm() {
   return (
     // Render a form with the onSubmit event handler and space-y-12 class
     <form onSubmit={handleSubmit} className="space-y-12">
-      // Render the ErrorMessage component with the isError prop
       <ErrorMessage isError={isErrorAuth} />
-      // Render the InputSection component
       <InputSection />
-      // Render the ButtonSection component
       <ButtonSection />
     </form>
   );
