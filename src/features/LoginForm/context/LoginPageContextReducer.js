@@ -2,6 +2,7 @@ export const INITIAL_STATE = {
   email: "",
   password: "",
   isErrorAuth: false,
+  isLoading: false,
 };
 
 /**
@@ -29,6 +30,8 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
     case "UPDATE_INVALIDAUTH":
       // this will set error state to true and set password to ''
       return { ...state, password: "", isErrorAuth: true };
+    case "UPDATE_ISLOADING":
+      return { ...state, isLoading: action.payload };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }
