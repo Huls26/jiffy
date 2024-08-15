@@ -1,7 +1,6 @@
-import ModalHeaderText from "@/components/ModalHeaderText";
 import LoginSignUpContainer from "@/components/componentContainers/LoginSignUpContainer";
 import ReducerContextProvider from "@/contexts/ReducerContextProvider";
-import LoginForm from "@/features/LoginForm";
+import LoginFeatures from "@/features/LoginFeatures";
 import reducerMethod, {
   INITIAL_STATE,
 } from "@/features/LoginForm/context/LoginPageContextReducer";
@@ -26,11 +25,7 @@ export default function LoginPage() {
         reducerMethod={reducerMethod}
         INITIAL_STATE={INITIAL_STATE}
       >
-        <ModalHeaderText
-          title={"Sign in"}
-          body={"Sign in to access your account"}
-        />
-        <LoginForm />
+        <LoginFeatures />
       </ReducerContextProvider>
     </LoginSignUpContainer>
   );
