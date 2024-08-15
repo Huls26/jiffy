@@ -24,6 +24,7 @@ export default function useHandleSubmitAndError() {
    */
   function handleSubmit(event) {
     event.preventDefault();
+    dispatch({ type: "UPDATE_ISLOADING", payload: true });
     loginUser(email, password, dispatch, navigate)
       .then((res) => {
         if (res) {
@@ -36,6 +37,9 @@ export default function useHandleSubmitAndError() {
           "Login failed. Please check your credentials and try again.",
         );
         dispatch({ type: "UPDATE_INVALIDAUTH" });
+      })
+      .finally(() => {
+        dispatch({ type: "UPDATE_ISLOADING", payload: false });
       });
   }
 
