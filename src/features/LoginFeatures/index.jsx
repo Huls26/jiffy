@@ -11,7 +11,7 @@ export default function LoginFeatures() {
 
   if (isLoading) {
     return (
-      <h1 className="flex justify-center items-center h-svh text-3xl text-white">
+      <h1 className="flex justify-center items-center h-96 text-3xl text-white">
         ...Loading...
       </h1>
     );
@@ -19,7 +19,7 @@ export default function LoginFeatures() {
   return (
     <Suspense
       fallback={
-        <h1 className="flex justify-center items-center h-svh text-3xl text-white">
+        <h1 className="flex justify-center items-center h-96 text-3xl text-white">
           ...Loading...
         </h1>
       }
