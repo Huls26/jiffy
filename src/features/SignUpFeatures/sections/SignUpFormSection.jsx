@@ -1,12 +1,9 @@
-import { reducerContext } from "@/contexts/ReducerContextProvider";
+import useSignUpState from "../hooks/useSignUpState";
 import SignUpBtnSection from "./SignUpBtnSection";
 import SignUpInputSection from "./SignUpInputSection";
 
-import { useContext } from "react";
-
 export default function SignUpFormSection() {
-  const [signUpState, dispatch] = useContext(reducerContext);
-  const { password, confirmPassword } = signUpState;
+  const { dispatch, password, confirmPassword } = useSignUpState();
 
   function handleSignUp(event) {
     event.preventDefault();
