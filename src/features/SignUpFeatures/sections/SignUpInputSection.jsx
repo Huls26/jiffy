@@ -1,8 +1,16 @@
+import ErrorMessage from "@/components/ErrorMessage";
 import InputLabelContainer from "@/components/componentContainers/InputLabelContainer";
+import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { useContext } from "react";
 
 export default function SignUpInputSection() {
+  const [signUpState] = useContext(reducerContext);
+  const { isError, errorMessage } = signUpState;
+
+  // Render the sign-up form inputs and error message based on the state
   return (
     <section className="space-y-4">
+      <ErrorMessage isError={isError} message={errorMessage} />
       <InputLabelContainer
         ariaLabel="Enter email address"
         label="Email address"
