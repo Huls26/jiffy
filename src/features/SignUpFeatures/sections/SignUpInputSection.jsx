@@ -1,11 +1,9 @@
 import ErrorMessage from "@/components/ErrorMessage";
 import InputLabelContainer from "@/components/componentContainers/InputLabelContainer";
-import { reducerContext } from "@/contexts/ReducerContextProvider";
-import { useContext } from "react";
+import useSignUpState from "../hooks/useSignUpState";
 
 export default function SignUpInputSection() {
-  const [signUpState] = useContext(reducerContext);
-  const { isError, errorMessage } = signUpState;
+  const { isError, errorMessage } = useSignUpState();
 
   // Render the sign-up form inputs and error message based on the state
   return (
