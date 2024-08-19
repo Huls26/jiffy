@@ -14,6 +14,12 @@ export default function SignUpFormSection() {
         isError: true,
         message: "Check Password",
       });
+    } else if (password.length < 6 || confirmPassword.length < 6) {
+      dispatch({
+        type: "UPDATE_ERROR",
+        isError: true,
+        message: "Password must be at least 6 characters",
+      });
     }
   }
 
