@@ -27,8 +27,19 @@ export default function SignUpInputSection() {
         id="username"
         dispatchType="UPDATE_USERNAME"
         autoComplete="username"
-        placeholder="Kiki Aquino"
+        placeholder="KikiNo"
       />
+      {/* to-be-added feature */}
+      {/* <InputLabelContainer
+        ariaLabel="Enter first name"
+        label="First Name"
+        type="text"
+        name="firstname"
+        id="firstname"
+        dispatchType="UPDATE_USERNAME"
+        autoComplete="firstname"
+        placeholder="Kiki"
+      /> */}
       <InputLabelContainer
         ariaLabel="Enter password"
         label="Password"
