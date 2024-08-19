@@ -25,6 +25,7 @@ export default function FormInput({
   placeholder,
   ariaLabel,
 }) {
+  // fix only the error input element should have the errorStyle
   const defaultStyle =
     "w-full px-2 py-1 sm500:px-3 sm500:py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:outline-blue-500";
   const errorStyle = "outline outline-red-500";
