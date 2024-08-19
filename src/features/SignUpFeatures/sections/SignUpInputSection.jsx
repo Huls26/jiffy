@@ -3,12 +3,12 @@ import InputLabelContainer from "@/components/componentContainers/InputLabelCont
 import useSignUpState from "../hooks/useSignUpState";
 
 export default function SignUpInputSection() {
-  const { isError, errorMessage } = useSignUpState();
+  const { isErrorAuth, errorMessage } = useSignUpState();
 
   // Render the sign-up form inputs and error message based on the state
   return (
     <section className="space-y-4">
-      <ErrorMessage isError={isError} message={errorMessage} />
+      <ErrorMessage isError={isErrorAuth} message={errorMessage} />
       <InputLabelContainer
         ariaLabel="Enter email address"
         label="Email address"
