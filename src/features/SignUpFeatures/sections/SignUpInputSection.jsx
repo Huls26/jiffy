@@ -2,6 +2,12 @@ import ErrorMessage from "@/components/ErrorMessage";
 import InputLabelContainer from "@/components/componentContainers/InputLabelContainer";
 import useSignUpState from "../hooks/useSignUpState";
 
+/**
+ * This function renders the sign-up form inputs and error message based on the state.
+ * It uses the `ErrorMessage` and `InputLabelContainer` components to display the necessary UI elements.
+ *
+ * @returns {JSX.Element} - The JSX element representing the sign-up input section.
+ */
 export default function SignUpInputSection() {
   const { isErrorAuth, errorMessage } = useSignUpState();
 
