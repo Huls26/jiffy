@@ -3,7 +3,7 @@ export const INITIAL_STATE = {
   username: "",
   password: "",
   confirmPassword: "",
-  isError: false,
+  isErrorAuth: false,
   errorMessage: "",
 };
 
@@ -34,7 +34,7 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
     case "UPDATE_ERROR":
       return {
         ...state,
-        isError: action.isError,
+        isErrorAuth: action.isError,
         errorMessage: action.message,
       };
     default:
