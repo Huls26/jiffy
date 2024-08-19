@@ -1,3 +1,8 @@
+/**
+ * The initial state for user authentication.
+ * @constant
+ * @type {Object}
+ */
 export const INITIAL_STATE = {
   email: "",
   username: "",
