@@ -3,8 +3,14 @@ import { useContext } from "react";
 
 export default function useSignUpState() {
   const [signUpState, dispatch] = useContext(reducerContext);
-  const { email, username, password, confirmPassword, isError, errorMessage } =
-    signUpState;
+  const {
+    email,
+    username,
+    password,
+    confirmPassword,
+    isErrorAuth,
+    errorMessage,
+  } = signUpState;
 
   return {
     dispatch,
@@ -12,7 +18,7 @@ export default function useSignUpState() {
     username,
     password,
     confirmPassword,
-    isError,
+    isErrorAuth,
     errorMessage,
   };
 }
