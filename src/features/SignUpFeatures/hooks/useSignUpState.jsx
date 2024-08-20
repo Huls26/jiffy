@@ -18,6 +18,7 @@ export default function useSignUpState() {
   const {
     email,
     username,
+    fullName,
     password,
     confirmPassword,
     isErrorAuth,
@@ -28,6 +29,7 @@ export default function useSignUpState() {
     dispatch,
     email,
     username,
+    fullName,
     password,
     confirmPassword,
     isErrorAuth,
