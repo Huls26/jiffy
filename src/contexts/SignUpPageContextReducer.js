@@ -6,6 +6,7 @@
 export const INITIAL_STATE = {
   email: "",
   username: "",
+  fullName: "",
   password: "",
   confirmPassword: "",
   isErrorAuth: false,
@@ -32,6 +33,8 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
       return { ...state, email: action.payload };
     case "UPDATE_USERNAME":
       return { ...state, username: action.payload };
+    case "UPDATE_USERFULLNAME":
+      return { ...state, fullName: action.payload };
     case "UPDATE_PASSWORD":
       return { ...state, password: action.payload };
     case "UPDATE_CONFIRM_PASSWORD":
