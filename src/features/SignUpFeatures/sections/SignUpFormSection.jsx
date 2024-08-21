@@ -20,12 +20,13 @@ export default function SignUpFormSection() {
     //   return doc.data();
     // });
 
-    console.log(querySnapshot.docs.length);
+    return querySnapshot.docs.length;
   }
 
-  function handleSignUp(event) {
+  async function handleSignUp(event) {
     event.preventDefault();
 
+    console.log(await checkUserName(username));
     if (password !== confirmPassword) {
       dispatch({
         type: "UPDATE_ERROR",
@@ -38,9 +39,19 @@ export default function SignUpFormSection() {
         isError: true,
         message: "Password must be at least 6 characters",
       });
+    } else if ((await checkUserName(username)) > 0) {
+      dispatch({
+        type: "UPDATE_ERROR",
+        isError: true,
+        message: "Username is already taken",
+      });
+    } else {
+      dispatch({
+        type: "UPDATE_ERROR",
+        isError: false,
+        message: "",
+      });
     }
-
-    checkUserName(username);
   }
 
   return (
