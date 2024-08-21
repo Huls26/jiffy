@@ -15,11 +15,12 @@ export default function SignUpFormSection() {
     const userDoc = query(usersRef, where("username", "==", username));
     const querySnapshot = await getDocs(userDoc);
 
-    // biome-ignore lint/complexity/noForEach: <explanation>
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-    });
+    // const q = querySnapshot.docs.map((doc) => {
+    //   // doc.data() is never undefined for query doc snapshots
+    //   return doc.data();
+    // });
+
+    console.log(querySnapshot.docs.length);
   }
 
   function handleSignUp(event) {
