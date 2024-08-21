@@ -39,6 +39,7 @@ if (location.hostname === "localhost") {
   connectStorageEmulator(storage, "127.0.0.1", 9199);
 }
 
+// create seed database
 // seedDatabase(db);
 
 export { app, auth, FieldValue, db, storage };
