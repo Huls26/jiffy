@@ -4,11 +4,22 @@ import useSignUpState from "../hooks/useSignUpState";
 import SignUpBtnSection from "./SignUpBtnSection";
 import SignUpInputSection from "./SignUpInputSection";
 
+/**
+ * The SignUpFormSection component is responsible for handling the sign-up form.
+ * It includes input fields for username, password, and confirm password, as well as a submit button.
+ * The component also checks for existing usernames in the database and validates the password.
+ *
+ * @returns {JSX.Element} - The SignUpFormSection component.
+ */
 export default function SignUpFormSection() {
   const { dispatch, username, password, confirmPassword } = useSignUpState();
 
-  // Check if the username already exists in the database.
-  // fix code later
+  /**
+   * Asynchronously checks if the given username already exists in the database.
+   *
+   * @param {string} username - The username to check.
+   * @returns {Promise<number>} - A promise that resolves to the number of documents found with the given username.
+   */
   async function checkUserName(username) {
     // Check if the username already exists in the database.
     const usersRef = collection(db, "users");
@@ -23,6 +34,12 @@ export default function SignUpFormSection() {
     return querySnapshot.docs.length;
   }
 
+  /**
+   * Handles the sign-up form submission.
+   * Validates the password, checks for existing usernames, and dispatches error messages if necessary.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+   */
   async function handleSignUp(event) {
     event.preventDefault();
 
