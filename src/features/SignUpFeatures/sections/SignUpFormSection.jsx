@@ -1,5 +1,5 @@
 import { auth } from "@/lib/fb";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import {} from "firebase/firestore";
 import useSignUpState from "../hooks/useSignUpState";
 import { checkUsername } from "../utils/checkUsername";
@@ -35,16 +35,41 @@ export default function SignUpFormSection() {
           return user;
         })
         .catch((error) => {
-          const errorMessage = error.message;
-          console.log(errorMessage);
-        })
-        .finally((u) => {
-          const auth = getAuth();
-          const user = auth.currentUser;
+          const errorCode = error.code;
+          let errorMessage = error.message;
 
-          console.log(user);
-          console.log(u);
+          // Handle specific errors based on errorCode
+          switch (errorCode) {
+            case "auth/email-already-in-use":
+              errorMessage = "Email is already taken";
+              break;
+            case "auth/invalid-email":
+              errorMessage = "The email address is not valid.";
+              break;
+            case "auth/operation-not-allowed":
+              errorMessage = "Email/password accounts are not enabled.";
+              break;
+            case "auth/weak-password":
+              errorMessage = "The password is too weak.";
+              break;
+            default:
+              console.error("An unknown error occurred:", errorMessage);
+          }
+
+          console.error(errorMessage);
+          dispatch({
+            type: "UPDATE_ERROR",
+            isError: true,
+            message: errorMessage,
+          });
         });
+      // .finally((u) => {
+      //   const auth = getAuth();
+      //   const user = auth.currentUser;
+
+      //   console.log(user);
+      //   console.log(u);
+      // });
     }
 
     if (password !== confirmPassword) {
