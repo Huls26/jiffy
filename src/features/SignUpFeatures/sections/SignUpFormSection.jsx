@@ -1,6 +1,8 @@
-import { db } from "@/lib/fb";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { auth } from "@/lib/fb";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {} from "firebase/firestore";
 import useSignUpState from "../hooks/useSignUpState";
+import { checkUsername } from "../utils/checkUsername";
 import SignUpBtnSection from "./SignUpBtnSection";
 import SignUpInputSection from "./SignUpInputSection";
 
@@ -12,27 +14,8 @@ import SignUpInputSection from "./SignUpInputSection";
  * @returns {JSX.Element} - The SignUpFormSection component.
  */
 export default function SignUpFormSection() {
-  const { dispatch, username, password, confirmPassword } = useSignUpState();
-
-  /**
-   * Asynchronously checks if the given username already exists in the database.
-   *
-   * @param {string} username - The username to check.
-   * @returns {Promise<number>} - A promise that resolves to the number of documents found with the given username.
-   */
-  async function checkUserName(username) {
-    // Check if the username already exists in the database.
-    const usersRef = collection(db, "users");
-    const userDoc = query(usersRef, where("username", "==", username));
-    const querySnapshot = await getDocs(userDoc);
-
-    // const q = querySnapshot.docs.map((doc) => {
-    //   // doc.data() is never undefined for query doc snapshots
-    //   return doc.data();
-    // });
-
-    return querySnapshot.docs.length;
-  }
+  const { dispatch, email, username, password, confirmPassword } =
+    useSignUpState();
 
   /**
    * Handles the sign-up form submission.
@@ -43,7 +26,27 @@ export default function SignUpFormSection() {
   async function handleSignUp(event) {
     event.preventDefault();
 
-    console.log(await checkUserName(username));
+    function createUser(email, password) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+
+          return user;
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          console.log(errorMessage);
+        })
+        .finally((u) => {
+          const auth = getAuth();
+          const user = auth.currentUser;
+
+          console.log(user);
+          console.log(u);
+        });
+    }
+
     if (password !== confirmPassword) {
       dispatch({
         type: "UPDATE_ERROR",
@@ -56,13 +59,14 @@ export default function SignUpFormSection() {
         isError: true,
         message: "Password must be at least 6 characters",
       });
-    } else if ((await checkUserName(username)) > 0) {
+    } else if (await checkUsername(username)) {
       dispatch({
         type: "UPDATE_ERROR",
         isError: true,
         message: "Username is already taken",
       });
     } else {
+      createUser(email, password);
       dispatch({
         type: "UPDATE_ERROR",
         isError: false,
