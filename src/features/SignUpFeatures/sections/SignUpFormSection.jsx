@@ -43,7 +43,7 @@ export default function SignUpFormSection() {
         message: "Username is already taken",
       });
     } else {
-      createUser(email, password, dispatch);
+      createUser(email, username, password, dispatch);
     }
   }
 
