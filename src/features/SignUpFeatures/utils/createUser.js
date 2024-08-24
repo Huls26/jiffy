@@ -29,7 +29,7 @@ export default async function createUser(email, username, password, dispatch) {
       message: "",
     });
 
-    return userCredential;
+    return userCredential.user;
   } catch (error) {
     const errorCode = error.code;
     let errorMessage = error.message;
