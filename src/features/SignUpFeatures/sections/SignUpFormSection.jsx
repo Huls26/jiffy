@@ -1,3 +1,5 @@
+import { db } from "@/lib/fb";
+import { doc, setDoc } from "firebase/firestore";
 import useSignUpState from "../hooks/useSignUpState";
 import { checkUsername } from "../utils/checkUsername";
 import createUser from "../utils/createUser";
@@ -12,7 +14,7 @@ import SignUpInputSection from "./SignUpInputSection";
  * @returns {JSX.Element} - The SignUpFormSection component.
  */
 export default function SignUpFormSection() {
-  const { dispatch, email, username, password, confirmPassword } =
+  const { dispatch, email, username, fullName, password, confirmPassword } =
     useSignUpState();
 
   /**
@@ -43,7 +45,18 @@ export default function SignUpFormSection() {
         message: "Username is already taken",
       });
     } else {
-      createUser(email, username, password, dispatch);
+      const { uid, displayName } = await createUser(
+        email,
+        username,
+        password,
+        dispatch,
+      );
+      await setDoc(doc(db, "users", uid), {
+        email,
+        username: displayName,
+        fullName,
+        password,
+      });
     }
   }
 
