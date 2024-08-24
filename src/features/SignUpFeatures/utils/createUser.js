@@ -64,5 +64,9 @@ export default async function createUser(email, username, password, dispatch) {
       isError: true,
       message: errorMessage,
     });
+
+    console.log(
+      "try return error dispatch value {type: 'UPDATE_ERROR', isError: true, message:errorMessage}",
+    );
   }
 }
