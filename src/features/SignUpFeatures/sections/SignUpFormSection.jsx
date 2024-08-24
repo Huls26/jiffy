@@ -45,17 +45,26 @@ export default function SignUpFormSection() {
         message: "Username is already taken",
       });
     } else {
-      const { uid, displayName } = await createUser(
+      const { uid, displayName, type, isError, message } = await createUser(
         email,
         username,
         password,
         dispatch,
       );
-      await setDoc(doc(db, "users", uid), {
-        email,
-        username: displayName,
-        fullName,
-        password,
+
+      if (!isError) {
+        await setDoc(doc(db, "users", uid), {
+          email,
+          username: displayName,
+          fullName,
+          password,
+        });
+      }
+
+      dispatch({
+        type,
+        isError,
+        message,
       });
     }
   }
