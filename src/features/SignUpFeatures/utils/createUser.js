@@ -1,5 +1,6 @@
 import { auth } from "@/lib/fb";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {} from "firebase/firestore";
 
 /**
  * This function creates a new user in Firebase Authentication using the provided email and password.
@@ -7,12 +8,11 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
  *
  * @param {string} email - The email address of the new user.
  * @param {string} password - The password for the new user.
- * @param {function} dispatch - The Redux dispatch function to update the error state.
  *
  * @returns {Promise<firebase.User|null>} - A Promise that resolves with the newly created user if successful,
  * or rejects with an error object if an error occurs.
  */
-export default async function createUser(email, username, password, dispatch) {
+export default async function createUser(email, username, password) {
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -23,13 +23,12 @@ export default async function createUser(email, username, password, dispatch) {
       displayName: username,
     });
 
-    dispatch({
+    return {
+      ...userCredential.user,
       type: "UPDATE_ERROR",
       isError: false,
       message: "",
-    });
-
-    return userCredential.user;
+    };
   } catch (error) {
     const errorCode = error.code;
     let errorMessage = error.message;
@@ -53,20 +52,17 @@ export default async function createUser(email, username, password, dispatch) {
         break;
       default:
         // biome-ignore lint/nursery/noConsole: <explanation>
-        console.error("An unknown error occurred:", errorMessage);
+        console.log("An unknown error occurred:", errorMessage);
     }
 
     // biome-ignore lint/nursery/noConsole: <explanation>
-    console.error(errorMessage);
-    // Optional: Log a more concise error message
-    dispatch({
+    console.log(errorMessage);
+
+    // Dispatch an action to update the error state with the errorMessage
+    return {
       type: "UPDATE_ERROR",
       isError: true,
       message: errorMessage,
-    });
-
-    console.log(
-      "try return error dispatch value {type: 'UPDATE_ERROR', isError: true, message:errorMessage}",
-    );
+    };
   }
 }
