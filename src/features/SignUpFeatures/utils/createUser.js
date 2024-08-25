@@ -1,6 +1,5 @@
 import { auth } from "@/lib/fb";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import {} from "firebase/firestore";
 
 /**
  * This function creates a new user in Firebase Authentication using the provided email and password.
@@ -14,17 +13,13 @@ import {} from "firebase/firestore";
  */
 export default async function createUser(email, username, password) {
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
+    await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(auth.currentUser, {
       displayName: username,
     });
 
     return {
-      ...userCredential.user,
+      ...auth.currentUser,
       type: "UPDATE_ERROR",
       isError: false,
       message: "",
