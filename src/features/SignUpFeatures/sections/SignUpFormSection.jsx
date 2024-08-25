@@ -1,8 +1,7 @@
-import { db } from "@/lib/fb";
-import { doc, setDoc } from "firebase/firestore";
 import useSignUpState from "../hooks/useSignUpState";
-import { checkUsername } from "../utils/checkUsername";
+import checkUsername from "../utils/checkUsername";
 import createUser from "../utils/createUser";
+import createUserFirestore from "../utils/createUserFirestore";
 import SignUpBtnSection from "./SignUpBtnSection";
 import SignUpInputSection from "./SignUpInputSection";
 
@@ -45,21 +44,21 @@ export default function SignUpFormSection() {
         message: "Username is already taken",
       });
     } else {
-      const { uid, displayName, type, isError, message } = await createUser(
+      const { uid, type, isError, message } = await createUser(
         email,
         username,
         password,
         dispatch,
       );
-
-      if (!isError) {
-        await setDoc(doc(db, "users", uid), {
-          email,
-          username: displayName,
-          fullName,
-          password,
-        });
-      }
+      createUserFirestore({
+        dispatch,
+        isError,
+        uid,
+        email,
+        fullName,
+        username,
+        password,
+      });
 
       dispatch({
         type,
