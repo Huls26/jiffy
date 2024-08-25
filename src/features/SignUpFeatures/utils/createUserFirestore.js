@@ -1,4 +1,5 @@
-import { db } from "@/lib/fb";
+import { auth, db } from "@/lib/fb";
+import { deleteUser } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
 export default async function createUserFirestore({
@@ -21,6 +22,9 @@ export default async function createUserFirestore({
     } catch (err) {
       // biome-ignore lint/nursery/noConsole: <explanation>
       console.log("Error adding document: ", err.message);
+      console.log("isLoading set to false createUserFirestore.js");
+      const user = auth.currentUser;
+      await deleteUser(user);
       dispatch({
         type: "UPDATE_ERROR",
         isError: true,
