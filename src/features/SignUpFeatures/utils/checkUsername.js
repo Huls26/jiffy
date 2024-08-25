@@ -7,7 +7,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
  * @param {string} username - The username to check.
  * @returns {Promise<number>} - A promise that resolves to the number of documents found with the given username.
  */
-export async function checkUsername(username) {
+export default async function checkUsername(username) {
   try {
     // Check if the username already exists in the database.
     const usersRef = collection(db, "users");
