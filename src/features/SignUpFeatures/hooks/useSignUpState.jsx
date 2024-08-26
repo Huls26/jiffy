@@ -18,24 +18,6 @@ import { useContext } from "react";
  */
 export default function useSignUpState() {
   const [signUpState, dispatch] = useContext(reducerContext);
-  const {
-    email,
-    username,
-    fullName,
-    password,
-    confirmPassword,
-    isErrorAuth,
-    errorMessage,
-  } = signUpState;
 
-  return {
-    dispatch,
-    email,
-    username,
-    fullName,
-    password,
-    confirmPassword,
-    isErrorAuth,
-    errorMessage,
-  };
+  return { ...signUpState, dispatch };
 }
