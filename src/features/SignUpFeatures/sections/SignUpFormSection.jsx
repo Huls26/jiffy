@@ -25,6 +25,7 @@ export default function SignUpFormSection() {
   async function handleSignUp(event) {
     event.preventDefault();
 
+    dispatch({ type: "UPDATE_LOADING", isLoading: true });
     if (password !== confirmPassword) {
       dispatch({
         type: "UPDATE_ERROR",
@@ -66,6 +67,7 @@ export default function SignUpFormSection() {
         message,
       });
     }
+    dispatch({ type: "UPDATE_LOADING", isLoading: false });
   }
 
   return (
