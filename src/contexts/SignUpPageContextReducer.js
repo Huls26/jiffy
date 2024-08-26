@@ -11,6 +11,7 @@ export const INITIAL_STATE = {
   confirmPassword: "",
   isErrorAuth: false,
   errorMessage: "",
+  isLoading: false,
 };
 
 /**
@@ -29,6 +30,8 @@ export const INITIAL_STATE = {
 // biome-ignore lint/style/useDefaultParameterLast: <explanation>
 export default function reducerMethod(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case "UPDATE_LOADING":
+      return { ...state, isLoading: action.isLoading };
     case "UPDATE_EMAIL":
       return { ...state, email: action.payload };
     case "UPDATE_USERNAME":
