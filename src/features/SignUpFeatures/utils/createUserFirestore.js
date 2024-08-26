@@ -22,7 +22,6 @@ export default async function createUserFirestore({
     } catch (err) {
       // biome-ignore lint/nursery/noConsole: <explanation>
       console.log("Error adding document: ", err.message);
-      console.log("isLoading set to false createUserFirestore.js");
       const user = auth.currentUser;
       await deleteUser(user);
       dispatch({
