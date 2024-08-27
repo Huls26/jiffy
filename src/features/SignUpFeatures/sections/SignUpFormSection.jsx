@@ -1,3 +1,6 @@
+import LoadingSkeleton from "@/components/LoadingSkeleton";
+import SignUpInputSkeleton from "@/components/LoadingSkeleton/components/SignUpInputSkeleton";
+import SubmitBtnSkeleton from "@/components/LoadingSkeleton/components/SubmitBtnSkeleton";
 import useSignUpState from "../hooks/useSignUpState";
 import checkUsername from "../utils/checkUsername";
 import createUser from "../utils/createUser";
@@ -13,8 +16,15 @@ import SignUpInputSection from "./SignUpInputSection";
  * @returns {JSX.Element} - The SignUpFormSection component.
  */
 export default function SignUpFormSection() {
-  const { dispatch, email, username, fullName, password, confirmPassword } =
-    useSignUpState();
+  const {
+    dispatch,
+    isLoading,
+    email,
+    username,
+    fullName,
+    password,
+    confirmPassword,
+  } = useSignUpState();
 
   /**
    * Handles the sign-up form submission.
@@ -68,6 +78,19 @@ export default function SignUpFormSection() {
       });
     }
     dispatch({ type: "UPDATE_LOADING", isLoading: false });
+  }
+
+  if (isLoading) {
+    return (
+      <LoadingSkeleton>
+        <SignUpInputSkeleton />
+        <SignUpInputSkeleton />
+        <SignUpInputSkeleton />
+        <SignUpInputSkeleton />
+        <SignUpInputSkeleton />
+        <SubmitBtnSkeleton />
+      </LoadingSkeleton>
+    ); // Show a loading component while waiting for the API response.
   }
 
   return (
