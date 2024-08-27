@@ -1,27 +1,20 @@
+import LoadingSkeleton from "@/components/LoadingSkeleton";
+import InputSkeleton from "@/components/LoadingSkeleton/components/InputSkeleton";
+import SubmitBtnSkeleton from "@/components/LoadingSkeleton/components/SubmitBtnSkeleton";
 import ModalHeaderText from "@/components/ModalHeaderText";
-import { reducerContext } from "@/contexts/ReducerContextProvider";
 
-import { Suspense, lazy, useContext } from "react";
+import { Suspense, lazy } from "react";
 const LoginForm = lazy(() => import("@/features/LoginForm"));
 
 export default function LoginFeatures() {
-  const [loginState] = useContext(reducerContext);
-  const { isLoading } = loginState;
-  console.log("rewrite login component");
-
-  if (isLoading) {
-    return (
-      <h1 className="flex justify-center items-center h-96 text-3xl text-white">
-        ...Loading...
-      </h1>
-    );
-  }
   return (
     <Suspense
       fallback={
-        <h1 className="flex justify-center items-center h-96 text-3xl text-white">
-          ...Loading...
-        </h1>
+        <LoadingSkeleton>
+          <InputSkeleton />
+          <InputSkeleton />
+          <SubmitBtnSkeleton />
+        </LoadingSkeleton>
       }
     >
       <ModalHeaderText
