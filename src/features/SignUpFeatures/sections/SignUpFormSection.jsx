@@ -1,5 +1,5 @@
 import LoadingSkeleton from "@/components/LoadingSkeleton";
-import SignUpInputSkeleton from "@/components/LoadingSkeleton/components/SignUpInputSkeleton";
+import InputSkeleton from "@/components/LoadingSkeleton/components/InputSkeleton";
 import SubmitBtnSkeleton from "@/components/LoadingSkeleton/components/SubmitBtnSkeleton";
 import useSignUpState from "../hooks/useSignUpState";
 import checkUsername from "../utils/checkUsername";
@@ -83,11 +83,11 @@ export default function SignUpFormSection() {
   if (isLoading) {
     return (
       <LoadingSkeleton>
-        <SignUpInputSkeleton />
-        <SignUpInputSkeleton />
-        <SignUpInputSkeleton />
-        <SignUpInputSkeleton />
-        <SignUpInputSkeleton />
+        <InputSkeleton />
+        <InputSkeleton />
+        <InputSkeleton />
+        <InputSkeleton />
+        <InputSkeleton />
         <SubmitBtnSkeleton />
       </LoadingSkeleton>
     ); // Show a loading component while waiting for the API response.
