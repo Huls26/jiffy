@@ -1,12 +1,18 @@
-import ErrorMessage from "@/components/ErrorMessage";
 import useHandleSubmitAndError from "./hooks/useHandleSubmitAndError";
 import ButtonSection from "./sections/ButtonSection";
 import InputSection from "./sections/InputSection";
 
-import LoadingSkeleton from "@/components/LoadingSkeleton";
-import InputSkeleton from "@/components/LoadingSkeleton/components/InputSkeleton";
-import SubmitBtnSkeleton from "@/components/LoadingSkeleton/components/SubmitBtnSkeleton";
 import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { lazy } from "react";
+
+const LoadingSkeleton = lazy(() => import("@/components/LoadingSkeleton"));
+const InputSkeleton = lazy(
+  () => import("@/components/LoadingSkeleton/components/InputSkeleton"),
+);
+const SubmitBtnSkeleton = lazy(
+  () => import("@/components/LoadingSkeleton/components/SubmitBtnSkeleton"),
+);
+const ErrorMessage = lazy(() => import("@/components/ErrorMessage"));
 
 import { useContext } from "react";
 
