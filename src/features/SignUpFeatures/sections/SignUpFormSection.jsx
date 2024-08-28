@@ -2,9 +2,7 @@ import LoadingSkeleton from "@/components/LoadingSkeleton";
 import InputSkeleton from "@/components/LoadingSkeleton/components/InputSkeleton";
 import SubmitBtnSkeleton from "@/components/LoadingSkeleton/components/SubmitBtnSkeleton";
 import useSignUpState from "../hooks/useSignUpState";
-import checkUsername from "../utils/checkUsername";
-import createUser from "../utils/createUser";
-import createUserFirestore from "../utils/createUserFirestore";
+import createNewUser from "../utils/createNewUser";
 import SignUpBtnSection from "./SignUpBtnSection";
 import SignUpInputSection from "./SignUpInputSection";
 
@@ -16,15 +14,8 @@ import SignUpInputSection from "./SignUpInputSection";
  * @returns {JSX.Element} - The SignUpFormSection component.
  */
 export default function SignUpFormSection() {
-  const {
-    dispatch,
-    isLoading,
-    email,
-    username,
-    fullName,
-    password,
-    confirmPassword,
-  } = useSignUpState();
+  const signUpState = useSignUpState();
+  const { dispatch, isLoading } = signUpState;
 
   /**
    * Handles the sign-up form submission.
@@ -36,47 +27,8 @@ export default function SignUpFormSection() {
     event.preventDefault();
 
     dispatch({ type: "UPDATE_LOADING", isLoading: true });
-    if (password !== confirmPassword) {
-      dispatch({
-        type: "UPDATE_ERROR",
-        isError: true,
-        message: "Check Password",
-      });
-    } else if (password.length < 6 || confirmPassword.length < 6) {
-      dispatch({
-        type: "UPDATE_ERROR",
-        isError: true,
-        message: "Password must be at least 6 characters",
-      });
-    } else if (await checkUsername(username)) {
-      dispatch({
-        type: "UPDATE_ERROR",
-        isError: true,
-        message: "Username is already taken",
-      });
-    } else {
-      const { uid, type, isError, message } = await createUser(
-        email,
-        username,
-        password,
-        dispatch,
-      );
-      createUserFirestore({
-        dispatch,
-        isError,
-        uid,
-        email,
-        fullName,
-        username,
-        password,
-      });
-
-      dispatch({
-        type,
-        isError,
-        message,
-      });
-    }
+    const setDispatchOptions = await createNewUser(signUpState);
+    dispatch({ ...setDispatchOptions });
     dispatch({ type: "UPDATE_LOADING", isLoading: false });
   }
 
