@@ -1,5 +1,6 @@
 import ErrorMessage from "@/components/ErrorMessage";
 import InputLabelContainer from "@/components/componentContainers/InputLabelContainer";
+import ConfirmationMessage from "../components/ConfirmationMessage";
 import useSignUpState from "../hooks/useSignUpState";
 
 /**
@@ -9,11 +10,15 @@ import useSignUpState from "../hooks/useSignUpState";
  * @returns {JSX.Element} - The JSX element representing the sign-up input section.
  */
 export default function SignUpInputSection() {
-  const { isErrorAuth, errorMessage } = useSignUpState();
+  const { accountCreated, isErrorAuth, errorMessage } = useSignUpState();
 
   // Render the sign-up form inputs and error message based on the state
   return (
     <section className="space-y-4">
+      <ConfirmationMessage
+        message="Account Created Successfully"
+        accountCreated={accountCreated}
+      />
       <ErrorMessage isError={isErrorAuth} message={errorMessage} />
       <InputLabelContainer
         ariaLabel="Enter email address"
