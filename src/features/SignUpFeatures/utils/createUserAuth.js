@@ -20,9 +20,8 @@ export default async function createUserAuth(email, username, password) {
 
     return {
       ...auth.currentUser,
-      type: "UPDATE_ERROR",
-      isError: false,
-      message: "",
+      type: "UPDATE_ACCOUNTCREATED",
+      accountCreated: true,
     };
   } catch (error) {
     const errorCode = error.code;
