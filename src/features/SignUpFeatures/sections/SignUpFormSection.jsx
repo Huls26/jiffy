@@ -26,7 +26,11 @@ export default function SignUpFormSection() {
   async function handleSignUp(event) {
     event.preventDefault();
 
-    dispatch({ type: "UPDATE_LOADING", isLoading: true });
+    dispatch({ type: "UPDATE_ACCOUNTCREATED", accountCreated: false });
+    dispatch({
+      type: "UPDATE_LOADING",
+      isLoading: true,
+    });
     const setDispatchOptions = await createNewUser(signUpState);
     dispatch({ ...setDispatchOptions });
     dispatch({ type: "UPDATE_LOADING", isLoading: false });
