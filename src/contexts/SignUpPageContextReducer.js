@@ -9,9 +9,10 @@ export const INITIAL_STATE = {
   fullName: "",
   password: "",
   confirmPassword: "",
-  isErrorAuth: false,
   errorMessage: "",
+  isErrorAuth: false,
   isLoading: false,
+  accountCreated: false,
 };
 
 /**
@@ -47,6 +48,13 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         ...state,
         isErrorAuth: action.isError,
         errorMessage: action.message,
+      };
+    case "UPDATE_ACCOUNTCREATED":
+      return {
+        ...state,
+        accountCreated: action.accountCreated,
+        errorMessage: "",
+        isErrorAuth: false,
       };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
