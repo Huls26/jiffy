@@ -42,6 +42,12 @@ export default async function createNewUser({
       isError: true,
       message: "Password must be at least 6 characters",
     };
+  } else if (username.length <= 0) {
+    setDispatchOptions = {
+      type: "UPDATE_ERROR",
+      isError: true,
+      message: "Invalid Username",
+    };
   } else if (await checkUsername(username)) {
     setDispatchOptions = {
       type: "UPDATE_ERROR",
