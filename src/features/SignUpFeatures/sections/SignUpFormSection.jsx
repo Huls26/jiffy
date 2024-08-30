@@ -1,6 +1,4 @@
-import LoadingSkeleton from "@/components/LoadingSkeleton";
-import InputSkeleton from "@/components/LoadingSkeleton/components/InputSkeleton";
-import SubmitBtnSkeleton from "@/components/LoadingSkeleton/components/SubmitBtnSkeleton";
+import SignUpLoadingSkeleton from "../components/SignUpLoadingSkeleton";
 import useSignUpState from "../hooks/useSignUpState";
 import createNewUser from "../utils/createNewUser";
 import SignUpBtnSection from "./SignUpBtnSection";
@@ -37,16 +35,7 @@ export default function SignUpFormSection() {
   }
 
   if (isLoading) {
-    return (
-      <LoadingSkeleton>
-        <InputSkeleton />
-        <InputSkeleton />
-        <InputSkeleton />
-        <InputSkeleton />
-        <InputSkeleton />
-        <SubmitBtnSkeleton />
-      </LoadingSkeleton>
-    ); // Show a loading component while waiting for the API response.
+    return <SignUpLoadingSkeleton />; // Show a loading component while waiting for the API response.
   }
 
   return (
