@@ -13,3 +13,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </ContextProvider>
   </React.StrictMode>,
 );
+
+console.log("check firebase rule update later");
