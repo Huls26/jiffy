@@ -17,6 +17,7 @@ export default async function checkUsername(username) {
     const querySnapshot = await getDocs(userDoc);
 
     // Return true if a document with the username exists, otherwise false
+    // Though I think I can just write querySnapshot.docs.length, just to make it more clear
     return querySnapshot.docs.length > 0;
   } catch (error) {
     // console.log("Error checking username:");
