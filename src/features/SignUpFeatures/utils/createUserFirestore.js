@@ -2,6 +2,20 @@ import { auth, db } from "@/lib/fb";
 import { deleteUser } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
+/**
+ * This function creates a new user in Firestore and deletes the corresponding Firebase Authentication user.
+ *
+ * @param {Object} params - The parameters required for creating a user in Firestore.
+ * @param {Function} params.dispatch - The dispatch function to update the application state.
+ * @param {boolean} params.isError - A flag indicating whether there is an error.
+ * @param {string} params.uid - The unique identifier of the user.
+ * @param {string} params.email - The email of the user.
+ * @param {string} params.username - The username of the user.
+ * @param {string} params.fullName - The full name of the user.
+ * @param {string} params.password - The password of the user.
+ *
+ * @returns {Promise<void>} - A promise that resolves when the user is created in Firestore and the Firebase Authentication user is deleted.
+ */
 export default async function createUserFirestore({
   dispatch,
   isError,
@@ -13,6 +27,7 @@ export default async function createUserFirestore({
 }) {
   if (!isError) {
     try {
+      // I need to add profile photo and post photos link later
       await setDoc(doc(db, "users", uid), {
         email,
         username,
