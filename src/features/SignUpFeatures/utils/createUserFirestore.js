@@ -18,6 +18,7 @@ export default async function createUserFirestore({
         username,
         fullName,
         password,
+        dateCreated: Date.now(),
       });
     } catch (err) {
       // biome-ignore lint/nursery/noConsole: <explanation>
