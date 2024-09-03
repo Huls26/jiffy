@@ -9,18 +9,20 @@ import { collection, getDocs, query, where } from "firebase/firestore";
  */
 export default async function checkUsername(username) {
   try {
-    // Check if the username already exists in the database.
+    // Reference to the users collection
     const usersRef = collection(db, "users");
-    const userDoc = query(usersRef, where("username", "==", username));
 
+    // Query to check if a user with the given username exists
+    const userDoc = query(usersRef, where("username", "==", username));
     const querySnapshot = await getDocs(userDoc);
 
+    // Return true if a document with the username exists, otherwise false
     return querySnapshot.docs.length > 0;
-    // biome-ignore lint/correctness/noUnusedVariables: <explanation>
   } catch (error) {
+    // console.log("Error checking username:");
     // biome-ignore lint/nursery/noConsole: <explanation>
-    console.log("Error checking username:");
+    console.error("Error checking username:", error);
     // You can return a default value or rethrow the error based on your needs.
-    return true;
+    return false;
   }
 }
