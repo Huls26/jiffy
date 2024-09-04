@@ -1,6 +1,11 @@
+import usePageTitle from "@/hooks/usePageTitle";
 import { Link } from "react-router-dom";
 
 export default function NotFoundPage() {
+  // The NotFoundPage component renders a 404 error page with a link to the homepage.
+  // It also sets the page title to "Not Found!".
+  usePageTitle("Not Found!");
+
   return (
     <section className="flex items-center h-full p-16 bg-transparent dark:text-white">
       <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
