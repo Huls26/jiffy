@@ -55,6 +55,11 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         accountCreated: action.accountCreated,
         errorMessage: "",
         isErrorAuth: false,
+        email: "",
+        username: "",
+        fullName: "",
+        password: "",
+        confirmPassword: "",
       };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
