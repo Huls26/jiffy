@@ -1,13 +1,19 @@
+import MainPageHeader from "@/features/MainPageFeatures/sections/MainPageHeader";
+import MainPageTimeline from "@/features/MainPageFeatures/sections/MainPageTimeline";
 import usePageTitle from "@/hooks/usePageTitle";
+import MainPageSidebar from "../features/MainPageFeatures/sections/MainPageSidebar";
 
 export default function MainPage() {
   usePageTitle("J I F F Y");
 
+  // highlight dark:bg-gray-900
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline m-3 text-blue-300">
-        Hello world!
-      </h1>
-    </div>
+    <main className="text-white">
+      <MainPageHeader />
+      <section>
+        <MainPageTimeline />
+        <MainPageSidebar />
+      </section>
+    </main>
   );
 }
