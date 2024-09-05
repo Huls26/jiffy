@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { createContext, useReducer } from "react";
+import { useReducer } from "react";
+import ContextProvider, { Context } from "../ContextProvider";
 
 /**
  * A React context object for managing state and dispatching actions.
@@ -15,7 +16,7 @@ import { createContext, useReducer } from "react";
  *   // ...
  * }
  */
-const reducerContext = createContext();
+const reducerContext = Context;
 export { reducerContext };
 
 /**
@@ -47,9 +48,7 @@ export default function ReducerContextProvider({
   return (
     // I could use ContextProvider here, instead of reducerContextProvider
     // but right this is probably fine for now
-    <reducerContext.Provider value={[state, dispatch]}>
-      {children}
-    </reducerContext.Provider>
+    <ContextProvider value={[state, dispatch]}>{children}</ContextProvider>
   );
 }
 
