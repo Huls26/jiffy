@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
   fullName: "",
   isError: false,
   isLoading: false,
+  userLogin: false,
 };
 
 /**
@@ -27,6 +28,17 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "UPDATE_LOADING":
       return { ...state, isLoading: action.isLoading };
+    case "UPDATE_ERROR":
+      return { ...state, isError: action.isError };
+    case "UPDATE_USERLOGIN":
+      return {
+        ...state,
+        userLogin: action.isLoggedIn,
+        email: action.email,
+        username: action.username,
+        fullName: action.fullName,
+        isLoading: false,
+      };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }
