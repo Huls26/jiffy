@@ -33,7 +33,7 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
     case "UPDATE_USERLOGIN":
       return {
         ...state,
-        userLogin: action.isLoggedIn,
+        userLogin: action.isUserLoggedIn,
         email: action.email,
         username: action.username,
         fullName: action.fullName,
