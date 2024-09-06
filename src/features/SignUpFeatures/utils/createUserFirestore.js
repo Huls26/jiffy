@@ -1,5 +1,5 @@
 import { auth, db } from "@/lib/fb";
-import { deleteUser } from "firebase/auth";
+import { deleteUser, signOut } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
 /**
@@ -35,6 +35,8 @@ export default async function createUserFirestore({
         password,
         dateCreated: Date.now(),
       });
+      // This will sign out user account after creating a new account
+      await signOut(auth);
     } catch (err) {
       // biome-ignore lint/nursery/noConsole: <explanation>
       console.log("Error adding document: ", err.message);
