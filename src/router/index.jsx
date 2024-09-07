@@ -1,9 +1,11 @@
 import { lazy } from "react";
 
+const AppLayout = lazy(() => import("@/layout/AppLayout"));
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
 const MainPage = lazy(() => import("@/pages/MainPage"));
-const SignUpPage = lazy(() => import("@/pages/SignUpPage"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
+const ProfilePage = lazy(() => import("@/pages/ProfilePage"));
+const SignUpPage = lazy(() => import("@/pages/SignUpPage"));
 
 import {
   Route,
@@ -15,7 +17,10 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route key="main" path="/" element={<MainPage />} />
+      <Route key="main" path="/" element={<AppLayout />}>
+        <Route index element={<MainPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+      </Route>
       ,
       <Route
         key="login"
