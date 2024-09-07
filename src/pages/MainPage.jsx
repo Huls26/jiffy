@@ -1,4 +1,3 @@
-import MainPageHeader from "@/features/MainPageFeatures/sections/MainPageHeader";
 import MainPageSidebar from "@/features/MainPageFeatures/sections/MainPageSidebar";
 import MainPageTimeline from "@/features/MainPageFeatures/sections/MainPageTimeline";
 import useAuthListener from "@/hooks/useAuthListener";
@@ -13,7 +12,6 @@ export default function MainPage() {
   // highlight dark:bg-gray-900
   return (
     <main className="text-white">
-      <MainPageHeader />
       <section>
         <MainPageTimeline />
         <MainPageSidebar />
