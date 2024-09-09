@@ -18,7 +18,6 @@ export default function LogoutButton() {
 					fullName: null,
 				});
 				dispatch({ type: "UPDATE_LOADING", isLoading: false });
-				console.log("User signed out successfully.");
 			})
 			.catch((error) => {
 				// Handle any errors during sign out

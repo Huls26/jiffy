@@ -10,7 +10,6 @@ import NavLinkLI from "./components/NavLinkLI";
  */
 export default function MainHeader() {
 	// to do
-	// add logout button
 	// display username
 
 	return (
