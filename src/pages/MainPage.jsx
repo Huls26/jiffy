@@ -3,15 +3,13 @@ import MainPageTimeline from "@/features/MainPageFeatures/sections/MainPageTimel
 import usePageTitle from "@/hooks/usePageTitle";
 
 export default function MainPage() {
-  usePageTitle("J I F F Y");
+	usePageTitle("J I F F Y");
 
-  // highlight dark:bg-gray-900
-  return (
-    <main className="text-white">
-      <section>
-        <MainPageTimeline />
-        <MainPageSidebar />
-      </section>
-    </main>
-  );
+	// highlight dark:bg-gray-900
+	return (
+		<main className="text-white">
+			<MainPageTimeline />
+			<MainPageSidebar />
+		</main>
+	);
 }
