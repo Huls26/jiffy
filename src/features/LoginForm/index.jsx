@@ -5,14 +5,10 @@ import InputSection from "./sections/InputSection";
 import { reducerContext } from "@/contexts/ReducerContextProvider";
 import { lazy } from "react";
 
-const LoadingSkeleton = lazy(() => import("@/components/LoadingSkeleton"));
-const InputSkeleton = lazy(
-  () => import("@/components/LoadingSkeleton/components/InputSkeleton"),
-);
-const SubmitBtnSkeleton = lazy(
-  () => import("@/components/LoadingSkeleton/components/SubmitBtnSkeleton"),
-);
 const ErrorMessage = lazy(() => import("@/components/ErrorMessage"));
+const LoginFormLoadingSkeleton = lazy(
+  () => import("./components/LoginFormLoadingSkeleton"),
+);
 
 import { useContext } from "react";
 
@@ -28,13 +24,7 @@ export default function LoginForm() {
   const { isLoading } = loginState;
 
   if (isLoading) {
-    return (
-      <LoadingSkeleton>
-        <InputSkeleton />
-        <InputSkeleton />
-        <SubmitBtnSkeleton />
-      </LoadingSkeleton>
-    );
+    return <LoginFormLoadingSkeleton />;
   }
 
   return (
