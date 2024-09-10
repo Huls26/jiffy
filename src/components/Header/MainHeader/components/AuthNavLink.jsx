@@ -9,16 +9,16 @@ import NavLinkLI from "./NavLinkLI";
  * @returns {JSX.Element} - A JSX element representing the navigation link.
  */
 export default function AuthNavLink() {
-	const globalStateContext = useAuthListener();
-	const { userLogin, isLoading } = globalStateContext;
+  const globalStateContext = useAuthListener();
+  const { userLogin, isLoading } = globalStateContext;
 
-	if (isLoading) {
-		return <h1>{"< ... />"}</h1>;
-	}
+  if (isLoading) {
+    return <h1>{"< ... />"}</h1>;
+  }
 
-	return !userLogin ? (
-		<NavLinkLI text="<Login />" to="login" />
-	) : (
-		<LogoutButton />
-	);
+  return !userLogin ? (
+    <NavLinkLI text="<Login />" to="login" />
+  ) : (
+    <LogoutButton />
+  );
 }
