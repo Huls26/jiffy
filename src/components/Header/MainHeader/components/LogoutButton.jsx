@@ -31,6 +31,7 @@ export default function LogoutButton() {
       })
       .catch((error) => {
         // Handle any errors during sign out
+        // biome-ignore lint/nursery/noConsole: <explanation>
         console.error("Error signing out: ", error);
         dispatch({ type: "UPDATE_LOADING", isLoading: false });
       });
