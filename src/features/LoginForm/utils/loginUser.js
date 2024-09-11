@@ -13,6 +13,11 @@ import { signInWithEmailAndPassword } from "firebase/auth";
  * @throws {Error} - Throws an error with the error message from Firebase if the login fails.
  */
 export default async function loginUser(email, password) {
+  // Validate email and password to ensure email and pasword are provided
+  if (!email || !password) {
+    throw new Error("Email and password must be provided.");
+  }
+
   try {
     const userCredential = await signInWithEmailAndPassword(
       auth,
