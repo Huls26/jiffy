@@ -12,12 +12,13 @@ import { useContext } from "react";
 export default function ButtonSection() {
   const [loginInputState] = useContext(reducerContext);
   const { email, password } = loginInputState;
-  // check if the email and password were provided
-  const isValidInput = !(email && password);
+
+  // Check if either email or password is missing
+  const isInvalidInput = !email || !password;
 
   return (
     <section className="space-y-2">
-      <SubmitFullBtn text="Sign in" isInvalid={isValidInput} />
+      <SubmitFullBtn text="Sign in" isInvalid={isInvalidInput} />
       <AuthPrompt
         message="Don't have an account yet?"
         url="/signup"
