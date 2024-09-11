@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 /**
  * A custom React hook that handles the login form submission and error handling.
- * It uses the `reducerContext` to manage the login state and the `useNavigate` hook from `react-router-dom` to navigate to the home page.
  *
  * @returns {Object} An object containing the `handleSubmit` function and the `isErrorAuth` state.
  */
@@ -17,8 +16,7 @@ export default function useHandleSubmitAndError() {
 
   /**
    * Handles the form submission by preventing the default form behavior,
-   * calling the `loginUser` function with the email, password, dispatch, and navigate parameters,
-   * and updating the login state based on the response.
+   * calling the `loginUser` function, and updating the login state based on the response.
    *
    * @param {Event} event - The form submission event.
    */
