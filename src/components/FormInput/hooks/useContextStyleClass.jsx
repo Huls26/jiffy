@@ -11,7 +11,11 @@ import { useContext } from "react";
  */
 export default function useContextStyleClass(defaultStyle, errorStyle) {
   const [stateReducer] = useContext(reducerContext);
-  const inputStyleClasses = !stateReducer.isErrorAuth
+
+  // Ensure stateReducer and isErrorAuth are defined
+  const isError = stateReducer?.isErrorAuth || false;
+
+  const inputStyleClasses = !isError
     ? defaultStyle
     : `${defaultStyle} ${errorStyle}`;
 
