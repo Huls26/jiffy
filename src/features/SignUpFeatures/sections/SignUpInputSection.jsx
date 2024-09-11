@@ -1,5 +1,5 @@
 import ErrorMessage from "@/components/ErrorMessage";
-import InputLabelContainer from "@/components/componentContainers/InputLabelContainer";
+import FormInputField from "@/components/componentContainers/FormInputField";
 import ConfirmationMessage from "../components/ConfirmationMessage";
 import useSignUpState from "../hooks/useSignUpState";
 
@@ -20,7 +20,7 @@ export default function SignUpInputSection() {
         accountCreated={accountCreated}
       />
       <ErrorMessage isError={isErrorAuth} message={errorMessage} />
-      <InputLabelContainer
+      <FormInputField
         ariaLabel="Enter email address"
         label="Email address"
         type="email"
@@ -30,7 +30,7 @@ export default function SignUpInputSection() {
         autoComplete="username"
         placeholder="aquino@mail.com"
       />
-      <InputLabelContainer
+      <FormInputField
         ariaLabel="Enter username"
         label="Username"
         type="text"
@@ -40,7 +40,7 @@ export default function SignUpInputSection() {
         autoComplete="username"
         placeholder="KikiNo"
       />
-      <InputLabelContainer
+      <FormInputField
         ariaLabel="Enter full name"
         label="Full Name"
         type="text"
@@ -50,7 +50,7 @@ export default function SignUpInputSection() {
         autoComplete="name"
         placeholder="Kiki Aquino"
       />
-      <InputLabelContainer
+      <FormInputField
         ariaLabel="Enter password"
         label="Password"
         type="password"
@@ -60,7 +60,7 @@ export default function SignUpInputSection() {
         autoComplete="new-password"
         placeholder="********"
       />
-      <InputLabelContainer
+      <FormInputField
         ariaLabel="confirm password"
         label="Confirm Password"
         type="password"
