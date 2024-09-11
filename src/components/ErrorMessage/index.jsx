@@ -2,7 +2,11 @@ import PropTypes from "prop-types";
 
 export default function ErrorMessage({ isError, message }) {
   return (
-    isError && <h1 className="text-xl text-red-500 text-center">{message}</h1>
+    isError && (
+      <h1 aria-live="assertive" className="text-xl text-red-500 text-center">
+        {message}
+      </h1>
+    )
   );
 }
 
