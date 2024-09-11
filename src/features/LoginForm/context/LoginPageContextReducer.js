@@ -13,8 +13,10 @@ export const INITIAL_STATE = {
  * @param {Object} action - The action object dispatched to the reducer.
  * @param {string} state.email - The current email of the user.
  * @param {string} state.password - The current password of the user.
+ * @param {boolean} state.isErrorAuth - Indicates if there was an authentication error.
+ * @param {boolean} state.isLoading - Indicates if an authentication request is in progress.
  * @param {string} action.type - The type of action being performed.
- * @param {string} action.payload - The payload associated with the action.
+ * @param {any} action.payload - The payload associated with the action (type varies by action).
  * @returns {Object} - The updated state of the application.
  * @throws {Error} - Throws an error if an invalid action type is encountered.
  */
