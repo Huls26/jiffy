@@ -21,8 +21,8 @@ export default function FormInput({
   id,
   value,
   onChange,
-  autoComplete,
-  placeholder,
+  autoComplete = "off",
+  placeholder = "",
   ariaLabel,
 }) {
   // fix only the error input element should have the errorStyle
