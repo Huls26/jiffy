@@ -1,4 +1,4 @@
-import InputLabelContainer from "@/components/componentContainers/InputLabelContainer";
+import FormInputField from "@/components/componentContainers/FormInputField";
 import ForgotPassword from "../components/ForgotPassword";
 import InputPassword from "../components/InputPassword";
 
@@ -11,7 +11,7 @@ import InputPassword from "../components/InputPassword";
 export default function InputSection() {
   return (
     <section className="space-y-4">
-      <InputLabelContainer
+      <FormInputField
         ariaLabel="Enter Email"
         label="Email address"
         type="email"
