@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
  *
  * @returns {JSX.Element} - A React functional component that renders a list item with a navigation link.
  */
-export default function NavLinkLI({ text, to }) {
+export default function NavLinkLI({ text, to, title }) {
   const defaultStyle =
     "pb-1 text-sm border-gray-600 hover:border-b-2 hover:text-gray-400 transition";
   const activeStyle =
@@ -22,6 +22,7 @@ export default function NavLinkLI({ text, to }) {
       <NavLink
         to={to}
         className={({ isActive }) => (isActive ? activeStyle : defaultStyle)}
+        title={title}
       >
         {text}
       </NavLink>
@@ -32,4 +33,5 @@ export default function NavLinkLI({ text, to }) {
 NavLinkLI.propTypes = {
   text: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };

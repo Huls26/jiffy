@@ -16,7 +16,7 @@ export default function AuthNavLink() {
   }
 
   return !userLogin ? (
-    <NavLinkLI text="<Login />" to="login" />
+    <NavLinkLI text="<Login />" to="login" title="Login" />
   ) : (
     <LogoutButton />
   );
