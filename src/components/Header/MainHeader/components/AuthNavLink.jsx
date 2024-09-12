@@ -9,8 +9,7 @@ import NavLinkLI from "./NavLinkLI";
  * @returns {JSX.Element} - A JSX element representing the navigation link.
  */
 export default function AuthNavLink() {
-  const globalStateContext = useAuthListener();
-  const { userLogin, isLoading } = globalStateContext;
+  const { userLogin, isLoading } = useAuthListener();
 
   if (isLoading) {
     return <h1>{"< ... />"}</h1>;

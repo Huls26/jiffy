@@ -17,6 +17,7 @@ export default function LogoutButton() {
    */
   const handleLogout = () => {
     const auth = getAuth();
+    dispatch({ type: "UPDATE_LOADING", isLoading: true });
     signOut(auth)
       .then(() => {
         // Update the global state to reflect the user is logged out
@@ -43,7 +44,7 @@ export default function LogoutButton() {
       onClick={handleLogout}
       disabled={globalStateContext.isLoading}
     >
-      {"<Logout />"}
+      {globalStateContext.isLoading ? "Logging out..." : "<Logout />"}
     </button>
   );
 }

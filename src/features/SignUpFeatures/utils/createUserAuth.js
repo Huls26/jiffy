@@ -6,10 +6,11 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
  * It also handles specific error cases and dispatches an action to update the error state.
  *
  * @param {string} email - The email address of the new user.
+ * @param {string} username - The username for the new user.
  * @param {string} password - The password for the new user.
  *
- * @returns {Promise<firebase.User|null>} - A Promise that resolves with the newly created user if successful,
- * or rejects with an error object if an error occurs.
+ * @returns {Promise<Object|null>} - A Promise that resolves with an object containing the newly created user
+ *                                   if successful, or an error object if an error occurs.
  */
 export default async function createUserAuth(email, username, password) {
   try {
