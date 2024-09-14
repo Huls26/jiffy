@@ -1,5 +1,11 @@
 import NavLinkLI from "./NavLinkLI";
 
+/**
+ * This function is responsible for rendering the home button in the header.
+ * It creates an SVG icon for the home button and passes it to the NavLinkLI component.
+ *
+ * @returns {JSX.Element} - A JSX element representing the home button.
+ */
 export default function HeaderHomeButton() {
   const homeIcon = (
     <div className="h-full flex items-center">
