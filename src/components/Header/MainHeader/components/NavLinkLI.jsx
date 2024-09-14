@@ -31,7 +31,7 @@ export default function NavLinkLI({ text, to, title }) {
 }
 
 NavLinkLI.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.node.isRequired,
   to: PropTypes.string.isRequired,
   title: PropTypes.string,
 };
