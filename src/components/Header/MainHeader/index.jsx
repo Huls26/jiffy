@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import AuthNavLink from "./components/AuthNavLink";
+import HeaderHomeButton from "./components/HeaderHomeButton";
 import NavLinkLI from "./components/NavLinkLI";
 
 /**
@@ -19,7 +20,9 @@ export default function MainHeader() {
         </h1>
         <nav>
           <ul className="flex space-x-2 md:space-x-4">
-            <NavLinkLI text="Home" to="/" />
+            {/* removed for now tobe decided on */}
+            {/* <NavLinkLI text="Home" to="/" /> */}
+            <HeaderHomeButton />
             <NavLinkLI text="Profile" to="profile" />
             <AuthNavLink />
           </ul>
