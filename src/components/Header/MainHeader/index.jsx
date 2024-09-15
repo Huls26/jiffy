@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import AuthNavLink from "./components/AuthNavLink";
-import DefaultUserProfile from "./components/DefaultUserProfile";
 import HeaderHomeButton from "./components/HeaderHomeButton";
-import NavLinkLI from "./components/NavLinkLI";
+import HeaderProfileButton from "./components/HeaderProfileButton";
 
 /**
  * MainHeader is a React functional component that renders the main header of the application.
@@ -21,11 +20,8 @@ export default function MainHeader() {
         </h1>
         <nav>
           <ul className="flex items-center space-x-2 md:space-x-4 select-none">
-            {/* removed for now tobe decided on */}
-            {/* <NavLinkLI text="Home" to="/" /> */}
             <HeaderHomeButton />
-            <NavLinkLI text="Profile" to="profile" />
-            <DefaultUserProfile />
+            <HeaderProfileButton />
             <AuthNavLink />
           </ul>
         </nav>
