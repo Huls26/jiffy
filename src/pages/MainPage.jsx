@@ -11,7 +11,7 @@ export default function MainPage() {
 
   return (
     <main className="text-white text-center">
-      {globalState.userLogin && <h1>...Display post here...</h1>}
+      {globalState.userLogin && <img src="" />}
       <MainPageTimeline />
       <MainPageSidebar />
     </main>
