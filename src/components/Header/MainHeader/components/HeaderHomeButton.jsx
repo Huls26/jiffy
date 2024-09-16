@@ -9,7 +9,7 @@ import NavLinkLI from "./NavLinkLI";
 export default function HeaderHomeButton() {
   const homeIcon = (
     <svg
-      className="w-5 md:w-7 text-black-light cursor-pointer"
+      className="w-5 md:w-7 cursor-pointer"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
