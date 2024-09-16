@@ -13,7 +13,7 @@ export default function MainHeader() {
   return (
     <header className="bg-gray-900 text-gray-50 p-4">
       <div className="container mx-auto flex justify-between items-center md:max-w-5xl">
-        <h1 className="text-lg font-bold cursor-pointer">
+        <h1 className="text-lg md:text-2xl font-bold cursor-pointer">
           <Link to="/" aria-label="jiffy simple logo">
             JIFFY
           </Link>
