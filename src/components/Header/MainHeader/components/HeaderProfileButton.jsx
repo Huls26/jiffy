@@ -8,9 +8,9 @@ export default function HeaderProfileButton() {
   // to do nav links highlight profile when clicked
   return (
     userLogin && (
-      <NavLink>
-        <div className="h-full flex items-center space-x-1">
-          <h1 className="text-xs">{username}</h1>
+      <NavLink to="profile">
+        <div className="h-full flex items-center space-x-1 hover:text-gray-400 transition">
+          <h1 className="text-xs md:text-lg">{username}</h1>
           <DefaultUserProfile />
         </div>
       </NavLink>
