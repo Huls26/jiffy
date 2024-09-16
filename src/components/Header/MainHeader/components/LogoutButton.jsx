@@ -44,7 +44,7 @@ export default function LogoutButton() {
       title="Sign out"
       onClick={handleLogout}
       disabled={globalStateContext.isLoading}
-      className="text-xs md:text-lg border-gray-600 hover:text-gray-400 transition cursor-pointer"
+      className="text-xs font-bold text-gray-200 md:text-lg border-gray-600 hover:text-gray-400 transition cursor-pointer"
     >
       {globalStateContext.isLoading ? "Logging out..." : "<Logout />"}
     </button>
