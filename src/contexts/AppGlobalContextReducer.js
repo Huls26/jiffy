@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
   fullName: "",
   isError: false,
   isLoading: false,
+  userId: "",
   userLogin: false,
 };
 
@@ -37,6 +38,7 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         email: action.email,
         username: action.username,
         fullName: action.fullName,
+        userId: action.uid,
         isLoading: false,
       };
     default:
