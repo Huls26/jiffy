@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
  */
 export default function NavLinkLI({ text, to, title }) {
   const defaultStyle =
-    "pb-1 text-xs md:text-lg hover:border-b-2 hover:text-gray-400 transition";
+    "pb-1 text-xs font-semibold md:text-lg hover:border-b-2 hover:text-gray-400 transition";
   const activeStyle =
     "pb-1 text-xs text-green-400 font-bold md:text-lg border-b-2 hover:text-gray-400 transition";
 
