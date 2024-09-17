@@ -19,7 +19,7 @@ const router = createBrowserRouter(
     <Route>
       <Route key="main" path="/" element={<AppLayout />}>
         <Route index element={<MainPage />} />
-        <Route path="profile" element={<ProfilePage />} />
+        <Route path="profile/:username" element={<ProfilePage />} />
       </Route>
       ,
       <Route
