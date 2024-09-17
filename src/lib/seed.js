@@ -8,6 +8,7 @@ export function seedDatabase(db) {
       emailAddress: "karlhadwen@gmail.com",
       following: ["2"],
       followers: ["2", "3", "4"],
+      followersCount: 3,
       dateCreated: Date.now(),
     },
     {
@@ -17,6 +18,7 @@ export function seedDatabase(db) {
       emailAddress: "raphael@sanzio.com",
       following: [],
       followers: ["NvPY9M9MzFTARQ6M816YAzDJxZ72"],
+      followersCount: 1,
       dateCreated: Date.now(),
     },
     {
@@ -26,6 +28,7 @@ export function seedDatabase(db) {
       emailAddress: "salvador@dali.com",
       following: [],
       followers: ["NvPY9M9MzFTARQ6M816YAzDJxZ72"],
+      followersCount: 1,
       dateCreated: Date.now(),
     },
     {
@@ -35,6 +38,7 @@ export function seedDatabase(db) {
       emailAddress: "george@orwell.com",
       following: [],
       followers: ["NvPY9M9MzFTARQ6M816YAzDJxZ72"],
+      followersCount: 1,
       dateCreated: Date.now(),
     },
   ];
