@@ -34,6 +34,9 @@ export default async function createUserFirestore({
         fullName,
         password,
         dateCreated: Date.now(),
+        followers: [],
+        following: [],
+        followersCount: 0,
       });
       // This will sign out user account after creating a new account
       await signOut(auth);
