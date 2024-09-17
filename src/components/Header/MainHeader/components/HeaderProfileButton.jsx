@@ -9,7 +9,7 @@ export default function HeaderProfileButton() {
   return (
     userLogin && (
       <NavLink
-        to="profile"
+        to={`profile/${username}`}
         className={({ isActive }) =>
           isActive ? "text-green-400 font-bold" : ""
         }
