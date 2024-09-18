@@ -1,9 +1,9 @@
 import useAuthListener from "@/hooks/useAuthListener";
 import { NavLink } from "react-router-dom";
-import DefaultUserProfile from "./DefaultUserProfile";
+import HeaderUserProfile from "./HeaderUserProfile";
 
 export default function HeaderProfileButton() {
-  const { userLogin, username } = useAuthListener();
+  const { userLogin, username, photoURL } = useAuthListener();
 
   // to do nav links highlight profile when clicked
   return (
@@ -16,7 +16,7 @@ export default function HeaderProfileButton() {
       >
         <div className="h-full flex items-center space-x-1 hover:text-gray-400 transition">
           <h1 className="text-xs md:text-lg">{username}</h1>
-          <DefaultUserProfile />
+          <HeaderUserProfile photoURL={photoURL} />
         </div>
       </NavLink>
     )
