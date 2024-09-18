@@ -11,6 +11,7 @@ export const INITIAL_STATE = {
   isLoading: false,
   userId: "",
   userLogin: false,
+  photoURL: "",
 };
 
 /**
@@ -39,6 +40,7 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         username: action.username,
         fullName: action.fullName,
         userId: action.uid,
+        photoURL: action.photoURL,
         isLoading: false,
       };
     default:
