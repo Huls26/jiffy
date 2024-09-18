@@ -25,6 +25,7 @@ export default function useAuthListener() {
           username: user.displayName,
           fullName: "",
           uid: user.uid,
+          photoURL: user.photoURL,
         });
       } else {
         dispatch({
@@ -34,6 +35,7 @@ export default function useAuthListener() {
           username: null,
           fullName: null,
           uid: null,
+          photoURL: null,
         });
       }
 
