@@ -55,7 +55,7 @@ export default async function createNewUser({
       message: "Username is already taken",
     };
   } else {
-    const { uid, type, accountCreated, message, isError } =
+    const { uid, type, accountCreated, photoURL, message, isError } =
       await createUserAuth(email, username, password, dispatch);
     createUserFirestore({
       dispatch,
@@ -65,6 +65,7 @@ export default async function createNewUser({
       fullName,
       username,
       password,
+      photoURL,
     });
     setDispatchOptions = {
       type,
