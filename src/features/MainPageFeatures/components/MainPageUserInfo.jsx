@@ -1,4 +1,5 @@
 import useAuthListener from "@/hooks/useAuthListener";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
@@ -10,10 +11,11 @@ export default function MainPageUserInfo() {
     // add link to='profile/:username
     <section className="sm:max-w-80 p-1 pl-2 flex cursor-pointer">
       <Link to={`profile/${username}`} className="grid place-self-center mr-2">
-        <img
-          className="w-8 rounded-full cur"
+        <LazyLoadImage
           src={photoURL}
-          alt={`${username} user profile`}
+          alt="user profile"
+          className="w-8 rounded-full hover:scale-110 transition"
+          effect="blur"
         />
       </Link>
       <Link to={`profile/${username}`} className="text-left -space-y-1">
