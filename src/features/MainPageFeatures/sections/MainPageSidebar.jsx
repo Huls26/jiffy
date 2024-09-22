@@ -7,7 +7,7 @@ export default function MainPageSidebar() {
 
   if (userLogin) {
     return (
-      <section className="min-w-72 border-white border-2">
+      <section className="py-1 min-w-[280px] sm:border-gray-300 sm:border-2 m-2 rounded-lg">
         <MainPageUserInfo />
         <MainPageAccountSuggestions />
       </section>
