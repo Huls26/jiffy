@@ -51,6 +51,9 @@ importers:
       '@vitest/coverage-v8':
         specifier: ^2.1.1
         version: 2.1.1(vitest@2.1.1(@types/node@22.5.5)(jsdom@25.0.1))
+      '@welldone-software/why-did-you-render':
+        specifier: ^8.0.3
+        version: 8.0.3(react@18.3.1)
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -832,6 +835,11 @@ packages:
 
   '@vitest/utils@2.1.1':
     resolution: {integrity: sha512-Y6Q9TsI+qJ2CC0ZKj6VBb+T8UPz593N113nnUykqwANqhgf3QkZeHFlusgKLTqrnVHbj/XDKZcDHol+dxVT+rQ==}
+
+  '@welldone-software/why-did-you-render@8.0.3':
+    resolution: {integrity: sha512-bb5bKPMStYnocyTBVBu4UTegZdBqzV1mPhxc0UIV/S43KFUSRflux9gvzJfu2aM4EWLJ3egTvdjOi+viK+LKGA==}
+    peerDependencies:
+      react: ^18
 
   agent-base@7.1.1:
     resolution: {integrity: sha512-H0TSyFNDMomMNJQBn8wFV5YC/2eJ+VXECwOadZJT554xP6cODZHPX3H9QMQECxvrgiSOP1pHjy1sMWQVYJOUOA==}
@@ -2685,6 +2693,11 @@ snapshots:
       '@vitest/pretty-format': 2.1.1
       loupe: 3.1.1
       tinyrainbow: 1.2.0
+
+  '@welldone-software/why-did-you-render@8.0.3(react@18.3.1)':
+    dependencies:
+      lodash: 4.17.21
+      react: 18.3.1
 
   agent-base@7.1.1:
     dependencies:
