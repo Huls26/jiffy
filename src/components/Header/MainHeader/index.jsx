@@ -29,3 +29,5 @@ export default function MainHeader() {
     </header>
   );
 }
+
+MainHeader.whyDidYouRender = true;
