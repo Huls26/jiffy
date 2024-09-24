@@ -5,41 +5,49 @@ export function seedDatabase(db) {
       userId: "NvPY9M9MzFTARQ6M816YAzDJxZ72",
       username: "karl",
       fullName: "Karl Hadwen",
-      emailAddress: "karlhadwen@gmail.com",
+      email: "karlhadwen@gmail.com",
       following: ["2"],
       followers: ["2", "3", "4"],
       followersCount: 3,
       dateCreated: Date.now(),
+      photoURL:
+        "https://firebasestorage.googleapis.com/v0/b/jiffy-ver-2.appspot.com/o/assets%2FdefaultProfile%2Fdefault-user-profile.webp?alt=media&token=a696e916-7833-484a-b2a2-d339734cbc80",
     },
     {
       userId: "2",
       username: "raphael",
       fullName: "Raffaello Sanzio da Urbino",
-      emailAddress: "raphael@sanzio.com",
+      email: "raphael@sanzio.com",
       following: [],
       followers: ["NvPY9M9MzFTARQ6M816YAzDJxZ72"],
       followersCount: 1,
       dateCreated: Date.now(),
+      photoURL:
+        "https://firebasestorage.googleapis.com/v0/b/jiffy-ver-2.appspot.com/o/assets%2FdefaultProfile%2Fdefault-user-profile.webp?alt=media&token=a696e916-7833-484a-b2a2-d339734cbc80",
     },
     {
       userId: "3",
       username: "dali",
       fullName: "Salvador Dalí",
-      emailAddress: "salvador@dali.com",
+      email: "salvador@dali.com",
       following: [],
       followers: ["NvPY9M9MzFTARQ6M816YAzDJxZ72"],
       followersCount: 1,
       dateCreated: Date.now(),
+      photoURL:
+        "https://firebasestorage.googleapis.com/v0/b/jiffy-ver-2.appspot.com/o/assets%2FdefaultProfile%2Fdefault-user-profile.webp?alt=media&token=a696e916-7833-484a-b2a2-d339734cbc80",
     },
     {
       userId: "4",
       username: "orwell",
       fullName: "George Orwell",
-      emailAddress: "george@orwell.com",
+      email: "george@orwell.com",
       following: [],
       followers: ["NvPY9M9MzFTARQ6M816YAzDJxZ72"],
       followersCount: 1,
       dateCreated: Date.now(),
+      photoURL:
+        "https://firebasestorage.googleapis.com/v0/b/jiffy-ver-2.appspot.com/o/assets%2FdefaultProfile%2Fdefault-user-profile.webp?alt=media&token=a696e916-7833-484a-b2a2-d339734cbc80",
     },
   ];
 
