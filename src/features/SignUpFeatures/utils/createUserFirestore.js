@@ -23,7 +23,6 @@ export default async function createUserFirestore({
   email,
   username,
   fullName,
-  password,
   photoURL,
 }) {
   if (!isError) {
@@ -33,7 +32,6 @@ export default async function createUserFirestore({
         email,
         username,
         fullName,
-        password,
         dateCreated: Date.now(),
         followers: [],
         following: [],

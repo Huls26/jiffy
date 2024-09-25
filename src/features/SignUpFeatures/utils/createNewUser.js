@@ -64,7 +64,6 @@ export default async function createNewUser({
       email,
       fullName,
       username,
-      password,
       photoURL,
     });
     setDispatchOptions = {
