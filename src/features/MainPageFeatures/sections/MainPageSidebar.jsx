@@ -1,9 +1,11 @@
-import useAuthListener from "@/hooks/useAuthListener";
+import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { useContext } from "react";
 import MainPageAccountSuggestions from "../components/MainPageAccountSuggestions";
 import MainPageUserInfo from "../components/MainPageUserInfo";
 
 export default function MainPageSidebar() {
-  const { userLogin } = useAuthListener();
+  const [globalState] = useContext(reducerContext);
+  const { userLogin } = globalState;
 
   if (userLogin) {
     return (
