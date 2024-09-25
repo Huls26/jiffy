@@ -1,4 +1,7 @@
+import { auth } from "@/lib/fb";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
+
 export function seedDatabase(db) {
   const users = [
     {
@@ -6,6 +9,7 @@ export function seedDatabase(db) {
       username: "karl",
       fullName: "Karl Hadwen",
       email: "karlhadwen@gmail.com",
+      password: "123456",
       following: ["2"],
       followers: ["2", "3", "4"],
       followersCount: 3,
@@ -18,6 +22,7 @@ export function seedDatabase(db) {
       username: "raphael",
       fullName: "Raffaello Sanzio da Urbino",
       email: "raphael@sanzio.com",
+      password: "123456",
       following: [],
       followers: ["NvPY9M9MzFTARQ6M816YAzDJxZ72"],
       followersCount: 1,
@@ -30,6 +35,7 @@ export function seedDatabase(db) {
       username: "dali",
       fullName: "Salvador Dalí",
       email: "salvador@dali.com",
+      password: "123456",
       following: [],
       followers: ["NvPY9M9MzFTARQ6M816YAzDJxZ72"],
       followersCount: 1,
@@ -42,6 +48,7 @@ export function seedDatabase(db) {
       username: "orwell",
       fullName: "George Orwell",
       email: "george@orwell.com",
+      password: "123456",
       following: [],
       followers: ["NvPY9M9MzFTARQ6M816YAzDJxZ72"],
       followersCount: 1,
@@ -54,7 +61,18 @@ export function seedDatabase(db) {
   const addUsersToFirestore = async (users) => {
     try {
       for (let k = 0; k < users.length; k++) {
-        await addDoc(collection(db, "users"), users[k]);
+        const currentUser = users[k];
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          currentUser.email,
+          currentUser.password,
+        );
+        updateProfile(auth.currentUser, {
+          photoURL: currentUser.photoURL,
+        });
+        const userId = userCredential.user.uid;
+        const { password, ...updateUserID } = { ...currentUser, userId };
+        await addDoc(collection(db, "users"), updateUserID);
       }
       // biome-ignore lint/nursery/noConsole: <explanation>
       console.log("Users added successfully!");
