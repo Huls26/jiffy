@@ -30,3 +30,5 @@ export default function SignUpPage() {
     </LoginSignUpContainer>
   );
 }
+
+SignUpPage.whyDidYouRender = true;
