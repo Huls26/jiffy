@@ -11,6 +11,11 @@ import { useContext, useEffect } from "react";
 export default function useAuthListener() {
   const [globalStateContext, dispatch] = useContext(reducerContext);
 
+  // remember when using this it will trigger dispatch or it will rerender
+  // usee this cautiously to avoid unnecessary state changes
+  // Beware this will triggere rendering
+  // By thee way I used this on my header 
+  // this will update the header when user is login
   useEffect(() => {
     // Start loading when the effect runs
     dispatch({ type: "UPDATE_LOADING", isLoading: true });
