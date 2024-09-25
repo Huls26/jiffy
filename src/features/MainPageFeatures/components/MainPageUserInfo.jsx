@@ -1,10 +1,12 @@
-import useAuthListener from "@/hooks/useAuthListener";
+import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { useContext } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 export default function MainPageUserInfo() {
-  const { email, username, photoURL } = useAuthListener();
+  const [globalState] = useContext(reducerContext);
+  const { email, username, photoURL } = globalState;
 
   return (
     // to decided add margin-auto or not...
