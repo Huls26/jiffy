@@ -44,6 +44,7 @@ export default function ReducerContextProvider({
   children,
 }) {
   const [state, dispatch] = useReducer(reducerMethod, INITIAL_STATE);
+  // const initialState = useMemo(() => [state, dispatch], [state]);
 
   return (
     // I could use ContextProvider here, instead of reducerContextProvider
