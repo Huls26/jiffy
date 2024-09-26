@@ -1,4 +1,4 @@
-import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { db } from '@/lib/fb';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext } from "react";
@@ -8,7 +8,7 @@ export default function MainPageAccountSuggestions() {
   // fetch all users that the current user is not following
   // recommend at least 3-5 users
   // display 3-5 random users for know
-  const [globalState] = useContext(reducerContext);
+  const [globalState] = useContext(GlobalContext);
   const { userId } = globalState;
 
   // fetch Data 
