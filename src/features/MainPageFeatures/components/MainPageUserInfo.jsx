@@ -1,11 +1,11 @@
-import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { useContext } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 export default function MainPageUserInfo() {
-  const [globalState] = useContext(reducerContext);
+  const [globalState] = useContext(GlobalContext);
   const { email, username, photoURL } = globalState;
 
   return (
