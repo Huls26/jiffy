@@ -1,10 +1,10 @@
-import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { useContext } from "react";
 import MainPageAccountSuggestions from "../components/MainPageAccountSuggestions";
 import MainPageUserInfo from "../components/MainPageUserInfo";
 
 export default function MainPageSidebar() {
-  const [globalState] = useContext(reducerContext);
+  const [globalState] = useContext(GlobalContext);
   const { userLogin } = globalState;
 
   if (userLogin) {
