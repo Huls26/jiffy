@@ -1,5 +1,9 @@
 import { auth } from "@/lib/fb";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 
 export function seedDatabase(db) {
@@ -70,6 +74,7 @@ export function seedDatabase(db) {
         updateProfile(auth.currentUser, {
           photoURL: currentUser.photoURL,
         });
+        await signOut(auth);
         const userId = userCredential.user.uid;
         const { password, ...updateUserID } = { ...currentUser, userId };
         await addDoc(collection(db, "users"), updateUserID);
