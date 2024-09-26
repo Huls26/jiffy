@@ -1,9 +1,9 @@
+import GlobalContextProvider from "@/contexts/GlobalContextProvider";
 import Router from "@/router";
 import { Suspense } from "react";
 import reducerMethod, {
   INITIAL_STATE,
 } from "./contexts/AppGlobalContextReducer";
-import ReducerContextProvider from "./contexts/ReducerContextProvider";
 
 function App() {
   console.log("create loading component");
@@ -16,12 +16,12 @@ function App() {
         </h1>
       }
     >
-      <ReducerContextProvider
+      <GlobalContextProvider
         reducerMethod={reducerMethod}
         INITIAL_STATE={INITIAL_STATE}
       >
         <Router />
-      </ReducerContextProvider>
+      </GlobalContextProvider>
     </Suspense>
   );
 }
