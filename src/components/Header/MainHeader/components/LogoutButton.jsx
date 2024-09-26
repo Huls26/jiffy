@@ -1,4 +1,4 @@
-import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { getAuth, signOut } from "firebase/auth";
 import { useContext } from "react";
 
@@ -9,7 +9,7 @@ import { useContext } from "react";
  * @returns {JSX.Element} - A logout button component.
  */
 export default function LogoutButton() {
-  const [globalStateContext, dispatch] = useContext(reducerContext);
+  const [globalStateContext, dispatch] = useContext(GlobalContext);
 
   /**
    * Handles the logout process by signing out the user using Firebase Authentication.
