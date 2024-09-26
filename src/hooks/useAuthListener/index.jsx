@@ -1,4 +1,4 @@
-import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { auth } from "@/lib/fb";
 import { onAuthStateChanged } from "firebase/auth";
 import { useContext, useEffect } from "react";
@@ -9,7 +9,7 @@ import { useContext, useEffect } from "react";
  * @returns {Object} The current global state context.
  */
 export default function useAuthListener() {
-  const [globalStateContext, dispatch] = useContext(reducerContext);
+  const [globalStateContext, dispatch] = useContext(GlobalContext);
 
   // remember when using this it will trigger dispatch or it will rerender
   // usee this cautiously to avoid unnecessary state changes
