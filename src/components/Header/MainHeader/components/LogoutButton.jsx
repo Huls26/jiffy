@@ -27,6 +27,7 @@ export default function LogoutButton() {
           email: null,
           username: null,
           fullName: null,
+          photoURL: null,
         });
         dispatch({ type: "UPDATE_LOADING", isLoading: false });
       })
