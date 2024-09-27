@@ -1,10 +1,9 @@
+import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { reducerContext } from "@/contexts/ReducerContextProvider";
 import loginUser from "../utils/loginUser";
 
-import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 /**
  * A custom React hook that handles the login form submission and error handling.
