@@ -1,4 +1,3 @@
-import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { reducerContext } from "@/contexts/ReducerContextProvider";
 import loginUser from "../utils/loginUser";
 
@@ -11,7 +10,6 @@ import { useNavigate } from "react-router-dom";
  * @returns {Object} An object containing the `handleSubmit` function and the `isErrorAuth` state.
  */
 export default function useHandleSubmitAndError() {
-  const [, globalDispatch] = useContext(GlobalContext);
   const [loginState, dispatch] = useContext(reducerContext);
   const { email, password, isErrorAuth } = loginState;
   const navigate = useNavigate();
@@ -29,15 +27,6 @@ export default function useHandleSubmitAndError() {
       .then((res) => {
         if (res) {
           dispatch({ type: "UPDATE_VALIDAUTH" });
-          globalDispatch({
-            type: "UPDATE_USERLOGIN",
-            isUserLoggedIn: true,
-            email: res.email,
-            username: res.displayName,
-            fullName: "",
-            uid: res.uid,
-            photoURL: res.photoURL,
-          });
           navigate("/");
         }
       })
