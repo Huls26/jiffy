@@ -1,3 +1,4 @@
+import GlobalAuthContextProvider from "@/contexts/GlobalAuthContextProvider";
 import GlobalContextProvider from "@/contexts/GlobalContextProvider";
 import Router from "@/router";
 import { Suspense } from "react";
@@ -20,7 +21,9 @@ function App() {
         reducerMethod={reducerMethod}
         INITIAL_STATE={INITIAL_STATE}
       >
-        <Router />
+        <GlobalAuthContextProvider>
+          <Router />
+        </GlobalAuthContextProvider>
       </GlobalContextProvider>
     </Suspense>
   );
