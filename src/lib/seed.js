@@ -72,6 +72,7 @@ export function seedDatabase(db) {
           currentUser.password,
         );
         updateProfile(auth.currentUser, {
+          displayName: currentUser.username,
           photoURL: currentUser.photoURL,
         });
         await signOut(auth);
