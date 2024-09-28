@@ -10,7 +10,7 @@ import { useContext } from "react";
  * @returns {JSX.Element} - A JSX element representing the navigation link.
  */
 export default function AuthNavLink() {
-  const globalState = useContext(GlobalContext);
+  const [globalState] = useContext(GlobalContext);
   const { userLogin, isLoading } = globalState;
 
   if (isLoading) {
