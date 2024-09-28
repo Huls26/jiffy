@@ -12,6 +12,8 @@ export default function MainPageAccountSuggestions() {
   const { userId } = globalState;
 
   // fetch Data 
+  // create a button new suggestion
+  // For func fetchUsers() only triggers when user clear the button or during the first render.
   async function fetchUsers() {
     const q = query(collection(db, 'users'), where('following', 'not-in', [userId]),);
     const querySnapshot = await getDocs(q);
