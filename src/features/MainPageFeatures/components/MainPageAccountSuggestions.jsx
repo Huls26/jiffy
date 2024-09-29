@@ -18,7 +18,10 @@ export default function MainPageAccountSuggestions() {
     const q = query(collection(db, 'users'), where('following', 'not-in', [userId]),);
     const querySnapshot = await getDocs(q);
     const filteredUsers = querySnapshot.docs.filter(doc => doc.data().userId !== userId);
+    // randomly select users
+    const randomIdx = Array.from({ length: filteredUsers.length }, (_, index) => index).sort(() => Math.random() - 0.5).slice(0, 3);
 
+    console.log(randomIdx);
     for (const doc of filteredUsers) {
       console.log(doc.data())
     }
