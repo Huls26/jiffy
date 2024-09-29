@@ -60,6 +60,58 @@ export function seedDatabase(db) {
       photoURL:
         "https://firebasestorage.googleapis.com/v0/b/jiffy-ver-2.appspot.com/o/assets%2FdefaultProfile%2Fdefault-user-profile.webp?alt=media&token=a696e916-7833-484a-b2a2-d339734cbc80",
     },
+    {
+      userId: "5",
+      username: "vanGogh",
+      fullName: "Vincent van Gogh",
+      email: "vincent@vangogh.com",
+      password: "123456",
+      following: ["3"],
+      followers: ["2", "4"],
+      followersCount: 2,
+      dateCreated: Date.now(),
+      photoURL:
+        "https://firebasestorage.googleapis.com/v0/b/jiffy-ver-2.appspot.com/o/assets%2FdefaultProfile%2Fdefault-user-profile.webp?alt=media&token=a696e916-7833-484a-b2a2-d339734cbc80",
+    },
+    {
+      userId: "6",
+      username: "hemingway",
+      fullName: "Ernest Hemingway",
+      email: "ernest@hemingway.com",
+      password: "123456",
+      following: ["4"],
+      followers: ["1"],
+      followersCount: 1,
+      dateCreated: Date.now(),
+      photoURL:
+        "https://firebasestorage.googleapis.com/v0/b/jiffy-ver-2.appspot.com/o/assets%2FdefaultProfile%2Fdefault-user-profile.webp?alt=media&token=a696e916-7833-484a-b2a2-d339734cbc80",
+    },
+    {
+      userId: "7",
+      username: "shakespeare",
+      fullName: "William Shakespeare",
+      email: "william@shakespeare.com",
+      password: "123456",
+      following: [],
+      followers: ["1", "2"],
+      followersCount: 2,
+      dateCreated: Date.now(),
+      photoURL:
+        "https://firebasestorage.googleapis.com/v0/b/jiffy-ver-2.appspot.com/o/assets%2FdefaultProfile%2Fdefault-user-profile.webp?alt=media&token=a696e916-7833-484a-b2a2-d339734cbc80",
+    },
+    {
+      userId: "8",
+      username: "austen",
+      fullName: "Jane Austen",
+      email: "jane@austen.com",
+      password: "123456",
+      following: ["2", "6"],
+      followers: ["1"],
+      followersCount: 1,
+      dateCreated: Date.now(),
+      photoURL:
+        "https://firebasestorage.googleapis.com/v0/b/jiffy-ver-2.appspot.com/o/assets%2FdefaultProfile%2Fdefault-user-profile.webp?alt=media&token=a696e916-7833-484a-b2a2-d339734cbc80",
+    },
   ];
 
   const addUsersToFirestore = async (users) => {
