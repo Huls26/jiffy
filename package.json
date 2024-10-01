@@ -2,6 +2,9 @@
   "name": "jiffy-app",
   "private": true,
   "version": "2.0.1",
+  "engines": {
+    "node": "v20.17.0"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
