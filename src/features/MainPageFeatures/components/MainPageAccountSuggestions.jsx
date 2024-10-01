@@ -1,3 +1,7 @@
+import LoadingSkeleton from '@/components/LoadingSkeleton';
+import ProfileSkeleton from '@/components/LoadingSkeleton/components/ProfileSkeleton';
+import TextSkeleton from '@/components/LoadingSkeleton/components/TextSkeleton';
+
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { db } from '@/lib/fb';
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -30,7 +34,18 @@ export default function MainPageAccountSuggestions() {
   fetchUsers()
 
 
-  return <div>MainPageAccountSuggestions</div>;
+  return (
+    <LoadingSkeleton>
+      <h1>MainPageSuggestions</h1>
+      <div className='p-1 pl-2 flex'>
+        <ProfileSkeleton />
+        <div className='space-y-1'>
+          <TextSkeleton width={"w-20"} />
+          <TextSkeleton width={"w-32"} />
+        </div>
+      </div>
+    </LoadingSkeleton >
+  );
 }
 
 MainPageAccountSuggestions.whyDidYouRender = true;
