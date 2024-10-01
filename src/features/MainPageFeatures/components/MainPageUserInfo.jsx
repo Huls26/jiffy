@@ -1,4 +1,6 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
+import MainPageUserInfoSkeleton from "./MainPageUserInfoSkeleton";
+
 import { useContext } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
@@ -6,7 +8,12 @@ import { NavLink } from "react-router-dom";
 
 export default function MainPageUserInfo() {
   const [globalState] = useContext(GlobalContext);
-  const { email, username, photoURL } = globalState;
+  const { email, username, photoURL, isLoading } = globalState;
+
+  console.log('compose component: MainPageUserProfile, MainPageUsernamEmail')
+  if (isLoading) {
+    return <MainPageUserInfoSkeleton />
+  }
 
   return (
     // to decided add margin-auto or not...
