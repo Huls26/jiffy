@@ -1,8 +1,8 @@
+import UserProfile from "@/components/UserProfile";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import MainPageUserInfoSkeleton from "./MainPageUserInfoSkeleton";
 
 import { useContext } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
@@ -16,16 +16,9 @@ export default function MainPageUserInfo() {
   }
 
   return (
-    // to decided add margin-auto or not...
-    // add link to='profile/:username
     <section className="sm:max-w-80 p-1 pl-2 flex cursor-pointer">
-      <Link to={`profile/${username}`} className="grid place-self-center mr-2">
-        <LazyLoadImage
-          src={photoURL}
-          alt="user profile"
-          className="w-8 rounded-full hover:scale-110 transition"
-          effect="blur"
-        />
+      <Link to={`profile/${username}`} className="grid place-self-center ">
+        <UserProfile photoURL={photoURL} addedClassName={'w-8 h-8 mr-2'} />
       </Link>
       <Link to={`profile/${username}`} className="text-left -space-y-1">
         <h2 className="text-sky-400 font-semibold hover:font-bold">
