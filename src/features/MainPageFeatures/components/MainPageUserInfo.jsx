@@ -1,6 +1,7 @@
 import UserProfile from "@/components/UserProfile";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import MainPageUserInfoSkeleton from "./MainPageUserInfoSkeleton";
+import MainPageUserProfileLink from "./MainPageUserProfileLink";
 
 import { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -20,14 +21,7 @@ export default function MainPageUserInfo() {
       <Link to={`profile/${username}`} className="grid place-self-center ">
         <UserProfile photoURL={photoURL} addedClassName={'w-8 h-8 mr-2'} />
       </Link>
-      <Link to={`profile/${username}`} className="text-left -space-y-1">
-        <h2 className="text-sky-400 font-semibold hover:font-bold">
-          {username}
-        </h2>
-        <p className="font-mono text-xs text-gray-300 hover:text-gray-400">
-          {email}
-        </p>
-      </Link>
+      <MainPageUserProfileLink username={username} email={email} />
       <NavLink to="creatpost" className="ml-auto">
         <button
           type="button"
