@@ -1,28 +1,19 @@
-import UserProfile from "@/components/UserProfile";
-import { GlobalContext } from "@/contexts/GlobalContextProvider";
-import MainPageCreatePostBtn from "./MainPageCreatePostBtn";
-import MainPageUserInfoSkeleton from "./MainPageUserInfoSkeleton";
-import MainPageUserProfileLink from "./MainPageUserProfileLink";
+import PropTypes from "prop-types";
 
-import { useContext } from "react";
-import { Link } from "react-router-dom";
-
-export default function MainPageUserInfo() {
-  const [globalState] = useContext(GlobalContext);
-  const { email, username, photoURL, isLoading } = globalState;
-
-  console.log('compose component: MainPageUserProfile, MainPageUsernamEmail')
-  if (isLoading) {
-    return <MainPageUserInfoSkeleton />
-  }
-
+export default function MainPageUserInfo({ username, email }) {
   return (
-    <section className="sm:max-w-80 p-1 pl-2 flex cursor-pointer">
-      <Link to={`profile/${username}`} className="grid place-self-center ">
-        <UserProfile photoURL={photoURL} addedClassName={'w-8 h-8 mr-2'} />
-      </Link>
-      <MainPageUserProfileLink username={username} email={email} />
-      <MainPageCreatePostBtn />
-    </section>
-  );
+    <div to={`profile/${username}`} className="text-left -space-y-1">
+      <h2 className="text-sky-400 font-semibold hover:font-bold">
+        {username}
+      </h2>
+      <p className="font-mono text-xs text-gray-300 hover:text-gray-400">
+        {email}
+      </p>
+    </div>
+  )
+}
+
+MainPageUserInfo.propTypes = {
+  username: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 }
