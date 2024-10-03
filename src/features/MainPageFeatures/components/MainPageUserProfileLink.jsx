@@ -1,20 +1,20 @@
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import UserProfile from "@/components/UserProfile";
+import MainPageUserInfo from "./MainPageUserInfo";
 
-export default function MainPageUserProfileLink({ username, email }) {
+import PropTypes from 'prop-types'
+import { Link } from "react-router-dom"
+
+export default function MainPageUserProfileLink({ to, photoURL, username, email }) {
   return (
-    <Link to={`profile/${username}`} className="text-left -space-y-1">
-      <h2 className="text-sky-400 font-semibold hover:font-bold">
-        {username}
-      </h2>
-      <p className="font-mono text-xs text-gray-300 hover:text-gray-400">
-        {email}
-      </p>
+    <Link to={to} className="flex items-center place-self-center ">
+      <UserProfile photoURL={photoURL} addedClassName={'w-8 h-8 mr-2 hover:scale-110'} />
+      <MainPageUserInfo username={username} email={email} />
     </Link>
   )
 }
 
 MainPageUserProfileLink.propTypes = {
+  to: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 }
