@@ -1,7 +1,7 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { useContext } from "react";
 import MainPageAccountSuggestions from "../components/MainPageAccountSuggestions";
-import MainPageUserInfo from "../components/MainPageUserInfo";
+import MainPageUserCard from "../components/MainPageUserCard";
 
 export default function MainPageSidebar() {
   const [globalState] = useContext(GlobalContext);
@@ -10,7 +10,7 @@ export default function MainPageSidebar() {
   if (userLogin) {
     return (
       <section className="py-1 min-w-[280px] sm:border-gray-300 sm:border-2 sm:m-2 rounded-lg">
-        <MainPageUserInfo />
+        <MainPageUserCard />
         <MainPageAccountSuggestions />
       </section>
     );
