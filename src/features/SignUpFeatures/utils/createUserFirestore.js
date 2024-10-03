@@ -32,6 +32,7 @@ export default async function createUserFirestore({
         email,
         username,
         fullName,
+        userId: uid,
         dateCreated: Date.now(),
         followers: [],
         following: [],
