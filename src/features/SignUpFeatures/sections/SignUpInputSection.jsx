@@ -39,6 +39,7 @@ export default function SignUpInputSection() {
         dispatchType="UPDATE_USERNAME"
         autoComplete="username"
         placeholder="KikiNo"
+        maxLength="15"
       />
       <FormInputField
         ariaLabel="Enter full name"
