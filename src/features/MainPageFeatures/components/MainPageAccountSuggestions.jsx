@@ -2,7 +2,7 @@ import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { db } from '@/lib/fb';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from 'react';
-import MainPageUserProfileLink from "./MainPageUserProfileLink";
+import MainPageAccountSuggestionProfile from "./MainpageAccountSuggestionProfile";
 
 export default function MainPageAccountSuggestions() {
   // Display different users
@@ -17,26 +17,44 @@ export default function MainPageAccountSuggestions() {
   // create a button new suggestion
   // For func fetchUsers() only triggers when user clear the button or during the first render.
   async function fetchUsers() {
-    const q = query(collection(db, 'users'), where('following', 'not-in', [userId]),);
-    const querySnapshot = await getDocs(q);
-    const filteredUsers = querySnapshot.docs.filter(doc => doc.data().userId !== userId);
-    console.log(filteredUsers)
-    // randomly select users
-    const randomIdx = Array.from({ length: filteredUsers.length }, (_, index) => index).sort(() => Math.random() - 0.5).slice(0, 3);
-    const suggestionProfiles = randomIdx.map(idx => {
-      const userProfile = filteredUsers[idx].data();
+    try {
+      const q = query(
+        collection(db, 'users'),
+        where('following', 'not-in', [userId])
+      );
 
-      return {
-        userId: userProfile.userId,
-        username: userProfile.username,
-        email: userProfile.email,
-        photoURL: userProfile.photoURL,
-        followersCount: userProfile.followersCount,
+      const querySnapshot = await getDocs(q);
+
+      // Filter out the current user's own profile
+      const filteredUsers = querySnapshot.docs.filter(doc => doc.data().userId !== userId);
+
+      if (filteredUsers.length === 0) {
+        return []; // Return an empty array if no suggestions available
       }
-    });
 
-    return suggestionProfiles;
+      // Randomly select up to 3 users
+      const randomUsers = filteredUsers
+        .sort(() => Math.random() - 0.5) // Shuffle array
+        .slice(0, 3)                     // Select first 3 users from shuffled list
+        .map(doc => {
+          const userProfile = doc.data();
+          return {
+            userId: userProfile.userId,
+            username: userProfile.username,
+            email: userProfile.email,
+            photoURL: userProfile.photoURL,
+            followersCount: userProfile.followersCount,
+          };
+        });
+
+      return randomUsers;
+
+    } catch (error) {
+      console.error('Error fetching user suggestions:', error);
+      return [];
+    }
   }
+
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -60,15 +78,10 @@ export default function MainPageAccountSuggestions() {
   }, [])
 
   return (
-    <section className="text-gray-200">
-      <h1>Suggested acounts to follow</h1>
-      {
-        // list of suggested acounts to follow 
-      }
+    <section className="pt-2 text-gray-200">
+      <h1 className="ml-2 sm:text-center text-left font-semibold text-lg text-cyan-200">Suggested acounts to follow</h1>
       {suggestedUsers?.map((user) => (
-        <div key={user.userId}>
-          <MainPageUserProfileLink to={`profile/${user.userId}`} photoURL={user.photoURL} username={user.username} email={user.email} />
-        </div>
+        <MainPageAccountSuggestionProfile key={user.userId} user={user} />
       ))}
     </section>
   )
