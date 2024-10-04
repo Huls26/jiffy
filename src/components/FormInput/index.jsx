@@ -23,6 +23,7 @@ export default function FormInput({
   onChange,
   autoComplete = "off",
   placeholder = "",
+  maxLength = '20',
   ariaLabel,
 }) {
   // fix only the error input element should have the errorStyle
@@ -42,6 +43,7 @@ export default function FormInput({
       autoComplete={autoComplete}
       placeholder={placeholder}
       className={inputStyleClasses}
+      maxLength={maxLength}
     />
   );
 }
@@ -58,4 +60,5 @@ FormInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   autoComplete: PropTypes.string,
   placeholder: PropTypes.string,
+  maxLength: PropTypes.string,
 };
