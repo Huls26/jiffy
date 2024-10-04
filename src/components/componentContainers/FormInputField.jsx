@@ -20,6 +20,7 @@ export default function FormInputField({
   autoComplete,
   placeholder,
   ariaLabel,
+  maxLength,
 }) {
   /**
    * The state and dispatch function from the LoginContext.
@@ -46,6 +47,7 @@ export default function FormInputField({
         onChange={(event) => handleChange(event, dispatch, dispatchType)}
         autoComplete={autoComplete}
         placeholder={placeholder}
+        maxLength={maxLength}
       />
     </section>
   );
@@ -60,4 +62,5 @@ FormInputField.propTypes = {
   dispatchType: PropTypes.string.isRequired,
   autoComplete: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
+  maxLength: PropTypes.string,
 };
