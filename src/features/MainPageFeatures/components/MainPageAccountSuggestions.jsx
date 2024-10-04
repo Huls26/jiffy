@@ -5,17 +5,15 @@ import { useContext, useEffect, useState } from 'react';
 import MainPageAccountSuggestionProfile from "./MainpageAccountSuggestionProfile";
 
 export default function MainPageAccountSuggestions() {
-  // Display different users
-  // fetch all users that the current user is not following
-  // recommend at least 3-5 users
-  // display 3-5 random users for know
   const [globalState, dispatch] = useContext(GlobalContext);
   const { userId } = globalState;
-  const [suggestedUsers, setSuggestedUsers] = useState(null);
+  const [suggestedUsers, setSuggestedUsers] = useState([]);
+  const [displaySuggestions, setDisplaySuggestions] = useState(false);
+  // const usersAccount = suggestedUsers?.map((user) => (
+  //   <MainPageAccountSuggestionProfile key={user.userId} user={user} />
+  // ));
 
-  // fetch Data 
-  // create a button new suggestion
-  // For func fetchUsers() only triggers when user clear the button or during the first render.
+  console.log("create own sidebar loading state");
   async function fetchUsers() {
     try {
       const q = query(
@@ -55,34 +53,42 @@ export default function MainPageAccountSuggestions() {
     }
   }
 
+  async function fetchUserSuggestions() {
+    dispatch({
+      type: "UPDATE_LOADING",
+      isLoading: true,
+    });
+    const suggestionUsers = await fetchUsers(); // Waits for the fetch to complete
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    setSuggestedUsers(() => suggestionUsers);
+    dispatch({
+      type: "UPDATE_LOADING",
+      isLoading: false,
+    });
+  }
+
+
   useEffect(() => {
-    const loadUsers = async () => {
-      dispatch({
-        type: "UPDATE_LOADING",
-        isLoading: true,
-      });
-
-      const suggestionUsers = await fetchUsers(); // Waits for the fetch to complete
-
-      setSuggestedUsers(() => suggestionUsers);
-
-      dispatch({
-        type: "UPDATE_LOADING",
-        isLoading: false,
-      });
-    };
-
-    loadUsers();
-  }, [])
+    if (displaySuggestions) {
+      fetchUserSuggestions();
+      setDisplaySuggestions(false);
+    }
+  }, [displaySuggestions])
 
   return (
-    <section className="pt-2 text-gray-200">
+    <section className="pt-2 pb-2 text-gray-200">
       <h1 className="ml-2 sm:text-center text-left font-semibold text-lg text-cyan-200">Suggested acounts to follow</h1>
-      {suggestedUsers?.map((user) => (
-        <MainPageAccountSuggestionProfile key={user.userId} user={user} />
-      ))}
+      {suggestedUsers.length > 0 ? (
+        suggestedUsers.map((user) => (
+          <MainPageAccountSuggestionProfile key={user.userId} user={user} />
+        ))
+      ) : (
+        <p>No suggestions available</p> // Display message when no suggestions are available
+      )}
+
+      <button type="button" onClick={() => setDisplaySuggestions(prev => !prev)} className="mt-2 px-5 py-1 font-semibold text-gray-200 bold bg-blue-500 rounded-full hover:bg-blue-600 active:bg-blue-700">
+        Discover Users
+      </button>
     </section>
   )
 }
