@@ -1,17 +1,16 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { db } from '@/lib/fb';
+import DiscoverUsersBtn from './buttons/DiscoverUsersBtn';
+
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import MainPageAccountSuggestionProfile from "./MainpageAccountSuggestionProfile";
+import SuggestedUsersCloseBtn from "./buttons/SuggestedUsersCloseBtn";
 
 export default function MainPageAccountSuggestions() {
   const [globalState, dispatch] = useContext(GlobalContext);
   const { userId } = globalState;
-  const [suggestedUsers, setSuggestedUsers] = useState([]);
-  const [displaySuggestions, setDisplaySuggestions] = useState(false);
-  // const usersAccount = suggestedUsers?.map((user) => (
-  //   <MainPageAccountSuggestionProfile key={user.userId} user={user} />
-  // ));
+  const [suggestedUsers, setSuggestedUsers] = useState(null);
 
   console.log("create own sidebar loading state");
   async function fetchUsers() {
@@ -60,36 +59,44 @@ export default function MainPageAccountSuggestions() {
     });
     const suggestionUsers = await fetchUsers(); // Waits for the fetch to complete
 
-    setSuggestedUsers(() => suggestionUsers);
+    setSuggestedUsers((prevValue) => {
+      if (!prevValue) {
+        return suggestionUsers;
+      }
+
+      return null;
+    });
+
     dispatch({
       type: "UPDATE_LOADING",
       isLoading: false,
     });
   }
 
-
-  useEffect(() => {
-    if (displaySuggestions) {
-      fetchUserSuggestions();
-      setDisplaySuggestions(false);
-    }
-  }, [displaySuggestions])
-
+  console.log(suggestedUsers);
   return (
     <section className="pt-2 pb-2 text-gray-200">
-      <h1 className="ml-2 sm:text-center text-left font-semibold text-lg text-cyan-200">Suggested acounts to follow</h1>
-      {suggestedUsers.length > 0 ? (
+      {
+        suggestedUsers !== null &&
+        <h1 className="ml-2 sm:text-center text-left font-semibold text-lg text-cyan-200">
+          Suggested acounts to follow
+        </h1>
+      }
+
+      {suggestedUsers !== null ? (
         suggestedUsers.map((user) => (
           <MainPageAccountSuggestionProfile key={user.userId} user={user} />
         ))
       ) : (
-        <p>No suggestions available</p> // Display message when no suggestions are available
-      )}
+        <DiscoverUsersBtn onClick={fetchUserSuggestions} />
+      )
+      }
 
-      <button type="button" onClick={() => setDisplaySuggestions(prev => !prev)} className="mt-2 px-5 py-1 font-semibold text-gray-200 bold bg-blue-500 rounded-full hover:bg-blue-600 active:bg-blue-700">
-        Discover Users
-      </button>
-    </section>
+      <SuggestedUsersCloseBtn
+        onClick={fetchUserSuggestions}
+        isDisplay={suggestedUsers !== null}
+      />
+    </section >
   )
 }
 
