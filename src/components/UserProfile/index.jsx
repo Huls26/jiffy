@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
+import { memo } from 'react';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-export default function UserProfile({ photoURL, addedClassName }) {
+function UserProfile({ photoURL, addedClassName }) {
   const style = `${addedClassName} overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer`
 
   return (
@@ -15,6 +16,9 @@ export default function UserProfile({ photoURL, addedClassName }) {
     </div>
   );
 }
+
+const MemoUserProfile = memo(UserProfile);
+export default MemoUserProfile;
 
 UserProfile.propTypes = {
   photoURL: PropTypes.string.isRequired,
