@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import AuthNavLink from "./components/AuthNavLink";
 import HeaderHomeButton from "./components/HeaderHomeButton";
 import HeaderProfileButton from "./components/HeaderProfileButton";
+
+import { Link } from "react-router-dom";
 
 /**
  * MainHeader is a React functional component that renders the main header of the application.
