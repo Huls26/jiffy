@@ -13,6 +13,9 @@ export default function MainPageUserProfileLink({ to, photoURL, username, email 
   )
 }
 
+// const MemoMainPageUserProfileLink = memo(MainPageUserProfileLink);
+// export default MemoMainPageUserProfileLink;
+
 MainPageUserProfileLink.propTypes = {
   to: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
