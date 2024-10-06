@@ -4,6 +4,7 @@ import DiscoverUsersBtn from './buttons/DiscoverUsersBtn';
 
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useState } from 'react';
+import MainPageAccountSuggestionTitle from './MainPageAccountSuggestionTitle';
 import MainPageAccountSuggestionProfile from "./MainpageAccountSuggestionProfile";
 import SuggestedUsersCloseBtn from "./buttons/SuggestedUsersCloseBtn";
 
@@ -73,15 +74,11 @@ export default function MainPageAccountSuggestions() {
     });
   }
 
-  console.log(suggestedUsers);
   return (
     <section className="pt-2 pb-2 text-gray-200">
-      {
-        suggestedUsers !== null &&
-        <h1 className="ml-2 sm:text-center text-left font-semibold text-lg text-cyan-200">
-          Suggested acounts to follow
-        </h1>
-      }
+      <MainPageAccountSuggestionTitle
+        isDisplay={suggestedUsers !== null}
+      />
 
       {suggestedUsers !== null ? (
         suggestedUsers.map((user) => (
