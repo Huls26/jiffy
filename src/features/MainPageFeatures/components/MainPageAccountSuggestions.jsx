@@ -5,7 +5,7 @@ import DiscoverUsersBtn from './buttons/DiscoverUsersBtn';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useState } from 'react';
 import MainPageAccountSuggestionTitle from './MainPageAccountSuggestionTitle';
-import MainPageAccountSuggestionProfile from "./MainpageAccountSuggestionProfile";
+import MainPageAccountSuggestionUserList from './MainPageAccountSuggestionUserList'
 import SuggestedUsersCloseBtn from "./buttons/SuggestedUsersCloseBtn";
 
 export default function MainPageAccountSuggestions() {
@@ -83,9 +83,7 @@ export default function MainPageAccountSuggestions() {
       {suggestedUsers?.length === 0 && <h1 className="my-2 font-semibold text-gray-300 text-sm">"No Suggested Users at the Moment"</h1>}
 
       {suggestedUsers !== null ? (
-        suggestedUsers.map((user) => (
-          <MainPageAccountSuggestionProfile key={user.userId} user={user} />
-        ))
+        <MainPageAccountSuggestionUserList list={suggestedUsers} />
       ) : (
         <DiscoverUsersBtn onClick={fetchUserSuggestions} />
       )
