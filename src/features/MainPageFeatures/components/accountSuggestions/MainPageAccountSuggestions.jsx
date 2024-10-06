@@ -1,13 +1,13 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { db } from '@/lib/fb';
-import DiscoverUsersBtn from './buttons/DiscoverUsersBtn';
+import DiscoverUsersBtn from '../buttons/DiscoverUsersBtn';
 
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useState } from 'react';
-import MainPageAccountSuggestionTitle from './MainPageAccountSuggestionTitle';
-import MainPageAccountSuggestionUserList from './MainPageAccountSuggestionUserList'
-import MainPageNoSuggestedUsersMessage from './MainPageNoSuggestedUsersMessage';
-import SuggestedUsersCloseBtn from "./buttons/SuggestedUsersCloseBtn";
+import MainPageAccountSuggestionTitle from '../MainPageAccountSuggestionTitle';
+import MainPageAccountSuggestionUserList from '../MainPageAccountSuggestionUserList'
+import MainPageNoSuggestedUsersMessage from '../MainPageNoSuggestedUsersMessage';
+import SuggestedUsersCloseBtn from "../buttons/SuggestedUsersCloseBtn";
 
 export default function MainPageAccountSuggestions() {
   const [globalState, dispatch] = useContext(GlobalContext);

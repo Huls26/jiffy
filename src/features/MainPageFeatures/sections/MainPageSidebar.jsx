@@ -1,7 +1,7 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { useContext } from "react";
-import MainPageAccountSuggestions from "../components/MainPageAccountSuggestions";
 import MainPageUserCard from "../components/MainPageUserCard";
+import MainPageAccountSuggestions from "../components/accountSuggestions/MainPageAccountSuggestions";
 
 export default function MainPageSidebar() {
   const [globalState] = useContext(GlobalContext);
