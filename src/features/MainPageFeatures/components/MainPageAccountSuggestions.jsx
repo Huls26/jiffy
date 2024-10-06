@@ -6,6 +6,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useState } from 'react';
 import MainPageAccountSuggestionTitle from './MainPageAccountSuggestionTitle';
 import MainPageAccountSuggestionUserList from './MainPageAccountSuggestionUserList'
+import MainPageNoSuggestedUsersMessage from './MainPageNoSuggestedUsersMessage';
 import SuggestedUsersCloseBtn from "./buttons/SuggestedUsersCloseBtn";
 
 export default function MainPageAccountSuggestions() {
@@ -80,7 +81,7 @@ export default function MainPageAccountSuggestions() {
         isDisplay={suggestedUsers !== null}
       />
 
-      {suggestedUsers?.length === 0 && <h1 className="my-2 font-semibold text-gray-300 text-sm">"No Suggested Users at the Moment"</h1>}
+      <MainPageNoSuggestedUsersMessage isDisplay={suggestedUsers?.length === 0} />
 
       {suggestedUsers !== null ? (
         <MainPageAccountSuggestionUserList list={suggestedUsers} />
