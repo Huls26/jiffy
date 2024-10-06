@@ -80,6 +80,8 @@ export default function MainPageAccountSuggestions() {
         isDisplay={suggestedUsers !== null}
       />
 
+      {suggestedUsers?.length === 0 && <h1 className="my-2 font-semibold text-gray-300 text-sm">"No Suggested Users at the Moment"</h1>}
+
       {suggestedUsers !== null ? (
         suggestedUsers.map((user) => (
           <MainPageAccountSuggestionProfile key={user.userId} user={user} />
