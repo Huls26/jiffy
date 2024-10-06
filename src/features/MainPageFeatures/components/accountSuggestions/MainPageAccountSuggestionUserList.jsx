@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import MainPageAccountSuggestionProfile from "./accountSuggestions/MainPageAccountSuggestionProfile";
+import MainPageAccountSuggestionProfile from "./MainPageAccountSuggestionProfile";
 
 
 export default function MainPageAccountSuggestionUserList({ list }) {

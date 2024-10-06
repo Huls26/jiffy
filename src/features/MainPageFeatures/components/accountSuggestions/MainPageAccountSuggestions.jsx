@@ -1,9 +1,9 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { db } from '@/lib/fb';
-import MainPageAccountSuggestionUserList from '../MainPageAccountSuggestionUserList'
 import DiscoverUsersBtn from '../buttons/DiscoverUsersBtn';
 import SuggestedUsersCloseBtn from "../buttons/SuggestedUsersCloseBtn";
 import MainPageAccountSuggestionTitle from './MainPageAccountSuggestionTitle';
+import MainPageAccountSuggestionUserList from './MainPageAccountSuggestionUserList'
 import MainPageNoSuggestedUsersMessage from './MainPageNoSuggestedUsersMessage';
 
 import { collection, getDocs, query, where } from "firebase/firestore";
