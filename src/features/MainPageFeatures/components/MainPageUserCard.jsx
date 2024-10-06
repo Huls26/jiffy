@@ -1,8 +1,7 @@
-
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
-import MainPageCreatePostBtn from "./MainPageCreatePostBtn";
 import MainPageUserInfoSkeleton from "./MainPageUserInfoSkeleton";
 import MainPageUserProfileLink from "./MainPageUserProfileLink";
+import MainPageCreatePostBtn from "./buttons/MainPageCreatePostBtn";
 
 import { useContext } from "react";
 
