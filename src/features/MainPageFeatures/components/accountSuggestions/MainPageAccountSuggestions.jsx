@@ -8,13 +8,13 @@ import MainPageAccountSuggestionUserList from './MainPageAccountSuggestionUserLi
 import MainPageNoSuggestedUsersMessage from './MainPageNoSuggestedUsersMessage';
 
 import { } from "firebase/firestore";
-import { useContext, useState } from 'react';
+import { useContext, } from 'react';
 
 export default function MainPageAccountSuggestions() {
   const [globalState] = useContext(GlobalContext);
-  const [, dispatch] = useContext(reducerContext)
+  const [sidebarState, dispatch] = useContext(reducerContext)
   const { userId } = globalState;
-  const [suggestedUsers, setSuggestedUsers] = useState(null);
+  const { suggestedUsersList } = sidebarState;
 
   async function fetchUserSuggestions() {
     dispatch({
@@ -23,13 +23,11 @@ export default function MainPageAccountSuggestions() {
     });
     const suggestionUsers = await fetchRandomUsers(userId); // Waits for the fetch to complete
 
-    setSuggestedUsers((prevValue) => {
-      if (!prevValue) {
-        return suggestionUsers;
-      }
-
-      return null;
-    });
+    dispatch({
+      type: "UPDATE_LIST",
+      suggestedUsersList: suggestedUsersList
+        ? null : suggestionUsers,
+    })
 
     dispatch({
       type: "UPDATE_LOADING",
@@ -40,13 +38,13 @@ export default function MainPageAccountSuggestions() {
   return (
     <section className="pt-2 pb-2 text-gray-200">
       <MainPageAccountSuggestionTitle
-        isDisplay={suggestedUsers !== null}
+        isDisplay={suggestedUsersList !== null}
       />
 
-      <MainPageNoSuggestedUsersMessage isDisplay={suggestedUsers?.length === 0} />
+      <MainPageNoSuggestedUsersMessage isDisplay={suggestedUsersList?.length === 0} />
 
-      {suggestedUsers !== null ? (
-        <MainPageAccountSuggestionUserList list={suggestedUsers} />
+      {suggestedUsersList !== null ? (
+        <MainPageAccountSuggestionUserList list={suggestedUsersList} />
       ) : (
         <DiscoverUsersBtn onClick={fetchUserSuggestions} />
       )
@@ -54,7 +52,7 @@ export default function MainPageAccountSuggestions() {
 
       <SuggestedUsersCloseBtn
         onClick={fetchUserSuggestions}
-        isDisplay={suggestedUsers !== null}
+        isDisplay={suggestedUsersList !== null}
       />
     </section >
   )
