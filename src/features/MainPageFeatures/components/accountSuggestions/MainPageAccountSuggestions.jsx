@@ -1,13 +1,11 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { reducerContext } from "@/contexts/ReducerContextProvider";
 import fetchRandomUsers from '../../utils/accountSuggestion/fetchRandomUsers';
-import DiscoverUsersBtn from '../buttons/DiscoverUsersBtn';
 import SuggestedUsersCloseBtn from "../buttons/SuggestedUsersCloseBtn";
+import MainPageAccountSuggestionListDisplay from "./MainPageAccountSuggestionListDisplay";
 import MainPageAccountSuggestionTitle from './MainPageAccountSuggestionTitle';
-import MainPageAccountSuggestionUserList from './MainPageAccountSuggestionUserList'
 import MainPageNoSuggestedUsersMessage from './MainPageNoSuggestedUsersMessage';
 
-import { } from "firebase/firestore";
 import { useContext, } from 'react';
 
 export default function MainPageAccountSuggestions() {
@@ -41,14 +39,14 @@ export default function MainPageAccountSuggestions() {
         isDisplay={suggestedUsersList !== null}
       />
 
-      <MainPageNoSuggestedUsersMessage isDisplay={suggestedUsersList?.length === 0} />
+      <MainPageNoSuggestedUsersMessage
+        isDisplay={suggestedUsersList?.length === 0}
+      />
 
-      {suggestedUsersList !== null ? (
-        <MainPageAccountSuggestionUserList list={suggestedUsersList} />
-      ) : (
-        <DiscoverUsersBtn onClick={fetchUserSuggestions} />
-      )
-      }
+      <MainPageAccountSuggestionListDisplay
+        suggestedUsersList={suggestedUsersList}
+        onClick={fetchUserSuggestions}
+      />
 
       <SuggestedUsersCloseBtn
         onClick={fetchUserSuggestions}
