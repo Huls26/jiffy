@@ -1,4 +1,5 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
+import { reducerContext } from "@/contexts/ReducerContextProvider";
 import MainPageUserInfoSkeleton from "../MainPageUserInfoSkeleton";
 import MainPageCreatePostBtn from "../buttons/MainPageCreatePostBtn";
 import MainPageUserProfileLink from "./MainPageUserProfileLink";
@@ -7,9 +8,10 @@ import { useContext } from "react";
 
 export default function MainPageUserCard() {
   const [globalState] = useContext(GlobalContext);
-  const { email, username, photoURL, isLoading } = globalState;
+  const [sidebarState] = useContext(reducerContext)
+  const { email, username, photoURL } = globalState;
 
-  if (isLoading) {
+  if (sidebarState.isLoading) {
     return <MainPageUserInfoSkeleton />
   }
 
