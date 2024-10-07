@@ -1,4 +1,5 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
+import { reducerContext } from "@/contexts/ReducerContextProvider";
 import { db } from '@/lib/fb';
 import DiscoverUsersBtn from '../buttons/DiscoverUsersBtn';
 import SuggestedUsersCloseBtn from "../buttons/SuggestedUsersCloseBtn";
@@ -10,7 +11,8 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useState } from 'react';
 
 export default function MainPageAccountSuggestions() {
-  const [globalState, dispatch] = useContext(GlobalContext);
+  const [globalState] = useContext(GlobalContext);
+  const [, dispatch] = useContext(reducerContext)
   const { userId } = globalState;
   const [suggestedUsers, setSuggestedUsers] = useState(null);
 
