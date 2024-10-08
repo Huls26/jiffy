@@ -1,6 +1,14 @@
 import { db } from "@/lib/fb";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
+/**
+ * Fetches random user profiles from the Firestore collection 'users' excluding the current user.
+ *
+ * @param {string} userId - The unique identifier of the current user.
+ * @returns {Promise<Array<{ userId: string, username: string, email: string, photoURL: string, followersCount: number }>>}
+ * An array of up to 3 random user profiles, excluding the current user.
+ * If no suggestions are available, an empty array is returned.
+ */
 export default async function fetchUsers(userId) {
   try {
     const q = query(
