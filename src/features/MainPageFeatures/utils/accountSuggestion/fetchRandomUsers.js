@@ -11,22 +11,23 @@ import { collection, getDocs, query, where } from "firebase/firestore";
  */
 export default async function fetchUsers(userId) {
   try {
-    const q = query(
-      collection(db, "users"),
-      where("following", "not-in", [userId]),
-    );
+    const q = query(collection(db, "users"), where("userId", "!=", userId));
 
     const querySnapshot = await getDocs(q);
 
-    // Filter out the current user's own profile
-    const filteredUsers = querySnapshot.docs.filter(
-      (doc) => doc.data().userId !== userId,
-    );
+    // Filter users who do not have userId in their followers array
+    const filteredUsers = querySnapshot.docs.filter((doc) => {
+      const docUser = doc.data();
+
+      // Check if userId is not included in followers
+      return !docUser.followers.includes(userId);
+    });
 
     if (filteredUsers.length === 0) {
       return []; // Return an empty array if no suggestions available
     }
 
+    console.log(filteredUsers, userId);
     // Randomly select up to 3 users
     const randomUsers = filteredUsers
       .sort(() => Math.random() - 0.5) // Shuffle array
