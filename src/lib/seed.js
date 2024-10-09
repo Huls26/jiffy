@@ -4,7 +4,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 export function seedDatabase(db) {
   const users = [
@@ -130,7 +130,7 @@ export function seedDatabase(db) {
         await signOut(auth);
         const userId = userCredential.user.uid;
         const { password, ...updateUserID } = { ...currentUser, userId };
-        await addDoc(collection(db, "users"), updateUserID);
+        await setDoc(doc(db, "users", userId), updateUserID);
       }
       // biome-ignore lint/nursery/noConsole: <explanation>
       console.log("Users added successfully!");
