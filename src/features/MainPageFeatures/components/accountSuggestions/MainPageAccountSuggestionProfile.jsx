@@ -10,6 +10,8 @@ export default function MainPageAccountSuggestionProfile({ user }) {
   const [globalState] = useContext(GlobalContext)
   const { userId } = globalState;
   const [isFollowed, setIsFollowed] = useState(false);
+  const defaultStyle = "font-semibold text-gray-400 hover:text-gray-200 active:text-green-300"
+  const activeStyle = "font-semibold text-green-400 cursor-no-drop"
 
   async function userFollowed() {
     setIsFollowed(true);
@@ -19,8 +21,6 @@ export default function MainPageAccountSuggestionProfile({ user }) {
       console.error('Failed to follow user');
     }
   }
-
-  console.log(isFollowed, "apply active style")
 
   return (
     <div key={user.userId}
@@ -35,8 +35,9 @@ export default function MainPageAccountSuggestionProfile({ user }) {
 
       <button
         type='button'
-        className="font-semibold text-gray-400 hover:text-gray-200 active:text-green-300 focus:text-green-300"
+        className={isFollowed ? activeStyle : defaultStyle}
         onClick={userFollowed}
+        disabled={isFollowed}
       >
         follow
       </button>
