@@ -4,10 +4,23 @@ import MainPageUserProfileLink from "../userInfo/MainPageUserProfileLink";
 
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
+import { useState } from 'react';
 
 export default function MainPageAccountSuggestionProfile({ user }) {
   const [globalState] = useContext(GlobalContext)
   const { userId } = globalState;
+  const [isFollowed, setIsFollowed] = useState(false);
+
+  async function userFollowed() {
+    setIsFollowed(true);
+    const resFollow = await followUser(userId, user);
+    if (!resFollow) {
+      setIsFollowed(false);
+      console.error('Failed to follow user');
+    }
+  }
+
+  console.log(isFollowed, "apply active style")
 
   return (
     <div key={user.userId}
@@ -23,7 +36,7 @@ export default function MainPageAccountSuggestionProfile({ user }) {
       <button
         type='button'
         className="font-semibold text-gray-400 hover:text-gray-200 active:text-green-300 focus:text-green-300"
-        onClick={() => followUser(userId, user)}
+        onClick={userFollowed}
       >
         follow
       </button>
