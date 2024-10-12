@@ -59,7 +59,7 @@ export default function useFetchUserSuggestions() {
 
   function fetchesSuggestions() {
     if (suggestedUsersList) {
-      fetchesSuggestions();
+      fetchUserSuggestions();
     } else {
       dispatch({
         type: "UPDATE_LIST",
