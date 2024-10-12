@@ -22,11 +22,12 @@ import { useContext } from "react";
 export default function useFetchUserSuggestions() {
   // Importing necessary context providers
   const [globalState] = useContext(GlobalContext);
-  const [sidebarState, dispatch] = useContext(reducerContext)
+  const [sidebarState, dispatch] = useContext(reducerContext);
 
   // Extracting necessary data from the global and sidebar states
   const { userId } = globalState;
   const { suggestedUsersList } = sidebarState;
+
   /**
    * Fetches random user suggestions and updates the suggestedUsersList in the sidebar state.
    *
@@ -40,25 +41,30 @@ export default function useFetchUserSuggestions() {
       isLoading: true,
     });
 
-    // Fetching random user suggestions using the fetchRandomUsers utility function
-    const suggestionUsers = await fetchRandomUsers(userId);
+    try {
+      // Fetching random user suggestions using the fetchRandomUsers utility function
+      const suggestionUsers = await fetchRandomUsers(userId);
 
-    // Dispatching an action to update the suggestedUsersList in the sidebar state
-    dispatch({
-      type: "UPDATE_LIST",
-      suggestedUsersList: suggestedUsersList
-        ? null : suggestionUsers,
-    })
-
-    // Dispatching an action to update the loading state
-    dispatch({
-      type: "UPDATE_LOADING",
-      isLoading: false,
-    });
+      // Dispatching an action to update the suggestedUsersList in the sidebar state
+      dispatch({
+        type: "UPDATE_LIST",
+        suggestedUsersList: suggestionUsers,  // Always update with fetched users
+      });
+    } catch (error) {
+      console.error("Failed to fetch user suggestions:", error);
+      // Optionally handle error state (e.g., show a message to the user)
+    } finally {
+      // Dispatching an action to update the loading state
+      dispatch({
+        type: "UPDATE_LOADING",
+        isLoading: false,
+      });
+    }
   }
 
   function fetchesSuggestions() {
-    if (suggestedUsersList) {
+    // Only fetch suggestions if suggestedUsersList is null or undefined
+    if (suggestedUsersList === null) {
       fetchUserSuggestions();
     } else {
       dispatch({
@@ -69,7 +75,8 @@ export default function useFetchUserSuggestions() {
   }
 
   // Returning the suggestedUsersList and fetchUserSuggestions function
-  return (
-    { suggestedUsersList, fetchUserSuggestions: fetchesSuggestions }
-  )
+  return {
+    suggestedUsersList,
+    fetchUserSuggestions: fetchesSuggestions,
+  };
 }
