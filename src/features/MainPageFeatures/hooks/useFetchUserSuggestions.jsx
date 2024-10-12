@@ -27,7 +27,6 @@ export default function useFetchUserSuggestions() {
   // Extracting necessary data from the global and sidebar states
   const { userId } = globalState;
   const { suggestedUsersList } = sidebarState;
-
   /**
    * Fetches random user suggestions and updates the suggestedUsersList in the sidebar state.
    *
@@ -58,8 +57,19 @@ export default function useFetchUserSuggestions() {
     });
   }
 
+  function fetchesSuggestions() {
+    if (suggestedUsersList) {
+      fetchesSuggestions();
+    } else {
+      dispatch({
+        type: "UPDATE_LIST",
+        suggestedUsersList: null,
+      })
+    }
+  }
+
   // Returning the suggestedUsersList and fetchUserSuggestions function
   return (
-    { suggestedUsersList, fetchUserSuggestions }
+    { suggestedUsersList, fetchUserSuggestions: fetchesSuggestions }
   )
 }
