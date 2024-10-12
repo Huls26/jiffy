@@ -132,6 +132,7 @@ export function seedDatabase(db) {
         updateProfile(auth.currentUser, {
           displayName: currentUser.username,
           photoURL: currentUser.photoURL,
+          uid: currentUser.userId,
         });
         await signOut(auth);
         const userId = userCredential.user.uid;
