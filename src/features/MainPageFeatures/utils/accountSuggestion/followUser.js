@@ -15,23 +15,50 @@ export default async function followUser(userId, followingUser) {
     }
 
     const currentUserData = currentUserSnap.data();
+    const isUserFollow = currentUserData.following[followingUser.userId];
 
+    console.log(isUserFollow);
     // Update the current user's following list and the suggested user's followers
     await runTransaction(db, async (transaction) => {
-      transaction.update(currentUserRef, {
-        following: {
-          ...currentUserData.following,
-          [followingUser.userId]: followingUser.userId,
-        },
-      });
+      const currentUserFollowing = currentUserData.following || {};
+      const followingUserFollowers = followingUser.followers || {};
 
-      transaction.update(usersFollowingRef, {
-        followers: {
-          ...followingUser.followers,
-          [userId]: userId,
-        },
-        followersCount: increment(1),
-      });
+      if (!isUserFollow) {
+        // If the user is not already followed, add them
+        if (!currentUserFollowing[followingUser.userId]) {
+          transaction.update(currentUserRef, {
+            following: {
+              ...currentUserFollowing,
+              [followingUser.userId]: followingUser.userId,
+            },
+          });
+
+          transaction.update(usersFollowingRef, {
+            followers: {
+              ...followingUserFollowers,
+              [userId]: userId,
+            },
+            followersCount: increment(1), // Increase followers count
+          });
+        }
+      } else {
+        // If the user is followed, remove them
+        if (currentUserFollowing[followingUser.userId]) {
+          const { [followingUser.userId]: _, ...updatedFollowing } =
+            currentUserFollowing;
+          const { [userId]: __, ...updatedFollowers } = followingUserFollowers;
+
+          transaction.update(currentUserRef, {
+            following: updatedFollowing,
+          });
+
+          transaction.update(usersFollowingRef, {
+            followers: updatedFollowers,
+            followersCount:
+              followingUser.followersCount > 0 ? increment(-1) : 0,
+          });
+        }
+      }
     });
 
     return true;
