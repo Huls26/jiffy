@@ -14,7 +14,7 @@ export default function MainPageAccountSuggestionProfile({ user }) {
   const activeStyle = "font-semibold text-green-400 cursor-no-drop"
 
   async function userFollowed() {
-    setIsFollowed(true);
+    setIsFollowed(prevVal => !prevVal);
     const resFollow = await followUser(userId, user);
     if (!resFollow) {
       setIsFollowed(false);
@@ -37,7 +37,7 @@ export default function MainPageAccountSuggestionProfile({ user }) {
         type='button'
         className={isFollowed ? activeStyle : defaultStyle}
         onClick={userFollowed}
-        disabled={isFollowed}
+      // disabled={isFollowed}
       >
         follow
       </button>
