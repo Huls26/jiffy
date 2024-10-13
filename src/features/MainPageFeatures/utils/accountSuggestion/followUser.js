@@ -17,7 +17,6 @@ export default async function followUser(userId, followingUser) {
     const currentUserData = currentUserSnap.data();
     const isUserFollow = currentUserData.following[followingUser.userId];
 
-    console.log(isUserFollow);
     // Update the current user's following list and the suggested user's followers
     await runTransaction(db, async (transaction) => {
       const currentUserFollowing = currentUserData.following || {};
