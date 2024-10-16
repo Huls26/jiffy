@@ -4,11 +4,16 @@ import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import MainPageCreatePostBtn from "../buttons/MainPageCreatePostBtn";
 import MainPageUserProfileLink from "./MainPageUserProfileLink";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 export default function MainPageUserCard() {
   const [globalState] = useContext(GlobalContext);
   const { email, username, photoURL } = globalState;
+  const [createPostModal, setCreatePostModal] = useState(null);
+
+  function displayPostModal() {
+    setCreatePostModal(prevValue => !prevValue);
+  }
 
   return (
     <section className="sm:max-w-80 p-1 pl-2 flex cursor-pointer">
@@ -18,7 +23,7 @@ export default function MainPageUserCard() {
         username={username}
         email={email}
       />
-      <MainPageCreatePostBtn />
+      <MainPageCreatePostBtn onClick={displayPostModal} />
     </section>
   );
 }
