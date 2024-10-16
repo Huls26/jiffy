@@ -1,6 +1,5 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
-// import { reducerContext } from "@/contexts/ReducerContextProvider";
-// import MainPageUserInfoSkeleton from "../MainPageUserInfoSkeleton";
+import MainPageCreatePostModal from "../MainPageCreatePostModal";
 import MainPageCreatePostBtn from "../buttons/MainPageCreatePostBtn";
 import MainPageUserProfileLink from "./MainPageUserProfileLink";
 
@@ -23,6 +22,7 @@ export default function MainPageUserCard() {
         username={username}
         email={email}
       />
+      <MainPageCreatePostModal displayModal={createPostModal} />
       <MainPageCreatePostBtn onClick={displayPostModal} />
     </section>
   );
