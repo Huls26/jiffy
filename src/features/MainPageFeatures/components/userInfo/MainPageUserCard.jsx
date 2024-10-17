@@ -8,7 +8,7 @@ import { useContext, useState } from "react";
 export default function MainPageUserCard() {
   const [globalState] = useContext(GlobalContext);
   const { email, username, photoURL } = globalState;
-  const [createPostModal, setCreatePostModal] = useState(null);
+  const [createPostModal, setCreatePostModal] = useState(false);
 
   function displayPostModal() {
     setCreatePostModal(prevValue => !prevValue);
