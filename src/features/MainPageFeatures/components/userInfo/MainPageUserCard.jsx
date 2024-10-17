@@ -22,7 +22,7 @@ export default function MainPageUserCard() {
         username={username}
         email={email}
       />
-      <MainPageCreatePostModal displayModal={createPostModal} />
+      <MainPageCreatePostModal displayModal={createPostModal} userInfo={globalState} />
       <MainPageCreatePostBtn onClick={displayPostModal} />
     </section>
   );
