@@ -33,7 +33,7 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         isErrorAuth: action.isError,
         errorMessage: action.message,
       };
-    case "UPDATE_DISPLAY_POST_MODAL_":
+    case "UPDATE_DISPLAY_POST_MODAL":
       return {
         ...state,
         isDisplayPostModalOpen: !state.isDisplayPostModalOpen,
