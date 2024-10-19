@@ -1,17 +1,18 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
+import { reducerContext } from "@/contexts/ReducerContextProvider";
 import MainPageCreatePostBtn from "../buttons/MainPageCreatePostBtn";
 import MainPageCreatePostModal from "../createPostModal/MainPageCreatePostModal";
 import MainPageUserProfileLink from "./MainPageUserProfileLink";
 
-import { useContext, useState } from "react";
+import { useContext, } from "react";
 
 export default function MainPageUserCard() {
   const [globalState] = useContext(GlobalContext);
   const { email, username, photoURL } = globalState;
-  const [createPostModal, setCreatePostModal] = useState(false);
+  const [, dispatch] = useContext(reducerContext)
 
   function displayPostModal() {
-    setCreatePostModal(prevValue => !prevValue);
+    dispatch({ type: "UPDATE_DISPLAY_POST_MODAL" })
   }
 
   return (
@@ -23,9 +24,7 @@ export default function MainPageUserCard() {
         email={email}
       />
       <MainPageCreatePostModal
-        displayModal={createPostModal}
         userInfo={globalState}
-        closeModalEvent={displayPostModal}
       />
       <MainPageCreatePostBtn onClick={displayPostModal} />
     </section>
