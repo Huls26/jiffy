@@ -1,6 +1,6 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
-import MainPageCreatePostModal from "../MainPageCreatePostModal";
 import MainPageCreatePostBtn from "../buttons/MainPageCreatePostBtn";
+import MainPageCreatePostModal from "../createPostModal/MainPageCreatePostModal";
 import MainPageUserProfileLink from "./MainPageUserProfileLink";
 
 import { useContext, useState } from "react";
