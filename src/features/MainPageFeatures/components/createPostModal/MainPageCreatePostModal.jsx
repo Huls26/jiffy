@@ -10,11 +10,11 @@ export default function MainPageCreatePostModal({ userInfo }) {
   const [sidebarContext, dispatch] = useContext(reducerContext)
   const { isDisplayPostModalOpen } = sidebarContext
 
-  // if (!isDisplayPostModalOpen) return null;
+  if (!isDisplayPostModalOpen) return null;
 
-  // function displayPostModal() {
-  //   dispatch({ type: "UPDATE_DISPLAY_POST_MODAL" })
-  // }
+  function displayPostModal() {
+    dispatch({ type: "UPDATE_DISPLAY_POST_MODAL" })
+  }
 
   return createPortal(
     <div className="
@@ -48,7 +48,7 @@ export default function MainPageCreatePostModal({ userInfo }) {
           <button
             type="button"
             className="text-gray-300 font-semibold hover:text-red-500 active:text-red-400"
-          // onClick={displayPostModal}
+            onClick={displayPostModal}
           >Cancel</button>
           <button type="button" className="px-2 py-0.5 bg-sky-950 text-gray-200 font-semibold rounded-md hover:bg-sky-900 active:text-green-400">Publish</button>
         </div>
