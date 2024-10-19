@@ -6,6 +6,8 @@ import { useContext, } from "react";
 export default function MainPagePostCreationModal() {
   const [globalState] = useContext(GlobalContext);
   const { username, photoURL } = globalState;
+
+  // Rest of the modal content goes here...
   return (
     <div className="
       fixed top-24 left-2/4 -translate-x-1/2 
