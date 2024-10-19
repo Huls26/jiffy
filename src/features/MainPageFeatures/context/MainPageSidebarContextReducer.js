@@ -8,6 +8,7 @@ export const INITIAL_STATE = {
   isError: false,
   isLoading: false,
   suggestedUsersList: null,
+  isDisplayPostModalOpen: false,
 };
 
 /**
@@ -31,6 +32,11 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         ...state,
         isErrorAuth: action.isError,
         errorMessage: action.message,
+      };
+    case "UPDATE_DISPLAY_POST_MODAL_":
+      return {
+        ...state,
+        isDisplayPostModalOpen: !state.isDisplayPostModalOpen,
       };
     case "UPDATE_LIST":
       return {
