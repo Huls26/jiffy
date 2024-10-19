@@ -1,12 +1,20 @@
+import { reducerContext } from "@/contexts/ReducerContextProvider";
 import MainPageUserProfileLink from "../userInfo/MainPageUserProfileLink";
 
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import { createPortal } from "react-dom";
 
-export default function MainPageCreatePostModal({ displayModal, userInfo, closeModalEvent, }) {
+export default function MainPageCreatePostModal({ userInfo }) {
   const { username, photoURL } = userInfo;
+  const [sidebarContext, dispatch] = useContext(reducerContext)
+  const { isDisplayPostModalOpen } = sidebarContext
 
-  if (!displayModal) return null;
+  // if (!isDisplayPostModalOpen) return null;
+
+  // function displayPostModal() {
+  //   dispatch({ type: "UPDATE_DISPLAY_POST_MODAL" })
+  // }
 
   return createPortal(
     <div className="
@@ -40,7 +48,7 @@ export default function MainPageCreatePostModal({ displayModal, userInfo, closeM
           <button
             type="button"
             className="text-gray-300 font-semibold hover:text-red-500 active:text-red-400"
-            onClick={closeModalEvent}
+          // onClick={displayPostModal}
           >Cancel</button>
           <button type="button" className="px-2 py-0.5 bg-sky-950 text-gray-200 font-semibold rounded-md hover:bg-sky-900 active:text-green-400">Publish</button>
         </div>
@@ -51,11 +59,9 @@ export default function MainPageCreatePostModal({ displayModal, userInfo, closeM
 }
 
 MainPageCreatePostModal.propTypes = {
-  displayModal: PropTypes.bool.isRequired,
   userInfo: PropTypes.shape({
     username: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     photoURL: PropTypes.string.isRequired,
   }).isRequired,
-  closeModalEvent: PropTypes.func.isRequired,
 }
