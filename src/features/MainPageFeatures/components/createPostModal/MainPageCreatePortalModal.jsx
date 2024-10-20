@@ -9,6 +9,7 @@ export default function MainPageCreatePortalModal() {
 
   if (!isDisplayPostModalOpen) return null;
 
+  console.log("code split this component")
   return createPortal(
     <MainPagePostCreationModal />,
     document.getElementById('root')
