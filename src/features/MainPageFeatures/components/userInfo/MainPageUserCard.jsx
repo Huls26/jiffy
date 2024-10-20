@@ -1,7 +1,7 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { reducerContext } from "@/contexts/ReducerContextProvider";
 import MainPageCreatePostBtn from "../buttons/MainPageCreatePostBtn";
-import MainPageCreatePostModal from "../createPostModal/MainPageCreatePostModal";
+import MainPageCreatePortalModal from '../createPostModal/MainPageCreatePortalModal'
 import MainPageUserProfileLink from "./MainPageUserProfileLink";
 
 import { useContext, } from "react";
@@ -23,7 +23,7 @@ export default function MainPageUserCard() {
         username={username}
         email={email}
       />
-      <MainPageCreatePostModal
+      <MainPageCreatePortalModal
         userInfo={globalState}
       />
       <MainPageCreatePostBtn onClick={displayPostModal} />
