@@ -39,7 +39,7 @@ export default function MainPagePostCreationModal() {
         placeholder="Publish a Post"
         maxLength="100"
       />
-      <div className="flex justify-between text-white">
+      <div className="flex justify-between text-gray-200">
         <button type="button" className="hover:opacity-75 active:opacity-60">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path fillRule="evenodd" clipRule="evenodd" d="M7 7C5.34315 7 4 8.34315 4 10C4 11.6569 5.34315 13 7 13C8.65685 13 10 11.6569 10 10C10 8.34315 8.65685 7 7 7ZM6 10C6 9.44772 6.44772 9 7 9C7.55228 9 8 9.44772 8 10C8 10.5523 7.55228 11 7 11C6.44772 11 6 10.5523 6 10Z" fill="currentColor" />
@@ -49,10 +49,10 @@ export default function MainPagePostCreationModal() {
         <div className="space-x-2 text-sm sm:text-base">
           <button
             type="button"
-            className="text-gray-300 font-semibold hover:text-red-500 active:text-red-400"
+            className="font-semibold hover:text-red-500 active:text-red-400"
             onClick={closeModalEvent}
           >Cancel</button>
-          <button type="button" className="px-2 py-0.5 bg-sky-950 text-gray-200 font-semibold rounded-md hover:bg-sky-900 active:text-green-400">Publish</button>
+          <button type="button" className="px-2 py-0.5 bg-sky-950 font-semibold rounded-md hover:bg-sky-900 active:text-green-400">Publish</button>
         </div>
       </div>
     </div>
