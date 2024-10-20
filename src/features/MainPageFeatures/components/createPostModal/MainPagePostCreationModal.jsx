@@ -1,4 +1,5 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
+import { reducerContext } from "@/contexts/ReducerContextProvider";
 import MainPageUserProfileLink from '../../components/userInfo/MainPageUserProfileLink';
 
 import { useContext, } from "react";
@@ -6,6 +7,15 @@ import { useContext, } from "react";
 export default function MainPagePostCreationModal() {
   const [globalState] = useContext(GlobalContext);
   const { username, photoURL } = globalState;
+  const [, dispatch] = useContext(reducerContext);
+
+  function closeModalEvent() {
+    // the state of display Portal modal
+    // will be true when this component is opened
+    // with this information we can use this to close this component modal
+    // onClick={closeModalEvent}
+    dispatch({ type: "UPDATE_DISPLAY_POST_MODAL" })
+  }
 
   // Rest of the modal content goes here...
   return (
@@ -45,6 +55,6 @@ export default function MainPagePostCreationModal() {
           <button type="button" className="px-2 py-0.5 bg-sky-950 text-gray-200 font-semibold rounded-md hover:bg-sky-900 active:text-green-400">Publish</button>
         </div>
       </div>
-    </div>,
+    </div>
   )
 }
