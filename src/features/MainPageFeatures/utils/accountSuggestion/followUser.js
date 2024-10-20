@@ -5,6 +5,7 @@ export default async function followUser(userId, followingUser) {
   const currentUserRef = doc(db, "users", userId);
   const usersFollowingRef = doc(db, "users", followingUser.userId);
 
+  console.log("use arrayRemove and arrayUpdate in firestore");
   try {
     // Fetch the current user's document
     const currentUserSnap = await getDoc(currentUserRef);
