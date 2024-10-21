@@ -25,7 +25,9 @@ export default function MainPagePostModalBtnSection() {
           type="button"
           className="font-semibold hover:text-red-500 active:text-red-400"
           onClick={closeModalEvent}
-        >Cancel</button>
+        >
+          Cancel
+        </button>
         <button type="button" className="px-2 py-0.5 bg-sky-950 font-semibold rounded-md hover:bg-sky-900 active:text-green-400">Publish</button>
       </div>
     </div>

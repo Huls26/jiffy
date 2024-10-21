@@ -4,7 +4,7 @@ import MainPageCreatePostBtn from "../buttons/MainPageCreatePostBtn";
 import MainPageCreatePortalModal from '../createPostModal/MainPageCreatePortalModal'
 import MainPageUserProfileLink from "./MainPageUserProfileLink";
 
-import { useContext, } from "react";
+import { useContext } from "react";
 
 export default function MainPageUserCard() {
   const [globalState] = useContext(GlobalContext);
@@ -25,6 +25,6 @@ export default function MainPageUserCard() {
       />
       <MainPageCreatePortalModal />
       <MainPageCreatePostBtn onClick={displayPostModal} />
-    </section>
+    </section >
   );
 }
