@@ -18,12 +18,14 @@ export default function MainPagePostCreationModal() {
       border-2 border-gray-300 rounded-lg
       space-y-2
     ">
-      <MainPageUserProfileLink
-        to={`profile/${username}`}
-        photoURL={photoURL}
-        username={username}
-        email={''}
-      />
+      <div className="flex">
+        <MainPageUserProfileLink
+          to={`profile/${username}`}
+          photoURL={photoURL}
+          username={username}
+          email={''}
+        />
+      </div>
       <input
         type="text"
         className="w-full bg-slate-950 outline-none font-semibold text-gray-400"
