@@ -5,13 +5,14 @@ import { reducerContext } from "@/contexts/ReducerContextProvider";
 import { Suspense, lazy, useContext } from "react";
 import { createPortal } from "react-dom";
 
-// const MainPagePostCreationModal = lazy(() => import("./MainPagePostCreationModal"));
+const MainPagePostCreationModal = lazy(() => import("./MainPagePostCreationModal"));
 
-const MainPagePostCreationModal = lazy(() =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(import('./MainPagePostCreationModal')), 10000); // Delay of 10 seconds
-  })
-);
+// testing
+// const MainPagePostCreationModal = lazy(() =>
+//   new Promise((resolve) => {
+//     setTimeout(() => resolve(import('./MainPagePostCreationModal')), 10000); // Delay of 10 seconds
+//   })
+// );
 
 export default function MainPageCreatePortalModal() {
   const [sidebarContext] = useContext(reducerContext)
