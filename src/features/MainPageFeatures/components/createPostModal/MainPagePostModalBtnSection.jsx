@@ -24,15 +24,6 @@ export default function MainPagePostModalBtnSection() {
 
   console.log(imageName)
 
-  // function trimFileName(fileName) {
-  //   // Trim file name to 15 characters
-  //   const maxLength = 13;
-  //   if (fileName.length > maxLength) {
-  //     return `${fileName.substring(0, maxLength)}...`;
-  //   }
-  //   return fileName;
-  // }
-
   function closeModalEvent() {
     // the state of display Portal modal
     // will be true when this component is opened
