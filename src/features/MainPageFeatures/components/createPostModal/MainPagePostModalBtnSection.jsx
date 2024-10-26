@@ -2,31 +2,38 @@ import { GlobalContext } from '@/contexts/GlobalContextProvider';
 import { reducerContext } from "@/contexts/ReducerContextProvider";
 import { db } from '@/lib/fb';
 
-import { Timestamp, doc, setDoc } from "firebase/firestore";
+import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { useContext } from "react";
 
 export default function MainPagePostModalBtnSection() {
   const [globalState] = useContext(GlobalContext);
   const [sidebarState, dispatch] = useContext(reducerContext);
-  const { imageName } = sidebarState;
+  const { imageName, imageFile } = sidebarState;
 
+  console.log("input element for textContent")
+  console.log("disable publish post when file is empty");
   const handlePublishPost = async () => {
-    const postId = doc(db).id;
+    const postRef = doc(collection(db, "userPosts"))
     const newPost = {
-      postId,
+      postId: postRef.id,
       userId: globalState.userId,
-      content: imageName,
+      content: imageFile,
+      textContent: '',
       dateCreated: Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
       likes: 0,
       comments: []
     };
-    await setDoc(doc(db, "userPosts", postId), newPost);
+    await setDoc(postRef, newPost);
   }
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
 
-    dispatch({ type: "UPDATE_IMAGE_NAME", imageName: file.name });
+    dispatch({
+      type: "HANDLE_IMAGE_FILE",
+      imageName: file.name,
+      imageFile: file
+    });
   };
 
   function closeModalEvent() {
