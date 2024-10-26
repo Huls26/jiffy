@@ -25,6 +25,7 @@ export default async function createUserFirestore({
   fullName,
   photoURL,
 }) {
+  console.log("test this code");
   if (!isError) {
     try {
       // I need to add profile photo and post photos link later
