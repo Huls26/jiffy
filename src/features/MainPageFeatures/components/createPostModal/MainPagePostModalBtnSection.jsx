@@ -1,9 +1,26 @@
+import { GlobalContext } from '@/contexts/GlobalContextProvider';
 import { reducerContext } from "@/contexts/ReducerContextProvider";
-import { useContext, } from "react";
+
+import { } from "firebase/firestore";
+import { useContext } from "react";
 
 export default function MainPagePostModalBtnSection() {
+  const [globalState] = useContext(GlobalContext);
   const [sidebarState, dispatch] = useContext(reducerContext);
   const { imageName } = sidebarState;
+
+  // const handlePublishPost = async () => {
+  //   const postId = doc(db).id;
+  //   const newPost = {
+  //     postId,
+  //     userId: globalState.userId,
+  //     content: imageName,
+  //     dateCreated: Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
+  //     likes: 0,
+  //     comments: []
+  //   };
+  //   await setDoc(doc(db, "userPosts", postId), newPost);
+  // }
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
@@ -53,7 +70,13 @@ export default function MainPagePostModalBtnSection() {
         >
           Cancel
         </button>
-        <button type="button" className="px-2 py-0.5 bg-sky-950 font-semibold rounded-md hover:bg-sky-900 active:text-green-400">Publish</button>
+        <button
+          type="button"
+          className="px-2 py-0.5 bg-sky-950 font-semibold rounded-md hover:bg-sky-900 active:text-green-400"
+          onClick={handlePublishPost}
+        >
+          Publish
+        </button>
       </div>
     </div>
   )
