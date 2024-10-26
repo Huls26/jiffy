@@ -10,6 +10,7 @@ export const INITIAL_STATE = {
   suggestedUsersList: null,
   isDisplayPostModalOpen: false,
   imageName: "",
+  imageFile: null,
 };
 
 /**
@@ -39,6 +40,7 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         ...state,
         isDisplayPostModalOpen: !state.isDisplayPostModalOpen,
         imageName: "",
+        // imageFile: null
       };
     case "UPDATE_LIST":
       return {
@@ -49,6 +51,12 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
       return {
         ...state,
         imageName: action.imageName,
+      };
+    case "HANDLE_IMAGE_FILE":
+      return {
+        ...state,
+        imageName: action.imageName,
+        imageFile: action.imageFile,
       };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
