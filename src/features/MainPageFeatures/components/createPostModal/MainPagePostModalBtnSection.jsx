@@ -1,28 +1,15 @@
 import { reducerContext } from "@/contexts/ReducerContextProvider";
-import { useContext, useState } from "react";
+import { useContext, } from "react";
 
 export default function MainPagePostModalBtnSection() {
-  const [, dispatch] = useContext(reducerContext);
+  const [sidebarState, dispatch] = useContext(reducerContext);
+  const { imageName } = sidebarState;
 
-  // const [image, setImage] = useState(null);
-  const [imageName, setImageName] = useState(null);
-
-  console.log("TODO: display filename and file image")
   const handleFileChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
-    // const fileName = trimFileName(file.name);
-    setImageName(() => file.name);
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        // setImage(reader.result); // Set the image state to the file data
 
-      };
-      reader.readAsDataURL(file); // Read the file as a data URL
-    }
+    dispatch({ type: "UPDATE_IMAGE_NAME", imageName: file.name });
   };
-
-  console.log(imageName)
 
   function closeModalEvent() {
     // the state of display Portal modal
