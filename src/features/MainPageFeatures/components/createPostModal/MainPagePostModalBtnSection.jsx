@@ -1,7 +1,8 @@
 import { GlobalContext } from '@/contexts/GlobalContextProvider';
 import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { db } from '@/lib/fb';
 
-import { } from "firebase/firestore";
+import { Timestamp, doc, setDoc } from "firebase/firestore";
 import { useContext } from "react";
 
 export default function MainPagePostModalBtnSection() {
@@ -9,18 +10,18 @@ export default function MainPagePostModalBtnSection() {
   const [sidebarState, dispatch] = useContext(reducerContext);
   const { imageName } = sidebarState;
 
-  // const handlePublishPost = async () => {
-  //   const postId = doc(db).id;
-  //   const newPost = {
-  //     postId,
-  //     userId: globalState.userId,
-  //     content: imageName,
-  //     dateCreated: Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
-  //     likes: 0,
-  //     comments: []
-  //   };
-  //   await setDoc(doc(db, "userPosts", postId), newPost);
-  // }
+  const handlePublishPost = async () => {
+    const postId = doc(db).id;
+    const newPost = {
+      postId,
+      userId: globalState.userId,
+      content: imageName,
+      dateCreated: Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
+      likes: 0,
+      comments: []
+    };
+    await setDoc(doc(db, "userPosts", postId), newPost);
+  }
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
