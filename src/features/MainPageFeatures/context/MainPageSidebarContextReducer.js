@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
   isLoading: false,
   suggestedUsersList: null,
   isDisplayPostModalOpen: false,
+  imageName: "",
 };
 
 /**
@@ -42,6 +43,11 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
       return {
         ...state,
         suggestedUsersList: action.suggestedUsersList,
+      };
+    case "UPDATE_IMAGE_NAME":
+      return {
+        ...state,
+        imageName: action.imageName,
       };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
