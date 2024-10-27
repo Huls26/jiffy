@@ -12,6 +12,7 @@ export default function MainPagePostModalBtnSection() {
 
   console.log("input element for textContent")
   console.log("disable publish post when file is empty");
+  console.log('add loading when user post content');
   const handlePublishPost = async () => {
     const postRef = doc(collection(db, "userPosts"))
     const newPost = {
@@ -29,11 +30,13 @@ export default function MainPagePostModalBtnSection() {
   const handleFileChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
 
-    dispatch({
-      type: "HANDLE_IMAGE_FILE",
-      imageName: file.name,
-      imageFile: file
-    });
+    if (file) {
+      dispatch({
+        type: "HANDLE_IMAGE_FILE",
+        imageName: file.name,
+        imageFile: file, // Pass the File object
+      });
+    }
   };
 
   function closeModalEvent() {
