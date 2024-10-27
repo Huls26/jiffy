@@ -1,8 +1,9 @@
 import { GlobalContext } from '@/contexts/GlobalContextProvider';
 import { reducerContext } from "@/contexts/ReducerContextProvider";
-import { db } from '@/lib/fb';
+import { db, storage } from '@/lib/fb';
 
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useContext } from "react";
 
 export default function MainPagePostModalBtnSection() {
@@ -14,18 +15,38 @@ export default function MainPagePostModalBtnSection() {
   console.log("disable publish post when file is empty");
   console.log('add loading when user post content');
   const handlePublishPost = async () => {
-    const postRef = doc(collection(db, "userPosts"))
-    const newPost = {
-      postId: postRef.id,
-      userId: globalState.userId,
-      content: imageFile,
-      textContent: '',
-      dateCreated: Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
-      likes: 0,
-      comments: []
-    };
-    await setDoc(postRef, newPost);
-  }
+    if (!imageFile) {
+      console.error("No image file to upload.");
+      return; // Exit if there is no image
+    }
+
+    const postRef = doc(collection(db, "userPosts"));
+    const storageRef = ref(storage, `contentImages/${globalState.userId}/${postRef.id}`); // Use postRef.id for the file name
+
+    try {
+      // Upload the image file
+      await uploadBytes(storageRef, imageFile);
+      // Get the download URL
+      const downloadURL = await getDownloadURL(storageRef);
+
+      const newPost = {
+        postId: postRef.id,
+        userId: globalState.userId,
+        content: downloadURL, // Store the image URL
+        textContent: '', // Add any text content here if needed
+        dateCreated: Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
+        likes: 0,
+        comments: []
+      };
+
+      // Set the document in Firestore
+      await setDoc(postRef, newPost);
+      console.log("Post published successfully:", newPost);
+    } catch (error) {
+      console.error("Error publishing post:", error);
+    }
+  };
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
