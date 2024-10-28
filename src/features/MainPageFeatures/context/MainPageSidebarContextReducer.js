@@ -41,6 +41,7 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         ...state,
         isDisplayPostModalOpen: !state.isDisplayPostModalOpen,
         imageName: "",
+        postContentText: "",
         // imageFile: null
       };
     case "UPDATE_LIST":
