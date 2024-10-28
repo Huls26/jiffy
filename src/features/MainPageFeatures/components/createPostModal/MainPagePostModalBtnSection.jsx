@@ -14,6 +14,8 @@ export default function MainPagePostModalBtnSection() {
   console.log("input element for textContent")
   console.log("disable publish post when file is empty");
   console.log('add loading when user post content');
+  console.log('clean up');
+  console.log("stop progATION. check the width of image file logo")
   const handlePublishPost = async () => {
     if (!imageFile) {
       console.error("No image file to upload.");
