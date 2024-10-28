@@ -31,7 +31,8 @@ export default function MainPagePostCreationModal() {
       </div>
       <input
         type="text"
-        className="w-full bg-slate-950 outline-none font-semibold text-gray-400"
+        className="w-full bg-slate-950 outline-none 
+        font-semibold text-gray-400 text-sm sm:text-base"
         placeholder="Publish a Post"
         maxLength="100"
         onChange={(e) =>
