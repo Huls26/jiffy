@@ -11,6 +11,7 @@ export const INITIAL_STATE = {
   isDisplayPostModalOpen: false,
   imageName: "",
   imageFile: null,
+  postContentText: "",
 };
 
 /**
@@ -57,6 +58,11 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         ...state,
         imageName: action.imageName,
         imageFile: action.imageFile,
+      };
+    case "SET_POST_CONTENTTEXT":
+      return {
+        ...state,
+        postContentText: action.payload,
       };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
