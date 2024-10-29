@@ -9,13 +9,13 @@ import { useContext } from "react";
 export default function MainPagePostModalBtnSection() {
   const [globalState] = useContext(GlobalContext);
   const [sidebarState, dispatch] = useContext(reducerContext);
-  const { imageName, imageFile } = sidebarState;
+  const { imageName, imageFile, postContentText } = sidebarState;
 
-  console.log("input element for textContent")
+  console.log("dont allow to publish a post when post content is empty");
   console.log("disable publish post when file is empty");
-  console.log('add loading when user post content');
   console.log('clean up');
   console.log("stop progATION. check the width of image file logo")
+
   const handlePublishPost = async () => {
     if (!imageFile) {
       console.error("No image file to upload.");
@@ -36,7 +36,7 @@ export default function MainPagePostModalBtnSection() {
         postId: postRef.id,
         userId: globalState.userId,
         content: downloadURL, // Store the image URL
-        textContent: '', // Add any text content here if needed
+        textContent: postContentText, // Add any text content here if needed
         dateCreated: Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
         likes: 0,
         comments: []
