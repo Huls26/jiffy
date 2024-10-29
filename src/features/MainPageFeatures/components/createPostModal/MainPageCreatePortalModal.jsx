@@ -16,9 +16,11 @@ const MainPagePostCreationModal = lazy(() => import("./MainPagePostCreationModal
 
 export default function MainPageCreatePortalModal() {
   const [sidebarContext] = useContext(reducerContext)
-  const { isDisplayPostModalOpen } = sidebarContext
+  const { isDisplayPostModalOpen, postContentLoading } = sidebarContext
 
   if (!isDisplayPostModalOpen) return null;
+
+  if (postContentLoading) return <LoadingDot />
 
   return createPortal(
     <Suspense fallback={<LoadingDot />}>
