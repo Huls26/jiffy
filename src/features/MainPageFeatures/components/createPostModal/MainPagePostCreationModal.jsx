@@ -10,7 +10,6 @@ export default function MainPagePostCreationModal() {
   const { username, photoURL } = globalState;
   const [sidebarState, dispatch] = useContext(reducerContext)
 
-  console.log(sidebarState.postContentText);
   // Rest of the modal content goes here...
   return (
     <div className="
@@ -33,7 +32,7 @@ export default function MainPagePostCreationModal() {
         type="text"
         className="w-full bg-slate-950 outline-none 
         font-semibold text-gray-400 text-sm sm:text-base"
-        placeholder="Publish a Post"
+        placeholder="Publish a Post Add an Image..."
         maxLength="100"
         onChange={(e) =>
           dispatch({ type: 'SET_POST_CONTENTTEXT', payload: e.target.value })}
