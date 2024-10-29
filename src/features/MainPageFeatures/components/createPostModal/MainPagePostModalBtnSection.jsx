@@ -11,10 +11,10 @@ export default function MainPagePostModalBtnSection() {
   const [sidebarState, dispatch] = useContext(reducerContext);
   const { imageName, imageFile, postContentText } = sidebarState;
 
-  console.log("dont allow to publish a post when post content is empty");
-  console.log("disable publish post when file is empty");
   console.log('clean up');
-  console.log("stop progATION. check the width of image file logo")
+  const defaultPublishStyle = "px-2 py-0.5 bg-sky-950 font-semibold rounded-md opacity-70"
+  const activePublishStyle = "px-2 py-0.5 bg-sky-950 font-semibold rounded-md hover:bg-sky-900 active:text-green-400"
+  const publishBtnStyle = imageFile ? activePublishStyle : defaultPublishStyle;
 
   const handlePublishPost = async () => {
     if (!imageFile) {
@@ -114,8 +114,9 @@ export default function MainPagePostModalBtnSection() {
         </button>
         <button
           type="button"
-          className="px-2 py-0.5 bg-sky-950 font-semibold rounded-md hover:bg-sky-900 active:text-green-400"
+          className={publishBtnStyle}
           onClick={handlePublishPost}
+          disabled={!imageFile || !postContentText}
         >
           Publish
         </button>
