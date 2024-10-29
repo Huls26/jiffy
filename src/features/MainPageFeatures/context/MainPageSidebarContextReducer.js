@@ -12,6 +12,7 @@ export const INITIAL_STATE = {
   imageName: "",
   imageFile: null,
   postContentText: "",
+  postContentLoading: false,
 };
 
 /**
@@ -30,6 +31,8 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "UPDATE_LOADING":
       return { ...state, isLoading: action.isLoading };
+    case "UPDATE_POST_MODAL_LOADING":
+      return { ...state, postContentLoading: action.payload };
     case "UPDATE_ERROR":
       return {
         ...state,
