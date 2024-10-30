@@ -48,6 +48,7 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         ...state,
         isErrorAuth: action.isError,
         errorMessage: action.message,
+        accountCreated: false,
       };
     case "UPDATE_ACCOUNTCREATED":
       return {
