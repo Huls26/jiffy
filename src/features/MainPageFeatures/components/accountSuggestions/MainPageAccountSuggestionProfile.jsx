@@ -53,3 +53,5 @@ MainPageAccountSuggestionProfile.propTypes = {
     email: PropTypes.string.isRequired,
   }).isRequired,
 }
+
+MainPageAccountSuggestionProfile.whyDidYouRender = true;

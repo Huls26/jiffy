@@ -9,3 +9,5 @@ export default function MainPageNoSuggestedUsersMessage({ isDisplay }) {
 MainPageNoSuggestedUsersMessage.propTypes = {
   isDisplay: PropTypes.bool.isRequired,
 }
+
+MainPageNoSuggestedUsersMessage.whyDidYouRender = true;

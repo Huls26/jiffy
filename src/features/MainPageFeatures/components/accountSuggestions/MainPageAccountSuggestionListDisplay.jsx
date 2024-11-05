@@ -36,3 +36,5 @@ MainPageAccountSuggestionListDisplay.propTypes = {
   suggestedUsersList: PropTypes.arrayOf(PropTypes.object),
   onClick: PropTypes.func,
 }
+
+MainPageAccountSuggestionListDisplay.whyDidYouRender = true;
