@@ -62,7 +62,7 @@ export default function useFetchUserSuggestions() {
     }
   }
 
-  function fetchesSuggestions() {
+  function fetchSuggestions() {
     // Only fetch suggestions if suggestedUsersList is null or undefined
     if (suggestedUsersList === null) {
       fetchUserSuggestions();
@@ -77,6 +77,6 @@ export default function useFetchUserSuggestions() {
   // Returning the suggestedUsersList and fetchUserSuggestions function
   return {
     suggestedUsersList,
-    fetchUserSuggestions: fetchesSuggestions,
+    fetchUserSuggestions: fetchSuggestions,
   };
 }
