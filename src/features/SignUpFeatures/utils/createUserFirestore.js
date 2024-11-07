@@ -26,6 +26,8 @@ export default async function createUserFirestore({
   photoURL,
 }) {
   console.log("test this code");
+  console.log("// update data format check firebase documentations");
+  console.log("I think I should put the singout() to createUserAuth.js");
   if (!isError) {
     try {
       // I need to add profile photo and post photos link later
@@ -34,9 +36,10 @@ export default async function createUserFirestore({
         username,
         fullName,
         userId: uid,
+        // update data format check firebase documentations
         dateCreated: Date.now(),
-        followers: {},
-        following: {},
+        followers: [],
+        following: [],
         followersCount: 0,
         photoURL,
       });
