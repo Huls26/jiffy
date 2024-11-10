@@ -93,7 +93,7 @@ export function seedDatabase(db) {
       email: "william@shakespeare.com",
       password: "123456",
       following: [],
-      followers: { 1: "1", 2: "2" },
+      followers: ["1", "2"],
       followersCount: 2,
       dateCreated: Date.now(),
       photoURL:
