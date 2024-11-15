@@ -20,13 +20,14 @@ export default async function fetchUsers(userId) {
       const docUser = doc.data();
 
       // Check if userId is not included in followers
-      return !docUser.followers.includes(userId);
+      return !docUser.followers[userId];
     });
 
     if (filteredUsers.length === 0) {
       return []; // Return an empty array if no suggestions available
     }
 
+    console.log(filteredUsers);
     // Randomly select up to 3 users
     const randomUsers = filteredUsers
       .sort(() => Math.random() - 0.5) // Shuffle array
