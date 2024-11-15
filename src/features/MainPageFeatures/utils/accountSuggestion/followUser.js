@@ -1,58 +1,70 @@
 import { db } from "@/lib/fb";
-import {
-  arrayRemove,
-  arrayUnion,
-  doc,
-  increment,
-  runTransaction,
-} from "firebase/firestore";
+import { doc, getDoc, increment, runTransaction } from "firebase/firestore";
 
 export default async function followUser(userId, followingUser) {
   const currentUserRef = doc(db, "users", userId);
   const usersFollowingRef = doc(db, "users", followingUser.userId);
 
+  console.log("use arrayRemove and arrayUpdate in firestore");
   try {
-    // Run transaction to perform atomic updates
+    // Fetch the current user's document
+    const currentUserSnap = await getDoc(currentUserRef);
+
+    // Check if the document exists
+    if (!currentUserSnap.exists()) {
+      throw new Error(`User with ID ${userId} does not exist.`);
+    }
+
+    const currentUserData = currentUserSnap.data();
+    const isUserFollow = currentUserData.following[followingUser.userId];
+
+    // Update the current user's following list and the suggested user's followers
     await runTransaction(db, async (transaction) => {
-      // Fetch current user and following user's documents within the transaction
-      const currentUserSnap = await transaction.get(currentUserRef);
-      const followingUserSnap = await transaction.get(usersFollowingRef);
-
-      // Check if documents exist
-      if (!currentUserSnap.exists() || !followingUserSnap.exists()) {
-        throw new Error(`One or both users do not exist.`);
-      }
-
-      const followingUserData = followingUserSnap.data();
-      const followersCount = followingUserData.followersCount || 0;
-
-      // Check if user is already followed via subcollection
-      const isUserFollow = followingUserData.followers.includes(userId);
+      const currentUserFollowing = currentUserData.following || {};
+      const followingUserFollowers = followingUser.followers || {};
 
       if (!isUserFollow) {
-        // Add to following and increment followers count
-        transaction.update(currentUserRef, {
-          following: arrayUnion(followingUser.userId),
-        });
-        transaction.update(usersFollowingRef, {
-          followers: arrayUnion(userId),
-          followersCount: increment(1),
-        });
+        // If the user is not already followed, add them
+        if (!currentUserFollowing[followingUser.userId]) {
+          transaction.update(currentUserRef, {
+            following: {
+              ...currentUserFollowing,
+              [followingUser.userId]: followingUser.userId,
+            },
+          });
+
+          transaction.update(usersFollowingRef, {
+            followers: {
+              ...followingUserFollowers,
+              [userId]: userId,
+            },
+            followersCount: increment(1), // Increase followers count
+          });
+        }
       } else {
-        // Remove from following and decrement followers count
-        transaction.update(currentUserRef, {
-          following: arrayRemove(followingUser.userId),
-        });
-        transaction.update(usersFollowingRef, {
-          followers: arrayRemove(userId),
-          followersCount: followersCount > 0 ? increment(-1) : 0,
-        });
+        // If the user is followed, remove them
+        if (currentUserFollowing[followingUser.userId]) {
+          const { [followingUser.userId]: _, ...updatedFollowing } =
+            currentUserFollowing;
+          const { [userId]: __, ...updatedFollowers } = followingUserFollowers;
+
+          transaction.update(currentUserRef, {
+            following: updatedFollowing,
+          });
+
+          transaction.update(usersFollowingRef, {
+            followers: updatedFollowers,
+            followersCount:
+              followingUser.followersCount > 0 ? increment(-1) : 0,
+          });
+        }
       }
     });
 
     return true;
   } catch (error) {
+    // biome-ignore lint/nursery/noConsole: <explanation>
     console.error("Error following user:", error);
-    return false;
+    return false; // Rethrow the error if needed
   }
 }
