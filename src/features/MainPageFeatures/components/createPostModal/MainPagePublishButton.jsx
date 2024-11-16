@@ -1,17 +1,18 @@
 import { GlobalContext } from '@/contexts/GlobalContextProvider';
-import { reducerContext } from "@/contexts/ReducerContextProvider";
 import publishBtnStyle from '../../styles/publishBtnStyle';
 import postStoreRef from '../../utils/createPostModal/postStorageRef';
 import uploadImageWithURL from '../../utils/createPostModal/uploadImageWithURL';
+import { PostPortalModal } from "./MainPageCreatePortalModal";
 
 import { useContext } from "react";
 
 export default function MainPagePublishButton() {
   const [globalState] = useContext(GlobalContext);
-  const [sidebarState, dispatch] = useContext(reducerContext);
+  const [sidebarState, dispatch] = useContext(PostPortalModal);
   const { imageFile, postContentText } = sidebarState;
 
-  console.log("create new context only for create post modal to prevent the sidebar context from updating context that may rerender the component")
+  console.log("reset state after published content")
+  console.log("check publish button style active")
   const publishContent = async () => {
 
     if (!imageFile) {
@@ -33,7 +34,7 @@ export default function MainPagePublishButton() {
   return (
     <button
       type="button"
-      className={publishBtnStyle(imageFile)}
+      className={publishBtnStyle(imageFile && postContentText)}
       onClick={publishContent}
       disabled={!imageFile || !postContentText}
     >
