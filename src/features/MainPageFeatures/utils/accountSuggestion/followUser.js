@@ -1,6 +1,7 @@
 import { db } from "@/lib/fb";
 import { doc, getDoc, increment, runTransaction } from "firebase/firestore";
 
+console.log("use new Set() instead of {} in followers and following");
 export default async function followUser(userId, followingUser) {
   const currentUserRef = doc(db, "users", userId);
   const usersFollowingRef = doc(db, "users", followingUser.userId);
