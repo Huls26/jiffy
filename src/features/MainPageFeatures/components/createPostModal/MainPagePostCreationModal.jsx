@@ -1,6 +1,6 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
-import { reducerContext } from "@/contexts/ReducerContextProvider";
 import MainPageUserProfileLink from '../../components/userInfo/MainPageUserProfileLink';
+import { PostPortalModal } from "./MainPageCreatePortalModal";
 import MainPagePostModalBtnSection from './MainPagePostModalBtnSection';
 
 import { useContext, } from "react";
@@ -8,7 +8,7 @@ import { useContext, } from "react";
 export default function MainPagePostCreationModal() {
   const [globalState] = useContext(GlobalContext);
   const { username, photoURL } = globalState;
-  const [sidebarState, dispatch] = useContext(reducerContext)
+  const [modalContext, dispatch] = useContext(PostPortalModal)
 
   // Rest of the modal content goes here...
   return (
@@ -36,7 +36,7 @@ export default function MainPagePostCreationModal() {
         maxLength="100"
         onChange={(e) =>
           dispatch({ type: 'SET_POST_CONTENTTEXT', payload: e.target.value })}
-        value={sidebarState.postContentText}
+        value={modalContext.postContentText}
       />
       <MainPagePostModalBtnSection />
     </div>
