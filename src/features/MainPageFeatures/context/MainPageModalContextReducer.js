@@ -2,7 +2,6 @@ const INITIAL_STATE = {
   errorMessage: "",
   isError: false,
   isLoading: false,
-  isDisplayPostModalOpen: false,
   imageName: "",
   imageFile: null,
   postContentText: "",
@@ -20,14 +19,6 @@ function reducerMethod(state, action) {
         ...state,
         isErrorAuth: action.isError,
         errorMessage: action.message,
-      };
-    case "UPDATE_DISPLAY_POST_MODAL":
-      return {
-        ...state,
-        isDisplayPostModalOpen: !state.isDisplayPostModalOpen,
-        imageName: "",
-        postContentText: "",
-        imageFile: null,
       };
     case "UPDATE_IMAGE_NAME":
       return {
