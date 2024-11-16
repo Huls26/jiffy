@@ -1,10 +1,10 @@
-import { reducerContext } from "@/contexts/ReducerContextProvider";
+import { PostPortalModal } from "./MainPageCreatePortalModal";
 import MainPagePublishButton from './MainPagePublishButton';
 
 import { useContext } from "react";
 
 export default function MainPagePostModalBtnSection() {
-  const [sidebarState, dispatch] = useContext(reducerContext);
+  const [sidebarState, dispatch] = useContext(PostPortalModal);
   const { imageName } = sidebarState;
 
 
