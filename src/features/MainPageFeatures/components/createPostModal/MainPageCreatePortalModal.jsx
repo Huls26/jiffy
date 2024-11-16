@@ -23,7 +23,6 @@ export default function MainPageCreatePortalModal() {
   const [modalContext, dispatch] = useReducer(reducerMethod, INITIAL_STATE);
   const { postContentLoading } = modalContext;
 
-  console.log(modalContext);
   if (!isDisplayPostModalOpen) return null;
 
   if (postContentLoading) return <LoadingDot />
