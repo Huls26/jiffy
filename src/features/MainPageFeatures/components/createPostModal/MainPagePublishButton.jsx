@@ -13,6 +13,7 @@ export default function MainPagePublishButton() {
 
   console.log("reset state after published content")
   console.log("check publish button style active")
+  console.log("remove unuse mainPage sidebar state")
   const publishContent = async () => {
 
     if (!imageFile) {
