@@ -9,7 +9,6 @@ export default function MainPagePostModalBtnSection() {
   const [sidebarState, dispatch] = useContext(PostPortalModal);
   const { imageName } = sidebarState;
 
-
   const handleFileChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
 
