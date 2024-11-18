@@ -1,3 +1,4 @@
+import LoadingDot from "@/components/LoadingSkeleton/components/LoadingDot";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import MainPageUserProfileLink from '../../components/userInfo/MainPageUserProfileLink';
 import { PostPortalModal } from "./MainPageCreatePortalModal";
@@ -8,7 +9,11 @@ import { useContext, } from "react";
 export default function MainPagePostCreationModal() {
   const [globalState] = useContext(GlobalContext);
   const { username, photoURL } = globalState;
-  const [modalContext, dispatch] = useContext(PostPortalModal)
+  const [modalContext, dispatch] = useContext(PostPortalModal);
+  const { postContentLoading } = modalContext;
+
+  // Check if the post content loading state is true, if so, display a loading dot.
+  if (postContentLoading) return <LoadingDot />
 
   // Rest of the modal content goes here...
   return (
