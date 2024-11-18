@@ -11,24 +11,24 @@ export default function MainPagePublishButton() {
   const [sidebarState, dispatch] = useContext(PostPortalModal);
   const { imageFile, postContentText } = sidebarState;
 
-  console.log("reset state after published content")
-  console.log("check publish button style active")
-  console.log("remove unuse mainPage sidebar state")
+  // console.log("reset state after published content")
+  // console.log("check publish button style active")
+  // console.log("remove unuse mainPage sidebar state")
   const publishContent = async () => {
 
     if (!imageFile) {
       console.error("No image file to upload.");
       return; // Exit if there is no image
     }
-
     dispatch({ type: "UPDATE_POST_MODAL_LOADING", payload: true });
     const { postRef, storageRef } = postStoreRef(globalState);
 
     try {
-      uploadImageWithURL({ storageRef, postRef, sidebarState, userId: globalState.userId })
-      dispatch({ type: "UPDATE_POST_MODAL_LOADING", payload: false });
+      await uploadImageWithURL({ storageRef, postRef, sidebarState, userId: globalState.userId });
     } catch (error) {
       console.error("Error publishing post:", error);
+    } finally {
+      dispatch({ type: "UPDATE_POST_MODAL_LOADING", payload: false });
     }
   };
 
