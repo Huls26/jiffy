@@ -21,11 +21,8 @@ export default function MainPageCreatePortalModal() {
   const [sidebarContext] = useContext(reducerContext);
   const { isDisplayPostModalOpen } = sidebarContext;
   const [modalContext, dispatch] = useReducer(reducerMethod, INITIAL_STATE);
-  const { postContentLoading } = modalContext;
 
-  if (!isDisplayPostModalOpen) return null;
-
-  if (postContentLoading) return <LoadingDot />
+  if (!isDisplayPostModalOpen) return null
 
   return createPortal(
     <Suspense fallback={<LoadingDot />}>
