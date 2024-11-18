@@ -1,9 +1,11 @@
+import { reducerContext } from "@/contexts/ReducerContextProvider";
 import { PostPortalModal } from "./MainPageCreatePortalModal";
 import MainPagePublishButton from './MainPagePublishButton';
 
 import { useContext } from "react";
 
 export default function MainPagePostModalBtnSection() {
+  const [, dispatchSideBar] = useContext(reducerContext)
   const [sidebarState, dispatch] = useContext(PostPortalModal);
   const { imageName } = sidebarState;
 
@@ -26,7 +28,7 @@ export default function MainPagePostModalBtnSection() {
     // with this information we can use this to close this component modal
     // this will set the state to false
     // onClick={closeModalEvent}
-    dispatch({ type: "UPDATE_DISPLAY_POST_MODAL" })
+    dispatchSideBar({ type: "UPDATE_DISPLAY_POST_MODAL" })
   }
 
   return (
