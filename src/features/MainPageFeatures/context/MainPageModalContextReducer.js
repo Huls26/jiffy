@@ -36,6 +36,13 @@ function reducerMethod(state, action) {
         ...state,
         postContentText: action.payload,
       };
+    case "RESET_CONTENTTEXT":
+      return {
+        ...state,
+        imageName: "",
+        imageFile: null,
+        postContentText: "",
+      };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }
