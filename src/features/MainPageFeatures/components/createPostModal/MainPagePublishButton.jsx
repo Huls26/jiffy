@@ -28,6 +28,7 @@ export default function MainPagePublishButton() {
       console.error("Error publishing post:", error);
     } finally {
       dispatch({ type: "UPDATE_POST_MODAL_LOADING", payload: false });
+      dispatch({ type: "RESET_CONTENTTEXT" })
     }
   };
 
