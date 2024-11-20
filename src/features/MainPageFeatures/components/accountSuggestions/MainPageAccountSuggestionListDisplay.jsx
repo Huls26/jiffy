@@ -2,9 +2,11 @@ import { reducerContext } from '@/contexts/ReducerContextProvider';
 import { useContext } from 'react';
 import MainPageUserInfoSkeleton from '../MainPageUserInfoSkeleton';
 import DiscoverUsersBtn from '../buttons/DiscoverUsersBtn';
-import MainPageAccountSuggestionUserList from './MainPageAccountSuggestionUserList';
 
 import PropTypes from 'prop-types';
+import { lazy } from 'react';
+
+const MainPageAccountSuggestionUserList = lazy(() => import('./MainPageAccountSuggestionUserList'));
 
 export default function MainPageAccountSuggestionListDisplay({ suggestedUsersList, onClick }) {
   const [sidebarState] = useContext(reducerContext);
