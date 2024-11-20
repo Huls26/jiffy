@@ -7,6 +7,9 @@ import MainPageNoSuggestedUsersMessage from './MainPageNoSuggestedUsersMessage';
 export default function MainPageAccountSuggestions() {
   const { suggestedUsersList, fetchUserSuggestions } = useFetchUserSuggestions()
 
+  console.log("check why this re-render");
+  console.log("Lazy load unecessary files during the first render");
+  console.log("check inspect network");
   return (
     <section className="pt-2 pb-2 text-gray-200">
       <MainPageAccountSuggestionTitle
