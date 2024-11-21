@@ -26,7 +26,7 @@ export default function useFetchUserSuggestions() {
 
   // Extracting necessary data from the global and sidebar states
   const { userId } = globalState;
-  const { suggestedUsersList } = sidebarState;
+  const { suggestedUsersList, isLoading } = sidebarState;
 
   /**
    * Fetches random user suggestions and updates the suggestedUsersList in the sidebar state.
@@ -78,5 +78,6 @@ export default function useFetchUserSuggestions() {
   return {
     suggestedUsersList,
     fetchUserSuggestions: fetchSuggestions,
+    sidebarIsLoading: isLoading,
   };
 }
