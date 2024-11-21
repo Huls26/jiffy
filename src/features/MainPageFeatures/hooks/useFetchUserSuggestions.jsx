@@ -49,16 +49,11 @@ export default function useFetchUserSuggestions() {
       dispatch({
         type: "UPDATE_LIST",
         suggestedUsersList: suggestionUsers,  // Always update with fetched users
+        isLoading: false,  // Update loading state after fetching users
       });
     } catch (error) {
       console.error("Failed to fetch user suggestions:", error);
       // Optionally handle error state (e.g., show a message to the user)
-    } finally {
-      // Dispatching an action to update the loading state
-      dispatch({
-        type: "UPDATE_LOADING",
-        isLoading: false,
-      });
     }
   }
 
