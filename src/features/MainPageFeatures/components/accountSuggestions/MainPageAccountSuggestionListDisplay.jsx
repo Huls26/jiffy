@@ -1,4 +1,3 @@
-// import useFetchUserSuggestions from "../../hooks/useFetchUserSuggestions";
 import MainPageUserInfoSkeleton from '../MainPageUserInfoSkeleton';
 import DiscoverUsersBtn from '../buttons/DiscoverUsersBtn';
 
