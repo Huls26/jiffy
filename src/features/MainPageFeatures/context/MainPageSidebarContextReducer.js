@@ -42,6 +42,7 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
       return {
         ...state,
         suggestedUsersList: action.suggestedUsersList,
+        isLoading: action.isLoading || false,
       };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
