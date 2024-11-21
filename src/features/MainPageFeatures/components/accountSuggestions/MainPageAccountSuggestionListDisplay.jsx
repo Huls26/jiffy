@@ -1,17 +1,15 @@
-import { reducerContext } from '@/contexts/ReducerContextProvider';
-import { useContext } from 'react';
+// import useFetchUserSuggestions from "../../hooks/useFetchUserSuggestions";
 import MainPageUserInfoSkeleton from '../MainPageUserInfoSkeleton';
 import DiscoverUsersBtn from '../buttons/DiscoverUsersBtn';
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { lazy } from 'react';
 
 const MainPageAccountSuggestionUserList = lazy(() => import('./MainPageAccountSuggestionUserList'));
 
-export default function MainPageAccountSuggestionListDisplay({ suggestedUsersList, onClick }) {
-  const [sidebarState] = useContext(reducerContext);
+export default function MainPageAccountSuggestionListDisplay({ suggestedUsersList, onClick, sidebarIsLoading }) {
 
-  if (sidebarState.isLoading) {
+  if (sidebarIsLoading) {
     return (
       <div className='px-2'>
         <MainPageUserInfoSkeleton />
@@ -37,6 +35,7 @@ export default function MainPageAccountSuggestionListDisplay({ suggestedUsersLis
 MainPageAccountSuggestionListDisplay.propTypes = {
   suggestedUsersList: PropTypes.arrayOf(PropTypes.object),
   onClick: PropTypes.func,
+  sidebarIsLoading: PropTypes.bool,
 }
 
 MainPageAccountSuggestionListDisplay.whyDidYouRender = true;
