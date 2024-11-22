@@ -7,7 +7,6 @@ import { lazy } from 'react';
 const MainPageAccountSuggestionUserList = lazy(() => import('./MainPageAccountSuggestionUserList'));
 
 export default function MainPageAccountSuggestionListDisplay({ suggestedUsersList, onClick, sidebarIsLoading }) {
-
   if (sidebarIsLoading) {
     return (
       <div className='px-2'>
