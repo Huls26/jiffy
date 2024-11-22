@@ -32,7 +32,7 @@ export default function MainPageAccountSuggestions() {
       />
 
       <SuggestedUsersCloseBtn
-        onClick={fetchUserSuggestions}
+        dispatch={dispatch}
         isDisplay={suggestedUsersList !== null}
       />
     </section >
