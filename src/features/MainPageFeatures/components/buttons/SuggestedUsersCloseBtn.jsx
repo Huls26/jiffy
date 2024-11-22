@@ -1,11 +1,18 @@
 import PropTypes from 'prop-types'
 
-export default function SuggestedUsersCloseBtn({ onClick, isDisplay }) {
+export default function SuggestedUsersCloseBtn({ dispatch, isDisplay }) {
+  function SuggestedUsersClose() {
+    dispatch({
+      type: "UPDATE_LIST",
+      suggestedUsersList: null,
+    });
+  }
+
   if (isDisplay) {
     return (
       <button
         type="button"
-        onClick={onClick}
+        onClick={SuggestedUsersClose}
         className="font-semibold text-red-500 hover:font-bold active:text-red-600"
       >
         close
@@ -17,6 +24,6 @@ export default function SuggestedUsersCloseBtn({ onClick, isDisplay }) {
 }
 
 SuggestedUsersCloseBtn.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   isDisplay: PropTypes.bool.isRequired,
-}
+};
