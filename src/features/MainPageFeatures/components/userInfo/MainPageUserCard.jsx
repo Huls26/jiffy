@@ -1,9 +1,10 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import MainPageCreatePostBtn from "../buttons/MainPageCreatePostBtn";
-import MainPageCreatePortalModal from '../createPostModal/MainPageCreatePortalModal'
 import MainPageUserProfileLink from "./MainPageUserProfileLink";
 
-import { useContext } from "react";
+import { lazy, useContext } from "react";
+
+const MainPageCreatePortalModal = lazy(() => import('../createPostModal/MainPageCreatePortalModal'));
 
 export default function MainPageUserCard() {
   const [globalState] = useContext(GlobalContext);
