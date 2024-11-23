@@ -12,9 +12,6 @@ export default function MainPageAccountSuggestions() {
   const { suggestedUsersList, isLoading } = sidebarState
   const { fetchUserSuggestions } = useFetchUserSuggestions(dispatch);
 
-  // console.log("check why this re-render");
-  // console.log("Lazy load unecessary files during the first render");
-  // console.log("check inspect network");
   return (
     <section className="pt-2 pb-2 text-gray-200">
       <MainPageAccountSuggestionTitle
