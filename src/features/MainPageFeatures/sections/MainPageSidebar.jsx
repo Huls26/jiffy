@@ -1,10 +1,11 @@
-import ReducerContextProvider from "@/contexts/ReducerContextProvider";
-import MainPageAccountSuggestions from "../components/accountSuggestions/MainPageAccountSuggestions";
-import MainPageUserCard from "../components/userInfo/MainPageUserCard";
-
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
-import { useContext } from "react";
+import ReducerContextProvider from "@/contexts/ReducerContextProvider";
+import MainPageUserCard from "../components/userInfo/MainPageUserCard";
 import reducerMethod, { INITIAL_STATE } from "../context/MainPageSidebarContextReducer";
+
+import { lazy, useContext } from "react";
+
+const MainPageAccountSuggestions = lazy(() => import("../components/accountSuggestions/MainPageAccountSuggestions"))
 
 export default function MainPageSidebar() {
   const [globalState] = useContext(GlobalContext);
