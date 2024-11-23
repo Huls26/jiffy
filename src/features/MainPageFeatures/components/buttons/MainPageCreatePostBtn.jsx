@@ -1,5 +1,4 @@
 import { reducerContext } from "@/contexts/ReducerContextProvider";
-import PropTypes from "prop-types"
 import { useContext } from "react";
 
 export default function MainPageCreatePostBtn() {
@@ -19,8 +18,4 @@ export default function MainPageCreatePostBtn() {
       </button>
     </div>
   )
-}
-
-MainPageCreatePostBtn.propTypes = {
-  onClick: PropTypes.func.isRequired,
 }
