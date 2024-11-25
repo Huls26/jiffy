@@ -27,7 +27,8 @@ export default function MainPagePostModalBtnSection() {
     // with this information we can use this to close this component modal
     // this will set the state to false
     // onClick={closeModalEvent}
-    dispatchSideBar({ type: "UPDATE_DISPLAY_POST_MODAL" })
+    dispatchSideBar({ type: "UPDATE_DISPLAY_POST_MODAL" });
+    dispatch({ type: "RESET_CONTENTTEXT" });
   }
 
   return (
