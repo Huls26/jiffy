@@ -26,7 +26,7 @@ export default async function createUserFirestore({
   photoURL,
 }) {
   console.log("test this code");
-  console.log("use new Set() instead of {} in followers and following");
+
   if (!isError) {
     try {
       // I need to add profile photo and post photos link later
@@ -36,8 +36,8 @@ export default async function createUserFirestore({
         fullName,
         userId: uid,
         dateCreated: Date.now(),
-        followers: {},
-        following: {},
+        followers: [],
+        following: [],
         followersCount: 0,
         photoURL,
       });
