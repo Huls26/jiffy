@@ -1,5 +1,5 @@
 import { db } from '@/lib/fb';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 
 export default function MainPageTimeline() {
@@ -7,8 +7,12 @@ export default function MainPageTimeline() {
 
   useEffect(() => {
     async function fetchData() {
-      const querySnapshot = await getDocs(collection(db, "userPosts"));
-      setUserPostsSnapshot(() => querySnapshot.docs);
+      const querySnapshot = query(
+        collection(db, "userPosts"),
+        orderBy('dateCreated', 'desc')
+      );
+      const docsSnapshot = await getDocs(querySnapshot);
+      setUserPostsSnapshot(() => docsSnapshot.docs);
     }
 
     fetchData();
