@@ -34,6 +34,7 @@ export default function MainPagePostCreationModal() {
         />
       </div>
       <input
+        name="input-portal-text"
         type="text"
         className="w-full bg-slate-950 outline-none 
         font-semibold text-gray-400 text-sm sm:text-base"
