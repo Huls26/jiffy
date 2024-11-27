@@ -18,11 +18,32 @@ export default function MainPageTimeline() {
     fetchData();
   }, [])
 
-  console.log(userPosts && userPosts[0].data());
+  console.log(userPosts?.length && userPosts[0].data());
 
   return (
-    <div className="flex-1 border-white border-2">
-      MainPageTimeline
+    <main className="mt-1 pt-3 flex-1">
+      {/* filter query */}
+      <section className='inline-flex'>
+        <button
+          type='button'
+          className="bg-sky-500 bg-gray-900 hover:bg-gray-700 text-gray-200 font-bold py-1 px-3 rounded-l"
+        >
+          All
+        </button>
+        <button
+          type='button'
+          className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500 text-gray-200 font-bold py-1 px-3"
+        >
+          Likes
+        </button>
+        <button
+          type='button'
+          className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500 text-gray-200 font-bold py-1 px-3 rounded-r"
+        >
+          Dates
+        </button>
+      </section>
+
       {userPosts?.map((u) => {
         const userPost = u.data();
 
@@ -35,5 +56,5 @@ export default function MainPageTimeline() {
             <img src={userPost.content} alt={`users post text content ${userPost.textContent}`} />
           </div>);
       })}
-    </div>);
+    </main>);
 }
