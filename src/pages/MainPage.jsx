@@ -4,12 +4,9 @@ import usePageTitle from "@/hooks/usePageTitle";
 
 export default function MainPage() {
   usePageTitle("J I F F Y");
-  // const globalState = useAuthListener();
-
-  // console.log(globalState);
 
   return (
-    <main className="text-white text-center">
+    <main className="">
       <MainPageFeatures />
     </main>
   );
