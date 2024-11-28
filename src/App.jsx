@@ -1,4 +1,4 @@
-import GlobalAuthContextProvider from "@/contexts/GlobalAuthContextProvider";
+import GlobalAuthContextProvider from '@/contexts/GlobalAuthContextProvider';
 import GlobalContextProvider from "@/contexts/GlobalContextProvider";
 import Router from "@/router";
 import { Suspense } from "react";
