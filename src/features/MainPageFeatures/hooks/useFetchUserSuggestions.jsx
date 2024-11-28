@@ -1,21 +1,3 @@
-
-
-/**
- * A custom React hook that fetches and manages user suggestions for the main page.
- *
- * @function useFetchUserSuggestions
- * @returns {Object} An object containing the suggestedUsersList and fetchUserSuggestions function.
- *
- * @example
- * import useFetchUserSuggestions from './useFetchUserSuggestions';
- *
- * function MyComponent() {
- *   const { suggestedUsersList, fetchUserSuggestions } = useFetchUserSuggestions();
- *
- *   // ...
- * }
- */
-
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { useCallback, useContext } from "react";
 import fetchRandomUsers from "../utils/accountSuggestion/fetchRandomUsers";
