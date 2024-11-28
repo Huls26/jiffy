@@ -40,7 +40,7 @@ export default function MainPageTimeline() {
           type='button'
           className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500 text-gray-200 font-bold py-1 px-3 rounded-r"
         >
-          Dates
+          Following
         </button>
       </section>
 
