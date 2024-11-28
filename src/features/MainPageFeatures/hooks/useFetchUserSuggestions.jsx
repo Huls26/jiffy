@@ -25,6 +25,7 @@ export default function useFetchUserSuggestions(dispatch) {
   const [globalState] = useContext(GlobalContext);
   const { userId } = globalState;
 
+  console.log(globalState);
   // Define a stable function to fetch user suggestions
   const fetchUserSuggestions = useCallback(async () => {
     // Dispatch loading state update

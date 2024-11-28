@@ -1,5 +1,12 @@
 import { db } from "@/lib/fb";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 /**
  * Fetches random user profiles from the Firestore collection 'users' excluding the current user.
@@ -10,9 +17,18 @@ import { collection, getDocs, query, where } from "firebase/firestore";
  * If no suggestions are available, an empty array is returned.
  */
 export default async function fetchUsers(userId) {
+  console.log(
+    "change followers, following to []",
+    "finale get the current user and use following to get something like this",
+  );
+  console.log("where(userId, not-in, [...following, userId]");
+  const docRef = doc(db, "users", userId);
+  const docSnap = await getDoc(docRef);
+
+  console.log(docSnap.data());
   try {
     const q = query(collection(db, "users"), where("userId", "!=", userId));
-
+    // const q2 = query(collection(db, "users"), where("following", "", );
     const querySnapshot = await getDocs(q);
 
     // Filter users who do not have userId in their followers array
