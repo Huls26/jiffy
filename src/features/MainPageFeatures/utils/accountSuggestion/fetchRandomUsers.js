@@ -1,12 +1,5 @@
 import { db } from "@/lib/fb";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 /**
  * Fetches random user profiles from the Firestore collection 'users' excluding the current user.
@@ -17,15 +10,16 @@ import {
  * If no suggestions are available, an empty array is returned.
  */
 export default async function fetchUsers(userId) {
-  console.log(
-    "change followers, following to []",
-    "finale get the current user and use following to get something like this",
-  );
   console.log("where(userId, not-in, [...following, userId]");
-  const docRef = doc(db, "users", userId);
-  const docSnap = await getDoc(docRef);
+  console.log("where(following, array-contains, userId)");
+  const q = query(
+    collection(db, "users"),
+    where("following", "array-contains", userId),
+  );
+  const docSnap = await getDocs(q);
 
-  console.log(docSnap.data());
+  console.log("testing");
+  console.log(docSnap.docs);
   try {
     const q = query(collection(db, "users"), where("userId", "!=", userId));
     // const q2 = query(collection(db, "users"), where("following", "", );
@@ -36,7 +30,8 @@ export default async function fetchUsers(userId) {
       const docUser = doc.data();
 
       // Check if userId is not included in followers
-      return !docUser.followers[userId];
+      console.log("update this filter");
+      return !docUser.followers.includes(userId);
     });
 
     if (filteredUsers.length === 0) {
