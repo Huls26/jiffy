@@ -1,24 +1,48 @@
 import { db } from '@/lib/fb';
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 
 export default function MainPageTimeline() {
-  const [userPosts, setUserPostsSnapshot] = useState(null);
+  const [userPosts, setUserPostsSnapshot] = useState([]);
+
+  console.log(userPosts);
 
   useEffect(() => {
-    async function fetchData() {
-      const querySnapshot = query(
-        collection(db, "userPosts"),
-        orderBy('dateCreated', 'desc')
-      );
-      const docsSnapshot = await getDocs(querySnapshot);
-      setUserPostsSnapshot(() => docsSnapshot.docs);
-    }
+    // Create a query with constraints
+    const myQuery = query(
+      collection(db, "userPosts"),
+      orderBy('dateCreated', 'desc')
+    );
+    // Listen for real-time updates using the query
+    const unsubscribe = onSnapshot(myQuery, (snapshot) => {
+      console.log("Snapshot triggered!");
 
-    fetchData();
-  }, [])
+      if (snapshot.empty) {
+        console.log("No matching documents.");
+        return;
+      }
 
-  console.log(userPosts?.length && userPosts[0].data());
+      setUserPostsSnapshot((prevDoc) => [...snapshot.docChanges(), ...prevDoc,]);
+      // for (const change of snapshot.docChanges()) {
+      //   if (change.type === "added") {
+      //     setUserPostsSnapshot((prevDocs) => [change.doc, ...prevDocs]); // Save document data
+      //     console.log("New document added: ", change.doc.data());
+      //   } else if (change.type === "modified") {
+      //     console.log("Document modified: ", change.doc.data());
+      //     // Update logic for modified documents, if needed
+      //   } else if (change.type === "removed") {
+      //     console.log("Document removed: ", change.doc.data());
+      //     // Update logic for removed documents, if needed
+      //   }
+      // }
+    });
+
+    // Clean up the listener on component unmount or dependency change
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
 
   return (
     <main className="mt-1 pt-3 flex-1">
@@ -45,7 +69,7 @@ export default function MainPageTimeline() {
       </section>
 
       {userPosts?.map((u) => {
-        const userPost = u.data();
+        const userPost = u.doc.data();
 
         return (
           <div
@@ -58,3 +82,5 @@ export default function MainPageTimeline() {
       })}
     </main>);
 }
+
+MainPageTimeline.whyDidYouRender = true;
