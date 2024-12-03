@@ -6,7 +6,7 @@ export default function MainPageTimeline() {
   const [userPosts, setUserPostsSnapshot] = useState([]);
 
   console.log(userPosts);
-
+  console.log('remove comments')
   useEffect(() => {
     // Create a query with constraints
     const myQuery = query(
@@ -80,6 +80,12 @@ export default function MainPageTimeline() {
             <img src={userPost.content} alt={`users post text content ${userPost.textContent}`} />
           </div>);
       })}
+
+      {
+        userPosts?.length === 0
+        &&
+        <h1 className='mt-5 text-xl text-gray-50'>Sorry No Content Right Now!</h1>
+      }
     </main>);
 }
 
