@@ -1,6 +1,6 @@
 export default function MainPageFilterQuery() {
   return (
-    <section section className='inline-flex' >
+    <section className='inline-flex' >
       <button
         type='button'
         className="bg-sky-500 bg-gray-900 hover:bg-gray-700 text-gray-200 font-bold py-1 px-3 rounded-l"

@@ -43,7 +43,6 @@ export default function MainPageTimeline() {
     };
   }, []);
 
-
   return (
     <main className="mt-1 pt-3 flex-1">
       <MainPageFilterQuery />
