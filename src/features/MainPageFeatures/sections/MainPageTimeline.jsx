@@ -1,3 +1,5 @@
+import MainPageFilterQuery from '../components/timeline/MainPageFilterQuery';
+
 import { db } from '@/lib/fb';
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from 'react';
@@ -5,7 +7,6 @@ import { useEffect, useState } from 'react';
 export default function MainPageTimeline() {
   const [userPosts, setUserPostsSnapshot] = useState([]);
 
-  console.log(userPosts);
   console.log('remove comments')
   useEffect(() => {
     // Create a query with constraints
@@ -15,7 +16,6 @@ export default function MainPageTimeline() {
     );
     // Listen for real-time updates using the query
     const unsubscribe = onSnapshot(myQuery, (snapshot) => {
-      console.log("Snapshot triggered!");
 
       if (snapshot.empty) {
         console.log("No matching documents.");
@@ -46,27 +46,7 @@ export default function MainPageTimeline() {
 
   return (
     <main className="mt-1 pt-3 flex-1">
-      {/* filter query */}
-      <section className='inline-flex'>
-        <button
-          type='button'
-          className="bg-sky-500 bg-gray-900 hover:bg-gray-700 text-gray-200 font-bold py-1 px-3 rounded-l"
-        >
-          All
-        </button>
-        <button
-          type='button'
-          className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500 text-gray-200 font-bold py-1 px-3"
-        >
-          Likes
-        </button>
-        <button
-          type='button'
-          className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500 text-gray-200 font-bold py-1 px-3 rounded-r"
-        >
-          Following
-        </button>
-      </section>
+      <MainPageFilterQuery />
 
       {userPosts?.map((u) => {
         const userPost = u.doc.data();
