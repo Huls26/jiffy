@@ -20,7 +20,7 @@ export default function MainPagePublishButton() {
     const { postRef, storageRef } = postStoreRef(globalState);
 
     try {
-      await uploadImageWithURL({ storageRef, postRef, sidebarState, userId: globalState.userId });
+      await uploadImageWithURL({ storageRef, postRef, sidebarState, userContext: globalState });
     } catch (error) {
       console.error("Error publishing post:", error);
     } finally {
