@@ -53,10 +53,18 @@ export default function MainPageTimeline() {
         return (
           <div
             key={userPost.postId}
-            className='min-w-[270px] max-w-xl m-auto border-2 border-black'
+            className='text-start text-gray-100  min-w-[270px] max-w-xl m-auto border-2 border-black'
           >
-            <MainPageUserProfileLink />
-            <h1 className='ml-1 text-left text-gray-100 sm:text-xl'>{userPost.textContent}</h1>
+            <div className='mx-3 m-1 flex justify-between'>
+              <MainPageUserProfileLink
+                to={`profile/${userPost.username}`}
+                photoURL={userPost.photoURL}
+                username={userPost.username}
+                email={userPost.email}
+              />
+              <h1>date here:123</h1>
+            </div>
+            <h1 className='ml-1 sm:text-xl'>{userPost.textContent}</h1>
             <img
               src={userPost.content}
               alt={`users post text content ${userPost.textContent}`}
