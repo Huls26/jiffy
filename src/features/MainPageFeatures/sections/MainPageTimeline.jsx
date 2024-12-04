@@ -1,4 +1,5 @@
 import MainPageFilterQuery from '../components/timeline/MainPageFilterQuery';
+import MainPageUserProfileLink from '../components/userInfo/MainPageUserProfileLink';
 
 import { db } from '@/lib/fb';
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
@@ -7,7 +8,6 @@ import { useEffect, useState } from 'react';
 export default function MainPageTimeline() {
   const [userPosts, setUserPostsSnapshot] = useState([]);
 
-  console.log('remove comments')
   useEffect(() => {
     // Create a query with constraints
     const myQuery = query(
@@ -49,12 +49,13 @@ export default function MainPageTimeline() {
 
       {userPosts?.map((u) => {
         const userPost = u.doc.data();
-
+        console.log(userPost)
         return (
           <div
             key={userPost.postId}
             className='min-w-[270px] max-w-xl m-auto border-2 border-black'
           >
+            <MainPageUserProfileLink />
             <h1 className='ml-1 text-left text-gray-100 sm:text-xl'>{userPost.textContent}</h1>
             <img
               src={userPost.content}
