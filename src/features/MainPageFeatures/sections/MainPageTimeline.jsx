@@ -53,10 +53,13 @@ export default function MainPageTimeline() {
         return (
           <div
             key={userPost.postId}
-            className='border-2 border-black'
+            className='min-w-[270px] max-w-xl m-auto border-2 border-black'
           >
-            <h1>{userPost.textContent}</h1>
-            <img src={userPost.content} alt={`users post text content ${userPost.textContent}`} />
+            <h1 className='ml-1 text-left text-gray-100 sm:text-xl'>{userPost.textContent}</h1>
+            <img
+              src={userPost.content}
+              alt={`users post text content ${userPost.textContent}`}
+            />
           </div>);
       })}
 
