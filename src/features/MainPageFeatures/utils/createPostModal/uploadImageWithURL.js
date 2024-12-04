@@ -26,7 +26,5 @@ export default async function uploadImageWithURL({
     email,
   };
 
-  console.log(newPost);
-
   await setDoc(postRef, newPost);
 }
