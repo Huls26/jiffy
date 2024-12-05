@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 export default function MainPageTimeline() {
   const [userPosts, setUserPostsSnapshot] = useState([]);
 
+  console.log('change flex-col to large width at least 700-750px')
   useEffect(() => {
     // Create a query with constraints
     const myQuery = query(
@@ -83,13 +84,12 @@ export default function MainPageTimeline() {
 
       {userPosts?.map((u) => {
         const userPost = u.doc.data();
-
         const a = formatRelativeTime(userPost.dateCreated)
 
         return (
           <div
             key={userPost.postId}
-            className='text-start text-gray-100 min-w-[270px] max-w-xl m-auto border-2 border-black'
+            className='m-auto my-3 mr-3 space-y-2 bg-slate-950 text-start text-gray-100 min-w-[270px] max-w-xl  rounded-lg border-4 border-gray-950'
           >
             <div className='mx-2 m-1 flex justify-between'>
               <MainPageUserProfileLink
