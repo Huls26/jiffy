@@ -43,28 +43,64 @@ export default function MainPageTimeline() {
     };
   }, []);
 
+  function formatRelativeTime(timestamp) {
+    // Convert Firestore _Timestamp to a JavaScript Date object
+    const date = new Date(timestamp.seconds * 1000); // Convert seconds to milliseconds
+
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000); // Difference in seconds
+
+    // Define thresholds
+    const secondsInMinute = 60;
+    const secondsInHour = 60 * secondsInMinute;
+    const secondsInDay = 24 * secondsInHour;
+    const secondsInWeek = 7 * secondsInDay;
+    const secondsInMonth = 30 * secondsInDay; // Approximate month
+    const secondsInYear = 365 * secondsInDay; // Approximate year
+
+    // Use switch with true
+    switch (true) {
+      case diffInSeconds < secondsInHour:
+        return `${Math.floor(diffInSeconds / secondsInMinute)}m`; // Minutes
+      case diffInSeconds < secondsInDay:
+        return `${Math.floor(diffInSeconds / secondsInHour)}h`; // Hours
+      case diffInSeconds < secondsInWeek:
+        return `${Math.floor(diffInSeconds / secondsInDay)} days`; // Days
+      case diffInSeconds < secondsInMonth:
+        return `${Math.floor(diffInSeconds / secondsInWeek)} weeks`; // Weeks
+      case diffInSeconds < secondsInYear:
+        return `${Math.floor(diffInSeconds / secondsInMonth)} months`; // Months
+      default: {
+        const years = Math.floor(diffInSeconds / secondsInYear);
+        return `${years} ${years === 1 ? "year" : "years"}`; // Years
+      }
+    }
+  }
+
   return (
     <main className="mt-1 pt-3 flex-1">
       <MainPageFilterQuery />
 
       {userPosts?.map((u) => {
         const userPost = u.doc.data();
-        console.log(userPost)
+
+        const a = formatRelativeTime(userPost.dateCreated)
+
         return (
           <div
             key={userPost.postId}
-            className='text-start text-gray-100  min-w-[270px] max-w-xl m-auto border-2 border-black'
+            className='text-start text-gray-100 min-w-[270px] max-w-xl m-auto border-2 border-black'
           >
-            <div className='mx-3 m-1 flex justify-between'>
+            <div className='mx-2 m-1 flex justify-between'>
               <MainPageUserProfileLink
                 to={`profile/${userPost.username}`}
                 photoURL={userPost.photoURL}
                 username={userPost.username}
                 email={userPost.email}
               />
-              <h1>date here:123</h1>
+              <h1 className='font-semibold text-xs text-gray-400'>{a} ago</h1>
             </div>
-            <h1 className='ml-1 sm:text-xl'>{userPost.textContent}</h1>
+            <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
             <img
               src={userPost.content}
               alt={`users post text content ${userPost.textContent}`}
