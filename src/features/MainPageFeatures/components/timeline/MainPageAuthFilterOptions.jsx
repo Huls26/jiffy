@@ -3,7 +3,7 @@ import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 
-export default function MainPageAuthFilterOptions({ isDisplay }) {
+export default function MainPageAuthFilterOptions({ isDisplay = [] }) {
   const [globalState] = useContext(GlobalContext);
 
   if (!globalState.userLogin) {
@@ -23,18 +23,21 @@ export default function MainPageAuthFilterOptions({ isDisplay }) {
       <button
         type='button'
         className="bg-sky-500 bg-gray-900 hover:bg-gray-700 text-gray-200 font-bold py-1 px-3 rounded-l"
+        aria-label="Show All Posts"
       >
         All
       </button>
       <button
         type='button'
         className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500 text-gray-200 font-bold py-1 px-3"
+        aria-label="Show Liked Posts"
       >
         Likes
       </button>
       <button
         type='button'
         className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500 text-gray-200 font-bold py-1 px-3 rounded-r"
+        aria-label="Show Following Posts"
       >
         Following
       </button>
