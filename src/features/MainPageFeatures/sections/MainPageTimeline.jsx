@@ -80,7 +80,7 @@ export default function MainPageTimeline() {
       {
         userPosts?.length === 0
         &&
-        <h1 className='mt-5 font-bold text-xl text-cyan-500 text-pretty'>Sorry No Content Right Now! :(</h1>
+        <h1 className='mt-5 font-bold sm:text-xl text-cyan-500 text-pretty'>Sorry No Content Right Now! :(</h1>
       }
     </main>);
 }
