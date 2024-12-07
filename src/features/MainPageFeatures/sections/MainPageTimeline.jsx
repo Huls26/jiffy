@@ -48,7 +48,7 @@ export default function MainPageTimeline() {
 
   return (
     <main className="mt-1 pt-3 flex-1">
-      <MainPageFilterQuery />
+      <MainPageFilterQuery isDisplay={userPosts} />
 
       {userPosts?.map((u) => {
         const userPost = u.doc.data();
@@ -79,7 +79,7 @@ export default function MainPageTimeline() {
       {
         userPosts?.length === 0
         &&
-        <h1 className='mt-5 text-xl text-gray-50'>Sorry No Content Right Now!</h1>
+        <h1 className='mt-5 text-xl text-gray-50'>Sorry No Content Right Now!!! :(</h1>
       }
     </main>);
 }
