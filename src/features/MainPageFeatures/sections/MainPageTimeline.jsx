@@ -10,7 +10,8 @@ export default function MainPageTimeline() {
   const [userPosts, setUserPostsSnapshot] = useState([]);
 
   console.log('change flex-col to large width at least 700-750px');
-  console.log("fix filter query should be align with user posts")
+  console.log("fix filter query should be align with user posts");
+  console.log("fix mainpage content when user posts is not centered check when user is not login")
   useEffect(() => {
     // Create a query with constraints
     const myQuery = query(
@@ -47,7 +48,7 @@ export default function MainPageTimeline() {
   }, []);
 
   return (
-    <main className="mt-1 pt-3 flex-1">
+    <main className="mt-1 pt-3 flex-1 text-gray-100">
       <MainPageAuthFilterOptions isDisplay={userPosts} />
 
       {userPosts?.map((u) => {
@@ -57,7 +58,7 @@ export default function MainPageTimeline() {
         return (
           <div
             key={userPost.postId}
-            className='m-auto my-3 sm:mx-3 space-y-2 bg-slate-950 text-start text-gray-100 min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
+            className='m-auto my-3 sm:mx-3 space-y-2 bg-slate-950 text-start  min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
           >
             <div className='mx-2 m-1 flex justify-between'>
               <MainPageUserProfileLink
@@ -79,7 +80,7 @@ export default function MainPageTimeline() {
       {
         userPosts?.length === 0
         &&
-        <h1 className='mt-5 text-xl text-gray-50'>Sorry No Content Right Now!!! :(</h1>
+        <h1 className='mt-5 font-bold text-xl text-cyan-500 text-pretty'>Sorry No Content Right Now! :(</h1>
       }
     </main>);
 }
