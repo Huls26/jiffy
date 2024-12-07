@@ -1,4 +1,18 @@
-export default function MainPageFilterQuery() {
+import { getAuth } from "firebase/auth";
+import PropTypes from "prop-types";
+
+export default function MainPageFilterQuery({ isDisplay }) {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (user === null) {
+    return <h1>Welcome! Create an account or log in to explore the app and share your posts.</h1>
+  }
+
+  if (isDisplay.length === 0 || user === null) {
+    return null;
+  }
+
   return (
     <section className='inline-flex' >
       <button
@@ -22,3 +36,7 @@ export default function MainPageFilterQuery() {
     </section >
   )
 }
+
+MainPageFilterQuery.propTypes = {
+  isDisplay: PropTypes.array,
+};
