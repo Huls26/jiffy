@@ -1,5 +1,6 @@
 import MainPageFilterQuery from '../components/timeline/MainPageFilterQuery';
 import MainPageUserProfileLink from '../components/userInfo/MainPageUserProfileLink';
+import formatRelativeTime from '../utils/timeline/formatRelativeTime';
 
 import { db } from '@/lib/fb';
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
@@ -8,7 +9,8 @@ import { useEffect, useState } from 'react';
 export default function MainPageTimeline() {
   const [userPosts, setUserPostsSnapshot] = useState([]);
 
-  console.log('change flex-col to large width at least 700-750px')
+  console.log('change flex-col to large width at least 700-750px');
+  console.log("fix filter query should be align with user posts")
   useEffect(() => {
     // Create a query with constraints
     const myQuery = query(
@@ -44,52 +46,18 @@ export default function MainPageTimeline() {
     };
   }, []);
 
-  function formatRelativeTime(timestamp) {
-    // Convert Firestore _Timestamp to a JavaScript Date object
-    const date = new Date(timestamp.seconds * 1000); // Convert seconds to milliseconds
-
-    const now = new Date();
-    const diffInSeconds = Math.floor((now - date) / 1000); // Difference in seconds
-
-    // Define thresholds
-    const secondsInMinute = 60;
-    const secondsInHour = 60 * secondsInMinute;
-    const secondsInDay = 24 * secondsInHour;
-    const secondsInWeek = 7 * secondsInDay;
-    const secondsInMonth = 30 * secondsInDay; // Approximate month
-    const secondsInYear = 365 * secondsInDay; // Approximate year
-
-    // Use switch with true
-    switch (true) {
-      case diffInSeconds < secondsInHour:
-        return `${Math.floor(diffInSeconds / secondsInMinute)}m`; // Minutes
-      case diffInSeconds < secondsInDay:
-        return `${Math.floor(diffInSeconds / secondsInHour)}h`; // Hours
-      case diffInSeconds < secondsInWeek:
-        return `${Math.floor(diffInSeconds / secondsInDay)} days`; // Days
-      case diffInSeconds < secondsInMonth:
-        return `${Math.floor(diffInSeconds / secondsInWeek)} weeks`; // Weeks
-      case diffInSeconds < secondsInYear:
-        return `${Math.floor(diffInSeconds / secondsInMonth)} months`; // Months
-      default: {
-        const years = Math.floor(diffInSeconds / secondsInYear);
-        return `${years} ${years === 1 ? "year" : "years"}`; // Years
-      }
-    }
-  }
-
   return (
     <main className="mt-1 pt-3 flex-1">
       <MainPageFilterQuery />
 
       {userPosts?.map((u) => {
         const userPost = u.doc.data();
-        const a = formatRelativeTime(userPost.dateCreated)
+        const a = formatRelativeTime(userPost.dateCreated);
 
         return (
           <div
             key={userPost.postId}
-            className='m-auto my-3 mr-3 space-y-2 bg-slate-950 text-start text-gray-100 min-w-[270px] max-w-xl  rounded-lg border-4 border-gray-950'
+            className='m-auto my-3 sm:mx-3 space-y-2 bg-slate-950 text-start text-gray-100 min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
           >
             <div className='mx-2 m-1 flex justify-between'>
               <MainPageUserProfileLink
