@@ -1,15 +1,20 @@
-import { getAuth } from "firebase/auth";
+import { GlobalContext } from "@/contexts/GlobalContextProvider";
+
 import PropTypes from "prop-types";
+import { useContext } from "react";
 
 export default function MainPageAuthFilterOptions({ isDisplay }) {
-  const auth = getAuth();
-  const user = auth.currentUser;
+  const [globalState] = useContext(GlobalContext);
 
-  if (user === null) {
-    return <h1>Welcome! Create an account or log in to explore the app and share your posts.</h1>
+  if (!globalState.userLogin) {
+    return (
+      <h1 className="font-semibold text-sm sm:text-lg text-gray-100 leading-5">
+        Welcome! Create an account or log in to explore the app and share your
+        posts.
+      </h1>);
   }
 
-  if (isDisplay.length === 0 || user === null) {
+  if (isDisplay.length === 0 || !globalState.userLogin) {
     return null;
   }
 
@@ -40,3 +45,5 @@ export default function MainPageAuthFilterOptions({ isDisplay }) {
 MainPageAuthFilterOptions.propTypes = {
   isDisplay: PropTypes.array,
 };
+
+MainPageAuthFilterOptions.whyDidYouRender = true;
