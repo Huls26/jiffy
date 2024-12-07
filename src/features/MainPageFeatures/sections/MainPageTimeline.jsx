@@ -1,4 +1,4 @@
-import MainPageFilterQuery from '../components/timeline/MainPageFilterQuery';
+import MainPageAuthFilterOptions from '../components/timeline/MainPageAuthFilterOptions';
 import MainPageUserProfileLink from '../components/userInfo/MainPageUserProfileLink';
 import formatRelativeTime from '../utils/timeline/formatRelativeTime';
 
@@ -48,7 +48,7 @@ export default function MainPageTimeline() {
 
   return (
     <main className="mt-1 pt-3 flex-1">
-      <MainPageFilterQuery isDisplay={userPosts} />
+      <MainPageAuthFilterOptions isDisplay={userPosts} />
 
       {userPosts?.map((u) => {
         const userPost = u.doc.data();
