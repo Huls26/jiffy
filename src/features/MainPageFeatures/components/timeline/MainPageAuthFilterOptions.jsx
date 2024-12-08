@@ -8,7 +8,7 @@ export default function MainPageAuthFilterOptions({ isDisplay = [] }) {
 
   if (!globalState.userLogin) {
     return (
-      <h1 className="font-semibold text-sm sm:text-lg text-gray-100 leading-5">
+      <h1 className="px-4 font-semibold text-sm sm:text-lg text-gray-100 leading-5">
         Welcome! Create an account or log in to explore the app and share your
         posts.
       </h1>);
