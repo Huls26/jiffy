@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
  */
 export default function MainHeader() {
   return (
-    <header className="bg-gray-900 text-gray-50 p-4">
-      <div className="container mx-auto flex justify-between items-center md:max-w-5xl">
+    <header className="bg-gray-900 text-gray-50 p-4 px-7">
+      <div className="mx-auto flex justify-between items-center md:max-w-screen-xl">
         <h1 className="text-lg md:text-2xl font-bold cursor-pointer">
           <Link to="/" aria-label="jiffy simple logo">
             JIFFY
