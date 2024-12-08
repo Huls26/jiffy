@@ -9,8 +9,7 @@ import { useEffect, useState } from 'react';
 export default function MainPageTimeline() {
   const [userPosts, setUserPostsSnapshot] = useState([]);
 
-  console.log('change flex-col to large width at least 700-750px');
-  console.log("fix filter query should be align with user posts");
+  console.log("fix media queries width 720px at least");
   console.log("fix mainpage content when user posts is not centered check when user is not login")
   useEffect(() => {
     // Create a query with constraints
@@ -48,34 +47,37 @@ export default function MainPageTimeline() {
   }, []);
 
   return (
-    <main className="mt-1 pt-3 flex-1 text-gray-100">
+    <main className="mt-1 sm:mx-3 pt-3 flex-1 text-gray-100">
       <MainPageAuthFilterOptions isDisplay={userPosts} />
 
-      {userPosts?.map((u) => {
-        const userPost = u.doc.data();
-        const a = formatRelativeTime(userPost.dateCreated);
+      <section className='grid place-self-center'>
+        {userPosts?.map((u) => {
+          const userPost = u.doc.data();
+          const a = formatRelativeTime(userPost.dateCreated);
 
-        return (
-          <div
-            key={userPost.postId}
-            className='m-auto my-3 sm:mx-3 space-y-2 bg-slate-950 text-start  min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
-          >
-            <div className='mx-2 m-1 flex justify-between'>
-              <MainPageUserProfileLink
-                to={`profile/${userPost.username}`}
-                photoURL={userPost.photoURL}
-                username={userPost.username}
-                email={userPost.email}
+          return (
+            <div
+              key={userPost.postId}
+              className='my-1 space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
+            >
+              <div className='mx-2 m-1 flex justify-between'>
+                <MainPageUserProfileLink
+                  to={`profile/${userPost.username}`}
+                  photoURL={userPost.photoURL}
+                  username={userPost.username}
+                  email={userPost.email}
+                />
+                <h1 className='font-semibold text-xs text-gray-400'>{a} ago</h1>
+              </div>
+              <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
+              <img
+                src={userPost.content}
+                alt={`users post text content ${userPost.textContent}`}
               />
-              <h1 className='font-semibold text-xs text-gray-400'>{a} ago</h1>
-            </div>
-            <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
-            <img
-              src={userPost.content}
-              alt={`users post text content ${userPost.textContent}`}
-            />
-          </div>);
-      })}
+            </div>);
+        })}
+      </section>
+
 
       {
         userPosts?.length === 0
