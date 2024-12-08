@@ -1,4 +1,5 @@
 import MainPageAuthFilterOptions from '../components/timeline/MainPageAuthFilterOptions';
+import MainPageNoContentMessage from '../components/timeline/MainPageNoContentMessage';
 import MainPageUserProfileLink from '../components/userInfo/MainPageUserProfileLink';
 import formatRelativeTime from '../utils/timeline/formatRelativeTime';
 
@@ -76,12 +77,7 @@ export default function MainPageTimeline() {
         })}
       </section>
 
-
-      {
-        userPosts?.length === 0
-        &&
-        <h1 className='mt-5 font-bold sm:text-xl text-cyan-500 text-pretty'>Sorry No Content Right Now! :(</h1>
-      }
+      <MainPageNoContentMessage userPosts={userPosts} />
     </main>);
 }
 
