@@ -9,8 +9,6 @@ import { useEffect, useState } from 'react';
 export default function MainPageTimeline() {
   const [userPosts, setUserPostsSnapshot] = useState([]);
 
-  console.log("fix media queries width 720px at least");
-  console.log("fix mainpage content when user posts is not centered check when user is not login")
   useEffect(() => {
     // Create a query with constraints
     const myQuery = query(
