@@ -4,7 +4,7 @@ import MainPageUserProfileLink from '../components/userInfo/MainPageUserProfileL
 import formatRelativeTime from '../utils/timeline/formatRelativeTime';
 
 import { db } from '@/lib/fb';
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 
 export default function MainPageTimeline() {
@@ -14,17 +14,21 @@ export default function MainPageTimeline() {
     // Create a query with constraints
     const myQuery = query(
       collection(db, "userPosts"),
-      orderBy('dateCreated', 'desc')
+      orderBy('dateCreated', 'desc'),
+      limit(10),
     );
     // Listen for real-time updates using the query
     const unsubscribe = onSnapshot(myQuery, (snapshot) => {
-
       if (snapshot.empty) {
         console.log("No matching documents.");
-        return;
+        setUserPostsSnapshot([]);
       }
 
-      setUserPostsSnapshot((prevDoc) => [...snapshot.docChanges(), ...prevDoc,]);
+      const posts = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        postId: doc.id, // Use document ID as postId
+      }));
+      setUserPostsSnapshot(posts);
       // for (const change of snapshot.docChanges()) {
       //   if (change.type === "added") {
       //     setUserPostsSnapshot((prevDocs) => [change.doc, ...prevDocs]); // Save document data
@@ -50,9 +54,8 @@ export default function MainPageTimeline() {
       <MainPageAuthFilterOptions isDisplay={userPosts} />
 
       <section className='grid place-self-center'>
-        {userPosts?.map((u) => {
-          const userPost = u.doc.data();
-          const a = formatRelativeTime(userPost.dateCreated);
+        {userPosts?.map((userPost) => {
+          const relativeTime = formatRelativeTime(userPost?.dateCreated);
 
           return (
             <div
@@ -66,12 +69,12 @@ export default function MainPageTimeline() {
                   username={userPost.username}
                   email={userPost.email}
                 />
-                <h1 className='font-semibold text-xs text-gray-400'>{a} ago</h1>
+                <h1 className='font-semibold text-xs text-gray-400'>{relativeTime} ago</h1>
               </div>
               <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
               <img
                 src={userPost.content}
-                alt={`users post text content ${userPost.textContent}`}
+                alt={`users post content: ${userPost.textContent}`}
               />
             </div>);
         })}
