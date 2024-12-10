@@ -5,14 +5,14 @@ import PropTypes from "prop-types";
 
 export default function MainPagePostsFeed({ userPosts }) {
   return (
-    <section className='grid place-self-center'>
+    <section className='grid place-self-center space-y-3'>
       {userPosts?.map((userPost) => {
         const relativeTime = formatRelativeTime(userPost?.dateCreated);
 
         return (
           <div
             key={userPost.postId}
-            className='my-1 space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
+            className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
           >
             <div className='mx-2 m-1 flex justify-between'>
               <MainPageUserProfileLink
