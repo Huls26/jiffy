@@ -25,9 +25,26 @@ export default function MainPagePostsFeed({ userPosts }) {
             </div>
             <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
             <img
+              className=''
               src={userPost.content}
               alt={`users post content: ${userPost.textContent}`}
             />
+            <div className='p-2 text-sm sm:text-base flex justify-between'>
+              <button
+                type='button'
+                className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500  text-gray-200 font-bold py-1 px-3 rounded-l"
+                aria-label="Show All Posts"
+              >
+                Like
+              </button>
+              <button
+                type='button'
+                className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500 text-gray-200 font-bold py-1 px-3 rounded-r"
+                aria-label="Show Liked Posts"
+              >
+                Comment
+              </button>
+            </div>
           </div>);
       })}
     </section>
