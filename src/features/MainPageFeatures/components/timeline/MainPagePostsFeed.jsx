@@ -25,7 +25,7 @@ export default function MainPagePostsFeed({ userPosts }) {
             </div>
             <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
             <img
-              className=''
+              className="min-h-[180px] aspect-video object-cover"
               src={userPost.content}
               alt={`users post content: ${userPost.textContent}`}
             />
