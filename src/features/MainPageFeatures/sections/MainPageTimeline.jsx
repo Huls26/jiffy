@@ -5,7 +5,6 @@ import useRealtimeUserPosts from '../hooks/useRealtimeUserPosts';;
 
 export default function MainPageTimeline() {
   const userPosts = useRealtimeUserPosts();
-  console.log("set image min-height user posts")
 
   return (
     <main className="mt-1 sm:mx-3 pt-3 flex-1 text-gray-100">
