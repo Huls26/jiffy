@@ -2,8 +2,29 @@ import formatRelativeTime from '../../utils/timeline/formatRelativeTime';
 import MainPageUserProfileLink from '../userInfo/MainPageUserProfileLink';
 
 import PropTypes from "prop-types";
+import { useReducer } from "react";
 
 export default function MainPagePostCard({ userPost }) {
+  const initialState = { likeButton: false, commentButton: false };
+
+  function reducerAction(state, action) {
+    switch (action.type) {
+      case 'LIKE_POST':
+        return {
+          ...state,
+          likeButton: !state.likeButton,
+        };
+      case 'COMMENT_POST':
+        return {
+          ...state,
+          commentButton: !state.commentButton,
+        };
+      default:
+        return state;
+    }
+  }
+
+  const [buttonState, dispatch] = useReducer(reducerAction, initialState);
   const relativeTime = formatRelativeTime(userPost?.dateCreated);
 
   return (
