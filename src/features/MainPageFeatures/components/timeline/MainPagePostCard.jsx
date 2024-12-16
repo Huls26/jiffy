@@ -26,6 +26,10 @@ export default function MainPagePostCard({ userPost }) {
 
   const [buttonState, dispatch] = useReducer(reducerAction, initialState);
   const relativeTime = formatRelativeTime(userPost?.dateCreated);
+  const defaultBtnStyle = 'bg-gray-900 active:bg-sky-500 hover:opacity-75 text-gray-200 font-bold py-1 px-3 rounded-l';
+  const activeBtnStyle = 'bg-sky-500 hover:opacity-75 active:bg-sky-500  text-gray-200 font-bold py-1 px-3 rounded-l'
+  console.log(buttonState.likeButton ? activeBtnStyle : defaultBtnStyle);
+  console.log("added button style check from the firebase if the user already like the post")
 
   return (
     <div
@@ -49,14 +53,16 @@ export default function MainPagePostCard({ userPost }) {
       <div className='p-2 text-sm sm:text-base flex justify-between'>
         <button
           type='button'
-          className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500  text-gray-200 font-bold py-1 px-3 rounded-l"
+          className={buttonState.likeButton ? activeBtnStyle : defaultBtnStyle}
+          onClick={() => dispatch({ type: 'LIKE_POST' })}
           aria-label="Show All Posts"
         >
           Like
         </button>
         <button
           type='button'
-          className="bg-gray-900 hover:bg-gray-700 active:bg-sky-500 text-gray-200 font-bold py-1 px-3 rounded-r"
+          className={buttonState.commentButton ? activeBtnStyle : defaultBtnStyle}
+          onClick={() => dispatch({ type: 'COMMENT_POST' })}
           aria-label="Show Liked Posts"
         >
           Comment
