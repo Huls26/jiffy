@@ -3,7 +3,7 @@ import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestor
 import { useEffect, useState } from 'react';
 
 export default function useRealtimeUserPosts() {
-  const [userPosts, setUserPostsSnapshot] = useState([]);
+  const [userPosts, setUserPostsSnapshot] = useState(null);
 
   useEffect(() => {
     // Create a query with constraints
@@ -15,15 +15,14 @@ export default function useRealtimeUserPosts() {
     // Listen for real-time updates using the query
     const unsubscribe = onSnapshot(myQuery, (snapshot) => {
       if (snapshot.empty) {
-        console.log("No matching documents.");
         setUserPostsSnapshot([]);
+      } else {
+        const posts = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          postId: doc.id, // Use document ID as postId
+        }));
+        setUserPostsSnapshot(posts);
       }
-
-      const posts = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        postId: doc.id, // Use document ID as postId
-      }));
-      setUserPostsSnapshot(posts);
       // for (const change of snapshot.docChanges()) {
       //   if (change.type === "added") {
       //     setUserPostsSnapshot((prevDocs) => [change.doc, ...prevDocs]); // Save document data
