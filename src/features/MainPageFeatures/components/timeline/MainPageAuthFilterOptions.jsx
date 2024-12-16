@@ -14,7 +14,7 @@ export default function MainPageAuthFilterOptions({ isDisplay = [] }) {
       </h1>);
   }
 
-  if (isDisplay.length === 0 || !globalState.userLogin) {
+  if (isDisplay?.length === 0 || !globalState?.userLogin) {
     return null;
   }
 
