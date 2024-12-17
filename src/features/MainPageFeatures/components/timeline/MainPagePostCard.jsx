@@ -32,10 +32,10 @@ export default function MainPagePostCard({ userPost }) {
   const relativeTime = formatRelativeTime(userPost?.dateCreated);
   const defaultBtnStyle = 'bg-gray-900 active:bg-sky-500 hover:opacity-75 text-gray-200 font-bold py-1 px-3 rounded-l';
   const activeBtnStyle = 'bg-sky-500 hover:opacity-75 active:bg-sky-500  text-gray-200 font-bold py-1 px-3 rounded-l'
-  console.log("added button style check from the firebase if the user already like the post")
 
   function handleLikeButton() {
     dispatch({ type: 'LIKE_POST' });
+    // TODO: Add Firebase logic to update the like count and likedUsers;
   }
   console.log(buttonState);
 
