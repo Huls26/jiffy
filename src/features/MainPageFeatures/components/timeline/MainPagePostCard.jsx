@@ -1,3 +1,4 @@
+import { auth } from '@/lib/fb';
 import formatRelativeTime from '../../utils/timeline/formatRelativeTime';
 import MainPageUserProfileLink from '../userInfo/MainPageUserProfileLink';
 
@@ -5,7 +6,9 @@ import PropTypes from "prop-types";
 import { useReducer } from "react";
 
 export default function MainPagePostCard({ userPost }) {
-  const initialState = { likeButton: false, commentButton: false };
+  const currentUserId = auth.currentUser.uid;
+  const isUserLiked = userPost?.likedUsers.includes(currentUserId);
+  const initialState = { likeButton: isUserLiked, commentButton: false };
 
   function reducerAction(state, action) {
     switch (action.type) {
@@ -31,6 +34,7 @@ export default function MainPagePostCard({ userPost }) {
   console.log(buttonState.likeButton ? activeBtnStyle : defaultBtnStyle);
   console.log("added button style check from the firebase if the user already like the post")
 
+  console.log(buttonState)
   return (
     <div
       className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
@@ -57,7 +61,7 @@ export default function MainPagePostCard({ userPost }) {
           onClick={() => dispatch({ type: 'LIKE_POST' })}
           aria-label="Show All Posts"
         >
-          Like
+          {0} Like
         </button>
         <button
           type='button'
