@@ -8,7 +8,7 @@ import { useReducer } from "react";
 export default function MainPagePostCard({ userPost }) {
   const currentUserId = auth.currentUser.uid;
   const isUserLiked = userPost?.likedUsers.includes(currentUserId);
-  const initialState = { likeButton: isUserLiked, commentButton: false };
+  const initialState = { likeButton: isUserLiked, commentButton: false, likesCount: userPost?.likes || 0 };
 
   function reducerAction(state, action) {
     switch (action.type) {
@@ -31,10 +31,13 @@ export default function MainPagePostCard({ userPost }) {
   const relativeTime = formatRelativeTime(userPost?.dateCreated);
   const defaultBtnStyle = 'bg-gray-900 active:bg-sky-500 hover:opacity-75 text-gray-200 font-bold py-1 px-3 rounded-l';
   const activeBtnStyle = 'bg-sky-500 hover:opacity-75 active:bg-sky-500  text-gray-200 font-bold py-1 px-3 rounded-l'
-  console.log(buttonState.likeButton ? activeBtnStyle : defaultBtnStyle);
   console.log("added button style check from the firebase if the user already like the post")
 
-  console.log(buttonState)
+  function handleLikeButton() {
+    dispatch({ type: 'LIKE_POST' });
+  }
+  console.log(buttonState);
+
   return (
     <div
       className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
