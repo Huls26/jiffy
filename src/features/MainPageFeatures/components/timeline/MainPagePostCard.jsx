@@ -16,6 +16,7 @@ export default function MainPagePostCard({ userPost }) {
         return {
           ...state,
           likeButton: !state.likeButton,
+          likesCount: state.likesCount + (!state.likeButton ? 1 : -1),
         };
       case 'COMMENT_POST':
         return {
@@ -64,7 +65,7 @@ export default function MainPagePostCard({ userPost }) {
           onClick={() => dispatch({ type: 'LIKE_POST' })}
           aria-label="Show All Posts"
         >
-          {0} Like
+          {buttonState.likesCount} Like
         </button>
         <button
           type='button'
