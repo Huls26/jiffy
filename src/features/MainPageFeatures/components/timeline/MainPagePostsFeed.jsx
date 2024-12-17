@@ -6,7 +6,6 @@ export default function MainPagePostsFeed({ userPosts }) {
   return (
     <section className='grid place-self-center space-y-3'>
       {userPosts?.map((userPost) => {
-
         return (
           <MainPagePostCard
             key={userPost.postId}
