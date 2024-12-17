@@ -20,6 +20,7 @@ export default async function uploadImageWithURL({
     textContent: postContentText, // Add any text content here if needed
     dateCreated: Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
     likes: 0,
+    likedUsers: [],
     comments: [],
     photoURL,
     username,
