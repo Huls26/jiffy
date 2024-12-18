@@ -1,7 +1,8 @@
-import { auth } from '@/lib/fb';
+import { auth, db } from '@/lib/fb';
 import formatRelativeTime from '../../utils/timeline/formatRelativeTime';
 import MainPageUserProfileLink from '../userInfo/MainPageUserProfileLink';
 
+import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import PropTypes from "prop-types";
 import { useReducer } from "react";
 
@@ -33,11 +34,17 @@ export default function MainPagePostCard({ userPost }) {
   const defaultBtnStyle = 'bg-gray-900 active:bg-sky-500 hover:opacity-75 text-gray-200 font-bold py-1 px-3 rounded-l';
   const activeBtnStyle = 'bg-sky-500 hover:opacity-75 active:bg-sky-500  text-gray-200 font-bold py-1 px-3 rounded-l'
 
-  function handleLikeButton() {
+  async function handleLikeButton() {
     dispatch({ type: 'LIKE_POST' });
-    // TODO: Add Firebase logic to update the like count and likedUsers;
+    const userPostRef = doc(db, "userPosts", userPost.postId);
+
+    await updateDoc(userPostRef, {
+      likedUsers: buttonState.likeButton ? arrayRemove(currentUserId) : arrayUnion(currentUserId)
+    })
+
   }
   console.log(buttonState);
+  console.log(userPost);
 
   return (
     <div
@@ -62,7 +69,7 @@ export default function MainPagePostCard({ userPost }) {
         <button
           type='button'
           className={buttonState.likeButton ? activeBtnStyle : defaultBtnStyle}
-          onClick={() => dispatch({ type: 'LIKE_POST' })}
+          onClick={handleLikeButton}
           aria-label="Show All Posts"
         >
           {buttonState.likesCount} Like
