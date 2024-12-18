@@ -2,7 +2,7 @@ import { auth, db } from '@/lib/fb';
 import formatRelativeTime from '../../utils/timeline/formatRelativeTime';
 import MainPageUserProfileLink from '../userInfo/MainPageUserProfileLink';
 
-import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, increment, updateDoc } from 'firebase/firestore';
 import PropTypes from "prop-types";
 import { useReducer } from "react";
 
@@ -39,7 +39,8 @@ export default function MainPagePostCard({ userPost }) {
     const userPostRef = doc(db, "userPosts", userPost.postId);
 
     await updateDoc(userPostRef, {
-      likedUsers: buttonState.likeButton ? arrayRemove(currentUserId) : arrayUnion(currentUserId)
+      likedUsers: buttonState.likeButton ? arrayRemove(currentUserId) : arrayUnion(currentUserId),
+      likes: buttonState.likeButton ? increment(-1) : increment(1),
     })
 
   }
