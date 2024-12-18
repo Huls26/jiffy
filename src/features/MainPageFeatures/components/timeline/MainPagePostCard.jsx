@@ -10,6 +10,7 @@ export default function MainPagePostCard({ userPost }) {
   const currentUserId = auth.currentUser.uid;
   const isUserLiked = userPost?.likedUsers.includes(currentUserId);
   const initialState = { likeButton: isUserLiked, commentButton: false, likesCount: userPost?.likes || 0 };
+  // TODO: clean this up
 
   function reducerAction(state, action) {
     switch (action.type) {
@@ -44,8 +45,6 @@ export default function MainPagePostCard({ userPost }) {
     })
 
   }
-  console.log(buttonState);
-  console.log(userPost);
 
   return (
     <div
