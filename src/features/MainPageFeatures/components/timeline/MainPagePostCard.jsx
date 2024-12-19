@@ -51,7 +51,7 @@ export default function MainPagePostCard({ userPost }) {
           type='button'
           className={likeBtnStyle}
           onClick={handleLikeButton}
-          aria-label="Show All Posts"
+          aria-label="like button"
         >
           {buttonState.likesCount} Like
         </button>
@@ -59,7 +59,7 @@ export default function MainPagePostCard({ userPost }) {
           type='button'
           className={commentBtnStyle}
           onClick={() => dispatch({ type: 'COMMENT_POST' })}
-          aria-label="Show Liked Posts"
+          aria-label="comment button"
         >
           Comment
         </button>
