@@ -29,7 +29,7 @@ export default function MainPagePostCard({ userPost }) {
 
   return (
     <div
-      className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950'
+      className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
     >
       <div className='mx-2 m-1 flex justify-between'>
         <MainPageUserProfileLink
@@ -38,7 +38,7 @@ export default function MainPagePostCard({ userPost }) {
           username={userPost.username}
           email={userPost.email}
         />
-        <h1 className='font-semibold text-xs text-gray-400'>{relativeTime} ago</h1>
+        <h1 className='font-semibold text-xs text-gray-400 select-none'>{relativeTime} ago</h1>
       </div>
       <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
       <img
@@ -46,7 +46,7 @@ export default function MainPagePostCard({ userPost }) {
         src={userPost.content}
         alt={`users post content: ${userPost.textContent}`}
       />
-      <div className='p-2 text-sm sm:text-base flex justify-between'>
+      <div className='p-2 text-sm sm:text-base flex justify-between select-none'>
         <button
           type='button'
           className={likeBtnStyle}
