@@ -1,36 +1,17 @@
-import { auth, db } from '@/lib/fb';
+import { db } from '@/lib/fb';
+import usePostInteraction from '../../hooks/usePostInteraction';
 import formatRelativeTime from '../../utils/timeline/formatRelativeTime';
 import MainPageUserProfileLink from '../userInfo/MainPageUserProfileLink';
 
 import { arrayRemove, arrayUnion, doc, increment, updateDoc } from 'firebase/firestore';
 import PropTypes from "prop-types";
-import { useReducer } from "react";
 
 export default function MainPagePostCard({ userPost }) {
-  const currentUserId = auth.currentUser.uid;
-  const isUserLiked = userPost?.likedUsers.includes(currentUserId);
-  const initialState = { likeButton: isUserLiked, commentButton: false, likesCount: userPost?.likes || 0 };
-  // TODO: clean this up
-
-  function reducerAction(state, action) {
-    switch (action.type) {
-      case 'LIKE_POST':
-        return {
-          ...state,
-          likeButton: !state.likeButton,
-          likesCount: state.likesCount + (!state.likeButton ? 1 : -1),
-        };
-      case 'COMMENT_POST':
-        return {
-          ...state,
-          commentButton: !state.commentButton,
-        };
-      default:
-        return state;
-    }
-  }
-
-  const [buttonState, dispatch] = useReducer(reducerAction, initialState);
+  const {
+    buttonState,
+    dispatch,
+    currentUserId,
+  } = usePostInteraction(userPost);
   const relativeTime = formatRelativeTime(userPost?.dateCreated);
   const defaultBtnStyle = 'bg-gray-900 active:bg-sky-500 hover:opacity-75 text-gray-200 font-bold py-1 px-3 rounded-l';
   const activeBtnStyle = 'bg-sky-500 hover:opacity-75 active:bg-sky-500  text-gray-200 font-bold py-1 px-3 rounded-l'
