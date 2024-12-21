@@ -3,6 +3,7 @@ import usePostInteraction from '../../hooks/usePostInteraction';
 import buttonStyle from '../../utils/timeline/buttonStyle';
 import formatRelativeTime from '../../utils/timeline/formatRelativeTime';
 import MainPageUserProfileLink from '../userInfo/MainPageUserProfileLink';
+import MainPagePostCardBtn from './MainPagePostCardBtn';
 
 import { arrayRemove, arrayUnion, doc, increment, updateDoc } from 'firebase/firestore';
 import PropTypes from "prop-types";
@@ -47,22 +48,19 @@ export default function MainPagePostCard({ userPost }) {
         alt={`users post content: ${userPost.textContent}`}
       />
       <div className='p-2 text-sm sm:text-base flex justify-between select-none'>
-        <button
-          type='button'
+        <MainPagePostCardBtn
           className={likeBtnStyle}
           onClick={handleLikeButton}
-          aria-label="like button"
-        >
-          {buttonState.likesCount} Like
-        </button>
-        <button
-          type='button'
+          ariaLabel="like button"
+          likesCount={buttonState.likesCount}
+          textContent={"Like"}
+        />
+        <MainPagePostCardBtn
           className={commentBtnStyle}
           onClick={() => dispatch({ type: 'COMMENT_POST' })}
-          aria-label="comment button"
-        >
-          Comment
-        </button>
+          ariaLabel="comment button"
+          textContent={"Comment"}
+        />
       </div>
     </div>);
 }
