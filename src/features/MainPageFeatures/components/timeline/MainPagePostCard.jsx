@@ -49,14 +49,14 @@ export default function MainPagePostCard({ userPost }) {
       />
       <div className='p-2 text-sm sm:text-base flex justify-between select-none'>
         <MainPagePostCardBtn
-          className={likeBtnStyle}
+          isActive={buttonState.likeButton}
           onClick={handleLikeButton}
           ariaLabel="like button"
           likesCount={buttonState.likesCount}
           textContent={"Like"}
         />
         <MainPagePostCardBtn
-          className={commentBtnStyle}
+          isActive={buttonState.commentButton}
           onClick={() => dispatch({ type: 'COMMENT_POST' })}
           ariaLabel="comment button"
           textContent={"Comment"}
