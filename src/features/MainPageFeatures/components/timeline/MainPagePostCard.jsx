@@ -1,6 +1,5 @@
 import { db } from '@/lib/fb';
 import usePostInteraction from '../../hooks/usePostInteraction';
-import buttonStyle from '../../utils/timeline/buttonStyle';
 import formatRelativeTime from '../../utils/timeline/formatRelativeTime';
 import MainPageUserProfileLink from '../userInfo/MainPageUserProfileLink';
 import MainPagePostCardBtn from './MainPagePostCardBtn';
@@ -15,8 +14,6 @@ export default function MainPagePostCard({ userPost }) {
     currentUserId,
   } = usePostInteraction(userPost);
   const relativeTime = formatRelativeTime(userPost?.dateCreated);
-  const likeBtnStyle = buttonStyle(buttonState.likeButton);
-  const commentBtnStyle = buttonStyle(buttonState.commentButton);
 
   async function handleLikeButton() {
     dispatch({ type: 'LIKE_POST' });
@@ -41,13 +38,20 @@ export default function MainPagePostCard({ userPost }) {
         />
         <h1 className='font-semibold text-xs text-gray-400 select-none'>{relativeTime} ago</h1>
       </div>
+      {/* Display the text content of the user's post */}
       <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
+
+      {/* Display the image content of the user's post */}
       <img
         className="min-h-[180px] aspect-video object-cover"
         src={userPost.content}
         alt={`users post content: ${userPost.textContent}`}
       />
+
+      {/* Container for the buttons */}
       <div className='p-2 text-sm sm:text-base flex justify-between select-none'>
+
+        {/* Like button */}
         <MainPagePostCardBtn
           isActive={buttonState.likeButton}
           onClick={handleLikeButton}
@@ -55,6 +59,8 @@ export default function MainPagePostCard({ userPost }) {
           likesCount={buttonState.likesCount}
           textContent={"Like"}
         />
+
+        {/* Comment button */}
         <MainPagePostCardBtn
           isActive={buttonState.commentButton}
           onClick={() => dispatch({ type: 'COMMENT_POST' })}
