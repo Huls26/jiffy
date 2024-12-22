@@ -1,6 +1,9 @@
 import { PropTypes } from 'prop-types';
+import buttonStyle from '../../utils/timeline/buttonStyle';
 
-export default function MainPagePostCardBtn({ className, onClick, ariaLabel, likesCount = '', textContent }) {
+export default function MainPagePostCardBtn({ isActive, onClick, ariaLabel, likesCount = '', textContent }) {
+  const className = buttonStyle(isActive);
+
   return (
     <button
       type='button'
@@ -14,7 +17,7 @@ export default function MainPagePostCardBtn({ className, onClick, ariaLabel, lik
 }
 
 MainPagePostCardBtn.propTypes = {
-  className: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   ariaLabel: PropTypes.string.isRequired,
   likesCount: PropTypes.number,
