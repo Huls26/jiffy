@@ -17,10 +17,17 @@ export default function MainPagePostCard({ userPost }) {
     dispatch({ type: 'LIKE_POST' });
     const userPostRef = doc(db, "userPosts", userPost.postId);
 
-    await updateDoc(userPostRef, {
-      likedUsers: buttonState.likeButton ? arrayRemove(currentUserId) : arrayUnion(currentUserId),
-      likes: buttonState.likeButton ? increment(-1) : increment(1),
-    })
+    try {
+      await updateDoc(userPostRef, {
+        likedUsers: buttonState.likeButton
+          ? arrayRemove(currentUserId)
+          : arrayUnion(currentUserId),
+        likes: buttonState.likeButton ? increment(-1) : increment(1),
+      });
+    } catch (error) {
+      console.error("Error updating like status:", error);
+      // Optional: Dispatch an error state or revert the state
+    }
   }
 
   return (
