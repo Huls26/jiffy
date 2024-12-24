@@ -53,7 +53,7 @@ function reducerAction(state, action) {
 export default function usePostInteraction(userPost) {
   const currentUserId = auth.currentUser.uid;
   // Memoize the initial state
-  const initialState = useMemo(() => {
+  const initializeState = useMemo(() => {
     const isUserLiked = userPost?.likedUsers.includes(currentUserId);
     return {
       likeButton: isUserLiked,
@@ -62,7 +62,7 @@ export default function usePostInteraction(userPost) {
     };
   }, [userPost, currentUserId]);
 
-  const [buttonState, dispatch] = useReducer(reducerAction, initialState);
+  const [buttonState, dispatch] = useReducer(reducerAction, initializeState);
 
   return (
     { buttonState, dispatch, currentUserId }
