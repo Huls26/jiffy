@@ -1,8 +1,7 @@
 import { db } from '@/lib/fb';
 import usePostInteraction from '../../hooks/usePostInteraction';
-import formatRelativeTime from '../../utils/timeline/formatRelativeTime';
-import MainPageUserProfileLink from '../userInfo/MainPageUserProfileLink';
 import MainPagePostCardBtn from './MainPagePostCardBtn';
+import MainPageUserPostCard from './MainPageUserPostCard';
 
 import { arrayRemove, arrayUnion, doc, increment, updateDoc } from 'firebase/firestore';
 import PropTypes from "prop-types";
@@ -13,7 +12,6 @@ export default function MainPagePostCard({ userPost }) {
     dispatch,
     currentUserId,
   } = usePostInteraction(userPost);
-  const relativeTime = formatRelativeTime(userPost?.dateCreated);
 
   async function handleLikeButton() {
     dispatch({ type: 'LIKE_POST' });
@@ -29,24 +27,8 @@ export default function MainPagePostCard({ userPost }) {
     <div
       className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
     >
-      <div className='mx-2 m-1 flex justify-between'>
-        <MainPageUserProfileLink
-          to={`profile/${userPost.username}`}
-          photoURL={userPost.photoURL}
-          username={userPost.username}
-          email={userPost.email}
-        />
-        <h1 className='font-semibold text-xs text-gray-400 select-none'>{relativeTime} ago</h1>
-      </div>
-      {/* Display the text content of the user's post */}
-      <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
-
-      {/* Display the image content of the user's post */}
-      <img
-        className="min-h-[180px] aspect-video object-cover"
-        src={userPost.content}
-        alt={`users post content: ${userPost.textContent}`}
-      />
+      {/* User profile link and relative time */}
+      <MainPageUserPostCard userPost={userPost} />
 
       {/* Container for the buttons */}
       <div className='p-2 text-sm sm:text-base flex justify-between select-none'>
@@ -82,3 +64,5 @@ MainPagePostCard.propTypes = {
     email: PropTypes.string.isRequired,
   }).isRequired,
 };
+
+MainPagePostCard.whyDidYouRender = true;
