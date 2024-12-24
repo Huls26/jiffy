@@ -1,5 +1,5 @@
 import { auth, } from '@/lib/fb';
-import { useReducer } from "react";
+import { useMemo, useReducer } from "react";
 
 /**
  * A reducer function that manages the state of the like and comment buttons.
@@ -52,8 +52,15 @@ function reducerAction(state, action) {
  */
 export default function usePostInteraction(userPost) {
   const currentUserId = auth.currentUser.uid;
-  const isUserLiked = userPost?.likedUsers.includes(currentUserId);
-  const initialState = { likeButton: isUserLiked, commentButton: false, likesCount: userPost?.likes || 0 };
+  // Memoize the initial state
+  const initialState = useMemo(() => {
+    const isUserLiked = userPost?.likedUsers.includes(currentUserId);
+    return {
+      likeButton: isUserLiked,
+      commentButton: false,
+      likesCount: userPost?.likes || 0,
+    };
+  }, [userPost, currentUserId]);
 
   const [buttonState, dispatch] = useReducer(reducerAction, initialState);
 
