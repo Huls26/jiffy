@@ -63,14 +63,14 @@ export default function MainPagePostCard({ userPost }) {
       {/* comment section */}
       <div>
         {/* Comment input */}
-        <label htmlFor="comment-input" className='flex items-center grow-0'>
-          <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 mr-2 hover:scale-110'} />
+        <label htmlFor="timeline-comment-input" className='mb-2 px-2 grid grid-cols-12 gap-2'>
+          <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110'} />
           <input
-            name='comment-input'
+            name='timeline-comment-input'
             type="text"
             placeholder="Write a comment..."
-            className="w-full px-3 py-2 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
-            id='comment-input'
+            className="col-start-2 col-end-13 row-end-auto w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
+            id='timeline-comment-input'
           />
         </label>
       </div>
