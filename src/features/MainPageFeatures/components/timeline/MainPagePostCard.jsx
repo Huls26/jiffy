@@ -61,9 +61,9 @@ export default function MainPagePostCard({ userPost }) {
       </div>
 
       {/* comment section */}
-      <section className="mb-2">
+      <section className='p-2'>
         {/* current user Comment input */}
-        <label htmlFor="timeline-comment-input" className='px-2 grid grid-cols-12 gap-2'>
+        <label htmlFor="timeline-comment-input" className='grid grid-cols-12 gap-2'>
           <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110'} />
           <input
             name='timeline-comment-input'
