@@ -1,4 +1,5 @@
-import { db } from '@/lib/fb';
+import UserProfile from "@/components/UserProfile";
+import { auth, db } from '@/lib/fb';
 import usePostInteraction from '../../hooks/usePostInteraction';
 import MainPagePostCardBtn from './MainPagePostCardBtn';
 import MainPageUserPostCard from './MainPageUserPostCard';
@@ -7,6 +8,7 @@ import { arrayRemove, arrayUnion, doc, increment, updateDoc } from 'firebase/fir
 import PropTypes from "prop-types";
 
 export default function MainPagePostCard({ userPost }) {
+  const authUserPhoto = auth.currentUser?.photoURL;
   const {
     buttonState,
     dispatch,
@@ -31,7 +33,7 @@ export default function MainPagePostCard({ userPost }) {
   }
 
   return (
-    <div
+    <section
       className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
     >
       {/* User profile link and relative time */}
@@ -57,7 +59,22 @@ export default function MainPagePostCard({ userPost }) {
           textContent={"Comment"}
         />
       </div>
-    </div>);
+
+      {/* comment section */}
+      <div>
+        {/* Comment input */}
+        <label htmlFor="comment-input" className='flex items-center grow-0'>
+          <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 mr-2 hover:scale-110'} />
+          <input
+            name='comment-input'
+            type="text"
+            placeholder="Write a comment..."
+            className="w-full px-3 py-2 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
+            id='comment-input'
+          />
+        </label>
+      </div>
+    </section>);
 }
 
 MainPagePostCard.propTypes = {
