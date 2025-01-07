@@ -7,6 +7,18 @@ import MainPageUserPostCard from './MainPageUserPostCard';
 import { arrayRemove, arrayUnion, doc, increment, updateDoc } from 'firebase/firestore';
 import PropTypes from "prop-types";
 
+/**
+ * MainPagePostCard component renders a user's post on the main page timeline.
+ * It includes the user's profile, post content, and interaction buttons (like and comment).
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.userPost - The user post data.
+ * @param {string} props.userPost.postId - The unique identifier for the post.
+ * @param {string} props.userPost.textContent - The text content of the post.
+ * @param {string} props.userPost.content - The image content of the post.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function MainPagePostCard({ userPost }) {
   const authUserPhoto = auth.currentUser?.photoURL;
   const {
