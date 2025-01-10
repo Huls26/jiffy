@@ -29,7 +29,8 @@
       },
       "style": {
         "useExportType": "error",
-        "useImportType": "error"
+        "useImportType": "error",
+        "useConst": "error"
       },
       "recommended": true
     }
