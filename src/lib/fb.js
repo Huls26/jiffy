@@ -29,7 +29,7 @@ connectAuthEmulator(auth, "http://127.0.0.1:9099");
 // Initialize firestore
 const db = getFirestore(app);
 // firestore emulator
-connectFirestoreEmulator(db, "127.0.0.1", 8080);
+connectFirestoreEmulator(db, "127.0.0.1", 8081);
 
 // Initialize Firebase Storage and get a reference to the service
 const storage = getStorage(app);
