@@ -1,7 +1,7 @@
 import MainPageAuthFilterOptions from '../components/timeline/MainPageAuthFilterOptions';
 import MainPageNoContentMessage from '../components/timeline/MainPageNoContentMessage';
 import MainPagePostsFeed from '../components/timeline/MainPagePostsFeed';
-import useRealtimeUserPosts from '../hooks/useRealtimeUserPosts';;
+import useRealtimeUserPosts from '../hooks/useRealtimeUserPosts';
 
 export default function MainPageTimeline() {
   const userPosts = useRealtimeUserPosts();
