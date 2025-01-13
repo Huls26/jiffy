@@ -114,6 +114,10 @@ export function seedDatabase(db) {
     },
   ];
 
+  // reminder:
+  // to sign out after adding users
+  // check the storage, firestore, and auth rules if seed is not working
+  // write reminders it will help you in the future
   const addUsersToFirestore = async (users) => {
     try {
       for (let k = 0; k < users.length; k++) {
