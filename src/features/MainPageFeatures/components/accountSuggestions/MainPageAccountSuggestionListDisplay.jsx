@@ -36,5 +36,3 @@ MainPageAccountSuggestionListDisplay.propTypes = {
   onClick: PropTypes.func,
   sidebarIsLoading: PropTypes.bool,
 }
-
-MainPageAccountSuggestionListDisplay.whyDidYouRender = true;

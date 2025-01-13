@@ -35,5 +35,3 @@ export default function MainPageAccountSuggestions() {
     </section >
   )
 }
-
-MainPageAccountSuggestions.whyDidYouRender = true;

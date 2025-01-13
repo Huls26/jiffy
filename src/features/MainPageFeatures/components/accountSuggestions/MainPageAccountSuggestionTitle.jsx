@@ -13,5 +13,3 @@ export default function MainPageAccountSuggestionTitle({ isDisplay }) {
 MainPageAccountSuggestionTitle.propTypes = {
   isDisplay: PropTypes.bool.isRequired,
 }
-
-MainPageAccountSuggestionTitle.whyDidYouRender = true;
