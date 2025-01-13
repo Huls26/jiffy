@@ -128,11 +128,12 @@ export function seedDatabase(db) {
           photoURL: currentUser.photoURL,
           uid: currentUser.userId,
         });
-        await signOut(auth);
+        // await signOut(auth);
         const userId = userCredential.user.uid;
         const { password, ...updateUserID } = { ...currentUser, userId };
         await setDoc(doc(db, "users", userId), updateUserID);
       }
+      await signOut(auth);
       // biome-ignore lint/nursery/noConsole: <explanation>
       console.log("Users added successfully!");
     } catch (error) {
