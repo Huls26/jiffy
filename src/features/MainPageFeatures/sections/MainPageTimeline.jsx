@@ -14,5 +14,3 @@ export default function MainPageTimeline() {
     </main>
   );
 }
-
-MainPageTimeline.whyDidYouRender = true;

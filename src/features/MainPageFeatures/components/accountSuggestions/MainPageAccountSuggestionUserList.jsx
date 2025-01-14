@@ -18,5 +18,3 @@ MainPageAccountSuggestionUserList.propTypes = {
     email: PropTypes.string.isRequired,
   })).isRequired,
 }
-
-MainPageAccountSuggestionUserList.whyDidYouRender = true;

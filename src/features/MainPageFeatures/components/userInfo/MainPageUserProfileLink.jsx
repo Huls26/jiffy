@@ -21,5 +21,3 @@ MainPageUserProfileLink.propTypes = {
   username: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 }
-
-MainPageUserInfo.whyDidYouRender = true;

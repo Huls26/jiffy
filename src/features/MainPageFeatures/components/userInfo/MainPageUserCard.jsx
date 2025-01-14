@@ -23,5 +23,3 @@ export default function MainPageUserCard() {
     </section >
   );
 }
-
-MainPageUserCard.whyDidYouRender = true;

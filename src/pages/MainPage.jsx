@@ -14,5 +14,3 @@ export default function MainPage() {
     </main>
   );
 }
-
-MainPage.whyDidYouRender = true;

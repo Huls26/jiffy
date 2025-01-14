@@ -83,5 +83,3 @@ MainPagePostCard.propTypes = {
     email: PropTypes.string.isRequired,
   }).isRequired,
 };
-
-MainPagePostCard.whyDidYouRender = true;

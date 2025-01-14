@@ -20,5 +20,3 @@ export default function MainPagePostsFeed({ userPosts }) {
 MainPagePostsFeed.propTypes = {
   userPosts: PropTypes.arrayOf(PropTypes.object),
 };
-
-MainPagePostsFeed.whyDidYouRender = true;

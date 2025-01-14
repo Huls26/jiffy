@@ -48,5 +48,3 @@ export default function MainPageAuthFilterOptions({ isDisplay = [] }) {
 MainPageAuthFilterOptions.propTypes = {
   isDisplay: PropTypes.array,
 };
-
-MainPageAuthFilterOptions.whyDidYouRender = true;

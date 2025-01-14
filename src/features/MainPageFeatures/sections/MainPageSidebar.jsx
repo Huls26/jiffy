@@ -28,5 +28,3 @@ export default function MainPageSidebar() {
 
   return null;
 }
-
-MainPageSidebar.whyDidYouRender = true;
