@@ -22,7 +22,7 @@ export default function MainPageAuthFilterOptions({ isDisplay = [] }) {
     <section className='text-sm sm:text-base mb-3 inline-flex'>
       <button
         type='button'
-        className="bg-sky-500 bg-gray-900 hover:bg-gray-700 text-gray-200 font-bold py-1 px-3 rounded-l"
+        className="bg-sky-500 hover:bg-gray-700 text-gray-200 font-bold py-1 px-3 rounded-l"
         aria-label="Show All Posts"
       >
         All
