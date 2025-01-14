@@ -1,10 +1,10 @@
 import UserProfile from "@/components/UserProfile";
-import { auth, db } from '@/lib/fb';
+import { auth } from '@/lib/fb';
 import usePostInteraction from '../../hooks/usePostInteraction';
+import handleLikeButton from "../../utils/timeline/handleLikeButton";
 import MainPagePostCardBtn from './MainPagePostCardBtn';
 import MainPageUserPostCard from './MainPageUserPostCard';
 
-import { arrayRemove, arrayUnion, doc, increment, updateDoc } from 'firebase/firestore';
 import PropTypes from "prop-types";
 
 /**
@@ -27,23 +27,6 @@ export default function MainPagePostCard({ userPost }) {
     currentUserId,
   } = usePostInteraction(userPost);
 
-  async function handleLikeButton() {
-    dispatch({ type: 'LIKE_POST' });
-    const userPostRef = doc(db, "userPosts", userPost.postId);
-
-    try {
-      await updateDoc(userPostRef, {
-        likedUsers: buttonState.likeButton
-          ? arrayRemove(currentUserId)
-          : arrayUnion(currentUserId),
-        likes: buttonState.likeButton ? increment(-1) : increment(1),
-      });
-    } catch (error) {
-      console.error("Error updating like status:", error);
-      // Optional: Dispatch an error state or revert the state
-    }
-  }
-
   return (
     <section
       className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
@@ -57,7 +40,7 @@ export default function MainPagePostCard({ userPost }) {
         {/* Like button */}
         <MainPagePostCardBtn
           isActive={buttonState.likeButton}
-          onClick={handleLikeButton}
+          onClick={() => handleLikeButton(dispatch, userPost, buttonState, currentUserId)}
           ariaLabel="like button"
           likesCount={buttonState.likesCount}
           textContent={"Like"}
