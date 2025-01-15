@@ -75,7 +75,7 @@ export default function MainPagePostCard({ userPost }) {
           {console.log("change photoURL to the user's who is commenting")}
           <UserProfile photoURL={authUserPhoto} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
           <div>
-            <h1 className="font-semibold text-sky-400">Username || email {<span className="text-gray-300">date created</span>}</h1>
+            <h1 className="font-semibold text-sky-400">Username || email {<span className="text-gray-300 text-xs">date created</span>}</h1>
             <p className="text-sm font-mono leading-4">The harmonic notes are flying and I'm happy with it.</p>
           </div>
         </div>
