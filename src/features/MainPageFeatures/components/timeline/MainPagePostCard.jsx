@@ -56,7 +56,7 @@ export default function MainPagePostCard({ userPost }) {
       </div>
 
       {/* comment section */}
-      <section className='p-2 fixed top-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50'>
+      <section className='p-2 fixed top-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300'>
         <h1 className="mb-2 text-gray-200 text-lg font-semibold">Comments [number of comments]</h1>
         {/* current user Comment input */}
         <label htmlFor="timeline-comment-input" className='mb-6 grid grid-cols-12 gap-2'>
@@ -75,8 +75,8 @@ export default function MainPagePostCard({ userPost }) {
           {console.log("change photoURL to the user's who is commenting")}
           <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110 shrink-0'} />
           <div>
-            <h1>Username</h1>
-            <p className="font-mono">The harmonic notes are flying and I'm happy with it.</p>
+            <h1 className="font-bold">Username</h1>
+            <p className="text-sm font-mono leading-4">The harmonic notes are flying and I'm happy with it.</p>
           </div>
         </div>
       </section>
