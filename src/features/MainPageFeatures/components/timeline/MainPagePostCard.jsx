@@ -73,7 +73,7 @@ export default function MainPagePostCard({ userPost }) {
         {/* Comment */}
         <div className="flex items-center space-x-2">
           {console.log("change photoURL to the user's who is commenting")}
-          <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110 shrink-0'} />
+          <UserProfile photoURL={authUserPhoto} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
           <div>
             <h1 className="font-bold">Username</h1>
             <p className="text-sm font-mono leading-4">The harmonic notes are flying and I'm happy with it.</p>
