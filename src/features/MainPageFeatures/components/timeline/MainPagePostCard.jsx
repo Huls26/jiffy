@@ -27,7 +27,6 @@ export default function MainPagePostCard({ userPost }) {
     currentUserId,
   } = usePostInteraction(userPost);
 
-  console.log(userPost)
   return (
     <section
       className='relative space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
@@ -70,6 +69,16 @@ export default function MainPagePostCard({ userPost }) {
             id='timeline-comment-input'
           />
         </label>
+
+        {/* Comment */}
+        <div className="flex items-center space-x-2">
+          {console.log("change photoURL to the user's who is commenting")}
+          <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110 shrink-0'} />
+          <div>
+            <h1>Username</h1>
+            <p className="font-mono">The harmonic notes are flying and I'm happy with it.</p>
+          </div>
+        </div>
       </section>
     </section>);
 }
