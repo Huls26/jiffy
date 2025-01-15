@@ -27,9 +27,10 @@ export default function MainPagePostCard({ userPost }) {
     currentUserId,
   } = usePostInteraction(userPost);
 
+  console.log(userPost)
   return (
     <section
-      className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
+      className='relative space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
     >
       {/* User profile link and relative time */}
       <MainPageUserPostCard userPost={userPost} />
@@ -56,9 +57,10 @@ export default function MainPagePostCard({ userPost }) {
       </div>
 
       {/* comment section */}
-      <section className='p-2'>
+      <section className='p-2 fixed top-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50'>
+        <h1 className="mb-2 text-gray-200 text-lg font-semibold">Comments [number of comments]</h1>
         {/* current user Comment input */}
-        <label htmlFor="timeline-comment-input" className='grid grid-cols-12 gap-2'>
+        <label htmlFor="timeline-comment-input" className='mb-6 grid grid-cols-12 gap-2'>
           <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110'} />
           <input
             name='timeline-comment-input'
