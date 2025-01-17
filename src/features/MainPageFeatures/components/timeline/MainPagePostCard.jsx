@@ -56,7 +56,7 @@ export default function MainPagePostCard({ userPost }) {
       </div>
 
       {/* comment section */}
-      <section className='p-2 fixed top-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300'>
+      <section className='p-2 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300'>
         <h1 className="mb-2 text-gray-200 text-lg font-semibold">Comments [number of comments]</h1>
         {/* current user Comment input */}
         <label htmlFor="timeline-comment-input" className='mb-6 grid grid-cols-12 gap-2'>
