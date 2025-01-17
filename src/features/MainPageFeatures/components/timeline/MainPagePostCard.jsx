@@ -4,6 +4,7 @@ import usePostInteraction from '../../hooks/usePostInteraction';
 import handleLikeButton from "../../utils/timeline/handleLikeButton";
 import MainPagePostCardBtn from './MainPagePostCardBtn';
 import MainPageUserPostCard from './MainPageUserPostCard';
+import "./style/MainPagePostCard.css";
 
 import PropTypes from "prop-types";
 
@@ -84,7 +85,7 @@ export default function MainPagePostCard({ userPost }) {
           <UserProfile photoURL={authUserPhoto} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
           <div className="w-full">
             <h1 className="flex items-center justify-between font-semibold text-sky-400 leading-4">Username || email {<span className="text-gray-300 text-xs leading-3">date created</span>}</h1>
-            <p className="text-sm font-mono leading-4">The harmonic notes are flying and I'm happy with it. sample text right random words added more words sample text testing is this correct.</p>
+            <p className="text-sm font-mono leading-4 truncate-multiline">The harmonic notes are flying and I'm happy with it. sample text right random words added more words sample text testing is this correct.</p>
           </div>
         </div>
       </section>
