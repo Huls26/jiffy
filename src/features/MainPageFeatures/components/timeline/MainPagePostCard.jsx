@@ -56,7 +56,7 @@ export default function MainPagePostCard({ userPost }) {
       </div>
 
       {/* comment section */}
-      <section className='p-2 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300'>
+      <section className='p-2 pb-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300'>
         <h1 className="mb-2 text-gray-200 text-lg font-semibold">Comments [number of comments]</h1>
         {/* current user Comment input */}
         <label htmlFor="timeline-comment-input" className='mb-6 grid grid-cols-12 gap-2'>
@@ -71,12 +71,20 @@ export default function MainPagePostCard({ userPost }) {
         </label>
 
         {/* Comment */}
-        <div className="flex items-center space-x-2">
+        <div className="mb-4 flex items-center space-x-2">
           {console.log("change photoURL to the user's who is commenting")}
           <UserProfile photoURL={authUserPhoto} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
-          <div>
-            <h1 className="font-semibold text-sky-400">Username || email {<span className="text-gray-300 text-xs">date created</span>}</h1>
-            <p className="text-sm font-mono leading-4">The harmonic notes are flying and I'm happy with it.</p>
+          <div className="w-full">
+            <h1 className="flex items-center justify-between font-semibold text-sky-400 leading-4">Username || email {<span className="text-gray-300 text-xs leading-3">date created</span>}</h1>
+            <p className="text-sm font-mono leading-4">The harmonic notes are flying and I'm happy with it. sample text right random words</p>
+          </div>
+        </div>
+        <div className="mb-4 flex items-center space-x-2">
+          {console.log("change photoURL to the user's who is commenting")}
+          <UserProfile photoURL={authUserPhoto} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
+          <div className="w-full">
+            <h1 className="flex items-center justify-between font-semibold text-sky-400 leading-4">Username || email {<span className="text-gray-300 text-xs leading-3">date created</span>}</h1>
+            <p className="text-sm font-mono leading-4">The harmonic notes are flying and I'm happy with it. sample text right random words added more words sample text testing is this correct.</p>
           </div>
         </div>
       </section>
