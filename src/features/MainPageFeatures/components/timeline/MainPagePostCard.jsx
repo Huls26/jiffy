@@ -34,6 +34,8 @@ export default function MainPagePostCard({ userPost }) {
     setIsExpanded(!isExpanded);
   };
 
+  console.log("Update classname line 87 & 98 create a variable for default style or readmore and readless style variable");
+  console.log("create a component for user's comment and separate state for toggle expand state");
   return (
     <section
       className='relative space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
@@ -94,7 +96,7 @@ export default function MainPagePostCard({ userPost }) {
           <UserProfile photoURL={authUserPhoto} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
           <div className="w-full">
             <h1 className="mb-1 flex items-center justify-between font-semibold text-sky-400 leading-4">Username || email {<span className="text-gray-300 text-xs leading-3">date created</span>}</h1>
-            <p className="text-sm font-mono leading-4 truncate-multiline">The harmonic notes are flying and I'm happy with it. sample text right random words added more words sample text testing is this correct.</p>
+            <p className={`text-sm font-mono leading-4 ${isExpanded ? '' : 'truncate-multiline'}`}>The harmonic notes are flying and I'm happy with it. sample text right random words added more words sample text testing is this correct.</p>
             <button type="button" onClick={toggleExpand} className="text-blue-500 text-xs">
               {isExpanded ? 'Read Less' : 'Read More'}
             </button>
