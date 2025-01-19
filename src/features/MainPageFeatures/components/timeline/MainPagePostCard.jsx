@@ -29,6 +29,11 @@ export default function MainPagePostCard({ userPost }) {
     currentUserId,
   } = usePostInteraction(userPost);
 
+  console.log("use search params to display comment section");
+  console.log("create a comment section component");
+  console.log('create collection for comment section');
+  console.log("user comment should upload to comment collection");
+  console.log("user comment should be displayed in the comment section");
   return (
     <section
       className='relative space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
