@@ -1,6 +1,8 @@
 import UserProfile from "@/components/UserProfile";
 import { useState } from "react";
 
+import PropTypes from "prop-types";
+
 export default function MainPageUserComment({ authUserPhoto }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -21,4 +23,8 @@ export default function MainPageUserComment({ authUserPhoto }) {
       </div>
     </div>
   )
+}
+
+MainPageUserComment.propTypes = {
+  authUserPhoto: PropTypes.string.isRequired,
 }
