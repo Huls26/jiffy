@@ -3,6 +3,7 @@ import { auth } from '@/lib/fb';
 import usePostInteraction from '../../hooks/usePostInteraction';
 import handleLikeButton from "../../utils/timeline/handleLikeButton";
 import MainPagePostCardBtn from './MainPagePostCardBtn';
+import MainPageUserComment from "./MainPageUserComment";
 import MainPageUserPostCard from './MainPageUserPostCard';
 import "./style/MainPagePostCard.css";
 
@@ -80,6 +81,7 @@ export default function MainPagePostCard({ userPost }) {
         </label>
 
         {/* Comment */}
+        <MainPageUserComment authUserPhoto={authUserPhoto} />
         <div className="mb-4 flex items-center space-x-2">
           {console.log("change photoURL to the user's who is commenting")}
           <UserProfile photoURL={authUserPhoto} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
