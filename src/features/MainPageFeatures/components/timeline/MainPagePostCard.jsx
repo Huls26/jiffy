@@ -32,11 +32,12 @@ export default function MainPagePostCard({ userPost }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleCommentButton() {
+    dispatch({ type: 'COMMENT_POST' });
     if (!searchParams.get('comment')) {
       setSearchParams({ comment: userPost.postId });
+    } else {
+      setSearchParams({});
     }
-
-    setSearchParams({});
   }
   console.log("use search params to display comment section");
   console.log("create a comment section component");
@@ -58,7 +59,7 @@ export default function MainPagePostCard({ userPost }) {
         <MainPagePostCardBtn
           isActive={buttonState.likeButton}
           onClick={() => handleLikeButton(dispatch, userPost, buttonState, currentUserId)}
-          ariaLabel="like button"
+          ariaLabel="Like post"
           likesCount={buttonState.likesCount}
           textContent={"Like"}
         />
@@ -66,8 +67,8 @@ export default function MainPagePostCard({ userPost }) {
         {/* Comment button */}
         <MainPagePostCardBtn
           isActive={buttonState.commentButton}
-          onClick={() => dispatch({ type: 'COMMENT_POST' })}
-          ariaLabel="comment button"
+          onClick={handleCommentButton}
+          ariaLabel="Toggle comment section for post"
           textContent={"Comment"}
         />
       </div>
