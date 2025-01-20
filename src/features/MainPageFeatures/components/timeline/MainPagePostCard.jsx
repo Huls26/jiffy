@@ -1,11 +1,11 @@
-import UserProfile from "@/components/UserProfile";
+
 import { auth } from '@/lib/fb';
 import usePostInteraction from '../../hooks/usePostInteraction';
 import handleLikeButton from "../../utils/timeline/handleLikeButton";
 import MainPagePostCardBtn from './MainPagePostCardBtn';
 import MainPageUserPostCard from './MainPageUserPostCard';
-import MainPageUserComment from "./commentSection/MainPageUserComment";
 import "./style/MainPagePostCard.css";
+import MainPageCommentSection from "./commentSection/MainPageCommentSection";
 
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
@@ -53,6 +53,7 @@ export default function MainPagePostCard({ userPost }) {
       {/* User profile link and relative time */}
       <MainPageUserPostCard userPost={userPost} />
 
+      {/* button section */}
       {/* Container for the buttons */}
       <div className='p-2 text-sm sm:text-base flex justify-between select-none'>
 
@@ -75,25 +76,7 @@ export default function MainPagePostCard({ userPost }) {
       </div>
 
       {/* comment section */}
-      <section className='p-2 pb-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300'>
-        <h1 className="mb-2 text-gray-200 text-lg font-semibold">Comments [number of comments]</h1>
-        {/* current user Comment input */}
-        <label htmlFor="timeline-comment-input" className='mb-6 grid grid-cols-12 gap-2'>
-          <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110'} />
-          <input
-            name='timeline-comment-input'
-            type="text"
-            placeholder="Write a comment..."
-            className="col-start-2 col-end-13 row-end-auto w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
-            id='timeline-comment-input'
-          />
-        </label>
-
-        {/* Comment */}
-        <MainPageUserComment authUserPhoto={authUserPhoto} />
-        <MainPageUserComment authUserPhoto={authUserPhoto} />
-        <MainPageUserComment authUserPhoto={authUserPhoto} />
-      </section>
+      <MainPageCommentSection authUserPhoto={authUserPhoto} />
     </section>);
 }
 
