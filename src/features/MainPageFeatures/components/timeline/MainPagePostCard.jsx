@@ -8,6 +8,7 @@ import MainPageUserPostCard from './MainPageUserPostCard';
 import "./style/MainPagePostCard.css";
 
 import PropTypes from "prop-types";
+import { useSearchParams } from "react-router-dom";
 
 /**
  * MainPagePostCard component renders a user's post on the main page timeline.
@@ -28,12 +29,21 @@ export default function MainPagePostCard({ userPost }) {
     dispatch,
     currentUserId,
   } = usePostInteraction(userPost);
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  function handleCommentButton() {
+    if (!searchParams.get('comment')) {
+      setSearchParams({ comment: userPost.postId });
+    }
+
+    setSearchParams({});
+  }
   console.log("use search params to display comment section");
   console.log("create a comment section component");
   console.log('create collection for comment section');
   console.log("user comment should upload to comment collection");
   console.log("user comment should be displayed in the comment section");
+  console.log(userPost)
   return (
     <section
       className='relative space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
