@@ -3,8 +3,8 @@ import { auth } from '@/lib/fb';
 import usePostInteraction from '../../hooks/usePostInteraction';
 import handleLikeButton from "../../utils/timeline/handleLikeButton";
 import MainPagePostCardBtn from './MainPagePostCardBtn';
-import MainPageUserComment from "./MainPageUserComment";
 import MainPageUserPostCard from './MainPageUserPostCard';
+import MainPageUserComment from "./commentSection/MainPageUserComment";
 import "./style/MainPagePostCard.css";
 
 import PropTypes from "prop-types";
