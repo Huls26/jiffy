@@ -2,8 +2,16 @@ import UserProfile from "@/components/UserProfile";
 import MainPageUserComment from "./MainPageUserComment";
 
 import PropTypes from "prop-types";
+import { useSearchParams } from "react-router-dom";
 
 export default function MainPageCommentSection({ authUserPhoto }) {
+  const [searchParams] = useSearchParams();
+
+  // If there is no comment query parameter, return null
+  if (!searchParams.get('comment')) {
+    return null;
+  }
+
   return (
     <section className='p-2 pb-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300'>
       <h1 className="mb-2 text-gray-200 text-lg font-semibold">Comments [number of comments]</h1>
