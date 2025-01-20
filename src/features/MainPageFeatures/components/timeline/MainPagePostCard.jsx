@@ -39,8 +39,9 @@ export default function MainPagePostCard({ userPost }) {
       setSearchParams({});
     }
   }
-  console.log("use search params to display comment section");
-  console.log("create a comment section component");
+
+  console.log("add show more button to comment section"); console.log("check if the layout is responsive");
+  console.log("add a close button to the comment section");
   console.log('create collection for comment section');
   console.log("user comment should upload to comment collection");
   console.log("user comment should be displayed in the comment section");
