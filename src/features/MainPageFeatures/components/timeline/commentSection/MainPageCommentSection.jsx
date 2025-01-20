@@ -1,5 +1,5 @@
 import UserProfile from "@/components/UserProfile";
-import MainPageUserComment from "./commentSection/MainPageUserComment";
+import MainPageUserComment from "./MainPageUserComment";
 
 import PropTypes from "prop-types";
 
