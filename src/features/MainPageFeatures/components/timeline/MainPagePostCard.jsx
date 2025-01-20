@@ -44,6 +44,7 @@ export default function MainPagePostCard({ userPost }) {
   console.log('create collection for comment section');
   console.log("user comment should upload to comment collection");
   console.log("user comment should be displayed in the comment section");
+  console.log("create context for comment section to pass data to the comment section");
   console.log(userPost)
   return (
     <section
