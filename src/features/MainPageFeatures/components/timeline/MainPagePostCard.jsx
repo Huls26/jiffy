@@ -37,7 +37,7 @@ export default function MainPagePostCard({ userPost }) {
     }
   }
 
-  console.log("add show more button to comment section"); console.log("check if the layout is responsive");
+  console.log("add show more button to comment section");
   console.log('create collection for comment section');
   console.log("user comment should upload to comment collection");
   console.log("user comment should be displayed in the comment section");
