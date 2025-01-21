@@ -13,7 +13,7 @@ export default function MainPageCommentSection({ authUserPhoto }) {
   }
 
   return (
-    <section className='p-2 pb-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300'>
+    <section className='p-2 pb-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300 text-left md:block md:static md:-translate-x-0 md:translate-y-0 md:max-w-80 md:w-80 md:top-0 md:left-0 md:mt-5'>
       <div className="flex justify-between items-start">
         <h1 className="mb-2 text-gray-200 text-lg font-semibold">Comments [number of comments]</h1>
         <button
