@@ -1,11 +1,10 @@
 
-import { auth } from '@/lib/fb';
 import usePostInteraction from '../../hooks/usePostInteraction';
 import handleLikeButton from "../../utils/timeline/handleLikeButton";
 import MainPagePostCardBtn from './MainPagePostCardBtn';
 import MainPageUserPostCard from './MainPageUserPostCard';
 import "./style/MainPagePostCard.css";
-import MainPageCommentSection from "./commentSection/MainPageCommentSection";
+// import MainPageCommentSection from "./commentSection/MainPageCommentSection";
 
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
@@ -23,7 +22,7 @@ import { useSearchParams } from "react-router-dom";
  * @returns {JSX.Element} The rendered component.
  */
 export default function MainPagePostCard({ userPost }) {
-  const authUserPhoto = auth.currentUser?.photoURL;
+  // const authUserPhoto = auth.currentUser?.photoURL;
   const {
     buttonState,
     dispatch,
@@ -48,7 +47,7 @@ export default function MainPagePostCard({ userPost }) {
   console.log(userPost)
   return (
     <section
-      className='relative space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
+      className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
     >
       {/* User profile link and relative time */}
       <MainPageUserPostCard userPost={userPost} />
@@ -76,7 +75,7 @@ export default function MainPagePostCard({ userPost }) {
       </div>
 
       {/* comment section */}
-      <MainPageCommentSection authUserPhoto={authUserPhoto} />
+      {/* <MainPageCommentSection authUserPhoto={authUserPhoto} /> */}
     </section>);
 }
 
