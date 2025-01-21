@@ -4,7 +4,6 @@ import handleLikeButton from "../../utils/timeline/handleLikeButton";
 import MainPagePostCardBtn from './MainPagePostCardBtn';
 import MainPageUserPostCard from './MainPageUserPostCard';
 import "./style/MainPagePostCard.css";
-// import MainPageCommentSection from "./commentSection/MainPageCommentSection";
 
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
@@ -22,7 +21,6 @@ import { useSearchParams } from "react-router-dom";
  * @returns {JSX.Element} The rendered component.
  */
 export default function MainPagePostCard({ userPost }) {
-  // const authUserPhoto = auth.currentUser?.photoURL;
   const {
     buttonState,
     dispatch,
@@ -73,9 +71,6 @@ export default function MainPagePostCard({ userPost }) {
           textContent={"Comment"}
         />
       </div>
-
-      {/* comment section */}
-      {/* <MainPageCommentSection authUserPhoto={authUserPhoto} /> */}
     </section>);
 }
 
