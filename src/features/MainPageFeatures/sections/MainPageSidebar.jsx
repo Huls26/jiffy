@@ -4,6 +4,7 @@ import MainPageUserCard from "../components/userInfo/MainPageUserCard";
 import reducerMethod, { INITIAL_STATE } from "../context/MainPageSidebarContextReducer";
 
 import { lazy, useContext } from "react";
+import MainPageCommentSection from "../components/timeline/commentSection/MainPageCommentSection";
 
 const MainPageAccountSuggestions = lazy(() => import("../components/accountSuggestions/MainPageAccountSuggestions"))
 
@@ -20,6 +21,7 @@ export default function MainPageSidebar() {
         <section className="md:self-start py-1 min-w-[280px] shadow-xl border-gray-300 sm:border-2 sm:m-2 rounded-lg">
           <MainPageUserCard />
           <MainPageAccountSuggestions />
+          <MainPageCommentSection />
         </section>
       </ReducerContextProvider>
 
