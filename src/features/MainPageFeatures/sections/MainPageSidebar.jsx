@@ -18,9 +18,12 @@ export default function MainPageSidebar() {
         reducerMethod={reducerMethod}
         INITIAL_STATE={INITIAL_STATE}
       >
-        <section className="md:self-start py-1 min-w-[280px] shadow-xl border-gray-300 sm:border-2 sm:m-2 rounded-lg">
-          <MainPageUserCard />
-          <MainPageAccountSuggestions />
+        <section className="md:self-start py-1 min-w-[280px] sm:m-2 shadow-xl">
+          <section className="border-gray-300 sm:border-2 rounded-lg">
+            <MainPageUserCard />
+            <MainPageAccountSuggestions />
+          </section>
+
           {/* comment section */}
           <MainPageCommentSection />
         </section>
