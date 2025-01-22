@@ -26,13 +26,15 @@ export default function MainPageCommentSection({ authUserPhoto }) {
 
 
       {/* current user Comment input */}
-      <label htmlFor="timeline-comment-input" className='mb-6 grid grid-cols-12 gap-2'>
-        <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110'} />
+      <label htmlFor="timeline-comment-input" className='mb-6 flex space-x-2'>
+        <div>
+          <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110'} />
+        </div>
         <input
           name='timeline-comment-input'
           type="text"
           placeholder="Write a comment..."
-          className="col-start-2 col-end-13 row-end-auto w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
+          className="w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
           id='timeline-comment-input'
         />
       </label>
