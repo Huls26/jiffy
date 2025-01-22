@@ -24,7 +24,6 @@ export default function MainPageCommentSection({ authUserPhoto }) {
         >close</button>
       </div>
 
-
       {/* current user Comment input */}
       <label htmlFor="timeline-comment-input" className='mb-6 flex space-x-2'>
         <div>
