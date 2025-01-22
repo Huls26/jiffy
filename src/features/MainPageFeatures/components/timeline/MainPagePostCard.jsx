@@ -42,7 +42,7 @@ export default function MainPagePostCard({ userPost }) {
   console.log("user comment should upload to comment collection");
   console.log("user comment should be displayed in the comment section");
   console.log("create context for comment section to pass data to the comment section");
-  console.log(userPost)
+  console.log("code clean up")
   return (
     <section
       className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
