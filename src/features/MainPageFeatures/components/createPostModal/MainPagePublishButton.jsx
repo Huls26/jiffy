@@ -11,6 +11,7 @@ export default function MainPagePublishButton() {
   const [sidebarState, dispatch] = useContext(PostPortalModal);
   const { imageFile, postContentText } = sidebarState;
 
+  console.log("code clean up");
   const publishContent = async () => {
     if (!imageFile) {
       console.error("No image file to upload.");
