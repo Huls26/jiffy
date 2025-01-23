@@ -17,6 +17,7 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
     const postId = postRef.id;
 
     // Use the generated ID to create a new document
+    console.log("content should be the value of the input field");
     await setDoc(postRef, {
       commentId: postId,
       content: "This is the content of the post",
