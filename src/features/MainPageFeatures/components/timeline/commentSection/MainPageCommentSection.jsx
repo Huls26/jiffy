@@ -36,6 +36,7 @@ export default function MainPageCommentSection({ authUserPhoto }) {
           className="w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
           id='timeline-comment-input'
         />
+        <button type="button" className="px-2 bg-blue-500 rounded-full text-gray-300">&#10149;</button>
       </label>
 
       {/* Comment */}
