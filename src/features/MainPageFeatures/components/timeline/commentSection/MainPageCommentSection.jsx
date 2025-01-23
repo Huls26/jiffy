@@ -1,11 +1,29 @@
 import UserProfile from "@/components/UserProfile";
 import MainPageUserComment from "./MainPageUserComment";
 
+import { db } from "@/lib/fb";
+import { collection, doc, setDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
 
-export default function MainPageCommentSection({ authUserPhoto }) {
+export default function MainPageCommentSection({ authUserPhoto, userId }) {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  async function submitComment() {
+    // Generate a document reference with an auto-generated ID
+    const postRef = doc(collection(db, "userPosts", searchParams.get('comment'), "comments"));
+
+    // Get the auto-generated ID
+    const postId = postRef.id;
+
+    // Use the generated ID to create a new document
+    await setDoc(postRef, {
+      commentId: postId,
+      content: "This is the content of the post",
+      createdAt: new Date(), // or serverTimestamp()
+      userId,
+    });
+  }
 
   // If there is no comment query parameter, return null
   if (!searchParams.get('comment')) {
@@ -36,7 +54,13 @@ export default function MainPageCommentSection({ authUserPhoto }) {
           className="w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
           id='timeline-comment-input'
         />
-        <button type="button" className="px-2 bg-blue-500 rounded-full text-gray-300">&#10149;</button>
+        <button
+          type="button"
+          className="px-2 bg-blue-500 rounded-full text-gray-300"
+          onClick={submitComment}
+        >
+          &#10149;
+        </button>
       </label>
 
       {/* Comment */}
@@ -49,4 +73,5 @@ export default function MainPageCommentSection({ authUserPhoto }) {
 
 MainPageCommentSection.propTypes = {
   authUserPhoto: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
 }
