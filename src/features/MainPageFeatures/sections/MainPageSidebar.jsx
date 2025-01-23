@@ -25,7 +25,7 @@ export default function MainPageSidebar() {
           </section>
 
           {/* comment section */}
-          <MainPageCommentSection authUserPhoto={globalState.photoURL} />
+          <MainPageCommentSection authUserPhoto={globalState.photoURL} userId={globalState.userId} />
         </section>
       </ReducerContextProvider>
 
