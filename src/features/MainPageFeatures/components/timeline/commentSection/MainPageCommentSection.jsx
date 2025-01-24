@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 export default function MainPageCommentSection({ authUserPhoto, userId }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [commentValue, setCommentValue] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   async function submitComment() {
     setLoading(true);
@@ -53,6 +53,7 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
         >close</button>
       </div>
 
+      {isLoading && <LoadingDot />}
       {/* current user Comment input */}
       <label htmlFor="timeline-comment-input" className='mb-6 flex space-x-2'>
         <div>
@@ -71,10 +72,10 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
           type="button"
           className="px-2 bg-blue-500 rounded-full text-gray-300"
           onClick={submitComment}
+          disabled={(commentValue.length === 0) || isLoading}
         >
           &#10149;
         </button>
-        <LoadingDot />
       </label>
 
       {/* Comment */}
