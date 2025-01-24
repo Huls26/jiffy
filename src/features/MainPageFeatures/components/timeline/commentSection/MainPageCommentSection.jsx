@@ -1,4 +1,5 @@
 import UserProfile from "@/components/UserProfile";
+import LoadingDot from "../../../../../components/LoadingSkeleton/components/LoadingDot";
 import MainPageUserComment from "./MainPageUserComment";
 
 import { db } from "@/lib/fb";
@@ -10,21 +11,29 @@ import { useSearchParams } from "react-router-dom";
 export default function MainPageCommentSection({ authUserPhoto, userId }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [commentValue, setCommentValue] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function submitComment() {
-    // Generate a document reference with an auto-generated ID
-    const postRef = doc(collection(db, "userPosts", searchParams.get('comment'), "comments"));
+    setLoading(true);
+    try {
+      // Generate a document reference with an auto-generated ID
+      const postRef = doc(collection(db, "userPosts", searchParams.get('comment'), "comments"));
 
-    // Get the auto-generated ID
-    const postId = postRef.id;
+      // Get the auto-generated ID
+      const postId = postRef.id;
 
-    // Use the generated ID to create a new document
-    await setDoc(postRef, {
-      commentId: postId,
-      content: commentValue,
-      createdAt: new Date(), // or serverTimestamp()
-      userId,
-    });
+      // Use the generated ID to create a new document
+      await setDoc(postRef, {
+        commentId: postId,
+        content: commentValue,
+        createdAt: new Date(), // or serverTimestamp()
+        userId,
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   // If there is no comment query parameter, return null
@@ -65,6 +74,7 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
         >
           &#10149;
         </button>
+        <LoadingDot />
       </label>
 
       {/* Comment */}
