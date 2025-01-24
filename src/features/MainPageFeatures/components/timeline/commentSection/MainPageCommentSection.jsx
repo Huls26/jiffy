@@ -33,6 +33,7 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
       console.error("Error adding document: ", error);
     } finally {
       setLoading(false);
+      setCommentValue('');
     }
   }
 
@@ -67,6 +68,7 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
           id='timeline-comment-input'
           value={commentValue}
           onChange={(e) => setCommentValue(e.target.value)}
+          maxLength="150"
         />
         <button
           type="button"
