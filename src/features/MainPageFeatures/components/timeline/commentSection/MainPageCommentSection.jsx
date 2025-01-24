@@ -4,10 +4,12 @@ import MainPageUserComment from "./MainPageUserComment";
 import { db } from "@/lib/fb";
 import { collection, doc, setDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function MainPageCommentSection({ authUserPhoto, userId }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [commentValue, setCommentValue] = useState('');
 
   async function submitComment() {
     // Generate a document reference with an auto-generated ID
@@ -17,10 +19,9 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
     const postId = postRef.id;
 
     // Use the generated ID to create a new document
-    console.log("content should be the value of the input field");
     await setDoc(postRef, {
       commentId: postId,
-      content: "This is the content of the post",
+      content: commentValue,
       createdAt: new Date(), // or serverTimestamp()
       userId,
     });
@@ -54,6 +55,8 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
           placeholder="Write a comment..."
           className="w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
           id='timeline-comment-input'
+          value={commentValue}
+          onChange={(e) => setCommentValue(e.target.value)}
         />
         <button
           type="button"
