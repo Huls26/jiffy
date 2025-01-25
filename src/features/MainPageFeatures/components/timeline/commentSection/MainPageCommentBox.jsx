@@ -1,9 +1,12 @@
 import LoadingDot from "@/components/LoadingSkeleton/components/LoadingDot";
 import UserProfile from "@/components/UserProfile";
+import handleSubmitComment from "../../../utils/commentSection/handleSubmitComment";
 
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export default function MainPageCommentBox({ authUserPhoto }) {
+  const [searchParams] = useSearchParams();
   const [commentValue, setCommentValue] = useState('');
   const [isLoading, setLoading] = useState(false);
 
@@ -27,7 +30,10 @@ export default function MainPageCommentBox({ authUserPhoto }) {
         <button
           type="button"
           className="px-2 bg-blue-500 rounded-full text-gray-300"
-          onClick={submitComment}
+          onClick={
+            () => handleSubmitComment(
+              setLoading, setCommentValue, searchParams.get('comment'), commentValue)
+          }
           disabled={(commentValue.length === 0) || isLoading}
         >
           &#10149;
