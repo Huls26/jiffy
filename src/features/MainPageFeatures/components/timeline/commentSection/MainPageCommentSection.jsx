@@ -1,9 +1,9 @@
+import LoadingDot from "@/components/LoadingSkeleton/components/LoadingDot";
 import UserProfile from "@/components/UserProfile";
-import LoadingDot from "../../../../../components/LoadingSkeleton/components/LoadingDot";
+import { db } from "@/lib/fb";
 import MainPageUserComment from "./MainPageUserComment";
 
-import { db } from "@/lib/fb";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -26,7 +26,7 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
       await setDoc(postRef, {
         commentId: postId,
         content: commentValue,
-        createdAt: new Date(), // or serverTimestamp()
+        createdAt: Timestamp.fromDate(new Date()),
         userId,
       });
     } catch (error) {
