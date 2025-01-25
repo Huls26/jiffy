@@ -1,14 +1,15 @@
-import { db } from "@/lib/fb";
+import { auth, db } from "@/lib/fb";
 
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 
-export async function submitComment(
+export default async function submitComment(
   setLoading,
   setCommentValue,
   postId,
   commentValue,
-  userId,
 ) {
+  const userId = auth.currentUser.uid;
+
   setLoading(true);
   try {
     // Generate a document reference with an auto-generated ID
