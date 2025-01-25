@@ -1,41 +1,11 @@
-import LoadingDot from "@/components/LoadingSkeleton/components/LoadingDot";
-import UserProfile from "@/components/UserProfile";
-import { db } from "@/lib/fb";
+import MainPageCommentBox from "./MainPageCommentBox";
 import MainPageUserComment from "./MainPageUserComment";
 
-import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
-import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-export default function MainPageCommentSection({ authUserPhoto, userId }) {
+export default function MainPageCommentSection({ authUserPhoto }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [commentValue, setCommentValue] = useState('');
-  const [isLoading, setLoading] = useState(false);
-
-  async function submitComment() {
-    setLoading(true);
-    try {
-      // Generate a document reference with an auto-generated ID
-      const postRef = doc(collection(db, "userPosts", searchParams.get('comment'), "comments"));
-
-      // Get the auto-generated ID
-      const postId = postRef.id;
-
-      // Use the generated ID to create a new document
-      await setDoc(postRef, {
-        commentId: postId,
-        content: commentValue,
-        createdAt: Timestamp.fromDate(new Date()),
-        userId,
-      });
-    } catch (error) {
-      console.error("Error adding document: ", error);
-    } finally {
-      setLoading(false);
-      setCommentValue('');
-    }
-  }
 
   // If there is no comment query parameter, return null
   if (!searchParams.get('comment')) {
@@ -54,31 +24,7 @@ export default function MainPageCommentSection({ authUserPhoto, userId }) {
         >close</button>
       </div>
 
-      {isLoading && <LoadingDot />}
-      {/* current user Comment input */}
-      <label htmlFor="timeline-comment-input" className='mb-6 flex space-x-2'>
-        <div>
-          <UserProfile photoURL={authUserPhoto} addedClassName={'w-8 h-8 hover:scale-110'} />
-        </div>
-        <input
-          name='timeline-comment-input'
-          type="text"
-          placeholder="Write a comment..."
-          className="w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
-          id='timeline-comment-input'
-          value={commentValue}
-          onChange={(e) => setCommentValue(e.target.value)}
-          maxLength="150"
-        />
-        <button
-          type="button"
-          className="px-2 bg-blue-500 rounded-full text-gray-300"
-          onClick={submitComment}
-          disabled={(commentValue.length === 0) || isLoading}
-        >
-          &#10149;
-        </button>
-      </label>
+      <MainPageCommentBox authUserPhoto={authUserPhoto} />
 
       {/* Comment */}
       <MainPageUserComment authUserPhoto={authUserPhoto} />
