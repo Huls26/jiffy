@@ -1,11 +1,23 @@
+import { db } from "@/lib/fb";
 import MainPageCommentBox from "./MainPageCommentBox";
 import MainPageUserComment from "./MainPageUserComment";
 
+import { collection, getDocs, query, where } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
 
 export default function MainPageCommentSection({ authUserPhoto }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const commentId = searchParams.get('comment');
+
+  async function fetchUserData() {
+    const q = query(collection(db, "userPosts"), where("postId", "==", commentId));
+    const querySnapshot = await getDocs(q);
+
+    console.log("Document data:", querySnapshot.docs.map((doc) => doc.data()));
+  }
+
+  fetchUserData();
 
   // If there is no comment query parameter, return null
   if (!searchParams.get('comment')) {
