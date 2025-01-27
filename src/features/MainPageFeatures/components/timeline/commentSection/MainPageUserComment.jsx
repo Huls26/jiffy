@@ -4,9 +4,12 @@ import { useState } from "react";
 
 import { doc, getDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
+import { useSearchParams } from "react-router-dom";
 
 export default function MainPageUserComment({ authUserPhoto, userId }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [searchParams] = useSearchParams();
+  const commentId = searchParams.get("comment");
 
   const toggleExpand = (event) => {
     event.stopPropagation();
@@ -25,6 +28,8 @@ export default function MainPageUserComment({ authUserPhoto, userId }) {
     }
 
   }
+
+  fetchUserData();
 
   return (
     <div className="mb-4 flex items-center space-x-2">
