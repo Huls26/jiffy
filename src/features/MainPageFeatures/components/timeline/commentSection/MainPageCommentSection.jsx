@@ -4,10 +4,12 @@ import MainPageUserComment from "./MainPageUserComment";
 
 import { collection, getDocs, } from "firebase/firestore";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function MainPageCommentSection({ authUserPhoto }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [usersComment, setUsersComment] = useState([]);
   const commentId = searchParams.get('comment');
 
   async function fetchUserData(queryRef) {
@@ -16,10 +18,13 @@ export default function MainPageCommentSection({ authUserPhoto }) {
     const q = collection(db, "userPosts", commentId, "comments");
     const querySnapshot = await getDocs(q);
 
-    console.log("Document data:", querySnapshot.docs.map((doc) => doc.data()));
+    setUsersComment(querySnapshot.docs);
   }
 
-  fetchUserData();
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   // If there is no comment query parameter, return null
   if (!searchParams.get('comment')) {
@@ -41,9 +46,19 @@ export default function MainPageCommentSection({ authUserPhoto }) {
       <MainPageCommentBox authUserPhoto={authUserPhoto} />
 
       {/* Comment */}
+      {usersComment.map((doc) => {
+        const { commentId, userId, content } = doc.data()
+
+        return (<MainPageUserComment
+          key={commentId}
+          userId={userId}
+          commentData={content}
+        />)
+      }
+      )}
+      {/* <MainPageUserComment authUserPhoto={authUserPhoto} />
       <MainPageUserComment authUserPhoto={authUserPhoto} />
-      <MainPageUserComment authUserPhoto={authUserPhoto} />
-      <MainPageUserComment authUserPhoto={authUserPhoto} />
+      <MainPageUserComment authUserPhoto={authUserPhoto} /> */}
     </section>
   )
 }
