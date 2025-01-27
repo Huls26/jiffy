@@ -1,15 +1,30 @@
 import UserProfile from "@/components/UserProfile";
+import { db } from "@/lib/fb";
 import { useState } from "react";
 
+import { doc, getDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
 
-export default function MainPageUserComment({ authUserPhoto }) {
+export default function MainPageUserComment({ authUserPhoto, userId }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = (event) => {
     event.stopPropagation();
     setIsExpanded(!isExpanded);
   };
+
+  async function fetchUserData() {
+    const docRef = doc(db, "userPosts", commentId, "comments", userId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log("No such document!");
+    }
+
+  }
 
   return (
     <div className="mb-4 flex items-center space-x-2">
@@ -28,4 +43,5 @@ export default function MainPageUserComment({ authUserPhoto }) {
 
 MainPageUserComment.propTypes = {
   authUserPhoto: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
 }
