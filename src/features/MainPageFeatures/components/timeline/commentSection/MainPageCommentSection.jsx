@@ -56,9 +56,6 @@ export default function MainPageCommentSection({ authUserPhoto }) {
         />)
       }
       )}
-      {/* <MainPageUserComment authUserPhoto={authUserPhoto} />
-      <MainPageUserComment authUserPhoto={authUserPhoto} />
-      <MainPageUserComment authUserPhoto={authUserPhoto} /> */}
     </section>
   )
 }

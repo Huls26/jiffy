@@ -11,7 +11,6 @@ export default function MainPageUserComment({ userId, commentData }) {
   const [searchParams] = useSearchParams();
   const commentId = searchParams.get("comment");
 
-  console.log(commentData)
   const toggleExpand = (event) => {
     event.stopPropagation();
     setIsExpanded(!isExpanded);
