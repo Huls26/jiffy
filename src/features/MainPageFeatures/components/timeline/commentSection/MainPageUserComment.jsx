@@ -26,10 +26,7 @@ export default function MainPageUserComment({ authUserPhoto, userId }) {
       // docSnap.data() will be undefined in this case
       console.log("No such document!");
     }
-
   }
-
-  fetchUserData();
 
   return (
     <div className="mb-4 flex items-center space-x-2">
