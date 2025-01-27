@@ -6,11 +6,12 @@ import { doc, getDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
 
-export default function MainPageUserComment({ authUserPhoto, userId }) {
+export default function MainPageUserComment({ userId, commentData }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchParams] = useSearchParams();
   const commentId = searchParams.get("comment");
 
+  console.log(commentData)
   const toggleExpand = (event) => {
     event.stopPropagation();
     setIsExpanded(!isExpanded);
@@ -34,7 +35,9 @@ export default function MainPageUserComment({ authUserPhoto, userId }) {
       <UserProfile photoURL={authUserPhoto} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
       <div className="w-full">
         <h1 className="mb-1 flex items-center justify-between font-semibold text-sky-400 leading-4">Username || email {<span className="text-gray-300 text-xs leading-3">date created</span>}</h1>
-        <p className={`text-sm font-mono leading-4 ${isExpanded ? '' : 'truncate-multiline'}`}>The harmonic notes are flying and I'm happy with it. sample text right random words added more words sample text testing is this correct.</p>
+        <p className={`text-sm font-mono leading-4 ${isExpanded ? '' : 'truncate-multiline'}`}>
+          {commentData}
+        </p>
         <button type="button" onClick={toggleExpand} className="text-blue-500 text-xs">
           {isExpanded ? 'Read Less' : 'Read More'}
         </button>
@@ -44,6 +47,6 @@ export default function MainPageUserComment({ authUserPhoto, userId }) {
 }
 
 MainPageUserComment.propTypes = {
-  authUserPhoto: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,
+  commentData: PropTypes.string.isRequired,
 }
