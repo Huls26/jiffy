@@ -8,22 +8,23 @@ import { useSearchParams } from "react-router-dom";
 
 export default function MainPageUserComment({ userId, commentData }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  // Hook to get search parameters from the URL
   const [searchParams] = useSearchParams();
-  const commentId = searchParams.get("comment");
+  const commentId = searchParams.get("comment"); // Get the comment ID from the URL
 
-  const paragraphRef = useRef(null);
-  const [isMultiLine, setIsMultiLine] = useState(false);
+  const paragraphRef = useRef(null); // Create a reference to the paragraph element
+  const [isMultiLine, setIsMultiLine] = useState(false);// State to track if the comment is multiline
 
-
-  // toggle expand comment
+  // Function to toggle the expansion of the comment
   const toggleExpand = (event) => {
-    event.stopPropagation();
-    setIsExpanded(!isExpanded);
+    event.stopPropagation(); // Prevent the event from bubbling up
+    setIsExpanded(!isExpanded); // Toggle the expanded state
   };
 
+  // Function to fetch user data from the database
   async function fetchUserData() {
-    const docRef = doc(db, "userPosts", commentId, "comments", userId);
-    const docSnap = await getDoc(docRef);
+    const docRef = doc(db, "userPosts", commentId, "comments", userId); // Reference to the document in the database
+    const docSnap = await getDoc(docRef); // Fetch the document
 
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
@@ -34,9 +35,10 @@ export default function MainPageUserComment({ userId, commentData }) {
   }
 
   // make this feature responsive
+  // Effect to make the feature responsive
   useEffect(() => {
     if (paragraphRef.current) {
-      const paragraph = paragraphRef.current;
+      const paragraph = paragraphRef.current; // Get the current paragraph element
 
       // Check if the element is truncated
       const isElementTruncated = paragraph.scrollHeight > paragraph.clientHeight ||
