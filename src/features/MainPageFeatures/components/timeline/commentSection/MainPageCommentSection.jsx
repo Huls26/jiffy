@@ -23,8 +23,10 @@ export default function MainPageCommentSection({ authUserPhoto }) {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    fetchUserData();
-  }, []);
+    if (commentId) {
+      fetchUserData();
+    }
+  }, [commentId]);
 
   // If there is no comment query parameter, return null
   if (!searchParams.get('comment')) {
