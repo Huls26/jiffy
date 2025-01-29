@@ -7,8 +7,10 @@ export default function MainPageReadMoreBtn({ isMultiLine, isExpanded, setIsExpa
     setIsExpanded(!isExpanded); // Toggle the expanded state
   };
 
+  if (!isMultiLine) return null;
+
   return (
-    isMultiLine && <button type="button" onClick={toggleExpand} className="text-blue-500 text-xs">
+    <button type="button" onClick={toggleExpand} className="text-blue-500 text-xs">
       {isExpanded ? 'Read Less' : 'Read More'}
     </button>
   )
