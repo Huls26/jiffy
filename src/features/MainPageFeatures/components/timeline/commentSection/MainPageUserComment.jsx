@@ -29,19 +29,30 @@ export default function MainPageUserComment({ userId, commentData }) {
     }
   }
 
-  // make this feature responsive
   // Effect to make the feature responsive
   useEffect(() => {
-    if (paragraphRef.current) {
-      const paragraph = paragraphRef.current; // Get the current paragraph element
+    const checkMultiline = () => {
+      if (paragraphRef.current) {
+        const paragraph = paragraphRef.current;
 
-      // Check if the element is truncated
-      const isElementTruncated = paragraph.scrollHeight > paragraph.clientHeight ||
-        paragraph.scrollWidth > paragraph.clientWidth;
+        // Check if the element is truncated
+        const isElementTruncated =
+          paragraph.scrollHeight > paragraph.clientHeight ||
+          paragraph.scrollWidth > paragraph.clientWidth;
 
-      // Check if the paragraph is multiline
-      setIsMultiLine(isElementTruncated);
-    }
+        // Update state based on truncation check
+        setIsMultiLine(isElementTruncated);
+      }
+    };
+
+    // Run on mount
+    checkMultiline();
+
+    // Attach resize listener
+    window.addEventListener("resize", checkMultiline);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", checkMultiline);
   }, []);
 
   return (
