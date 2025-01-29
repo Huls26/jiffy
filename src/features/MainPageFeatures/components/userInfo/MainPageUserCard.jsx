@@ -11,7 +11,7 @@ export default function MainPageUserCard() {
   const { email, username, photoURL } = globalState;
 
   return (
-    <section className="md:max-w-md p-1 pl-2 flex cursor-pointer">
+    <section className="md:max-w-md p-1 pl-2 flex items-center cursor-pointer">
       <MainPageUserProfileLink
         to={`profile/${username}`}
         photoURL={photoURL}
