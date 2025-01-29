@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import MainPageReadMoreBtn from "./MainPageReadMoreBtn";
 
 export default function MainPageUserComment({ userId, commentData }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -14,12 +15,6 @@ export default function MainPageUserComment({ userId, commentData }) {
 
   const paragraphRef = useRef(null); // Create a reference to the paragraph element
   const [isMultiLine, setIsMultiLine] = useState(false);// State to track if the comment is multiline
-
-  // Function to toggle the expansion of the comment
-  const toggleExpand = (event) => {
-    event.stopPropagation(); // Prevent the event from bubbling up
-    setIsExpanded(!isExpanded); // Toggle the expanded state
-  };
 
   // Function to fetch user data from the database
   async function fetchUserData() {
@@ -58,11 +53,12 @@ export default function MainPageUserComment({ userId, commentData }) {
         <p ref={paragraphRef} className={`text-sm font-mono leading-4 ${isExpanded ? '' : 'truncate-multiline'}`}>
           {commentData}
         </p>
-        {
-          isMultiLine && <button type="button" onClick={toggleExpand} className="text-blue-500 text-xs">
-            {isExpanded ? 'Read Less' : 'Read More'}
-          </button>
-        }
+
+        <MainPageReadMoreBtn
+          isMultiLine={isMultiLine}
+          isExpanded={isExpanded}
+          setIsExpanded={setIsExpanded}
+        />
       </div>
     </div>
   )
