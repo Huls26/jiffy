@@ -2,7 +2,7 @@ import { db } from "@/lib/fb";
 import MainPageCommentBox from "./MainPageCommentBox";
 import MainPageUserComment from "./MainPageUserComment";
 
-import { collection, getDocs, } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -12,22 +12,31 @@ export default function MainPageCommentSection({ authUserPhoto }) {
   const [usersComment, setUsersComment] = useState([]);
   const commentId = searchParams.get('comment');
 
-  async function fetchUserData(queryRef) {
+  function fetchUserData(queryRef) {
     if (!commentId) return;
 
     // queryRef will use to make it customable later
     // const q = query(collection(db, "userPosts"), where("postId", "==", commentId), collection(db, "userPosts", commentId, "comments"));
-    const q = collection(db, "userPosts", commentId, "comments");
-    const querySnapshot = await getDocs(q);
 
-    setUsersComment(querySnapshot.docs);
+    // add query order by createdAt
+    const q = collection(db, "userPosts", commentId, "comments");
+
+    // Subscribe to real-time updates
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      setUsersComment(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+    });
+
+    return unsubscribe; // Return the unsubscribe function to clean up
   }
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    if (commentId) {
-      fetchUserData();
-    }
+    const unsubscribe = fetchUserData();
+    console.log(unsubscribe)
+
+    return () => {
+      if (unsubscribe) unsubscribe(); // Cleanup listener on unmount
+    };
   }, [commentId]);
 
   // If there is no comment query parameter, return null
@@ -51,7 +60,7 @@ export default function MainPageCommentSection({ authUserPhoto }) {
 
       {/* Comment */}
       {usersComment.map((doc) => {
-        const { commentId, userId, content } = doc.data()
+        const { commentId, userId, content } = doc;
 
         return (<MainPageUserComment
           key={commentId}
