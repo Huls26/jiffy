@@ -3,7 +3,7 @@ import MainPageTimeline from "./sections/MainPageTimeline";
 
 export default function MainPageFeatures() {
   return (
-    <main className="max-w-6xl m-auto pb-16 md:px-2 flex flex-col-reverse md:flex-row">
+    <main className="max-w-6xl m-auto md:px-2 flex flex-col-reverse md:flex-row">
       <MainPageTimeline />
       <MainPageSidebar />
     </main>
