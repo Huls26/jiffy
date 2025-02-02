@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export default function MainPagePostsFeed({ userPosts }) {
   return (
-    <section className='grid place-self-center space-y-3'>
+    <section className='pb-72 md:pb-52 grid place-items-center h-screen space-y-3 overflow-y-auto'>
       {userPosts?.map((userPost) => {
         return (
           <MainPagePostCard
