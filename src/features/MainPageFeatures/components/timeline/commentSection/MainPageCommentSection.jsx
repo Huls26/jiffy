@@ -13,6 +13,8 @@ export default function MainPageCommentSection({ authUserPhoto }) {
   const commentId = searchParams.get('comment');
 
   async function fetchUserData(queryRef) {
+    if (!commentId) return;
+
     // queryRef will use to make it customable later
     // const q = query(collection(db, "userPosts"), where("postId", "==", commentId), collection(db, "userPosts", commentId, "comments"));
     const q = collection(db, "userPosts", commentId, "comments");
