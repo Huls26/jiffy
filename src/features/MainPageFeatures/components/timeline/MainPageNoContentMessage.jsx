@@ -6,6 +6,8 @@ export default function MainPageNoContentMessage({ userPosts }) {
       <h1 className='mt-5 font-bold sm:text-xl text-cyan-500 text-pretty'>Sorry No Content Right Now! :(</h1>
     )
   }
+
+  return null;
 }
 
 MainPageNoContentMessage.propTypes = {
