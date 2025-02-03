@@ -13,7 +13,7 @@ export default function LoginSignUpContainer({ children }) {
       className="
                   flex flex-col
                   mx-8 my-16 p-5 sm500:m-auto sm500:mt-10 sm500:p-10 max-w-md rounded-md  
-                  dark:bg-gray-900 dark:text-gray-100 
+                  dark:bg-gray-900 dark:text-gray-100
                 "
     >
       {children}
