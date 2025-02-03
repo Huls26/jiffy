@@ -13,8 +13,6 @@ export default function MainPageCommentSection({ authUserPhoto }) {
   const [commentSize, setCommentSize] = useState("");
   const commentId = searchParams.get('comment');
 
-  console.log("add scroll to users post Timeline")
-
   function fetchUserData(queryRef) {
     if (!commentId) return;
 
