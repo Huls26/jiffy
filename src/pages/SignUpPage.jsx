@@ -20,13 +20,15 @@ export default function SignUpPage() {
   usePageTitle("SignUp");
 
   return (
-    <LoginSignUpContainer>
-      <ReducerContextProvider
-        reducerMethod={reducerMethod}
-        INITIAL_STATE={INITIAL_STATE}
-      >
-        <SignUpFeatures />
-      </ReducerContextProvider>
-    </LoginSignUpContainer>
+    <main className="h-screen py-10 overflow-auto">
+      <LoginSignUpContainer>
+        <ReducerContextProvider
+          reducerMethod={reducerMethod}
+          INITIAL_STATE={INITIAL_STATE}
+        >
+          <SignUpFeatures />
+        </ReducerContextProvider>
+      </LoginSignUpContainer>
+    </main>
   );
 }
