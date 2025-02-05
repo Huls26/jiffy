@@ -15,19 +15,36 @@ export default function MainPageUserComment({ userId, commentData }) {
 
   const paragraphRef = useRef(null); // Create a reference to the paragraph element
   const [isMultiLine, setIsMultiLine] = useState(false);// State to track if the comment is multiline
+  const [userInfo, setUserInfo] = useState({});
 
-  // Function to fetch user data from the database
-  async function fetchUserData() {
-    const docRef = doc(db, "userPosts", commentId, "comments", userId); // Reference to the document in the database
-    const docSnap = await getDoc(docRef); // Fetch the document
+  useEffect(() => {
+    if (!userId) return; // Prevent fetching if userId is missing
 
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log("No such document!");
+    async function fetchUserData() {
+      try {
+        const docRef = doc(db, "users", userId); // Create a reference to the user document in the database
+        const docSnap = await getDoc(docRef); // Fetch the document snapshot
+
+        // Check if the document exists
+        if (docSnap.exists()) {
+          // If it exists, set the user info state with the document data
+          setUserInfo(docSnap.data());
+        } else {
+          // If it doesn't exist, log an error and set the user info state to an empty object
+          console.error("No such document!");
+          setUserInfo({});
+        }
+      } catch (error) {
+        // Catch and log any errors that occur during the fetch operation
+        console.error("Error fetching user data:", error);
+        // Set the user info state to an empty object in case of an error
+        setUserInfo({});
+      }
     }
-  }
+
+    // Call the fetchUserData function to fetch the user data
+    fetchUserData();
+  }, [userId]); // Runs when userId changes
 
   // Effect to make the feature responsive
   useEffect(() => {
@@ -57,10 +74,9 @@ export default function MainPageUserComment({ userId, commentData }) {
 
   return (
     <div className="mb-4 flex items-center space-x-2">
-      {console.log("change photoURL to the user's who is commenting")}
-      <UserProfile photoURL={''} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
+      <UserProfile photoURL={userInfo.photoURL} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
       <div className="w-full">
-        <h1 className="mb-1 flex items-center justify-between font-semibold text-sky-400 leading-4">Username || email {<span className="text-gray-300 text-xs leading-3">date created</span>}</h1>
+        <h1 className="mb-1 flex items-center justify-between font-semibold text-sky-400 leading-4">{userInfo.username} {<span className="text-gray-300 text-xs leading-3">date created</span>}</h1>
         <p ref={paragraphRef} className={`text-sm font-mono leading-4 ${isExpanded ? '' : 'truncate-multiline'}`}>
           {commentData}
         </p>
