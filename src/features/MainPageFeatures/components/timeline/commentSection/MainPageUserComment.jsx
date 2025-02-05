@@ -4,14 +4,10 @@ import { db } from "@/lib/fb";
 import { doc, getDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import MainPageReadMoreBtn from "./MainPageReadMoreBtn";
 
 export default function MainPageUserComment({ userId, commentData }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  // Hook to get search parameters from the URL
-  const [searchParams] = useSearchParams();
-  const commentId = searchParams.get("comment"); // Get the comment ID from the URL
 
   const paragraphRef = useRef(null); // Create a reference to the paragraph element
   const [isMultiLine, setIsMultiLine] = useState(false);// State to track if the comment is multiline
