@@ -7,7 +7,7 @@ export default function MainPagePostsFeed({ userPosts }) {
   if (userPosts?.length === 0) return null;
 
   return (
-    <section className='pb-72 md:pb-52 grid place-self-center h-screen space-y-5 md:space-y-7 overflow-y-auto timeline-scroll'>
+    <section className='pb-72 md:pb-52 flex flex-col items-center h-screen space-y-5 md:space-y-7 overflow-y-auto timeline-scroll'>
       {userPosts?.map((userPost) => {
         return (
           <MainPagePostCard
