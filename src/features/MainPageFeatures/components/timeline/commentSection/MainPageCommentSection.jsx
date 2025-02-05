@@ -66,7 +66,7 @@ export default function MainPageCommentSection({ authUserPhoto }) {
         return (<MainPageUserComment
           key={commentId}
           userId={userId}
-          commentData={content}
+          content={content}
         />)
       }
       )}

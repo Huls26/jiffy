@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import MainPageReadMoreBtn from "./MainPageReadMoreBtn";
 
-export default function MainPageUserComment({ userId, commentData }) {
+export default function MainPageUserComment({ userId, content }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const paragraphRef = useRef(null); // Create a reference to the paragraph element
@@ -74,7 +74,7 @@ export default function MainPageUserComment({ userId, commentData }) {
       <div className="w-full">
         <h1 className="mb-1 flex items-center justify-between font-semibold text-sky-400 leading-4">{userInfo.username} {<span className="text-gray-300 text-xs leading-3">date created</span>}</h1>
         <p ref={paragraphRef} className={`text-sm font-mono leading-4 ${isExpanded ? '' : 'truncate-multiline'}`}>
-          {commentData}
+          {content}
         </p>
 
         <MainPageReadMoreBtn
@@ -89,5 +89,5 @@ export default function MainPageUserComment({ userId, commentData }) {
 
 MainPageUserComment.propTypes = {
   userId: PropTypes.string.isRequired,
-  commentData: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
 }
