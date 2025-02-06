@@ -1,17 +1,19 @@
 import UserProfile from "@/components/UserProfile";
 import { db } from "@/lib/fb";
+import formatRelativeTime from "../../../utils/timeline/formatRelativeTime";
 
 import { doc, getDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import MainPageReadMoreBtn from "./MainPageReadMoreBtn";
 
-export default function MainPageUserComment({ userId, content }) {
+export default function MainPageUserComment({ userId, content, dateCreated = "1" }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const paragraphRef = useRef(null); // Create a reference to the paragraph element
   const [isMultiLine, setIsMultiLine] = useState(false);// State to track if the comment is multiline
   const [userInfo, setUserInfo] = useState({});
+  const relativeTime = formatRelativeTime(dateCreated);
 
   useEffect(() => {
     if (!userId) return; // Prevent fetching if userId is missing
@@ -72,7 +74,7 @@ export default function MainPageUserComment({ userId, content }) {
     <div className="mb-4 flex items-center space-x-2">
       <UserProfile photoURL={userInfo.photoURL} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
       <div className="w-full">
-        <h1 className="mb-1 flex items-center justify-between font-semibold text-sky-400 leading-4">{userInfo.username} {<span className="text-gray-300 text-xs leading-3">date created</span>}</h1>
+        <h1 className="mb-1 flex items-center justify-between font-semibold text-sky-400 leading-4">{userInfo.username} <span className="text-gray-300 text-xs leading-3">{relativeTime}</span></h1>
         <p ref={paragraphRef} className={`text-sm font-mono leading-4 ${isExpanded ? '' : 'truncate-multiline'}`}>
           {content}
         </p>
@@ -90,4 +92,5 @@ export default function MainPageUserComment({ userId, content }) {
 MainPageUserComment.propTypes = {
   userId: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
+  dateCreated: PropTypes.string.isRequired,
 }
