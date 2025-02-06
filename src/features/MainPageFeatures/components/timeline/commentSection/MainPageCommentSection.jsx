@@ -61,12 +61,13 @@ export default function MainPageCommentSection({ authUserPhoto }) {
 
       {/* Comment */}
       {usersComment.map((doc) => {
-        const { commentId, userId, content } = doc;
+        const { commentId, userId, content, createdAt } = doc;
 
         return (<MainPageUserComment
           key={commentId}
           userId={userId}
           content={content}
+          createdAt={createdAt}
         />)
       }
       )}

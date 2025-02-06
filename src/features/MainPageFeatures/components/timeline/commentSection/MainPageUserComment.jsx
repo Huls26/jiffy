@@ -7,13 +7,13 @@ import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import MainPageReadMoreBtn from "./MainPageReadMoreBtn";
 
-export default function MainPageUserComment({ userId, content, dateCreated = "1" }) {
+export default function MainPageUserComment({ userId, content, createdAt }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const paragraphRef = useRef(null); // Create a reference to the paragraph element
   const [isMultiLine, setIsMultiLine] = useState(false);// State to track if the comment is multiline
   const [userInfo, setUserInfo] = useState({});
-  const relativeTime = formatRelativeTime(dateCreated);
+  const relativeTime = formatRelativeTime(createdAt);
 
   useEffect(() => {
     if (!userId) return; // Prevent fetching if userId is missing
@@ -92,5 +92,5 @@ export default function MainPageUserComment({ userId, content, dateCreated = "1"
 MainPageUserComment.propTypes = {
   userId: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  dateCreated: PropTypes.string.isRequired,
+  createAt: PropTypes.any.isRequired,
 }
