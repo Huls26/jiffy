@@ -1,4 +1,4 @@
-import formatRelativeTime from '../../utils/timeline/formatRelativeTime';
+import formatRelativeTime from '../../utils/formatRelativeTime';
 import MainPageUserProfileLink from '../userInfo/MainPageUserProfileLink';
 
 import PropTypes from "prop-types";

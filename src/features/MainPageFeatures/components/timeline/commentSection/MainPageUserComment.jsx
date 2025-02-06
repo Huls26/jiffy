@@ -1,6 +1,6 @@
 import UserProfile from "@/components/UserProfile";
 import { db } from "@/lib/fb";
-import formatRelativeTime from "../../../utils/timeline/formatRelativeTime";
+import formatRelativeTime from "../../../utils/formatRelativeTime";
 
 import { doc, getDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
