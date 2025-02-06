@@ -47,7 +47,7 @@ export default function MainPageCommentSection({ authUserPhoto }) {
 
   console.log("code clean up")
   return (
-    <section className='p-2 pb-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300 text-left md:block md:static md:-translate-x-0 md:translate-y-0 md:w-full md:max-w-md md:top-0 md:left-0 md:mt-5'>
+    <section className='p-2 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-slate-950 rounded-lg z-50 text-gray-300 text-left md:block md:static md:-translate-x-0 md:translate-y-0 md:w-full md:max-w-md md:top-0 md:left-0 md:mt-5'>
       <div className="flex justify-between items-start">
         <h1 className="mb-2 text-gray-200 text-lg font-semibold">Comments ({commentSize})</h1>
         <button
