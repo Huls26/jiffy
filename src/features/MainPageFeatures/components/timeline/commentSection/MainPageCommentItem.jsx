@@ -9,11 +9,14 @@ export default function MainPageCommentItem({ username, content, createdAt }) {
   const { paragraphRef, isMultiLine, } = useCheckMultiline()
   const [isExpanded, setIsExpanded] = useState(false);
   const relativeTime = formatRelativeTime(createdAt);
+  const truncatedStyle = "text-sm font-mono leading-4 truncate-multiline";
+  const defaultStyle = "text-sm font-mono leading-4";
+  const isTruncatedStyle = isExpanded ? defaultStyle : truncatedStyle;
 
   return (
     <div className="w-full">
       <h1 className="mb-1 flex items-center justify-between font-semibold text-sky-400 leading-4">{username} <span className="text-gray-300 text-xs leading-3">{relativeTime}</span></h1>
-      <p ref={paragraphRef} className={`text-sm font-mono leading-4 ${isExpanded ? '' : 'truncate-multiline'}`}>
+      <p ref={paragraphRef} className={isTruncatedStyle}>
         {content}
       </p>
 
