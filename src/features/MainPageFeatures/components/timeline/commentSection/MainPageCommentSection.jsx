@@ -5,11 +5,20 @@ import useComment from "../../../hooks/commentSection/useComment";
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
 
-
+/**
+ * MainPageCommentSection component displays the comments for a specific post.
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.authUserPhoto - The photo URL of the authenticated user
+ * @param {string} props.userId - The ID of the authenticated user
+ * 
+ * @returns {JSX.Element} - The MainPageCommentSection component
+ */
 export default function MainPageCommentSection({ authUserPhoto }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const { usersComment, commentSize } = useComment();
 
+  // Hide the comment section if no comment ID is present in the URL
   if (!searchParams.get('comment')) {
     return null;
   }
