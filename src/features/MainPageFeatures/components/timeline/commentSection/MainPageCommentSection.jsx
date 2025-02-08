@@ -1,6 +1,6 @@
 import MainPageCommentBox from "./MainPageCommentBox";
-import MainPageUserComment from "./MainPageUserComment";
 import useComment from "../../../hooks/commentSection/useComment";
+import MainPageCommentList from "./MainPageCommentList";
 
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
@@ -35,19 +35,7 @@ export default function MainPageCommentSection({ authUserPhoto }) {
       </div>
 
       <MainPageCommentBox authUserPhoto={authUserPhoto} />
-
-      {/* Comment */}
-      {usersComment.map((doc) => {
-        const { commentId, userId, content, createdAt } = doc;
-
-        return (<MainPageUserComment
-          key={commentId}
-          userId={userId}
-          content={content}
-          createdAt={createdAt}
-        />)
-      }
-      )}
+      <MainPageCommentList usersCommentList={usersComment} />
     </section>
   )
 }
