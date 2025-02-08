@@ -37,10 +37,6 @@ export default function MainPagePostCard({ userPost }) {
     }
   }
 
-  console.log("add show more button to comment section");
-  console.log("user comment should be displayed in the comment section");
-  console.log("create context for comment section to pass data to the comment section");
-  console.log("Put state to component of MainPagePostCardBtn like and comment button put the state")
   console.log("bug: comment button background color is active. When user click other comment button with different user post")
   console.log("code clean up")
   return (
