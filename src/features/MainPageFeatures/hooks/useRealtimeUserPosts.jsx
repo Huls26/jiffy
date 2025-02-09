@@ -3,22 +3,33 @@ import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestor
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+/**
+ * Custom hook to fetch and listen for real-time updates on user posts.
+ * The hook accepts search parameters to filter posts based on "likes" or "following".
+ *
+ * @returns {Array} An array containing the user posts fetched from Firestore.
+ */
 export default function useRealtimeUserPosts() {
+  // State variable to store the user posts snapshot
   const [userPosts, setUserPostsSnapshot] = useState(null);
+  // Use the useSearchParams hook from react-router-dom to access search parameters
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    // Create a query defending on the search parameters
+    // Function to create a query based on the search parameters
     function queryFilter() {
       switch (searchParams.get("filter")) {
         case "likes":
+          // Query to fetch posts sorted by likes in descending order
           return query(collection(db, "userPosts"), orderBy("likes", "desc"));
         case "following":
+          // Query to fetch posts from followed users, sorted by date created in descending order, limited to 10 posts
           return query(
             collection(db, "userPosts"),
             orderBy('dateCreated', 'desc'),
             limit(10));
         default:
+          // Default query to fetch all posts, sorted by date created in descending order, limited to 10 posts
           return query(
             collection(db, "userPosts"),
             orderBy('dateCreated', 'desc'),
@@ -27,6 +38,7 @@ export default function useRealtimeUserPosts() {
       }
     }
 
+    // Create a query using the queryFilter function
     const myQuery = queryFilter();
     // Listen for real-time updates using the query
     const unsubscribe = onSnapshot(myQuery, (snapshot) => {
