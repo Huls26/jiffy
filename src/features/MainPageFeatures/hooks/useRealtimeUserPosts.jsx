@@ -1,17 +1,33 @@
 import { db } from '@/lib/fb';
 import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export default function useRealtimeUserPosts() {
   const [userPosts, setUserPostsSnapshot] = useState(null);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    // Create a query with constraints
-    const myQuery = query(
-      collection(db, "userPosts"),
-      orderBy('dateCreated', 'desc'),
-      limit(10),
-    );
+    // Create a query defending on the search parameters
+    function queryFilter() {
+      switch (searchParams.get("filter")) {
+        case "likes":
+          return query(collection(db, "userPosts"), orderBy("likes", "desc"));
+        case "following":
+          return query(
+            collection(db, "userPosts"),
+            orderBy('dateCreated', 'desc'),
+            limit(10));
+        default:
+          return query(
+            collection(db, "userPosts"),
+            orderBy('dateCreated', 'desc'),
+            limit(10)
+          );
+      }
+    }
+
+    const myQuery = queryFilter();
     // Listen for real-time updates using the query
     const unsubscribe = onSnapshot(myQuery, (snapshot) => {
       if (snapshot.empty) {
@@ -41,7 +57,7 @@ export default function useRealtimeUserPosts() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [searchParams]);
 
   return (
     userPosts
