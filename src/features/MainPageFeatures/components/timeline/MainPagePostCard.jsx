@@ -37,8 +37,6 @@ export default function MainPagePostCard({ userPost }) {
     }
   }
 
-  console.log("bug: comment button background color is active. When user click other comment button with different user post")
-  console.log("code clean up")
   return (
     <section
       className='space-y-2 bg-slate-950 text-start min-w-[270px] max-w-xl sm:rounded-lg border-4 border-gray-950 cursor-pointer'
