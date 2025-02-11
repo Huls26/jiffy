@@ -7,6 +7,7 @@ export default function MainPageCommentList({ usersCommentList }) {
       {usersCommentList?.map(({ commentId, userId, content, createdAt }) => (
         <MainPageUserComment
           key={commentId}
+          commentId={commentId}
           userId={userId}
           content={content}
           createdAt={createdAt}

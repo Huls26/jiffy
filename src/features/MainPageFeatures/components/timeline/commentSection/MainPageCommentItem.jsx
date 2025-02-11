@@ -5,7 +5,7 @@ import formatRelativeTime from "../../../utils/formatRelativeTime";
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-export default function MainPageCommentItem({ username, content, createdAt }) {
+export default function MainPageCommentItem({ username, content, createdAt, commentId }) {
   const { paragraphRef, isMultiLine, } = useCheckMultiline()
   const [isExpanded, setIsExpanded] = useState(false);
   const relativeTime = formatRelativeTime(createdAt);
@@ -13,6 +13,7 @@ export default function MainPageCommentItem({ username, content, createdAt }) {
   const defaultStyle = "text-sm font-mono leading-4";
   const isTruncatedStyle = isExpanded ? defaultStyle : truncatedStyle;
 
+  console.log(commentId);
   return (
     <div className="w-full">
       <div className="flex items-center justify-between">
@@ -38,6 +39,7 @@ export default function MainPageCommentItem({ username, content, createdAt }) {
 }
 
 MainPageCommentItem.propTypes = {
+  commentId: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   createdAt: PropTypes.any.isRequired,
