@@ -15,7 +15,15 @@ export default function MainPageCommentItem({ username, content, createdAt }) {
 
   return (
     <div className="w-full">
-      <h1 className="mb-1 flex items-center justify-between font-semibold text-sky-400 leading-4">{username} <span className="text-gray-300 text-xs leading-3">{relativeTime}</span></h1>
+      <div className="flex items-center justify-between">
+        <h1 className='font-semibold text-sky-400 leading-4'>
+          {username}
+          <span className="ml-2 text-gray-500 text-xs leading-3">{relativeTime}</span>
+        </h1>
+
+        <button type="button" className='text-sm text-red-600 hover:text-red-500'>remove</button>
+      </div>
+
       <p ref={paragraphRef} className={isTruncatedStyle}>
         {content}
       </p>
