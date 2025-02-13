@@ -2,13 +2,15 @@ import useCheckMultiline from '../../../hooks/commentSection/useCheckMultiline';
 import MainPageReadMoreBtn from './MainPageReadMoreBtn';
 import formatRelativeTime from "../../../utils/formatRelativeTime";
 import { db } from '@/lib/fb';
+import { UserCommentContext } from "@/features/MainPageFeatures/context/MainPageUserCommentDataContext"
 
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { doc, deleteDoc } from "firebase/firestore";
 
-export default function MainPageCommentItem({ username, content, createdAt, commentId }) {
+export default function MainPageCommentItem({ username }) {
+  const { content, createdAt, commentId } = useContext(UserCommentContext);
   const { paragraphRef, isMultiLine, } = useCheckMultiline()
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchParams] = useSearchParams();
@@ -51,8 +53,5 @@ export default function MainPageCommentItem({ username, content, createdAt, comm
 }
 
 MainPageCommentItem.propTypes = {
-  commentId: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
-  createdAt: PropTypes.any.isRequired,
 };

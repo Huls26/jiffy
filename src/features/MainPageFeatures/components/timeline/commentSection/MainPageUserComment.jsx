@@ -6,7 +6,7 @@ import { UserCommentContext } from "@/features/MainPageFeatures/context/MainPage
 import { useContext } from "react";
 
 export default function MainPageUserComment() {
-  const { userId, content, createdAt, commentId } = useContext(UserCommentContext);
+  const { userId } = useContext(UserCommentContext);
   const userInfo = useFetchUserData(userId)
 
   return (
@@ -16,10 +16,7 @@ export default function MainPageUserComment() {
         addedClassName={'w-10 h-10 hover:scale-110 shrink-0'}
       />
       <MainPageCommentItem
-        commentId={commentId}
-        content={content}
         username={userInfo.username}
-        createdAt={createdAt}
       />
     </div>
   )
