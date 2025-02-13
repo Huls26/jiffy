@@ -1,17 +1,14 @@
 import MainPageUserComment from "./MainPageUserComment";
+import { UserCommentContext } from "@/features/MainPageFeatures/context/MainPageUserCommentDataContext"
 import PropTypes from "prop-types";
 
 export default function MainPageCommentList({ usersCommentList }) {
   return (
     <>
-      {usersCommentList?.map(({ commentId, userId, content, createdAt }) => (
-        <MainPageUserComment
-          key={commentId}
-          commentId={commentId}
-          userId={userId}
-          content={content}
-          createdAt={createdAt}
-        />
+      {usersCommentList?.map((commentData) => (
+        <UserCommentContext.Provider key={commentData.id} value={commentData}>
+          <MainPageUserComment />
+        </UserCommentContext.Provider>
       ))}
     </>
   )
