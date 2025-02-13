@@ -1,10 +1,12 @@
 import UserProfile from "@/components/UserProfile";
 import useFetchUserData from "../../../hooks/commentSection/useFetchUserData";
 import MainPageCommentItem from "./MainPageCommentItem";
+import { UserCommentContext } from "@/features/MainPageFeatures/context/MainPageUserCommentDataContext"
 
-import PropTypes from "prop-types";
+import { useContext } from "react";
 
-export default function MainPageUserComment({ userId, content, createdAt, commentId }) {
+export default function MainPageUserComment() {
+  const { userId, content, createdAt, commentId } = useContext(UserCommentContext);
   const userInfo = useFetchUserData(userId)
 
   return (
@@ -18,11 +20,4 @@ export default function MainPageUserComment({ userId, content, createdAt, commen
       />
     </div>
   )
-}
-
-MainPageUserComment.propTypes = {
-  commmentId: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  createAt: PropTypes.any.isRequired,
 }
