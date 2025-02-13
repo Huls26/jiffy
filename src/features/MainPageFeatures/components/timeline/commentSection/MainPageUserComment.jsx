@@ -11,7 +11,10 @@ export default function MainPageUserComment() {
 
   return (
     <div className="mb-4 flex items-center space-x-2">
-      <UserProfile photoURL={userInfo.photoURL} addedClassName={'w-10 h-10 hover:scale-110 shrink-0'} />
+      <UserProfile
+        photoURL={userInfo.photoURL}
+        addedClassName={'w-10 h-10 hover:scale-110 shrink-0'}
+      />
       <MainPageCommentItem
         commentId={commentId}
         content={content}

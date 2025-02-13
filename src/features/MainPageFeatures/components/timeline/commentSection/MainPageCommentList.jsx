@@ -6,7 +6,9 @@ export default function MainPageCommentList({ usersCommentList }) {
   return (
     <>
       {usersCommentList?.map((commentData) => (
-        <UserCommentContext.Provider key={commentData.id} value={commentData}>
+        <UserCommentContext.Provider
+          key={commentData.id}
+          value={commentData}>
           <MainPageUserComment />
         </UserCommentContext.Provider>
       ))}
