@@ -51,7 +51,7 @@ function reducerAction(state, action) {
  * @returns {string} currentUserId - The current user's ID.
  */
 export default function usePostInteraction(userPost) {
-  const currentUserId = auth.currentUser.uid;
+  const currentUserId = auth.currentUser?.uid;
   // Memoize the initial state
   const initializeState = useMemo(() => {
     const isUserLiked = userPost?.likedUsers.includes(currentUserId);
