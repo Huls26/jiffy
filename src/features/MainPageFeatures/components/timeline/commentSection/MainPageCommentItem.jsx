@@ -13,7 +13,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 export default function MainPageCommentItem({ username }) {
   const { content, createdAt, commentId, userId } = useContext(UserCommentContext);
   const [globalState] = useContext(GlobalContext);
-  const { paragraphRef, isMultiLine, } = useCheckMultiline()
+  const { paragraphRef, isMultiLine } = useCheckMultiline()
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchParams] = useSearchParams();
   const relativeTime = formatRelativeTime(createdAt);
@@ -22,9 +22,17 @@ export default function MainPageCommentItem({ username }) {
   const isTruncatedStyle = isExpanded ? defaultStyle : truncatedStyle;
 
   async function deleteUserComment() {
-    const postId = searchParams.get('comment');
+    try {
+      const postId = searchParams.get('comment');
+      if (!postId || !commentId) {
+        console.error("Missing postId or commentId");
+        return;
+      }
 
-    await deleteDoc(doc(db, "userPosts", postId, 'comments', commentId));
+      await deleteDoc(doc(db, "userPosts", postId, 'comments', commentId));
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
   }
 
   return (
