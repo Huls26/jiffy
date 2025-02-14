@@ -1,6 +1,7 @@
 import useCheckMultiline from '../../../hooks/commentSection/useCheckMultiline';
 import MainPageReadMoreBtn from './MainPageReadMoreBtn';
 import formatRelativeTime from "../../../utils/formatRelativeTime";
+import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { db } from '@/lib/fb';
 import { UserCommentContext } from "@/features/MainPageFeatures/context/MainPageUserCommentDataContext"
 
@@ -11,6 +12,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 
 export default function MainPageCommentItem({ username }) {
   const { content, createdAt, commentId } = useContext(UserCommentContext);
+  const [globalState] = useContext(GlobalContext);
   const { paragraphRef, isMultiLine, } = useCheckMultiline()
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchParams] = useSearchParams();
@@ -25,6 +27,8 @@ export default function MainPageCommentItem({ username }) {
     await deleteDoc(doc(db, "userPosts", postId, 'comments', commentId));
   }
 
+  console.log(globalState);
+  console.log(useContext(UserCommentContext))
   return (
     <div className="w-full">
       <div className="flex items-center justify-between">
