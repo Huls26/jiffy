@@ -11,7 +11,7 @@ import { useSearchParams } from 'react-router-dom';
 import { doc, deleteDoc } from "firebase/firestore";
 
 export default function MainPageCommentItem({ username }) {
-  const { content, createdAt, commentId } = useContext(UserCommentContext);
+  const { content, createdAt, commentId, userId } = useContext(UserCommentContext);
   const [globalState] = useContext(GlobalContext);
   const { paragraphRef, isMultiLine, } = useCheckMultiline()
   const [isExpanded, setIsExpanded] = useState(false);
@@ -27,8 +27,6 @@ export default function MainPageCommentItem({ username }) {
     await deleteDoc(doc(db, "userPosts", postId, 'comments', commentId));
   }
 
-  console.log(globalState);
-  console.log(useContext(UserCommentContext))
   return (
     <div className="w-full">
       <div className="flex items-center justify-between">
@@ -37,10 +35,16 @@ export default function MainPageCommentItem({ username }) {
           <span className="ml-2 text-gray-500 text-xs leading-3">{relativeTime}</span>
         </h1>
 
-        <button
-          onClick={deleteUserComment}
-          type="button"
-          className='text-sm text-red-600 hover:text-red-500'>remove</button>
+        {
+          (userId === globalState.userId) &&
+          <button
+            onClick={deleteUserComment}
+            type="button"
+            className="text-sm text-red-600 hover:text-red-500"
+          >
+            remove
+          </button>
+        }
       </div>
 
       <p ref={paragraphRef} className={isTruncatedStyle}>
