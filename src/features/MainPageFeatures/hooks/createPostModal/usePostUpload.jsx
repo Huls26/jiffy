@@ -1,5 +1,5 @@
 import { GlobalContext } from '@/contexts/GlobalContextProvider';
-import { PostPortalModal } from "@/MainPageFeatures/components/createPostModal/MainPageCreatePortalModal";
+import { PostPortalModal } from "@/features/MainPageFeatures/components/createPostModal/MainPageCreatePortalModal";
 import postStoreRef from '../../utils/createPostModal/postStorageRef';
 import uploadImageWithURL from '../../utils/createPostModal/uploadImageWithURL';
 
