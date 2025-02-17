@@ -1,34 +1,31 @@
-import { GlobalContext } from '@/contexts/GlobalContextProvider';
 import publishBtnStyle from '../../styles/publishBtnStyle';
-import postStoreRef from '../../utils/createPostModal/postStorageRef';
-import uploadImageWithURL from '../../utils/createPostModal/uploadImageWithURL';
-import { PostPortalModal } from "./MainPageCreatePortalModal";
+import usePostUpload from '../../hooks/createPostModal/usePostUpload';
 
-import { useContext } from "react";
-
+/**
+ * This file contains the MainPagePublishButton component, which is responsible for the publish button on the main page of the Jiffy app.
+ * The component uses the 'usePostUpload' hook to manage the post content and image file.
+ * The button is disabled if either the post content or image file is missing.
+ * When clicked, it triggers the 'publishContent' function to upload the post.
+ *
+ * Imported Components and Hooks:
+ * - publishBtnStyle: A style object for the publish button.
+ * - usePostUpload: A custom hook to manage the post upload process.
+ *
+ * Components:
+ * - MainPagePublishButton: The publish button component.
+ *
+ * Props:
+ * - None
+ *
+ * State:
+ * - postContentText: The text content of the post.
+ * - imageFile: The image file associated with the post.
+ * - publishContent: A function to upload the post.
+ *
+ * @returns {JSX.Element} - The publish button component.
+ */
 export default function MainPagePublishButton() {
-  const [globalState] = useContext(GlobalContext);
-  const [sidebarState, dispatch] = useContext(PostPortalModal);
-  const { imageFile, postContentText } = sidebarState;
-
-  console.log("code clean up");
-  const publishContent = async () => {
-    if (!imageFile) {
-      console.error("No image file to upload.");
-      return; // Exit if there is no image
-    }
-    dispatch({ type: "UPDATE_POST_MODAL_LOADING", payload: true });
-    const { postRef, storageRef } = postStoreRef(globalState);
-
-    try {
-      await uploadImageWithURL({ storageRef, postRef, sidebarState, userContext: globalState });
-    } catch (error) {
-      console.error("Error publishing post:", error);
-    } finally {
-      dispatch({ type: "UPDATE_POST_MODAL_LOADING", payload: false });
-      dispatch({ type: "RESET_CONTENTTEXT" })
-    }
-  };
+  const { postContentText, imageFile, publishContent } = usePostUpload();
 
   return (
     <button
