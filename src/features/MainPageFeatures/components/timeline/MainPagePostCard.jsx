@@ -29,7 +29,6 @@ export default function MainPagePostCard({ userPost }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleCommentButton = () => {
-    dispatch({ type: 'COMMENT_POST' });
     if (!searchParams.get('comment')) {
       setSearchParams({ comment: userPost.postId });
     } if (searchParams.get('comment') !== userPost.postId) {
@@ -62,7 +61,7 @@ export default function MainPagePostCard({ userPost }) {
 
         {/* Comment button */}
         <MainPagePostCardBtn
-          isActive={buttonState.commentButton}
+          isActive={searchParams.get('comment') === userPost.postId}
           onClick={handleCommentButton}
           ariaLabel="Toggle comment section for post"
           textContent={"Comment"}
