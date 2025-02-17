@@ -28,11 +28,14 @@ export default function MainPagePostCard({ userPost }) {
   } = usePostInteraction(userPost);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  function handleCommentButton() {
+  const handleCommentButton = () => {
     dispatch({ type: 'COMMENT_POST' });
     if (!searchParams.get('comment')) {
       setSearchParams({ comment: userPost.postId });
-    } else {
+    } if (searchParams.get('comment') !== userPost.postId) {
+      setSearchParams({ comment: userPost.postId });
+    }
+    else {
       setSearchParams({});
     }
   }
