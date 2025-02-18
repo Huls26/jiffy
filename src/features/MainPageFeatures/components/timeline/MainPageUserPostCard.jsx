@@ -15,7 +15,13 @@ export default function MainPageUserPostCard({ userPost }) {
           username={userPost.username}
           email={userPost.email}
         />
-        <h1 className='font-semibold text-xs text-gray-400 select-none'>{relativeTime} ago</h1>
+        <div>
+          <button type='button' className='text-gray-200 font-semibold hover:text-gray-400'>
+            Follow
+          </button>
+          <h1 className='font-semibold text-xs text-gray-400 select-none'>{relativeTime} ago</h1>
+        </div>
+
       </div >
       <h1 className='ml-2 sm:text-xl'>{userPost.textContent}</h1>
       <img
