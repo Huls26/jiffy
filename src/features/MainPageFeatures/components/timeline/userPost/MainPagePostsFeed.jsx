@@ -1,5 +1,5 @@
 import MainPagePostCard from './MainPagePostCard';
-import './style/MainPagePostsFeed.css'
+import '../style/MainPagePostsFeed.css'
 
 import PropTypes from "prop-types";
 

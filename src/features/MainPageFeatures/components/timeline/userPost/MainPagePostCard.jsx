@@ -1,9 +1,9 @@
 
-import usePostInteraction from '../../hooks/usePostInteraction';
-import handleLikeButton from "../../utils/timeline/handleLikeButton";
+import usePostInteraction from '../../../hooks/usePostInteraction';
+import handleLikeButton from "../../../utils/timeline/handleLikeButton";
 import MainPagePostCardBtn from './MainPagePostCardBtn';
 import MainPageUserPostCard from './MainPageUserPostCard';
-import "./style/MainPagePostCard.css";
+import "../style/MainPagePostCard.css";
 
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";

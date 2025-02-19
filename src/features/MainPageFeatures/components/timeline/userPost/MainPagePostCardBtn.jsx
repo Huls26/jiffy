@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import buttonStyle from '../../utils/timeline/buttonStyle';
+import buttonStyle from '../../../utils/timeline/buttonStyle';
 
 export default function MainPagePostCardBtn({ isActive, onClick, ariaLabel, likesCount = '', textContent }) {
   const className = buttonStyle(isActive);
