@@ -1,11 +1,11 @@
 import formatRelativeTime from '../../../utils/formatRelativeTime';
 import MainPageUserProfileLink from '../../userInfo/MainPageUserProfileLink';
+import MainPagePostFollowBtn from './MainPagePostFollowBtn';
 
 import PropTypes from "prop-types";
 
 export default function MainPageUserPostCard({ userPost }) {
   const relativeTime = formatRelativeTime(userPost?.dateCreated);
-  console.log(userPost);
 
   return (
     <>
@@ -17,12 +17,7 @@ export default function MainPageUserPostCard({ userPost }) {
           email={userPost.email}
         />
         <div>
-          <button
-            type='button'
-            className='text-gray-200 font-semibold hover:text-gray-400'
-          >
-            Follow
-          </button>
+          <MainPagePostFollowBtn postData={userPost} />
           <h1 className='font-semibold text-xs text-gray-400 select-none'>{relativeTime} ago</h1>
         </div>
 
