@@ -5,5 +5,6 @@ export default async function getUserData(userId) {
   const userRef = doc(db, "users", userId);
 
   const userSnap = await getDoc(userRef);
+
   return userSnap.data();
 }
