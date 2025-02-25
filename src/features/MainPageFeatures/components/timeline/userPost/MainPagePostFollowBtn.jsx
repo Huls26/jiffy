@@ -1,7 +1,9 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { useContext } from "react";
-import followUser from "../../../utils/accountSuggestion/followUser";
 import { db } from "@/lib/fb";
+import getUserData from "../../../utils/timeline/userPost/getUserData";
+import isUserFollowing from "../../../utils/timeline/userPost/isUserFollowing";
+
 import {
   arrayRemove,
   arrayUnion,
@@ -14,14 +16,18 @@ import {
 export default function MainPagePostFollowBtn({ postData }) {
   const [globalState] = useContext(GlobalContext);
 
+  isUserFollowing(globalState.userId, postData.userId).then((isFollowing) => {
+    console.log(isFollowing);
+  })
+
   async function handleFollowUser() {
     const currentUserRef = doc(db, "users", globalState.userId);
     const usersFollowingRef = doc(db, "users", postData.userId);
 
-    const followingData = await getDoc(usersFollowingRef);
     try {
       // Fetch the current user's document
       const currentUserSnap = await getDoc(currentUserRef);
+      const followingData = await getUserData(globalState.userId, postData.userId);
 
       if (!currentUserSnap.exists()) {
         // Check if the document exists
