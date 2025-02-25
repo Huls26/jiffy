@@ -26,14 +26,13 @@ export default function MainPagePostFollowBtn({ postData }) {
 
     try {
       // Fetch the current user's document
-      const currentUserSnap = await getDoc(currentUserRef);
-      const followingData = await getUserData(globalState.userId, postData.userId);
+      const currentUserData = await getUserData(globalState.userId);
+      const followingData = await getUserData(postData.userId);
 
-      if (!currentUserSnap.exists()) {
+      if (!currentUserData) {
         // Check if the document exists
         throw new Error(`User with ID ${globalState.userId} does not exist.`);
       }
-      const currentUserData = currentUserSnap.data();
       const currentFollowing = currentUserData.following || [];
 
       // Check if the current user is following the target user
