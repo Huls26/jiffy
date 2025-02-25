@@ -18,7 +18,7 @@ import getUserData from "./getUserData";
  *     console.log(isFollowing); // Output: true or false
  *   });
  */
-export default async function isUserFollowing(postUserId, currentUserId) {
+export default async function isUserFollowing(currentUserId, postUserId) {
   const data = await getUserData(postUserId);
 
   if (!data || !data.followers) {
