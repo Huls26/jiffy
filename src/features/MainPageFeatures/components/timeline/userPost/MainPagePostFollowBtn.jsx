@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { db } from "@/lib/fb";
 import getUserData from "../../../utils/timeline/userPost/getUserData";
 import isUserFollowing from "../../../utils/timeline/userPost/isUserFollowing";
+import followUserAction from "../../../utils/timeline/userPost/followUserAction";
 
 import {
   arrayRemove,
@@ -39,14 +40,7 @@ export default function MainPagePostFollowBtn({ postData }) {
 
       if (!isUserFollowed) {
         // Add the user to the following list and increment followers count
-        await updateDoc(currentUserRef, {
-          following: arrayUnion(postData.userId),
-        });
-        await updateDoc(usersFollowingRef, {
-          followers: arrayUnion(globalState.userId),
-          followersCount: increment(1),
-        });
-
+        await followUserAction(globalState.userId, postData.userId);
       } else {
         // Remove the user from the following list and decrement followers count
         await updateDoc(currentUserRef, {
