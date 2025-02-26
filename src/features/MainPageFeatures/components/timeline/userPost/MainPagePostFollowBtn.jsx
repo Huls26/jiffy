@@ -8,7 +8,6 @@ import {
   arrayRemove,
   arrayUnion,
   doc,
-  getDoc,
   increment,
   updateDoc,
 } from "firebase/firestore";
@@ -33,10 +32,10 @@ export default function MainPagePostFollowBtn({ postData }) {
         // Check if the document exists
         throw new Error(`User with ID ${globalState.userId} does not exist.`);
       }
-      const currentFollowing = currentUserData.following || [];
+      // const currentFollowing = currentUserData.following || [];
 
       // Check if the current user is following the target user
-      const isUserFollowed = currentFollowing.includes(postData.userId);
+      const isUserFollowed = await isUserFollowing(globalState.userId, postData.userId);
 
       if (!isUserFollowed) {
         // Add the user to the following list and increment followers count
