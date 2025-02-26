@@ -1,17 +1,9 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
-import { useContext } from "react";
-import { db } from "@/lib/fb";
-import getUserData from "../../../utils/timeline/userPost/getUserData";
 import isUserFollowing from "../../../utils/timeline/userPost/isUserFollowing";
 import followUserAction from "../../../utils/timeline/userPost/followUserAction";
+import unFollowingUserAction from "../../../utils/timeline/userPost/unFollowingUserAction";
 
-import {
-  arrayRemove,
-  arrayUnion,
-  doc,
-  increment,
-  updateDoc,
-} from "firebase/firestore";
+import { useContext } from "react";
 
 export default function MainPagePostFollowBtn({ postData }) {
   const [globalState] = useContext(GlobalContext);
@@ -21,20 +13,7 @@ export default function MainPagePostFollowBtn({ postData }) {
   })
 
   async function handleFollowUser() {
-    const currentUserRef = doc(db, "users", globalState.userId);
-    const usersFollowingRef = doc(db, "users", postData.userId);
-
     try {
-      // Fetch the current user's document
-      const currentUserData = await getUserData(globalState.userId);
-      const followingData = await getUserData(postData.userId);
-
-      if (!currentUserData) {
-        // Check if the document exists
-        throw new Error(`User with ID ${globalState.userId} does not exist.`);
-      }
-      // const currentFollowing = currentUserData.following || [];
-
       // Check if the current user is following the target user
       const isUserFollowed = await isUserFollowing(globalState.userId, postData.userId);
 
@@ -43,13 +22,7 @@ export default function MainPagePostFollowBtn({ postData }) {
         await followUserAction(globalState.userId, postData.userId);
       } else {
         // Remove the user from the following list and decrement followers count
-        await updateDoc(currentUserRef, {
-          following: arrayRemove(postData.userId),
-        });
-        await updateDoc(usersFollowingRef, {
-          followers: arrayRemove(globalState.userId),
-          followersCount: followingData.followersCount > 0 ? increment(-1) : 0,
-        });
+        await unFollowingUserAction(globalState.userId, postData.userId);
       }
     } catch (err) {
       console.error("Error following user:", err);
