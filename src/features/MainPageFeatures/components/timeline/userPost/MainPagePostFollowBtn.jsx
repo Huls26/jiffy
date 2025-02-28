@@ -3,6 +3,7 @@ import handleFollowUser from "../../../utils/timeline/userPost/handleFollowUser"
 import useFollowerState from "../../../hooks/userPost/useFollowerState";
 
 import { useContext } from "react";
+import PropTypes from "prop-types";
 
 export default function MainPagePostFollowBtn({ postData }) {
   const [globalState] = useContext(GlobalContext);
@@ -28,4 +29,10 @@ export default function MainPagePostFollowBtn({ postData }) {
   }
 
   return null;
+}
+
+MainPagePostFollowBtn.propTypes = {
+  postData: PropTypes.shape({
+    userId: PropTypes.string.isRequired,
+  }).isRequired,
 }
