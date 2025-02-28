@@ -10,22 +10,22 @@ export default function MainPagePostFollowBtn({ postData }) {
   const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
-    isUserFollowing(globalState.userId, postData.userId).then((res) => {
-      setIsFollowing(res);
-    });
+    isUserFollowing(globalState.userId, postData.userId)
+      .then((res) => {
+        setIsFollowing(res);
+      });
   }, [globalState.userId, postData.userId]);
 
   async function handleFollowUser() {
     try {
-      // Check if the current user is following the target user
-      const isUserFollowed = await isUserFollowing(globalState.userId, postData.userId);
-
-      if (!isUserFollowed) {
+      if (!isFollowing) {
         // Add the user to the following list and increment followers count
         await followUserAction(globalState.userId, postData.userId);
+        setIsFollowing(true);
       } else {
         // Remove the user from the following list and decrement followers count
         await unFollowingUserAction(globalState.userId, postData.userId);
+        setIsFollowing(false);
       }
     } catch (err) {
       console.error("Error following user:", err);
@@ -39,7 +39,7 @@ export default function MainPagePostFollowBtn({ postData }) {
         className="text-gray-200 font-semibold hover:text-gray-400"
         onClick={handleFollowUser}
       >
-        {isFollowing ? "Follow" : "Following"}
+        {isFollowing ? "Following" : "Follow"}
       </button>
     );
   }
