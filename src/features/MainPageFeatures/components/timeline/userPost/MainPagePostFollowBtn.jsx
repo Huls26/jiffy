@@ -1,19 +1,12 @@
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
-import isUserFollowing from "../../../utils/timeline/userPost/isUserFollowing";
 import handleFollowUser from "../../../utils/timeline/userPost/handleFollowUser";
+import useFollowerState from "../../../hooks/userPost/useFollowerState";
 
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 
 export default function MainPagePostFollowBtn({ postData }) {
   const [globalState] = useContext(GlobalContext);
-  const [isFollowing, setIsFollowing] = useState(false);
-
-  useEffect(() => {
-    isUserFollowing(globalState.userId, postData.userId)
-      .then((res) => {
-        setIsFollowing(res);
-      });
-  }, [globalState.userId, postData.userId]);
+  const [isFollowing, setIsFollowing] = useFollowerState(globalState.userId, postData.userId);
 
   if (postData.userId !== globalState.userId) {
     return (
