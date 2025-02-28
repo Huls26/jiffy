@@ -3,14 +3,17 @@ import isUserFollowing from "../../../utils/timeline/userPost/isUserFollowing";
 import followUserAction from "../../../utils/timeline/userPost/followUserAction";
 import unFollowingUserAction from "../../../utils/timeline/userPost/unFollowingUserAction";
 
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 
 export default function MainPagePostFollowBtn({ postData }) {
   const [globalState] = useContext(GlobalContext);
+  const [isFollowing, setIsFollowing] = useState(false);
 
-  isUserFollowing(globalState.userId, postData.userId).then((isFollowing) => {
-    console.log(isFollowing);
-  })
+  useEffect(() => {
+    isUserFollowing(globalState.userId, postData.userId).then((res) => {
+      setIsFollowing(res);
+    });
+  }, [globalState.userId, postData.userId]);
 
   async function handleFollowUser() {
     try {
@@ -36,7 +39,7 @@ export default function MainPagePostFollowBtn({ postData }) {
         className="text-gray-200 font-semibold hover:text-gray-400"
         onClick={handleFollowUser}
       >
-        Follow
+        {isFollowing ? "Follow" : "Following"}
       </button>
     );
   }
