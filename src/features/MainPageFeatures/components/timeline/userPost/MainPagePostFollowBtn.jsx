@@ -9,7 +9,7 @@ export default function MainPagePostFollowBtn({ postData }) {
   const [globalState] = useContext(GlobalContext);
   const [isFollowing, setIsFollowing] = useFollowerState(globalState.userId, postData.userId);
 
-  if (postData.userId !== globalState.userId) {
+  if (globalState.userId && postData.userId !== globalState.userId) {
     return (
       <button
         type="button"
