@@ -2,30 +2,19 @@ import MainPagePostCardBtn from "./MainPagePostCardBtn"
 import usePostInteraction from '../../../hooks/usePostInteraction';
 import handleLikeButton from "../../../utils/timeline/handleLikeButton";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
+import useActionLikeComment from '../../../hooks/userPost/useActionLikeComment';
 
 import PropTypes from "prop-types";
-import { useSearchParams } from "react-router-dom";
 import { useContext } from "react";
 
 export default function MainPagePostCardBtnSection({ userPost }) {
+  const [globalState] = useContext(GlobalContext);
   const {
     buttonState,
     dispatch,
     currentUserId,
   } = usePostInteraction(userPost);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [globalState] = useContext(GlobalContext);
-
-  const handleCommentButton = () => {
-    if (!searchParams.get('comment')) {
-      setSearchParams({ comment: userPost.postId });
-    } if (searchParams.get('comment') !== userPost.postId) {
-      setSearchParams({ comment: userPost.postId });
-    }
-    else {
-      setSearchParams({});
-    }
-  }
+  const { searchParams, handleCommentButton } = useActionLikeComment(userPost)
 
   if (!globalState.userId) return null;
 
