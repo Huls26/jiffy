@@ -11,7 +11,7 @@ export default function ProfilePage() {
   console.log(globalState)
   return (
     <main className="px-5 py-3 text-gray-50">
-      <header className="flex items-center space-x-4 ">
+      <header className="mb-5 flex items-center space-x-3">
         <UserProfile
           photoURL={globalState.photoURL}
           addedClassName={"w-15 h-15"}
@@ -21,7 +21,7 @@ export default function ProfilePage() {
           <p className="text-base text-gray-300 leading-3">{globalState.email}</p>
         </div>
       </header>
-      <section>
+      <section className="border-t-2">
         user post
       </section>
     </main>);
