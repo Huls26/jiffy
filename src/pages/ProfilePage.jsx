@@ -5,31 +5,37 @@ import { db } from "@/lib/fb";
 import MainPagePostsFeed from "../features/MainPageFeatures/components/timeline/userPost/MainPagePostsFeed";
 
 import { useContext } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, onSnapshot, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export default function ProfilePage() {
   const [globalState] = useContext(GlobalContext);
   usePageTitle(`${globalState.username} 👀`);
   const [userPosts, setUserPosts] = useState(null);
+  const [userData, setUserData] = useState(null);
 
-  async function fetchUserPosts() {
-    const citiesRef = collection(db, "userPosts");
-
-    const q = query(citiesRef, where("userId", "==", globalState.userId));
-    const querySnapshot = await getDocs(q);
-
-    const mapQ = querySnapshot.docs.map((doc) => doc.data());
-
-    setUserPosts(mapQ);
-  }
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    fetchUserPosts();
-  }, [userPosts?.length]);
+    const citiesRef = collection(db, "userPosts");
+    const q = query(citiesRef, where("userId", "==", globalState.userId));
 
-  // add user followers number
+    const unsubscribePosts = onSnapshot(q, (querySnapshot) => {
+      const posts = querySnapshot.docs.map((doc) => doc.data());
+      setUserPosts(posts);
+    });
+
+    (async () => {
+      if (globalState.userId) {
+        const userRef = doc(db, "users", globalState.userId);
+        const userSnapshot = await getDoc(userRef);
+        setUserData(userSnapshot.data());
+      }
+    })();
+
+    return () => {
+      unsubscribePosts();
+    };
+  }, [globalState.userId]);
+
   return (
     <main className="px-5 py-3 text-gray-50">
       <header className="mb-5 flex items-center space-x-3">
@@ -37,9 +43,10 @@ export default function ProfilePage() {
           photoURL={globalState?.photoURL}
           addedClassName={"w-15 h-15"}
         />
-        <div>
+        <div className="space-y-1">
           <h1 className="text-xl text-sky-400 font-semibold">{globalState.username}</h1>
-          <p className="text-base text-gray-300 leading-3">{globalState.email}</p>
+          <p className="text-sm text-gray-400 leading-3">{globalState.email}</p>
+          <p className="font-semibold text-gray-300">{userData?.followersCount} Followers</p>
         </div>
       </header>
       <section className="pt-5 border-t-2 border-gray-400">
