@@ -7,12 +7,15 @@ function UserProfile({ photoURL, addedClassName }) {
 
   return (
     <div className={style}>
-      <LazyLoadImage
-        src={photoURL}
-        alt="user profile"
-        className="block w-full h-full object-contain rounded-full transition"
-        effect="blur"
-      />
+      {
+        photoURL
+        && <LazyLoadImage
+          src={photoURL}
+          alt="user profile"
+          className="block w-full h-full object-contain rounded-full transition"
+          effect="blur"
+        />
+      }
     </div>
   );
 }
