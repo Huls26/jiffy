@@ -21,7 +21,7 @@ export default function MainPageCommentBox({ authUserPhoto }) {
           name='timeline-comment-input'
           type="text"
           placeholder="Write a comment..."
-          className="w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
+          className="w-full px-3 py-1 font-medium text-gray-950 text-sm sm:text-base rounded-full bg-gray-50 border-gray-950 focus:outline-none focus:ring-2 focus:ring-slate-600"
           id='timeline-comment-input'
           value={commentValue}
           onChange={(e) => setCommentValue(e.target.value)}
