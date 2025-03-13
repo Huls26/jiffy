@@ -29,7 +29,7 @@ export default function MainPageCommentBox({ authUserPhoto }) {
         />
         <button
           type="button"
-          className="px-2 bg-blue-500 rounded-full text-gray-300"
+          className="px-2 bg-blue-500 rounded-full text-gray-300 hover:bg-blue-600 active:bg-blue-700"
           onClick={
             () => handleSubmitComment(
               setLoading, setCommentValue, searchParams.get('comment'), commentValue)
