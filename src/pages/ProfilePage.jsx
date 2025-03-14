@@ -6,7 +6,7 @@ import MainPagePostsFeed from "@/features/MainPageFeatures/components/timeline/u
 import MainPageSidebar from "@/features/MainPageFeatures/sections/MainPageSidebar";
 
 import { useContext } from "react";
-import { collection, query, where, onSnapshot, doc, getDoc } from "firebase/firestore";
+import { collection, query, where, onSnapshot, doc, getDoc, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export default function ProfilePage() {
@@ -17,7 +17,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const citiesRef = collection(db, "userPosts");
-    const q = query(citiesRef, where("userId", "==", globalState.userId));
+    const q = query(citiesRef, where("userId", "==", globalState.userId), orderBy("dateCreated", "desc"));
 
     const unsubscribePosts = onSnapshot(q, (querySnapshot) => {
       const posts = querySnapshot.docs.map((doc) => doc.data());
