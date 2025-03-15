@@ -1,6 +1,7 @@
 import UserProfile from "@/components/UserProfile";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { db } from "@/lib/fb";
+import ProfilePageUpdateProfileModal from './ProfilePageUpdateProfileModal';
 
 import { useContext, useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
@@ -8,6 +9,7 @@ import { doc, getDoc } from "firebase/firestore";
 export default function ProfilePageHeader() {
   const [globalState] = useContext(GlobalContext);
   const [userData, setUserData] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Get user data from Firestore
@@ -32,9 +34,12 @@ export default function ProfilePageHeader() {
         <p className="font-semibold text-gray-300">{userData?.followersCount} Followers</p>
       </div>
 
+      <ProfilePageUpdateProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <button
         type="button"
-        className="ml-auto font-semibold text-sky-400 text-lg hover:text-sky-600">
+        className="ml-auto font-semibold text-sky-400 text-lg hover:text-sky-600"
+        onClick={() => setIsModalOpen(true)}
+      >
         Update Profile
       </button>
     </header>
