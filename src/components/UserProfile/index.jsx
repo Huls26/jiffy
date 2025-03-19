@@ -3,20 +3,19 @@ import { memo } from 'react';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function UserProfile({ photoURL, addedClassName }) {
-  const style = `${addedClassName} overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer`
+  const style = `${addedClassName} overflow-hidden object-fit bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer transition`
+
+  if (!photoURL) {
+    return null; // Return early if no photo URL is provided. This prevents unnecessary re-renders.
+  }
 
   return (
-    <div className={style}>
-      {
-        photoURL
-        && <LazyLoadImage
-          src={photoURL}
-          alt="user profile"
-          className="block w-full h-full object-contain rounded-full transition"
-          effect="blur"
-        />
-      }
-    </div>
+    <LazyLoadImage
+      src={photoURL}
+      alt="user profile"
+      className={style}
+      effect="blur"
+    />
   );
 }
 
