@@ -67,12 +67,15 @@ export default function Modal({ isOpen, onClose }) {
           <input className="text-blue-300" name="modalProfilePic" id="modalProfilePic" type="file" onChange={handleFileChange} />
         </div>
       </div>
-      <button type='button' onClick={onClose} className="mt-4 px-4 py-2 bg-red-500 text-white rounded">
-        Cancel
-      </button>
-      <button type='submit' onClick={onClose} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
-        Update
-      </button>
+
+      <div className="mt-5 space-x-2">
+        <button type='button' onClick={onClose} className="px-3 py-1 bg-red-600 text-gray-200 font-semibold rounded hover:bg-red-800 active:bg-red-500">
+          Cancel
+        </button>
+        <button type='submit' onClick={onClose} className="px-3 py-1 bg-blue-500 text-gray-200 font-semibold rounded hover:bg-blue-600 active:bg-blue-700">
+          Update
+        </button>
+      </div>
     </div>,
     document.getElementById("root") // Append modal outside the normal React tree
   );
