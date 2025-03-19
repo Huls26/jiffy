@@ -1,14 +1,20 @@
 import ProfilePageModalInputField from "./ProfilePageModalInputField";
+import { auth, db, storage } from "@/lib/fb";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getFirestore, doc, updateDoc } from "firebase/firestore";
+import { updateProfile } from "firebase/auth";
+import { GlobalContext } from "@/contexts/GlobalContextProvider";
 
 import { createPortal } from "react-dom";
-import { useReducer } from "react";
+import { useReducer, useContext } from "react";
 
 const initialState = {
   profilePic: null,
   username: "",
   fullName: "",
   email: "",
-  password: ""
+  password: "",
+  isLoading: false,
 };
 
 const reducer = (state, action) => {
@@ -32,10 +38,44 @@ export default function Modal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [globalContextState] = useContext(GlobalContext);
 
   const handleFileChange = (e) => {
     dispatch({ type: "SET_PROFILE_PIC", payload: e.target.files[0] });
   };
+
+  const handleSubmit = async () => {
+    try {
+      const userId = globalContextState.userId;
+      const userDocRef = doc(db, "users", userId);
+      let imageUrl = null;
+
+      console.log(state.profilePic)
+      if (state.profilePic) {
+        const storageRef = ref(storage, `userProfile/${userId}`);
+        await uploadBytes(storageRef, state.profilePic);
+        imageUrl = await getDownloadURL(storageRef);
+        await updateProfile(auth.currentUser, {
+          photoURL: imageUrl,
+        });
+      }
+
+      // Update Firestore document
+      await updateDoc(userDocRef, {
+        // username: state.username,
+        // fullName: state.fullName,
+        // email: state.email,
+        ...(imageUrl && { photoURL: imageUrl }) // Only update if a new image is uploaded
+      });
+    } catch (e) {
+      console.error(e);
+      alert("An error occurred while updating your profile. Please try again later.");
+      return;
+    }
+
+    alert("Profile updated successfully!");
+  };
+
 
   return createPortal(
     <div className="p-6 text-gray-200 fixed top-1/5 left-1/2 -translate-x-1/2 w-1/2 min-w-80 max-w-2xl bg-slate-950 rounded-lg border-2 border-gray-300 shadow-lg">
@@ -72,7 +112,7 @@ export default function Modal({ isOpen, onClose }) {
         <button type='button' onClick={onClose} className="px-3 py-1 bg-red-600 text-gray-200 font-semibold rounded hover:bg-red-800 active:bg-red-500">
           Cancel
         </button>
-        <button type='submit' onClick={onClose} className="px-3 py-1 bg-blue-500 text-gray-200 font-semibold rounded hover:bg-blue-600 active:bg-blue-700">
+        <button type='submit' onClick={handleSubmit} className="px-3 py-1 bg-blue-500 text-gray-200 font-semibold rounded hover:bg-blue-600 active:bg-blue-700">
           Update
         </button>
       </div>
