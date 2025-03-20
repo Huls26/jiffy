@@ -2,7 +2,7 @@ import ProfilePageModalInputField from "./ProfilePageModalInputField";
 import { auth, db, storage } from "@/lib/fb";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
-import { updateProfile } from "firebase/auth";
+import { updateProfile, updateEmail } from "firebase/auth";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 
 import { createPortal } from "react-dom";
@@ -50,14 +50,22 @@ export default function Modal({ isOpen, onClose }) {
       const userDocRef = doc(db, "users", userId);
       let imageUrl = null;
 
-      console.log(state.profilePic)
+      // Upload profile picture to Firebase Storage and update user's profile picture in Firestore
       if (state.profilePic) {
+        // upload profile picture to Firebase Storage
         const storageRef = ref(storage, `userProfile/${userId}`);
         await uploadBytes(storageRef, state.profilePic);
         imageUrl = await getDownloadURL(storageRef);
+        // update auth photoURL
         await updateProfile(auth.currentUser, {
           photoURL: imageUrl,
         });
+      }
+
+      // Update email address
+      if (state.email && state.email !== auth.currentUser.email) {
+        await updateEmail(auth.currentUser, state.email);
+        await updateDoc(userDocRef, { email: state.email });
       }
 
       // Update Firestore document
