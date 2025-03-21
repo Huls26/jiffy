@@ -60,6 +60,9 @@ export default function Modal({ isOpen, onClose }) {
         await updateProfile(auth.currentUser, {
           photoURL: imageUrl,
         });
+
+        // update Firestore document
+        await updateDoc(userDocRef, { photoURL: imageUrl });
       }
 
       // Update email address
@@ -71,14 +74,6 @@ export default function Modal({ isOpen, onClose }) {
       if (state.password) {
         await updatePassword(auth.currentUser, state.password);
       }
-
-      // Update Firestore document
-      await updateDoc(userDocRef, {
-        // username: state.username,
-        // fullName: state.fullName,
-        // email: state.email,
-        ...(imageUrl && { photoURL: imageUrl }) // Only update if a new image is uploaded
-      });
     } catch (e) {
       console.error(e);
       alert("An error occurred while updating your profile. Please try again later.");
