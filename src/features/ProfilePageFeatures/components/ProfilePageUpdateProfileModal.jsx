@@ -2,7 +2,7 @@ import ProfilePageModalInputField from "./ProfilePageModalInputField";
 import { auth, db, storage } from "@/lib/fb";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
-import { updateProfile, updateEmail } from "firebase/auth";
+import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 
 import { createPortal } from "react-dom";
@@ -66,6 +66,10 @@ export default function Modal({ isOpen, onClose }) {
       if (state.email && state.email !== auth.currentUser.email) {
         await updateEmail(auth.currentUser, state.email);
         await updateDoc(userDocRef, { email: state.email });
+      }
+
+      if (state.password) {
+        await updatePassword(auth.currentUser, state.password);
       }
 
       // Update Firestore document
