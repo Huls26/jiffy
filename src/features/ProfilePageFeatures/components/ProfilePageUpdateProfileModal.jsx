@@ -65,6 +65,14 @@ export default function Modal({ isOpen, onClose }) {
         await updateDoc(userDocRef, { photoURL: imageUrl });
       }
 
+      // Update username
+      if (state.username && state.username !== globalContextState.username) {
+        await updateDoc(userDocRef, { username: state.username });
+        await updateProfile(auth.currentUser, {
+          displayName: state.username,
+        });
+      }
+
       // Update email address
       if (state.email && state.email !== auth.currentUser.email) {
         await updateEmail(auth.currentUser, state.email);
