@@ -29,7 +29,7 @@ export default function ProfilePageHeader() {
         addedClassName={"w-15 h-15"}
       />
       <div className="space-y-1">
-        <h1 className="text-xl text-sky-400 font-semibold">{userData.fullName}</h1>
+        <h1 className="text-xl text-sky-400 font-semibold">{userData?.fullName}</h1>
         <p className="text-sm text-gray-400 leading-3">{globalState.email}</p>
         <p className="font-semibold text-gray-300">{userData?.followersCount} Followers</p>
       </div>
