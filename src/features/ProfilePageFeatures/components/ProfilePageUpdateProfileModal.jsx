@@ -79,6 +79,10 @@ export default function Modal({ isOpen, onClose }) {
         await updateDoc(userDocRef, { email: state.email });
       }
 
+      if (state.fullName) {
+        await updateDoc(userDocRef, { fullName: state.fullName });
+      }
+
       if (state.password) {
         await updatePassword(auth.currentUser, state.password);
       }
