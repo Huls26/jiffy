@@ -1,12 +1,13 @@
 import ProfilePageModalInputField from "./ProfilePageModalInputField";
 import { auth, db, storage } from "@/lib/fb";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { getFirestore, doc, updateDoc } from "firebase/firestore";
-import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
+import LoadingSpinner from "./ProfilePageLoadingSpinner";
 
 import { createPortal } from "react-dom";
 import { useReducer, useContext } from "react";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { doc, updateDoc } from "firebase/firestore";
+import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 
 const initialState = {
   profilePic: null,
@@ -29,6 +30,8 @@ const reducer = (state, action) => {
       return { ...state, email: action.payload };
     case "SET_PASSWORD":
       return { ...state, password: action.payload };
+    case "SET_IS_LOADING":
+      return { ...state, isLoading: action.payload };
     default:
       return state;
   }
@@ -45,6 +48,8 @@ export default function Modal({ isOpen, onClose }) {
   };
 
   const handleSubmit = async () => {
+    dispatch({ type: "SET_IS_LOADING", payload: true });
+
     try {
       const userId = globalContextState.userId;
       const userDocRef = doc(db, "users", userId);
@@ -88,13 +93,11 @@ export default function Modal({ isOpen, onClose }) {
       }
     } catch (e) {
       console.error(e);
-      alert("An error occurred while updating your profile. Please try again later.");
       return;
+    } finally {
+      dispatch({ type: "SET_IS_LOADING", payload: false });
     }
-
-    alert("Profile updated successfully!");
   };
-
 
   return createPortal(
     <div className="p-6 text-gray-200 fixed top-1/5 left-1/2 -translate-x-1/2 w-1/2 min-w-80 max-w-2xl bg-slate-950 rounded-lg border-2 border-gray-300 shadow-lg">
@@ -131,10 +134,12 @@ export default function Modal({ isOpen, onClose }) {
         <button type='button' onClick={onClose} className="px-3 py-1 bg-red-600 text-gray-200 font-semibold rounded hover:bg-red-800 active:bg-red-500">
           Cancel
         </button>
-        <button type='submit' onClick={handleSubmit} className="px-3 py-1 bg-blue-500 text-gray-200 font-semibold rounded hover:bg-blue-600 active:bg-blue-700">
+        <button type='submit' onClick={handleSubmit} className="px-3 py-1 bg-blue-500 text-gray-200 font-semibold rounded hover:bg-blue-600 active:bg-blue-700" disabled={state.isLoading}>
           Update
         </button>
       </div>
+
+      <LoadingSpinner isLoading={state.isLoading} />
     </div>,
     document.getElementById("root") // Append modal outside the normal React tree
   );
