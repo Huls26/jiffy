@@ -1,13 +1,10 @@
 import ProfilePageModalInputField from "./ProfilePageModalInputField";
-import { auth, db, storage } from "@/lib/fb";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import LoadingSpinner from "./ProfilePageLoadingSpinner";
+import updateUserProfile from "../utils/updateUserProfile";
 
 import { createPortal } from "react-dom";
 import { useReducer, useContext } from "react";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { doc, updateDoc } from "firebase/firestore";
-import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 
 const initialState = {
   profilePic: null,
@@ -47,58 +44,6 @@ export default function Modal({ isOpen, onClose }) {
     dispatch({ type: "SET_PROFILE_PIC", payload: e.target.files[0] });
   };
 
-  const handleSubmit = async () => {
-    dispatch({ type: "SET_IS_LOADING", payload: true });
-
-    try {
-      const userId = globalContextState.userId;
-      const userDocRef = doc(db, "users", userId);
-      let imageUrl = null;
-
-      // Upload profile picture to Firebase Storage and update user's profile picture in Firestore
-      if (state.profilePic) {
-        // upload profile picture to Firebase Storage
-        const storageRef = ref(storage, `userProfile/${userId}`);
-        await uploadBytes(storageRef, state.profilePic);
-        imageUrl = await getDownloadURL(storageRef);
-        // update auth photoURL
-        await updateProfile(auth.currentUser, {
-          photoURL: imageUrl,
-        });
-
-        // update Firestore document
-        await updateDoc(userDocRef, { photoURL: imageUrl });
-      }
-
-      // Update username
-      if (state.username && state.username !== globalContextState.username) {
-        await updateDoc(userDocRef, { username: state.username });
-        await updateProfile(auth.currentUser, {
-          displayName: state.username,
-        });
-      }
-
-      // Update email address
-      if (state.email && state.email !== auth.currentUser.email) {
-        await updateEmail(auth.currentUser, state.email);
-        await updateDoc(userDocRef, { email: state.email });
-      }
-
-      if (state.fullName) {
-        await updateDoc(userDocRef, { fullName: state.fullName });
-      }
-
-      if (state.password) {
-        await updatePassword(auth.currentUser, state.password);
-      }
-    } catch (e) {
-      console.error(e);
-      return;
-    } finally {
-      dispatch({ type: "SET_IS_LOADING", payload: false });
-    }
-  };
-
   return createPortal(
     <div className="p-6 text-gray-200 fixed top-1/5 left-1/2 -translate-x-1/2 w-1/2 min-w-80 max-w-2xl bg-slate-950 rounded-lg border-2 border-gray-300 shadow-lg">
       <h1 className="mb-5 text-lg font-bold">Update Profile</h1>
@@ -134,7 +79,7 @@ export default function Modal({ isOpen, onClose }) {
         <button type='button' onClick={onClose} className="px-3 py-1 bg-red-600 text-gray-200 font-semibold rounded hover:bg-red-800 active:bg-red-500">
           Cancel
         </button>
-        <button type='submit' onClick={handleSubmit} className="px-3 py-1 bg-blue-500 text-gray-200 font-semibold rounded hover:bg-blue-600 active:bg-blue-700" disabled={state.isLoading}>
+        <button type='submit' onClick={() => updateUserProfile(dispatch, globalContextState, state)} className="px-3 py-1 bg-blue-500 text-gray-200 font-semibold rounded hover:bg-blue-600 active:bg-blue-700" disabled={state.isLoading}>
           Update
         </button>
       </div>
