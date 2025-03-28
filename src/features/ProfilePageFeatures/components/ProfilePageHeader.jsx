@@ -4,7 +4,7 @@ import { db } from "@/lib/fb";
 import ProfilePageUpdateProfileModal from './ProfilePageUpdateProfileModal';
 
 import { useContext, useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 
 export default function ProfilePageHeader() {
   const [globalState] = useContext(GlobalContext);
@@ -16,8 +16,12 @@ export default function ProfilePageHeader() {
     (async () => {
       if (globalState.userId) {
         const userRef = doc(db, "users", globalState.userId);
-        const userSnapshot = await getDoc(userRef);
-        setUserData(userSnapshot.data());
+
+        const unsubscribe = onSnapshot(userRef, (userSnapshot) => {
+          setUserData(userSnapshot.data());
+        });
+
+        return () => unsubscribe();
       }
     })();
   }, [globalState.userId]);
@@ -25,7 +29,7 @@ export default function ProfilePageHeader() {
   return (
     <header className="mb-5 flex items-center space-x-3 cursor-pointer">
       <UserProfile
-        photoURL={globalState?.photoURL}
+        photoURL={userData?.photoURL}
         addedClassName={"w-15 h-15"}
       />
       <div className="space-y-1">
