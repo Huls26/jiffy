@@ -2,42 +2,15 @@ import ProfilePageModalInputField from "./ProfilePageModalInputField";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import LoadingSpinner from "./ProfilePageLoadingSpinner";
 import updateUserProfile from "../utils/updateUserProfile";
+import { initialState, reducerAction } from "../reducers/modalAuthReducer";
 
 import { createPortal } from "react-dom";
 import { useReducer, useContext } from "react";
 
-const initialState = {
-  profilePic: null,
-  username: "",
-  fullName: "",
-  email: "",
-  password: "",
-  isLoading: false,
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "SET_PROFILE_PIC":
-      return { ...state, profilePic: action.payload };
-    case "SET_USERNAME":
-      return { ...state, username: action.payload };
-    case "SET_FULL_NAME":
-      return { ...state, fullName: action.payload };
-    case "SET_EMAIL":
-      return { ...state, email: action.payload };
-    case "SET_PASSWORD":
-      return { ...state, password: action.payload };
-    case "SET_IS_LOADING":
-      return { ...state, isLoading: action.payload };
-    default:
-      return state;
-  }
-};
-
 export default function Modal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducerAction, initialState);
   const [globalContextState] = useContext(GlobalContext);
 
   const handleFileChange = (e) => {
