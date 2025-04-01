@@ -11,7 +11,7 @@ export default function Modal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const [state, dispatch] = useReducer(reducerAction, initialState);
-  const [globalContextState] = useContext(GlobalContext);
+  const [globalContextState, globalDispatch] = useContext(GlobalContext);
 
   const handleFileChange = (e) => {
     dispatch({ type: "SET_PROFILE_PIC", payload: e.target.files[0] });
@@ -52,7 +52,7 @@ export default function Modal({ isOpen, onClose }) {
         <button type='button' onClick={onClose} className="px-3 py-1 bg-red-600 text-gray-200 font-semibold rounded hover:bg-red-800 active:bg-red-500">
           Cancel
         </button>
-        <button type='submit' onClick={() => updateUserProfile(dispatch, globalContextState, state)} className="px-3 py-1 bg-blue-500 text-gray-200 font-semibold rounded hover:bg-blue-600 active:bg-blue-700" disabled={state.isLoading}>
+        <button type='submit' onClick={() => updateUserProfile(dispatch, globalDispatch, globalContextState, state,)} className="px-3 py-1 bg-blue-500 text-gray-200 font-semibold rounded hover:bg-blue-600 active:bg-blue-700" disabled={state.isLoading}>
           Update
         </button>
       </div>
