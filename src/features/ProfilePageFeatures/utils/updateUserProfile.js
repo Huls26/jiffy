@@ -4,7 +4,12 @@ import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 
-const handleSubmit = async (dispatch, globalContextState, state) => {
+const handleSubmit = async (
+  dispatch,
+  globalDispatch,
+  globalContextState,
+  state,
+) => {
   dispatch({ type: "SET_IS_LOADING", payload: true });
 
   try {
@@ -32,6 +37,10 @@ const handleSubmit = async (dispatch, globalContextState, state) => {
       await updateDoc(userDocRef, { username: state.username });
       await updateProfile(auth.currentUser, {
         displayName: state.username,
+      });
+      globalDispatch({
+        type: "UPDATE_USERNAME",
+        username: state.username,
       });
     }
 
