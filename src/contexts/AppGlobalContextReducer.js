@@ -43,6 +43,11 @@ export default function reducerMethod(state = INITIAL_STATE, action) {
         photoURL: action.photoURL,
         isLoading: false,
       };
+    case "UPDATE_USERNAME":
+      return {
+        ...state,
+        username: action.username,
+      };
     default:
       throw new Error(`Invalid action type: ${action.type}`);
   }
