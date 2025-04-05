@@ -4,12 +4,22 @@ import { db } from "@/lib/fb";
 import ProfilePageUpdateProfileModal from './ProfilePageUpdateProfileModal';
 
 import { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { doc, onSnapshot } from "firebase/firestore";
 
 export default function ProfilePageHeader() {
   const [globalState] = useContext(GlobalContext);
   const [userData, setUserData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const {
+    username
+  } = useParams();
+
+  console.log(username);
+
+  if (username !== globalState.username) {
+    console.log("retrieve userID")
+  }
 
   useEffect(() => {
     // Get user data from Firestore
