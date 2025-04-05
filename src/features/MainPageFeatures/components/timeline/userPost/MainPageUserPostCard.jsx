@@ -11,7 +11,7 @@ export default function MainPageUserPostCard({ userPost }) {
     <>
       <div className='mx-2 m-1 flex justify-between'>
         <MainPageUserProfileLink
-          to={`profile/${userPost.username}`}
+          to={`profile/${userPost.userId}`}
           photoURL={userPost.photoURL}
           username={userPost.username}
           email={userPost.email}
