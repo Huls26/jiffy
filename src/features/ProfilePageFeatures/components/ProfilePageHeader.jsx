@@ -5,7 +5,7 @@ import ProfilePageUpdateProfileModal from './ProfilePageUpdateProfileModal';
 
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, getDoc } from "firebase/firestore";
 
 export default function ProfilePageHeader() {
   const [globalState] = useContext(GlobalContext);
@@ -15,16 +15,10 @@ export default function ProfilePageHeader() {
     username
   } = useParams();
 
-  console.log(username);
-
-  if (username !== globalState.username) {
-    console.log("retrieve userID")
-  }
-
   useEffect(() => {
     // Get user data from Firestore
     (async () => {
-      if (globalState.userId) {
+      if (username === globalState.username) {
         const userRef = doc(db, "users", globalState.userId);
 
         const unsubscribe = onSnapshot(userRef, (userSnapshot) => {
@@ -34,7 +28,26 @@ export default function ProfilePageHeader() {
         return () => unsubscribe();
       }
     })();
-  }, [globalState.userId]);
+
+    if (username && username !== globalState.username) {
+      const fetchUser = async () => {
+        try {
+          const userRef = doc(db, "users", username);
+          const userSnapshot = await getDoc(userRef);
+
+          if (userSnapshot.exists()) {
+            setUserData(userSnapshot.data());
+          } else {
+            setUserData(null);
+          }
+        } catch (error) {
+          console.error("Error getting document:", error);
+        }
+      };
+
+      fetchUser();
+    }
+  }, [globalState.username, globalState.userId, username]);
 
   return (
     <header className="mb-5 flex items-center space-x-3 cursor-pointer">
