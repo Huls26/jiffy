@@ -16,25 +16,18 @@ export default function ProfilePageHeader() {
   } = useParams();
 
   useEffect(() => {
-    // Get user data from Firestore
-    (async () => {
+    let unsubscribe = null;
+
+    const fetchUser = async () => {
       if (username === globalState.username) {
         const userRef = doc(db, "users", globalState.userId);
-
-        const unsubscribe = onSnapshot(userRef, (userSnapshot) => {
+        unsubscribe = onSnapshot(userRef, (userSnapshot) => {
           setUserData(userSnapshot.data());
         });
-
-        return () => unsubscribe();
-      }
-    })();
-
-    if (username && username !== globalState.username) {
-      const fetchUser = async () => {
+      } else if (username) {
         try {
           const userRef = doc(db, "users", username);
           const userSnapshot = await getDoc(userRef);
-
           if (userSnapshot.exists()) {
             setUserData(userSnapshot.data());
           } else {
@@ -43,10 +36,14 @@ export default function ProfilePageHeader() {
         } catch (error) {
           console.error("Error getting document:", error);
         }
-      };
+      }
+    };
 
-      fetchUser();
-    }
+    fetchUser();
+
+    return () => {
+      if (unsubscribe) unsubscribe(); // Clean up Firestore subscription
+    };
   }, [globalState.username, globalState.userId, username]);
 
   return (
