@@ -6,11 +6,14 @@ import ProfilePageUpdateProfileModal from './ProfilePageUpdateProfileModal';
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { doc, onSnapshot, getDoc } from "firebase/firestore";
+import ProfilePageUpdateButton from "./ProfilePageUpdateButton";
 
 export default function ProfilePageHeader() {
   const [globalState] = useContext(GlobalContext);
   const [userData, setUserData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // username is the Id of the user in the URL
+  // and if user view there own profile, it will be the same as the globalState.username
   const {
     username
   } = useParams();
@@ -58,14 +61,14 @@ export default function ProfilePageHeader() {
         <p className="font-semibold text-gray-300">{userData?.followersCount} Followers</p>
       </div>
 
-      <ProfilePageUpdateProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <button
-        type="button"
-        className="ml-auto font-semibold text-sky-400 text-lg hover:text-sky-600"
+      <ProfilePageUpdateProfileModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+      <ProfilePageUpdateButton
+        isDisplay={globalState.username === username}
         onClick={() => setIsModalOpen(true)}
-      >
-        Update Profile
-      </button>
+      />
     </header>
   )
 }
