@@ -50,7 +50,6 @@ export default function ProfilePageHeader() {
     };
   }, [globalState.username, globalState.userId, username]);
 
-  console.log("userData", userData);
   return (
     <header className="mb-5 flex items-center space-x-3 cursor-pointer">
       <UserProfile
@@ -81,7 +80,7 @@ export default function ProfilePageHeader() {
           });
         }}
       >
-        {userData?.followers.includes(globalState.userId) ? "Unfollow" : "Follow"}
+        {userData?.followers.includes(globalState.userId) ? "Following" : "Follow"}
       </button>
     </header>
   )
