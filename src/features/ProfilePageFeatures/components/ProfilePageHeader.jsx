@@ -2,6 +2,7 @@ import UserProfile from "@/components/UserProfile";
 import { GlobalContext } from "@/contexts/GlobalContextProvider";
 import { db } from "@/lib/fb";
 import ProfilePageUpdateProfileModal from './ProfilePageUpdateProfileModal';
+import followUser from "@/features/MainPageFeatures/utils/accountSuggestion/followUser";
 
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -49,6 +50,7 @@ export default function ProfilePageHeader() {
     };
   }, [globalState.username, globalState.userId, username]);
 
+  console.log("userData", userData);
   return (
     <header className="mb-5 flex items-center space-x-3 cursor-pointer">
       <UserProfile
@@ -69,6 +71,18 @@ export default function ProfilePageHeader() {
         isDisplay={globalState.username === username}
         onClick={() => setIsModalOpen(true)}
       />
+      <button
+        type="button"
+        className="ml-auto text-gray-200 font-semibold hover:text-gray-400"
+        onClick={() => {
+          followUser(globalState.userId, {
+            userId: userData?.userId,
+            followersCount: userData?.followersCount,
+          });
+        }}
+      >
+        {userData?.followers.includes(globalState.userId) ? "Unfollow" : "Follow"}
+      </button>
     </header>
   )
 }
